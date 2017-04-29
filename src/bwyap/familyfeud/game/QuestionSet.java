@@ -19,7 +19,7 @@ public class QuestionSet {
 	 * Create a new question set
 	 */
 	public QuestionSet() {
-		questions = new ArrayList<Question>();
+		reset();
 	}
 	
 	/**
@@ -80,6 +80,14 @@ public class QuestionSet {
 	 */
 	public int size() {
 		return questions.size();
+	}
+
+	/**
+	 * Reset the question set. 
+	 * This will remove all questions.
+	 */
+	public void reset() {
+		questions = new ArrayList<Question>();
 	}
 	
 }

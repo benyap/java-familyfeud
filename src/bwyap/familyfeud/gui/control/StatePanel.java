@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import bwyap.familyfeud.game.FamilyFeudGame;
@@ -64,6 +65,7 @@ public class StatePanel extends JPanel {
 				initGame.setEnabled(true);
 				newGame.setEnabled(false);
 				window.setFamilyPanelEnabled(false);
+				window.reset();
 			}
 		});
 		
@@ -109,6 +111,7 @@ public class StatePanel extends JPanel {
 		play.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (game.changeState(FFStateType.PLAY)) {
+					play.setEnabled(false);
 					initGame.setEnabled(false);
 					endGame.setEnabled(true);
 				}
@@ -119,10 +122,17 @@ public class StatePanel extends JPanel {
 		endGame.setEnabled(false);
 		endGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (game.changeState(FFStateType.END_GAME)) {
-					play.setEnabled(false);
-					endGame.setEnabled(false);
-					newGame.setEnabled(true);
+				if (JOptionPane.showConfirmDialog(StatePanel.this, 
+						"Are you sure you want to end the game?",
+						"Ending game",
+						JOptionPane.OK_CANCEL_OPTION,
+						JOptionPane.WARNING_MESSAGE) == 
+						JOptionPane.OK_OPTION) {
+					if (game.changeState(FFStateType.END_GAME)) {
+						play.setEnabled(false);
+						endGame.setEnabled(false);
+						newGame.setEnabled(true);
+					}
 				}
 			}
 		});

@@ -108,4 +108,11 @@ public class ControlWindow extends FamilyFeudWindow {
 		questionLoaderPanel.setEnabled(enabled);
 	}
 
+	/**
+	 * Reset GUI components for a new game
+	 */
+	public void reset() {
+		questionLoaderPanel.reset();
+	}
+
 }

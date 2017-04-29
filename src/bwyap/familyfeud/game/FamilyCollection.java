@@ -19,7 +19,7 @@ public class FamilyCollection {
 	 * Create a new  empty Family collection.
 	 */
 	public FamilyCollection() {
-		families = new ArrayList<Family>();
+		reset();
 	}
 	
 	/**
@@ -80,6 +80,14 @@ public class FamilyCollection {
 	 */
 	public int size() {
 		return families.size();
+	}
+
+	/**
+	 * Reset the family collection.
+	 * This will remove all families.
+	 */
+	public void reset() {
+		families = new ArrayList<Family>();
 	}
 
 }

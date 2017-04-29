@@ -75,6 +75,13 @@ public class QuestionSetLoaderPanel extends JPanel {
 	}
 	
 	/**
+	 * Reset the GUI components
+	 */
+	public void reset() {
+		title.setText("Quesion Set: No file loaded...");
+	}
+	
+	/**
 	 * An action that opens a file choose dialog and loads a JSON file.
 	 * The JSON file is parsed if it is a valid quesiton set.
 	 * @author bwyap

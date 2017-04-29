@@ -1,19 +1,29 @@
 package bwyap.familyfeud.game.state;
 
+import bwyap.familyfeud.game.FamilyFeudGame;
+import bwyap.utility.logging.Logger;
+
 /**
- * This state represents the waiting state while the
- * question set is loaded and families are added before start a new game.
+ * This state creates a new game and allows a new
+ * question set to be loaded and new families to be added. 
  * @author bwyap
  *
  */
 public class StateNewGame extends FFState {
 	
-	protected StateNewGame() {
+	private FamilyFeudGame game;
+	
+	protected StateNewGame(FamilyFeudGame game) {
 		super(FFStateType.NEW_GAME);
+		this.game = game;
 	}
 
 	@Override
-	public void initState(Object data) { }
+	public void initState(Object data) {
+		game.getFamilyCollection().reset();
+		game.getQuestionSet().reset();
+		Logger.info("New game created.");
+	}
 
 	@Override
 	public void cleanupState() { }

@@ -29,7 +29,7 @@ public class FFStateMachine extends StateMachine<FFState> {
 	public void init() {
 		// Add all states to the machine
 		addState(FFStateType.START.toString(), FFStateFactory.getState(FFStateType.START, null));
-		addState(FFStateType.NEW_GAME.toString(), FFStateFactory.getState(FFStateType.NEW_GAME, null));
+		addState(FFStateType.NEW_GAME.toString(), FFStateFactory.getState(FFStateType.NEW_GAME, game));
 		addState(FFStateType.ADD_FAMILY.toString(), FFStateFactory.getState(FFStateType.ADD_FAMILY, families));
 		addState(FFStateType.LOAD_QUESTIONS.toString(), FFStateFactory.getState(FFStateType.LOAD_QUESTIONS, questions));
 		addState(FFStateType.INITIALIZE_GAME.toString(), FFStateFactory.getState(FFStateType.INITIALIZE_GAME, null));

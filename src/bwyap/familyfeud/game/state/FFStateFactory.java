@@ -50,7 +50,11 @@ public class FFStateFactory {
 			}
 			return loadQuestions;
 		case NEW_GAME:
-			if (newGame == null) createNewGameState();
+			if (newGame == null) {
+				if (data instanceof FamilyFeudGame)
+					createNewGameState((FamilyFeudGame) data);
+				else throw new InvalidDataException("FFStateFactory: FamilyFeudGame required when create StateNewGame");
+			}
 			return newGame;
 		case PLAY:
 			if (play == null) {
@@ -79,8 +83,8 @@ public class FFStateFactory {
 		play = new StatePlay(game);
 	}
 
-	private static void createNewGameState() {
-		newGame = new StateNewGame();
+	private static void createNewGameState(FamilyFeudGame game) {
+		newGame = new StateNewGame(game);
 	}
 
 	private static void createLoadQuestionsState(QuestionSet questions) {
