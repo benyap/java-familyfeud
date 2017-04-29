@@ -18,6 +18,11 @@ public abstract class State {
 		return name;
 	}
 	
+	@Override
+	public String toString() {
+		return getName();
+	}
+	
 	/**
 	 * Initialize the state.
 	 * This should be run before the state is updated for the first time.

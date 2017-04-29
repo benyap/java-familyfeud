@@ -79,7 +79,7 @@ public class StateMachine<T extends State> {
 			}
 		}
 		else {
-			if (getDebugMode()) printErr("Invalid state transition: <" + currentState.getName() + "> to <" + name + ">");
+			if (getDebugMode()) printErr("Invalid state transition: <" + currentState + "> to <" + name + ">");
 		}
 	}
 	
