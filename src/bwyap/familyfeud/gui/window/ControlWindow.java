@@ -1,8 +1,12 @@
 package bwyap.familyfeud.gui.window;
 
+import java.awt.BorderLayout;
 import java.awt.GridBagLayout;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+import bwyap.utility.logging.Logger;
 
 /**
  * This is a control window with controls to 
@@ -16,6 +20,8 @@ public class ControlWindow extends FamilyFeudWindow {
 
 	public static final int WIDTH = 800;
 	public static final int HEIGHT = 600;
+	
+	private JPanel contentPane;
 	
 	/**
 	 * Create a new control window
@@ -33,7 +39,16 @@ public class ControlWindow extends FamilyFeudWindow {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setAlwaysOnTop(true);
 		setResizable(false);
-		setLayout(new GridBagLayout());
+		setLayout(new BorderLayout());
+		
+		// init components
+		contentPane = new JPanel();
+		contentPane.setLayout(new GridBagLayout());
+		
+		
+		
+		add(contentPane, BorderLayout.CENTER);
+		Logger.info("Control window initialized.");
 	}
 
 }
