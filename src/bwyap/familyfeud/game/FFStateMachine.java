@@ -48,14 +48,7 @@ public class FFStateMachine extends StateMachine<FFState> {
 		
 		switch (currentState.getType()) {
 		case ADD_FAMILY:
-			if (nextState == FFStateType.NEW_GAME.toString()) return true;
-		case END_GAME:
-			if (nextState == FFStateType.NEW_GAME.toString()) return true;
-		case INITIALIZE_GAME:
-			if (nextState == FFStateType.PLAY.toString()) return true;
 		case LOAD_QUESTIONS:
-			if (nextState == FFStateType.NEW_GAME.toString()) return true;
-		case NEW_GAME:
 			if (nextState == FFStateType.ADD_FAMILY.toString()) return true;
 			if (nextState == FFStateType.LOAD_QUESTIONS.toString()) return true;
 			if (nextState == FFStateType.INITIALIZE_GAME.toString()) {
@@ -69,10 +62,22 @@ public class FFStateMachine extends StateMachine<FFState> {
 				else Logger.err("More families required!");
 			}
 			break;
+		case NEW_GAME:
+			if (nextState == FFStateType.ADD_FAMILY.toString()) return true;
+			if (nextState == FFStateType.LOAD_QUESTIONS.toString()) return true;
+			break;
+		case END_GAME:
+			if (nextState == FFStateType.NEW_GAME.toString()) return true;
+			break;
+		case INITIALIZE_GAME:
+			if (nextState == FFStateType.PLAY.toString()) return true;
+			break;
 		case PLAY:
 			if (nextState == FFStateType.END_GAME.toString()) return true;
+			break;
 		case START:
 			if (nextState == FFStateType.NEW_GAME.toString()) return true;
+			break;
 		}
 		return false;
 	}

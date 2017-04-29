@@ -47,17 +47,23 @@ public class FFPlayStateMachine extends StateMachine<FFPlayState> {
 		switch(currentState.getType()) {
 		case ALLOCATE_POINTS:
 			if (nextState == FFPlayStateType.REVEAL_ANSWERS.toString()) return true;
+			break;
 		case FACE_OFF:
 			if (nextState == FFPlayStateType.FAMILY_PLAY.toString()) return true;
+			break;
 		case FAMILY_PLAY:
 			if (nextState == FFPlayStateType.FAMILY_STEAL.toString()) return true;
 			if (nextState == FFPlayStateType.ALLOCATE_POINTS.toString()) return true;
+			break;
 		case FAMILY_STEAL:
 			if (nextState == FFPlayStateType.ALLOCATE_POINTS.toString()) return true;
+			break;
 		case REVEAL_ANSWERS:
 			if (nextState == FFPlayStateType.SELECT_QUESTION.toString()) return true;
+			break;
 		case SELECT_QUESTION:
 			if (nextState == FFPlayStateType.FACE_OFF.toString()) return true;
+			break;
 		}
 		
 		return false;
