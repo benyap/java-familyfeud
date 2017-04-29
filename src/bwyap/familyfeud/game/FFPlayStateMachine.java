@@ -7,6 +7,12 @@ import bwyap.familyfeud.test.FamilyFeudTestDriver;
 import bwyap.statemachine.StateMachine;
 import bwyap.utility.logging.Logger;
 
+/**
+ * A state machine that handles {@code FFPlayState} for Family Feud.
+ * This state machine is used within the {@code FFStateType.PLAY} state.
+ * @author bwyap
+ *
+ */
 public class FFPlayStateMachine extends StateMachine<FFPlayState> {
 	
 	private QuestionSet questions;

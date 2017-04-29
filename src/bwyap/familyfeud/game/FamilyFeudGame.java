@@ -20,6 +20,9 @@ public class FamilyFeudGame {
 	private FamilyCollection families;
 	private QuestionSet questions;
 	
+	/**
+	 * Initialize the game
+	 */
 	public void init() {
 		families = new FamilyCollection();
 		questions = new QuestionSet();
