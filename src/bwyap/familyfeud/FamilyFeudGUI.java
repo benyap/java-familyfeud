@@ -1,9 +1,11 @@
 package bwyap.familyfeud;
 
+import static bwyap.familyfeud.FamilyFeud.TITLE;
+import static bwyap.familyfeud.FamilyFeud.VERSION;
+
 import bwyap.familyfeud.gui.window.ControlWindow;
 import bwyap.familyfeud.gui.window.GameWindow;
-
-import static bwyap.familyfeud.FamilyFeud.*;
+import bwyap.familyfeud.gui.window.render.RenderingPanel;
 
 /**
  * This class is responsible for handling all GUI components of the Family Feud application
@@ -15,8 +17,8 @@ public class FamilyFeudGUI {
 	private GameWindow gameWindow;
 	private ControlWindow controlWindow;
 	
-	public FamilyFeudGUI() {
-		gameWindow = new GameWindow(TITLE);
+	public FamilyFeudGUI(RenderingPanel renderPanel) {
+		gameWindow = new GameWindow(TITLE, renderPanel);
 		controlWindow = new ControlWindow(TITLE + " controller " + VERSION);
 	}
 	
@@ -26,7 +28,6 @@ public class FamilyFeudGUI {
 	public void init() {
 		gameWindow.initWindow();
 		controlWindow.initWindow();
-		
 	}
 	
 	/**
@@ -34,6 +35,7 @@ public class FamilyFeudGUI {
 	 */
 	public void start() {
 		controlWindow.setVisible(true);
+		gameWindow.setVisible(true);
 	}
 	
 }
