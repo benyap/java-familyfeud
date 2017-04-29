@@ -9,11 +9,11 @@ package bwyap.utility.logging;
  */
 public abstract class Logger implements LoggerInterface {
 	
-	protected static Logger INSTANCE = null;
+	protected static LoggerInterface INSTANCE = null;
 	
 	private static void createInstance() {
 		// Create concrete Logger class and store it in the INSTANCE variable
-		INSTANCE = new SystemLogger();
+		INSTANCE = ConsoleLogger.getInstance();
 	}
 	
 	/**

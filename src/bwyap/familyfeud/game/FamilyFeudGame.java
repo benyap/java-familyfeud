@@ -30,7 +30,7 @@ public class FamilyFeudGame {
 		stateMachine = new FFStateMachine(this, families, questions);
 		stateMachine.init();
 		
-		if (FamilyFeudTestDriver.DEBUG_LOG_CONSOLE) Logger.log("Game initialized.");
+		if (FamilyFeudTestDriver.DEBUG_LOG_CONSOLE) Logger.info("Game initialized.");
 	}
 	
 	/**

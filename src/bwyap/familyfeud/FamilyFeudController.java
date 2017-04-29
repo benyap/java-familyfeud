@@ -24,17 +24,11 @@ public class FamilyFeudController {
 	private Thread engineThread;
 	
 	/**
-	 * Create a new Family Feud controller
-	 */
-	public FamilyFeudController() {
-		if (FamilyFeudTestDriver.DEBUG_LOG_CONSOLE) Logger.log("Welcome to Family Feud!");
-	}
-	
-	/**
 	 * Initialize the application
 	 */
 	public void init() {
 		resourceLoader = new FamilyFeudResources();
+		resourceLoader.init();
 		resourceLoader.load();
 		
 		game = new FamilyFeudGame();		
@@ -48,13 +42,14 @@ public class FamilyFeudController {
 		engine = new FFRenderingEngine(FPS_RATE, renderPanel);
 		engineThread = new Thread(engine);
 
-		if (FamilyFeudTestDriver.DEBUG_LOG_CONSOLE) Logger.log("Controller initialized.");
+		if (FamilyFeudTestDriver.DEBUG_LOG_CONSOLE) Logger.info("Controller initialized.");
 	}
 	
 	/**
 	 * Start the application
 	 */
 	public void start() {
+		if (FamilyFeudTestDriver.DEBUG_LOG_CONSOLE) Logger.log("Welcome to Family Feud!");
 		gui.start();
 		engineThread.start();
 	}

@@ -37,7 +37,7 @@ public class FFPlayStateMachine extends StateMachine<FFPlayState> {
 		// Set the initial state
 		changeState(FFPlayStateType.SELECT_QUESTION.toString());
 		
-		if (FamilyFeudTestDriver.DEBUG_LOG_CONSOLE) Logger.log("FFPlayStateMachine initialized.");
+		if (FamilyFeudTestDriver.DEBUG_LOG_CONSOLE) Logger.info("FFPlayStateMachine initialized.");
 	}
 	
 	@Override

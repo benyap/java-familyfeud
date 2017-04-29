@@ -5,7 +5,10 @@ import java.awt.GridBagLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextPane;
 
+import bwyap.familyfeud.gui.GBC;
+import bwyap.utility.logging.ConsoleLogger;
 import bwyap.utility.logging.Logger;
 
 /**
@@ -22,6 +25,7 @@ public class ControlWindow extends FamilyFeudWindow {
 	public static final int HEIGHT = 600;
 	
 	private JPanel contentPane;
+	private JTextPane consoleLogger;
 	
 	/**
 	 * Create a new control window
@@ -45,7 +49,8 @@ public class ControlWindow extends FamilyFeudWindow {
 		contentPane = new JPanel();
 		contentPane.setLayout(new GridBagLayout());
 		
-		
+		consoleLogger = ConsoleLogger.getInstance();
+		contentPane.add(consoleLogger, new GBC(0, 0));
 		
 		add(contentPane, BorderLayout.CENTER);
 		Logger.info("Control window initialized.");

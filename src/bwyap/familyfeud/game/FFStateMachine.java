@@ -39,7 +39,7 @@ public class FFStateMachine extends StateMachine<FFState> {
 		// Set the initial state
 		changeState(FFStateType.START.toString());
 		
-		if (FamilyFeudTestDriver.DEBUG_LOG_CONSOLE) Logger.log("FFStateMachine initialized.");
+		if (FamilyFeudTestDriver.DEBUG_LOG_CONSOLE) Logger.info("FFStateMachine initialized.");
 	}
 	
 	@Override
