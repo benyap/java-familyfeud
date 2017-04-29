@@ -7,6 +7,7 @@ package bwyap.familyfeud.render;
  */
 enum RenderStateType {
 	LOADING,
+	MAIN,
 	NEWGAME,
 	
 
