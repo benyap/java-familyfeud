@@ -40,6 +40,7 @@ public class FamilyFeudTestDriver {
 		driver.testStart();
 		driver.testAddFamilies();
 		driver.testLoadQuestions();
+		driver.testStartGame();
 	}
 	
 	
@@ -104,6 +105,13 @@ public class FamilyFeudTestDriver {
 
 		// Verify that questions were added to the game
 		System.out.println("# VERIFY > Questions: " + app.getGame().getQuestions());
+	}
+	
+	/**
+	 * Test starting the family feud game
+	 */
+	public void testStartGame() {
+		app.getGame().changeState(FFStateType.INITIALIZE_GAME);
 	}
 	
 }

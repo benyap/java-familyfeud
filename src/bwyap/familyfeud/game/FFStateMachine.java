@@ -65,9 +65,18 @@ public class FFStateMachine extends StateMachine<FFState> {
 		case LOAD_QUESTIONS:
 			if (nextState == FFStateType.NEW_GAME.toString()) return true;
 		case NEW_GAME:
-			if (nextState == FFStateType.INITIALIZE_GAME.toString()) return true;
 			if (nextState == FFStateType.ADD_FAMILY.toString()) return true;
 			if (nextState == FFStateType.LOAD_QUESTIONS.toString()) return true;
+			if (nextState == FFStateType.INITIALIZE_GAME.toString()) {
+				// Check that questions are loaded and there are enough families
+				if (families.getFamilies().size() > 1) {
+					if (questions.getQuestions().size() > 0) {
+						return true;						
+					}
+					else System.err.println("No questions loaded!");
+				}
+				else System.err.println("More families required!");
+			}
 		case PLAY:
 			if (nextState == FFStateType.END_GAME.toString()) return true;
 		case START:
