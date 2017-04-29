@@ -20,6 +20,7 @@ import bwyap.utility.resource.JSONLoader;
 public class FamilyFeudTestDriver {
 	
 	public static final boolean DEBUG_LOG_CONSOLE = true;
+	public static final boolean LOG_VERIFY = false;
 	
 	private FamilyFeudController app;
 
@@ -86,7 +87,7 @@ public class FamilyFeudTestDriver {
 		app.getGame().changeState(FFStateType.NEW_GAME);
 		
 		// Verify that families are added to the game
-		System.out.println("# VERIFY > Families: " + app.getGame().getFamilies());
+		if (LOG_VERIFY) System.out.println("### VERIFY > Families: " + app.getGame().getFamilies());
 	}
 	
 	/**
@@ -105,7 +106,7 @@ public class FamilyFeudTestDriver {
 		app.getGame().changeState(FFStateType.NEW_GAME);
 
 		// Verify that questions were added to the game
-		System.out.println("# VERIFY > Questions: " + app.getGame().getQuestions());
+		if (LOG_VERIFY) System.out.println("### VERIFY > Questions: " + app.getGame().getQuestions());
 	}
 	
 	/**
