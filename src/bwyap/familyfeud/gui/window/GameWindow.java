@@ -84,5 +84,13 @@ public class GameWindow extends FamilyFeudWindow {
 	public boolean isFullscreen() {
 		return fullscreen;
 	}
+	
+	/**
+	 * Get the rendering surface of the game window
+	 * @return
+	 */
+	public RenderingPanel getRenderSurface() {
+		return renderSurface;
+	}
 
 }

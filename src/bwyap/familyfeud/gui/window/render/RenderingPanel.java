@@ -62,6 +62,14 @@ public class RenderingPanel extends JPanel {
 		renderFPS = show;
 	}
 	
+	/** 
+	 * Check if the render panel is currently showing the fps
+	 * @return
+	 */
+	public boolean showingFPS() {
+		return renderFPS;
+	}
+	
 	/**
 	 * Set the value of the last measured fps to render to the screen
 	 * @param fps

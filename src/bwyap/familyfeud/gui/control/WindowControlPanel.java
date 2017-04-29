@@ -25,13 +25,14 @@ public class WindowControlPanel extends JPanel {
 
 	private static final long serialVersionUID = 3506047425993585668L;
 
-	public static final int WIDTH = 200;
-	public static final int HEIGHT = 80;
+	public static final int WIDTH = 180;
+	public static final int HEIGHT = 110;
 	
 	private GameWindow window;
 	private JLabel title;
 	private JButton fullscreen;
-	private JButton show;
+	private JButton showWindow;
+	private JButton showFPS;
 	
 	public WindowControlPanel(GameWindow window) {
 		this.window = window;
@@ -45,19 +46,21 @@ public class WindowControlPanel extends JPanel {
 		title = new JLabel("WINDOW CONTROL");
 		title.setFont(new Font(ResourceLoader.DEFAULT_FONT_NAME, Font.BOLD, 14));
 		
-		show = new JButton("Show game window");
-		show.addActionListener(new ActionListener() {
+		showWindow = new JButton("Show game window");
+		showWindow.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (window.isVisible()) {
 					if (window.isFullscreen()) window.toggleFullscreen();
 					window.setVisible(false);
-					show.setText("Show game window");
+					showWindow.setText("Show game window");
 					fullscreen.setEnabled(false);
+					showFPS.setEnabled(false);
 				}
 				else {
 					window.setVisible(true);
-					show.setText("Hide game window");
+					showWindow.setText("Hide game window");
 					fullscreen.setEnabled(true);
+					showFPS.setEnabled(true);
 				}
 			}
 		});
@@ -69,10 +72,26 @@ public class WindowControlPanel extends JPanel {
 				if (window.isVisible()) window.toggleFullscreen();
 			}
 		}); 
-				
+		
+		showFPS = new JButton("Show fps");
+		showFPS.setEnabled(false);
+		showFPS.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (window.getRenderSurface().showingFPS()) {
+					window.getRenderSurface().showFPS(false);
+					showFPS.setText("Show fps");
+				}
+				else {
+					window.getRenderSurface().showFPS(true);
+					showFPS.setText("Hide fps");
+				}
+			}
+		}); 
+
 		add(title, new GBC(0, 0));
-		add(show, new GBC(0, 1));
-		add(fullscreen, new GBC(0, 2));
+		add(showWindow, new GBC(0, 1).setFill(1));
+		add(fullscreen, new GBC(0, 2).setFill(1));
+		add(showFPS, new GBC(0, 3).setFill(1));
 	}
 
 }
