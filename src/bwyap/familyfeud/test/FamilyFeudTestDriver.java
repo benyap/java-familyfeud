@@ -54,14 +54,14 @@ public class FamilyFeudTestDriver {
 	 * Create a new test driver with the given FamilyFeudController app
 	 * @param app
 	 */
-	public FamilyFeudTestDriver(FamilyFeudController app) {
+	protected FamilyFeudTestDriver(FamilyFeudController app) {
 		this.app = app;
 	}
 	
 	/**
 	 * Test starting the application
 	 */
-	public void testStart() {
+	protected void testStart() {
 		app.start();
 		app.getGame().changeState(FFStateType.NEW_GAME);
 	}
@@ -69,14 +69,14 @@ public class FamilyFeudTestDriver {
 	/**
 	 * Test initializing the application
 	 */
-	public void testInit() {
+	protected void testInit() {
 		app.init();
 	}
 	
 	/**
 	 * Test adding families to the game
 	 */
-	public void testAddFamilies() {
+	protected void testAddFamilies() {
 		app.getGame().changeState(FFStateType.ADD_FAMILY);
 		
 		// Add families
@@ -93,7 +93,7 @@ public class FamilyFeudTestDriver {
 	/**
 	 * Test the loading of a question set from a JSON file
 	 */
-	public void testLoadQuestions() {
+	protected void testLoadQuestions() {
 		File questionFile = new File("res/questionset.json");
 		JSONObject o = JSONLoader.loadJSON(questionFile);
 		JSONQuestionSet q = new JSONQuestionSet(o);
@@ -112,14 +112,14 @@ public class FamilyFeudTestDriver {
 	/**
 	 * Test initialize the game
 	 */
-	public void testInitGame() {
+	protected void testInitGame() {
 		app.getGame().changeState(FFStateType.INITIALIZE_GAME);
 	}
 	
 	/**
 	 * Test starting the family feud game
 	 */
-	public void testPlayGame() {
+	protected void testPlayGame() {
 		app.getGame().changeState(FFStateType.PLAY);
 	}
 	
