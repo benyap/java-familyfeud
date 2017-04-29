@@ -1,5 +1,6 @@
 package bwyap.familyfeud.game.play.state;
 
+import bwyap.familyfeud.game.Answer;
 import bwyap.familyfeud.game.FamilyFeudGame;
 import bwyap.familyfeud.game.InvalidDataException;
 import bwyap.familyfeud.game.Question;
@@ -18,7 +19,6 @@ public class StateFamilyPlay extends FFPlayState {
 
 	public static final int ACTION_OPENANSWER = 0x0;
 	public static final int ACTION_STRIKE = 0x1;
-	public static final int CHANGESTATE_STEAL = 0x10;
 	
 	private Question question;
 	private int selectedFamilyIndex;
@@ -41,7 +41,18 @@ public class StateFamilyPlay extends FFPlayState {
 	}
 
 	@Override
-	public void cleanupState() { }
+	public void cleanupState() {
+		data = question;
+	}
+	
+	@Override
+	public boolean canAdvance() {
+		boolean clearedBoard = true;
+		for(Answer a : question.getAnswers()) {
+			clearedBoard = clearedBoard && a.isRevealed();
+		}
+		return (strikes == 3) || clearedBoard;
+	}
 
 	@Override
 	public boolean executeAction(int action, Object[] data) {
@@ -54,14 +65,23 @@ public class StateFamilyPlay extends FFPlayState {
 			else throw new InvalidDataException("Expecting a {*, Integer} when using action ACTION_OPENANSWER");
 			break;
 		case ACTION_STRIKE:
-			strikes++;
-			Logger.log("Family [" + selectedFamilyIndex + "] now has " + strikes + " strikes.");
-			break;
-		case CHANGESTATE_STEAL:
-			// TODO
+			strike();
 			break;
 		}
 		return false;
+	}
+	
+	/**
+	 * Give the selected family a strike
+	 */
+	private void strike() {
+		if (strikes >= FamilyFeudGame.STRIKE_LIMIT) {
+			Logger.err("Strike limit reached: other family should be given the chance to steal.");
+		}
+		else {
+			strikes++;
+			Logger.log("Family [" + selectedFamilyIndex + "] now has " + strikes + " strike(s).");
+		}
 	}
 	
 	/**
@@ -71,6 +91,7 @@ public class StateFamilyPlay extends FFPlayState {
 	private void openAnswer(int index) {
 		if (strikes < FamilyFeudGame.STRIKE_LIMIT) {
 			question.getAnswers().get(index).setReveal(true);
+			Logger.log("Revealed answer: " + question.getAnswers().get(index));
 		}
 		else Logger.err("Strike limit reached: cannot reveal more answers for family [" + selectedFamilyIndex + "]");
 	}

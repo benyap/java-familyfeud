@@ -10,6 +10,7 @@ import bwyap.familyfeud.game.Answer;
 import bwyap.familyfeud.game.Question;
 import bwyap.familyfeud.game.play.state.StateFaceOff;
 import bwyap.familyfeud.game.play.state.StateFamilyPlay;
+import bwyap.familyfeud.game.play.state.StateFamilySteal;
 import bwyap.familyfeud.game.play.state.StateSelectQuestion;
 import bwyap.familyfeud.game.state.FFStateType;
 import bwyap.familyfeud.game.state.StateAddFamily;
@@ -53,6 +54,7 @@ public class FamilyFeudTestDriver {
 		driver.testSelectQuestion();
 		driver.testFaceOff();
 		driver.testFamilyPlay();
+		driver.testFamilySteal();
 	}
 	
 	
@@ -187,6 +189,7 @@ public class FamilyFeudTestDriver {
 		app.getGame().getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[]{
 				StateFamilyPlay.ACTION_OPENANSWER, 1
 		});
+	
 		if (LOG_VERIFY) {
 			for(Answer a : app.getGame().getQuestions().get(1).getAnswers()) {
 				Logger.info(a + ": " + a.isRevealed());
@@ -205,9 +208,31 @@ public class FamilyFeudTestDriver {
 		});	
 		
 		// Try to reveal an answer
+		//app.getGame().getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[]{
+		//		StateFamilyPlay.ACTION_OPENANSWER, 0
+		//});
+	}
+	
+	/**
+	 * Test family steal
+	 */
+	protected void testFamilySteal() {
+		app.getGame().getState().executeAction(StatePlay.CHANGESTATE_FAMILYSTEAL, null);
+		
+		// Choose steal family
 		app.getGame().getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[]{
-				StateFamilyPlay.ACTION_OPENANSWER, 0
-		});
+				StateFamilySteal.ACTION_SELECTSTEALFAMILY, 1
+		});	
+		
+		// Apply strike
+		app.getGame().getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[]{
+				StateFamilySteal.ACTION_STRIKE
+		});	
+		
+		// Select winning family
+		app.getGame().getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[]{
+				StateFamilySteal.ACTION_SELECTWINFAMILY, 0
+		});	
 	}
 	
 }

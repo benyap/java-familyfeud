@@ -15,6 +15,8 @@ public class StatePlay extends FFState {
 	public static final int ACTION_EXECUTEPLAYACTION = 0x00;
 	public static final int CHANGESTATE_FACEOFF = 0x10;
 	public static final int CHANGESTATE_FAMILYPLAY = 0x11;
+	public static final int CHANGESTATE_FAMILYSTEAL = 0x12;
+	public static final int CHANGESTATE_ALLOCATEPOINTS = 0x13;
 	
 	private FamilyFeudGame game;
 	private FFPlayStateMachine stateMachine;
@@ -47,6 +49,9 @@ public class StatePlay extends FFState {
 			break;
 		case CHANGESTATE_FAMILYPLAY: 
 			stateMachine.changeState(FFPlayStateType.FAMILY_PLAY.toString());
+			break;
+		case CHANGESTATE_FAMILYSTEAL: 
+			stateMachine.changeState(FFPlayStateType.FAMILY_STEAL.toString());
 			break;
 		}
 		return false;
