@@ -8,6 +8,12 @@ package bwyap.utility.logging;
 public interface LoggerInterface {
 	
 	/**
+	 * Print a plain text message
+	 * @param msg
+	 */
+	public void printMessage(String msg);
+	
+	/**
 	 * Log a message
 	 * @param msg
 	 */

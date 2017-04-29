@@ -10,6 +10,11 @@ public class SystemLogger extends Logger {
 	protected SystemLogger() { }
 	
 	@Override
+	public void printMessage(String msg) {
+		System.out.println(msg);
+	}
+	
+	@Override
 	public void logMessage(String msg) {
 		System.out.println("[MSG] " + msg);
 	}

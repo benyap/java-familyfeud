@@ -15,6 +15,15 @@ public abstract class Logger implements LoggerInterface {
 		// Create concrete Logger class and store it in the INSTANCE variable
 		INSTANCE = new SystemLogger();
 	}
+	
+	/**
+	 * Log plain text
+	 * @param msg
+	 */
+	public static void print(String msg) {
+		if (INSTANCE == null) createInstance();
+		INSTANCE.printMessage(msg);
+	}
 
 	/**
 	 * Log a message
