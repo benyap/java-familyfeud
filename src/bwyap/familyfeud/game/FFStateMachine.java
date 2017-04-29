@@ -13,11 +13,22 @@ import bwyap.statemachine.StateMachine;
  */
 public class FFStateMachine extends StateMachine<FFState> {
 	
+	private FamilyCollection families;
+	
+	public FFStateMachine(FamilyCollection families) {
+		this.families = families;
+	}
+	
 	@Override
 	public void init() {
 		// Add all states to the machine
 		for(FFStateType type : FFStateType.values()) {
-			addState(type.toString(), FFStateFactory.getState(type));
+			if (type == FFStateType.ADD_FAMILY) {
+				addState(type.toString(), FFStateFactory.getState(type, families));
+			}
+			else {
+				addState(type.toString(), FFStateFactory.getState(type, null));				
+			}
 			if (FamilyFeudTestDriver.DEBUG_LOG_CONSOLE) System.out.println("  Adding " + type + " state to state machine.");
 		}
 		
@@ -25,6 +36,14 @@ public class FFStateMachine extends StateMachine<FFState> {
 		changeState(FFStateType.START.toString());
 		
 		if (FamilyFeudTestDriver.DEBUG_LOG_CONSOLE) System.out.println("FFStateMachine initialized.");
+	}
+	
+	/**
+	 * Get the current state
+	 * @return
+	 */
+	public FFState getCurrentState() {
+		return currentState;
 	}
 	
 	@Override
@@ -50,6 +69,17 @@ public class FFStateMachine extends StateMachine<FFState> {
 			if (nextState == FFStateType.NEW_GAME.toString()) return true;
 		}
 		return false;
+	}
+	
+	/**
+	 * Get the state type of the current state
+	 * @return
+	 */
+	public FFStateType getCurrentStateType() {
+		if (currentState == null) {
+			return null;
+		}
+		else return currentState.getType();
 	}
 	
 	@Override

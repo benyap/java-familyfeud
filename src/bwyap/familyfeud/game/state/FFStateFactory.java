@@ -1,5 +1,7 @@
 package bwyap.familyfeud.game.state;
 
+import bwyap.familyfeud.game.FamilyCollection;
+
 /**
  * This class is responsible for creating and initializing the game states of a Family Feud game.
  * Each state should only be created once.
@@ -22,10 +24,14 @@ public class FFStateFactory {
 	 * @param type
 	 * @return
 	 */
-	public static FFState getState(FFStateType type) {
+	public static FFState getState(FFStateType type, Object data) {
 		switch(type) {
 		case ADD_FAMILY:
-			if (addFamily == null) createAddFamilyState();
+			if (addFamily == null) {
+				if (data instanceof FamilyCollection)
+					createAddFamilyState((FamilyCollection)data);
+				else throw new InvalidDataException("FFStateFactory: FamilyCollection required when create StateAddFamily");
+			}
 			return addFamily;
 		case END_GAME:
 			if (endGame == null) createEndGameState();
@@ -78,8 +84,8 @@ public class FFStateFactory {
 		endGame = new StateEndGame();
 	}
 
-	private static void createAddFamilyState() {
-		addFamily = new StateAddFamily();
+	private static void createAddFamilyState(FamilyCollection families) {
+		addFamily = new StateAddFamily(families);
 	}
 	
 }

@@ -2,6 +2,8 @@ package bwyap.familyfeud.test;
 
 import bwyap.familyfeud.FamilyFeud;
 import bwyap.familyfeud.FamilyFeudController;
+import bwyap.familyfeud.game.state.FFStateType;
+import bwyap.familyfeud.game.state.StateAddFamily;
 
 /**
  * Test Driver to test FamilyFeud application
@@ -29,6 +31,7 @@ public class FamilyFeudTestDriver {
 		// TESTS
 		driver.testInit();
 		driver.testStart();
+		driver.testAddFamilies();
 	}
 	
 	
@@ -56,6 +59,24 @@ public class FamilyFeudTestDriver {
 	 */
 	public void testInit() {
 		app.init();
+	}
+	
+	/**
+	 * Test adding families to the game
+	 */
+	public void testAddFamilies() {
+		app.getGame().changeState(FFStateType.NEW_GAME);
+		app.getGame().changeState(FFStateType.ADD_FAMILY);
+		
+		// Add families
+		app.getGame().getState().executeAction(StateAddFamily.ACTION_ADDFAMILY, new Object[]{"Tran"});
+		app.getGame().getState().executeAction(StateAddFamily.ACTION_ADDFAMILY, new Object[]{"Lee"});
+		
+		// Finish adding families
+		app.getGame().changeState(FFStateType.NEW_GAME);
+		
+		// Verify that families are added to the game
+		System.out.println("Families: " + app.getGame().getFamilies());
 	}
 	
 }

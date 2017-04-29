@@ -36,4 +36,12 @@ public class FamilyFeudController {
 		
 	}
 	
+	/**
+	 * Get the current Family Feud game
+	 * @return
+	 */
+	public FamilyFeudGame getGame() {
+		return game;
+	}
+	
 }

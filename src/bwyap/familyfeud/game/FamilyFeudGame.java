@@ -1,5 +1,9 @@
 package bwyap.familyfeud.game;
 
+import java.util.List;
+
+import bwyap.familyfeud.game.state.FFState;
+import bwyap.familyfeud.game.state.FFStateType;
 import bwyap.familyfeud.test.FamilyFeudTestDriver;
 
 /**
@@ -10,16 +14,40 @@ import bwyap.familyfeud.test.FamilyFeudTestDriver;
 public class FamilyFeudGame {
 	
 	private FFStateMachine stateMachine;
-	
-	public FamilyFeudGame() {
-		
-	}
+	private FamilyCollection families;
 	
 	public void init() {
-		stateMachine = new FFStateMachine();
+		families = new FamilyCollection();
+		
+		stateMachine = new FFStateMachine(families);
 		stateMachine.init();
 		
 		if (FamilyFeudTestDriver.DEBUG_LOG_CONSOLE) System.out.println("Game initialized.");
+	}
+	
+	/**
+	 * Change the state of the game.
+	 * State changes must be validated by the state machine to work.
+	 * @param type
+	 */
+	public void changeState(FFStateType type) {
+		stateMachine.changeState(type.toString());
+	}
+	
+	/**
+	 * Get the current state of the game
+	 * @return
+	 */
+	public FFState getState() {
+		return stateMachine.getCurrentState();
+	}
+	
+	/**
+	 * Get the list of families in the game
+	 * @return
+	 */
+	public List<Family> getFamilies() {
+		return families.getFamilies();
 	}
 	
 }
