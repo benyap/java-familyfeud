@@ -10,6 +10,8 @@ import bwyap.familyfeud.FamilyFeudController;
  */
 public class FamilyFeudTestDriver {
 	
+	public static final boolean DEBUG_LOG_CONSOLE = true;
+	
 	private FamilyFeudController app;
 
 	/**
@@ -25,8 +27,8 @@ public class FamilyFeudTestDriver {
 		FamilyFeudTestDriver driver = new FamilyFeudTestDriver(FamilyFeud.app);
 		
 		// TESTS
+		driver.testInit();
 		driver.testStart();
-		
 	}
 	
 	
@@ -47,6 +49,13 @@ public class FamilyFeudTestDriver {
 	 */
 	public void testStart() {
 		app.start();
+	}
+	
+	/**
+	 * Test initializing the application
+	 */
+	public void testInit() {
+		app.init();
 	}
 	
 }

@@ -19,13 +19,13 @@ public class FamilyFeud {
 	 */
 	public static void init() {
 		app = new FamilyFeudController();
-		app.init();
 	}
 	
 	/**
 	 * Start the controller
 	 */
 	public static void start() {
+		app.init();
 		app.start();
 	}
 	

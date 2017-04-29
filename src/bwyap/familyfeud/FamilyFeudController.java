@@ -1,5 +1,8 @@
 package bwyap.familyfeud;
 
+import bwyap.familyfeud.game.FamilyFeudGame;
+import bwyap.familyfeud.test.FamilyFeudTestDriver;
+
 /**
  * Controller class that manages the game and GUI components of Family Feud
  * @author bwyap
@@ -7,18 +10,23 @@ package bwyap.familyfeud;
  */
 public class FamilyFeudController {
 	
+	private FamilyFeudGame game;
+	
 	/**
 	 * Create a new Family Feud controller
 	 */
 	public FamilyFeudController() {
-		System.out.println("Welcome to Family Feud!");
+		if (FamilyFeudTestDriver.DEBUG_LOG_CONSOLE) System.out.println("Welcome to Family Feud!");
 	}
 	
 	/**
 	 * Initialize the application
 	 */
 	public void init() {
-		
+		game = new FamilyFeudGame();		
+		game.init();
+
+		if (FamilyFeudTestDriver.DEBUG_LOG_CONSOLE) System.out.println("Controller initialized.");
 	}
 	
 	/**
