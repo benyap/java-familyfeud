@@ -3,6 +3,7 @@ package bwyap.familyfeud;
 import static bwyap.familyfeud.FamilyFeud.TITLE;
 import static bwyap.familyfeud.FamilyFeud.VERSION;
 
+import bwyap.familyfeud.game.FamilyFeudGame;
 import bwyap.familyfeud.gui.window.ControlWindow;
 import bwyap.familyfeud.gui.window.GameWindow;
 import bwyap.familyfeud.render.RenderingPanel;
@@ -22,9 +23,9 @@ public class FamilyFeudGUI {
 	 * the provided RenderingPanel and a control window
 	 * @param renderPanel
 	 */
-	public FamilyFeudGUI(RenderingPanel renderPanel) {
+	public FamilyFeudGUI(RenderingPanel renderPanel, FamilyFeudGame game) {
 		gameWindow = new GameWindow(TITLE, renderPanel);
-		controlWindow = new ControlWindow(TITLE + " controller " + VERSION, gameWindow);
+		controlWindow = new ControlWindow(TITLE + " controller " + VERSION, gameWindow, game);
 	}
 	
 	/**

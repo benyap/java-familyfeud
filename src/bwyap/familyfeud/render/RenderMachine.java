@@ -4,6 +4,8 @@ import java.util.HashMap;
 
 import bwyap.familyfeud.game.FamilyFeudGame;
 import bwyap.familyfeud.render.state.RenderStateLoading;
+import bwyap.familyfeud.render.state.RenderStateNewGame;
+
 import static bwyap.familyfeud.render.RenderStateType.*;
 
 /**
@@ -27,6 +29,7 @@ public class RenderMachine {
 		renderStates = new HashMap<RenderStateType, RenderStateInterface>();
 		
 		renderStates.put(LOADING, new RenderStateLoading());
+		renderStates.put(NEWGAME, new RenderStateNewGame());
 
 	}
 	
@@ -45,6 +48,7 @@ public class RenderMachine {
 		case LOAD_QUESTIONS:
 			break;
 		case NEW_GAME:
+			renderState = renderStates.get(NEWGAME);
 			break;
 		case PLAY:
 			break;

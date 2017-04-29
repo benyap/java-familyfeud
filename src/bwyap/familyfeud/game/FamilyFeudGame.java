@@ -37,9 +37,10 @@ public class FamilyFeudGame {
 	 * Change the state of the game.
 	 * State changes must be validated by the state machine to work.
 	 * @param type
+	 * @return true if the state transition was successful
 	 */
-	public void changeState(FFStateType type) {
-		stateMachine.changeState(type.toString());
+	public boolean changeState(FFStateType type) {
+		return stateMachine.changeState(type.toString());
 	}
 	
 	/**

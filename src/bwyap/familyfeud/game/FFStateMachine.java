@@ -68,6 +68,7 @@ public class FFStateMachine extends StateMachine<FFState> {
 				}
 				else Logger.err("More families required!");
 			}
+			break;
 		case PLAY:
 			if (nextState == FFStateType.END_GAME.toString()) return true;
 		case START:

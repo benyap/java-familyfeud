@@ -36,7 +36,7 @@ public class FamilyFeudController {
 		
 		RenderingPanel renderPanel = new RenderingPanel();
 		
-		gui = new FamilyFeudGUI(renderPanel);
+		gui = new FamilyFeudGUI(renderPanel, game);
 		gui.init();
 		
 		engine = new FFRenderingEngine(FPS_RATE, renderPanel, game);

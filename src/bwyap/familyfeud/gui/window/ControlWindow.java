@@ -9,8 +9,10 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import bwyap.familyfeud.game.FamilyFeudGame;
 import bwyap.familyfeud.gui.GBC;
 import bwyap.familyfeud.gui.control.ConsolePanel;
+import bwyap.familyfeud.gui.control.StatePanel;
 import bwyap.familyfeud.gui.control.WindowControlPanel;
 import bwyap.utility.logging.Logger;
 
@@ -28,17 +30,21 @@ public class ControlWindow extends FamilyFeudWindow {
 	public static final int HEIGHT = 600;
 	
 	private GameWindow gameWindow;
+	private FamilyFeudGame game;
+	
 	private JPanel contentPane;
 	private ConsolePanel consolePanel;
 	private WindowControlPanel windowControlPanel;
+	private StatePanel statePanel;
 	
 	/**
 	 * Create a new control window
 	 * @param title
 	 */
-	public ControlWindow(String title, GameWindow gameWindow) {
+	public ControlWindow(String title, GameWindow gameWindow, FamilyFeudGame game) {
 		super(title, WIDTH, HEIGHT);
 		this.gameWindow = gameWindow;
+		this.game = game;
 	}
 
 	/**
@@ -70,10 +76,13 @@ public class ControlWindow extends FamilyFeudWindow {
 		contentPane.setLayout(new GridBagLayout());
 		
 		consolePanel = new ConsolePanel();
-		contentPane.add(consolePanel, new GBC(0, 1));
+		contentPane.add(consolePanel, new GBC(0, 1).setSpan(2, 1));
 		
 		windowControlPanel = new WindowControlPanel(gameWindow);
 		contentPane.add(windowControlPanel, new GBC(0, 0));
+		
+		statePanel = new StatePanel(game);
+		contentPane.add(statePanel, new GBC(1, 0));
 		
 		add(contentPane, BorderLayout.CENTER);
 		Logger.info("Control window initialized.");

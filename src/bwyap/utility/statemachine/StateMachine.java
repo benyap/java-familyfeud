@@ -98,8 +98,9 @@ public class StateMachine<T extends State> {
 	 * Change the current state to the one specified by the name.
 	 * If no such state exists, it is set to null.
 	 * @param name
+	 * @return true if the state transition was successful
 	 */
-	public void changeState(String name) {
+	public boolean changeState(String name) {
 		if (validateStateTransition(currentState, name)) {
 			if (currentState != null && !currentState.canAdvance(name)) {
 				if (getDebugMode()) printErr("> Invalid state transition: <" + currentState + "> is not complete and cannot advance to <" + name + ">");
@@ -112,6 +113,7 @@ public class StateMachine<T extends State> {
 					if (currentState != null) data = currentState.getData();
 					currentState = states.get(name);
 					currentState.initState(data);
+					return true;
 				}
 				else {
 					// no state 
@@ -122,6 +124,7 @@ public class StateMachine<T extends State> {
 		else {
 			if (getDebugMode()) printErr(getName() + " > Invalid state transition: <" + currentState + "> to <" + name + ">");
 		}
+		return false;
 	}
 	
 	/**
