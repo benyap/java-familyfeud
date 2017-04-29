@@ -69,9 +69,9 @@ public class StateMachine<T extends State> {
 		if (validateStateTransition(currentState, name)) {
 			if (currentState != null) currentState.cleanupState();
 			if (states.containsKey(name)) {
+				if (getDebugMode()) printOut("CHANGING STATE from <" + currentState + "> to <" + name + ">");
 				currentState = states.get(name);
 				currentState.initState();
-				if (getDebugMode()) printOut("CHANGING STATE: " + name);
 			}
 			else {
 				// no state 
