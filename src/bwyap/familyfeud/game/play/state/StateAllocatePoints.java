@@ -9,7 +9,7 @@ import bwyap.familyfeud.game.play.FFPlayStateType;
 import bwyap.utility.logging.Logger;
 
 /**
- * 
+ * This state is used to allocate points to the family that won the round.
  * @author bwyap
  *
  */
