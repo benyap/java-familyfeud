@@ -40,7 +40,9 @@ public class FFPlayStateFactory {
 			}
 			return faceOff;
 		case FAMILY_PLAY:
-			if (familyPlay == null) createFamilyPlayState();
+			if (familyPlay == null) {
+				createFamilyPlayState();
+			}
 			return familyPlay;
 		case FAMILY_STEAL:
 			if (familySteal == null) createFamilyStealState();

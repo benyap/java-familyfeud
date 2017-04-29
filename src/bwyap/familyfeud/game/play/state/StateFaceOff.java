@@ -14,9 +14,11 @@ import bwyap.familyfeud.game.play.FFPlayStateType;
 public class StateFaceOff extends FFPlayState {
 
 	public static final int ACTION_OPENANSWER = 0x0;
+	public static final int ACTION_CHOOSEFAMILY = 0x1;
 	
 	private QuestionSet questions;
 	private int selectedIndex;
+	private int selectedFamilyIndex = -1;
 	
 	protected StateFaceOff(QuestionSet questions) {
 		super(FFPlayStateType.FACE_OFF);
@@ -32,7 +34,10 @@ public class StateFaceOff extends FFPlayState {
 	}
 
 	@Override
-	public void cleanupState() { }
+	public void cleanupState() {
+		// Set the selected question and selected family as the data for the next state
+		data = new Object[]{questions.getQuestion(selectedIndex), selectedFamilyIndex};
+	}
 
 	@Override
 	public boolean executeAction(int action, Object[] data) {
@@ -44,8 +49,23 @@ public class StateFaceOff extends FFPlayState {
 			}
 			else throw new InvalidDataException("Expecting a {*, Integer} when using action ACTION_OPENANSWER");
 			break;
+		case ACTION_CHOOSEFAMILY:
+			// Choose the family that won the face off
+			if (data[1] instanceof Integer) {
+				selectFamily((Integer) data[1]);
+			}
+			else throw new InvalidDataException("Expecting a {*, Integer} when using action ACTION_CHOOSEFAMILY");
+			break;
+		default: 
+			throw new RuntimeException("Invalid action");
 		}
 		return false;
+	}
+	
+	@Override
+	public boolean canAdvance() {
+		// Must selected a family before advancing to the next state
+		return selectedFamilyIndex >= 0;
 	}
 	
 	/**
@@ -55,5 +75,13 @@ public class StateFaceOff extends FFPlayState {
 	private void openAnswer(int index) {
 		questions.getQuestion(selectedIndex).getAnswers().get(index).setReveal(true);
 	}
-
+	
+	/**
+	 * Select the family that won the face off
+	 * @param index
+	 */
+	private void selectFamily(int index) {
+		selectedFamilyIndex = index;
+	}
+	
 }

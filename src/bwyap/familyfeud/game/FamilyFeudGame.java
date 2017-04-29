@@ -14,6 +14,8 @@ import bwyap.utility.logging.Logger;
  */
 public class FamilyFeudGame {
 	
+	public static final int STRIKE_LIMIT = 3;
+	
 	private FFStateMachine stateMachine;
 	private FamilyCollection families;
 	private QuestionSet questions;

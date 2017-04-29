@@ -9,6 +9,7 @@ import bwyap.familyfeud.FamilyFeudController;
 import bwyap.familyfeud.game.Answer;
 import bwyap.familyfeud.game.Question;
 import bwyap.familyfeud.game.play.state.StateFaceOff;
+import bwyap.familyfeud.game.play.state.StateFamilyPlay;
 import bwyap.familyfeud.game.play.state.StateSelectQuestion;
 import bwyap.familyfeud.game.state.FFStateType;
 import bwyap.familyfeud.game.state.StateAddFamily;
@@ -51,6 +52,7 @@ public class FamilyFeudTestDriver {
 		driver.testPlayGame();
 		driver.testSelectQuestion();
 		driver.testFaceOff();
+		driver.testFamilyPlay();
 	}
 	
 	
@@ -157,6 +159,8 @@ public class FamilyFeudTestDriver {
 	 */
 	protected void testFaceOff() {
 		app.getGame().getState().executeAction(StatePlay.CHANGESTATE_FACEOFF, null);
+		
+		// Reveal and answer
 		app.getGame().getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[]{
 				StateFaceOff.ACTION_OPENANSWER, 3
 		});
@@ -165,6 +169,45 @@ public class FamilyFeudTestDriver {
 				Logger.info(a + ": " + a.isRevealed());
 			}
 		}
+		
+		// choose family
+		app.getGame().getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[]{
+				StateFaceOff.ACTION_CHOOSEFAMILY, 0
+		});
+
+	}
+	
+	/**
+	 * Test family play
+	 */
+	protected void testFamilyPlay() {
+		app.getGame().getState().executeAction(StatePlay.CHANGESTATE_FAMILYPLAY, null);
+		
+		// Reveal an answer
+		app.getGame().getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[]{
+				StateFamilyPlay.ACTION_OPENANSWER, 1
+		});
+		if (LOG_VERIFY) {
+			for(Answer a : app.getGame().getQuestions().get(1).getAnswers()) {
+				Logger.info(a + ": " + a.isRevealed());
+			}
+		}
+		
+		// Give three strikes to the family
+		app.getGame().getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[]{
+				StateFamilyPlay.ACTION_STRIKE
+		});
+		app.getGame().getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[]{
+				StateFamilyPlay.ACTION_STRIKE
+		});	
+		app.getGame().getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[]{
+				StateFamilyPlay.ACTION_STRIKE
+		});	
+		
+		// Try to reveal an answer
+		app.getGame().getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[]{
+				StateFamilyPlay.ACTION_OPENANSWER, 0
+		});
 	}
 	
 }
