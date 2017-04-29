@@ -2,8 +2,6 @@ package bwyap.utility.statemachine;
 
 import java.util.HashMap;
 
-import bwyap.utility.logging.Logger;
-
 /**
  * A basic state machine which provide the {@code update()} method for each state.
  * @author bwyap
@@ -108,7 +106,7 @@ public class StateMachine<T extends State> {
 			else {
 				if (currentState != null) currentState.cleanupState();
 				if (states.containsKey(name)) {
-					if (getDebugMode()) printLog(getName() + " > CHANGING STATE from <" + currentState + "> to <" + name + ">");
+					if (getDebugMode()) printTransition(getName() + " > CHANGING STATE from <" + currentState + "> to <" + name + ">");
 					Object data = null;
 					if (currentState != null) data = currentState.getData();
 					currentState = states.get(name);
@@ -156,7 +154,17 @@ public class StateMachine<T extends State> {
 	 * @param message
 	 */
 	protected void printLog(String message) {
-		Logger.info(message);
+		System.out.println(message);
+	}
+	
+	/**
+	 * Log a transition message to the console.
+	 * By default this logs the message to {@code System.out}. 
+	 * Override this method to direct the message.
+	 * @param message
+	 */
+	protected void printTransition(String message) {
+		System.out.println(message);
 	}
 	
 	/**
@@ -166,7 +174,7 @@ public class StateMachine<T extends State> {
 	 * @param message
 	 */
 	protected void printErr(String message) {
-		Logger.err(message);
+		System.err.println(message);
 	}
 	
 }

@@ -99,4 +99,19 @@ public class FFStateMachine extends StateMachine<FFState> {
 		return FamilyFeudTestDriver.DEBUG_LOG_CONSOLE;
 	}
 	
+	@Override
+	protected void printLog(String message) {
+		Logger.info(message);
+	}
+	
+	@Override
+	protected void printTransition(String message) {
+		Logger.warning(message);
+	}
+	
+	@Override
+	protected void printErr(String message) {
+		Logger.err(message);
+	}
+	
 }
