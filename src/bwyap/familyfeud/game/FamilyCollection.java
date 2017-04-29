@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bwyap.familyfeud.test.FamilyFeudTestDriver;
+import bwyap.utility.logging.Logger;
 
 /**
  * Manages a list of families for Family Feud.
@@ -28,7 +29,7 @@ public class FamilyCollection {
 	 */
 	public void addFamily(String familyName) {
 		families.add(new Family(familyName));
-		if (FamilyFeudTestDriver.DEBUG_LOG_CONSOLE) System.out.println(" + Added family: " + familyName);
+		if (FamilyFeudTestDriver.DEBUG_LOG_CONSOLE) Logger.log(" + Added family: " + familyName);
 	}
 	
 	/**

@@ -5,6 +5,7 @@ import bwyap.familyfeud.game.play.FFPlayStateType;
 import bwyap.familyfeud.game.play.state.FFPlayStateFactory;
 import bwyap.familyfeud.test.FamilyFeudTestDriver;
 import bwyap.statemachine.StateMachine;
+import bwyap.utility.logging.Logger;
 
 public class FFPlayStateMachine extends StateMachine<FFPlayState> {
 	
@@ -28,7 +29,7 @@ public class FFPlayStateMachine extends StateMachine<FFPlayState> {
 		// Set the initial state
 		changeState(FFPlayStateType.SELECT_QUESTION.toString());
 		
-		if (FamilyFeudTestDriver.DEBUG_LOG_CONSOLE) System.out.println("FFPlayStateMachine initialized.");
+		if (FamilyFeudTestDriver.DEBUG_LOG_CONSOLE) Logger.log("FFPlayStateMachine initialized.");
 	}
 	
 	@Override

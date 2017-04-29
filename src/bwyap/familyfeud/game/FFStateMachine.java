@@ -5,6 +5,7 @@ import bwyap.familyfeud.game.state.FFStateFactory;
 import bwyap.familyfeud.game.state.FFStateType;
 import bwyap.familyfeud.test.FamilyFeudTestDriver;
 import bwyap.statemachine.StateMachine;
+import bwyap.utility.logging.Logger;
 
 /**
  * A state machine that handles {@code FFState} for Family Feud
@@ -38,7 +39,7 @@ public class FFStateMachine extends StateMachine<FFState> {
 		// Set the initial state
 		changeState(FFStateType.START.toString());
 		
-		if (FamilyFeudTestDriver.DEBUG_LOG_CONSOLE) System.out.println("FFStateMachine initialized.");
+		if (FamilyFeudTestDriver.DEBUG_LOG_CONSOLE) Logger.log("FFStateMachine initialized.");
 	}
 	
 	@Override
@@ -63,9 +64,9 @@ public class FFStateMachine extends StateMachine<FFState> {
 					if (questions.getQuestions().size() > 0) {
 						return true;						
 					}
-					else System.err.println("No questions loaded!");
+					else Logger.err("No questions loaded!");
 				}
-				else System.err.println("More families required!");
+				else Logger.err("More families required!");
 			}
 		case PLAY:
 			if (nextState == FFStateType.END_GAME.toString()) return true;

@@ -5,6 +5,7 @@ import java.util.List;
 import bwyap.familyfeud.game.state.FFState;
 import bwyap.familyfeud.game.state.FFStateType;
 import bwyap.familyfeud.test.FamilyFeudTestDriver;
+import bwyap.utility.logging.Logger;
 
 /**
  * This class holds information about a Family Feud game, its components and its state.
@@ -24,7 +25,7 @@ public class FamilyFeudGame {
 		stateMachine = new FFStateMachine(this, families, questions);
 		stateMachine.init();
 		
-		if (FamilyFeudTestDriver.DEBUG_LOG_CONSOLE) System.out.println("Game initialized.");
+		if (FamilyFeudTestDriver.DEBUG_LOG_CONSOLE) Logger.log("Game initialized.");
 	}
 	
 	/**

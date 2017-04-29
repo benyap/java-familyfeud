@@ -15,6 +15,7 @@ import bwyap.familyfeud.game.state.StateAddFamily;
 import bwyap.familyfeud.game.state.StateLoadQuestions;
 import bwyap.familyfeud.game.state.StatePlay;
 import bwyap.familyfeud.res.JSONQuestionSet;
+import bwyap.utility.logging.Logger;
 import bwyap.utility.resource.JSONLoader;
 
 /**
@@ -34,9 +35,9 @@ public class FamilyFeudTestDriver {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		System.out.println("-----------------------");
-		System.out.println("! Running test driver !");
-		System.out.println("-----------------------");
+		Logger.print("-----------------------");
+		Logger.print("! Running test driver !");
+		Logger.print("-----------------------");
 		
 		FamilyFeud.init();
 		FamilyFeudTestDriver driver = new FamilyFeudTestDriver(FamilyFeud.app);
@@ -94,7 +95,7 @@ public class FamilyFeudTestDriver {
 		app.getGame().changeState(FFStateType.NEW_GAME);
 		
 		// Verify that families are added to the game
-		if (LOG_VERIFY) System.out.println("### VERIFY > Families: " + app.getGame().getFamilies());
+		if (LOG_VERIFY) Logger.info("### VERIFY > Families: " + app.getGame().getFamilies());
 	}
 	
 	/**
@@ -114,15 +115,17 @@ public class FamilyFeudTestDriver {
 		app.getGame().changeState(FFStateType.NEW_GAME);
 
 		// Verify that questions were added to the game
-		if (LOG_VERIFY) System.out.println("### VERIFY > Questions: ");
+		if (LOG_VERIFY) Logger.info("### VERIFY > Questions: ");
 		if (LOG_VERIFY) {
+			String s = "";
 			for(Question question : app.getGame().getQuestions()) {
-				System.out.print(question.toString() + ": [ ");
+				s = (question.toString()) + ": [ ";
 				for(Answer a : question.getAnswers()) {
-					System.out.print(a + "(" + a.getValue() + ") ");
+					s += a + "(" + a.getValue() + ") ";
 				}
-				System.out.println("]");
+				s += "]";
 			}
+			Logger.info(s);
 		}
 	}
 	
@@ -159,7 +162,7 @@ public class FamilyFeudTestDriver {
 		});
 		if (LOG_VERIFY) {
 			for(Answer a : app.getGame().getQuestions().get(1).getAnswers()) {
-				System.out.println(a + ": " + a.isRevealed());
+				Logger.info(a + ": " + a.isRevealed());
 			}
 		}
 	}

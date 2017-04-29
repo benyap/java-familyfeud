@@ -2,6 +2,7 @@ package bwyap.familyfeud;
 
 import bwyap.familyfeud.game.FamilyFeudGame;
 import bwyap.familyfeud.test.FamilyFeudTestDriver;
+import bwyap.utility.logging.Logger;
 
 /**
  * Controller class that manages the game and GUI components of Family Feud
@@ -16,7 +17,7 @@ public class FamilyFeudController {
 	 * Create a new Family Feud controller
 	 */
 	public FamilyFeudController() {
-		if (FamilyFeudTestDriver.DEBUG_LOG_CONSOLE) System.out.println("Welcome to Family Feud!");
+		if (FamilyFeudTestDriver.DEBUG_LOG_CONSOLE) Logger.log("Welcome to Family Feud!");
 	}
 	
 	/**
@@ -26,7 +27,7 @@ public class FamilyFeudController {
 		game = new FamilyFeudGame();		
 		game.init();
 
-		if (FamilyFeudTestDriver.DEBUG_LOG_CONSOLE) System.out.println("Controller initialized.");
+		if (FamilyFeudTestDriver.DEBUG_LOG_CONSOLE) Logger.log("Controller initialized.");
 	}
 	
 	/**
