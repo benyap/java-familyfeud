@@ -11,9 +11,7 @@ import bwyap.statemachine.State;
 public abstract class FFPlayState extends State {
 	
 	private FFPlayStateType type;
-	
-	protected Object returnObject;
-	
+		
 	/**
 	 * Create a new state with the specified name
 	 * @param name
@@ -46,16 +44,6 @@ public abstract class FFPlayState extends State {
 	@Override
 	public void updateState(float timeElapsed) {
 		// This method is not needed for this state machine
-	}
-	
-	/**
-	 * Get the return object for this state.
-	 * The return object is used to get data from this state at the end of its life
-	 * to be used by the state machine to transfer information to the next state.
-	 * @return
-	 */
-	public Object getReturnObject() {
-		return returnObject;
 	}
 
 }

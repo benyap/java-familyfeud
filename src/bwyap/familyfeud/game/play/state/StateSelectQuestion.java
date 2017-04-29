@@ -23,21 +23,21 @@ public class StateSelectQuestion extends FFPlayState {
 	}
 
 	@Override
-	public void initState() { }
+	public void initState(Object data) { }
 
 	@Override
 	public void cleanupState() { 
-		returnObject = selectedIndex;
+		data = selectedIndex;
 	}
 	
 	@Override
 	public boolean executeAction(int action, Object[] data) {
 		switch(action) {
 		case ACTION_SELECTQUESTION:
-			if (data[2] instanceof Integer) {
-				return selectQuestion((Integer) data[2]);
+			if (data[1] instanceof Integer) {
+				return selectQuestion((Integer) data[1]);
 			}
-			else throw new InvalidDataException("Expecting a {Integer, Integer, Integer} when using action ACTION_SELECTQUESTION");
+			else throw new InvalidDataException("Expecting a {Integer, Integer} when using action ACTION_SELECTQUESTION");
 		}
 		return false;
 	}
@@ -53,6 +53,11 @@ public class StateSelectQuestion extends FFPlayState {
 			return true;
 		}
 		return false;
+	}
+	
+	@Override
+	public boolean canAdvance() {
+		return selectedIndex > -1;
 	}
 
 }

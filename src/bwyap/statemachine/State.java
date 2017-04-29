@@ -9,6 +9,7 @@ public abstract class State {
 	
 	private String name;
 	private String nextState;
+	protected Object data;
 	
 	public State(String name) {
 		this.name = name;
@@ -26,8 +27,9 @@ public abstract class State {
 	/**
 	 * Initialize the state.
 	 * This should be run before the state is updated for the first time.
+	 * @param data
 	 */
-	public abstract void initState();
+	public abstract void initState(Object data);
 	
 	/**
 	 * Update the state.
@@ -69,6 +71,16 @@ public abstract class State {
 	 */
 	protected void setNextState(String state) {
 		this.nextState = state;
+	}
+	
+	/**
+	 * Get the return data for this state.
+	 * The return object is used to get data from this state at the end of its life
+	 * to be used by the state machine to transfer information to the next state.
+	 * @return
+	 */
+	public Object getData() {
+		return data;
 	}
 	
 }

@@ -21,12 +21,10 @@ public class StateAddFamily extends FFState {
 	}
 
 	@Override
-	public void initState() { }
+	public void initState(Object data) { }
 
 	@Override
-	public void cleanupState() {
-		returnObject = families;
-	}
+	public void cleanupState() { }
 	
 	@Override
 	public boolean executeAction(int action, Object[] data) {

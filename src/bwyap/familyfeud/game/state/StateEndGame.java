@@ -8,7 +8,7 @@ public class StateEndGame extends FFState {
 	}
 
 	@Override
-	public void initState() {
+	public void initState(Object data) {
 		// TODO Auto-generated method stub
 		
 	}

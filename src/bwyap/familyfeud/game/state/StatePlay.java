@@ -3,6 +3,7 @@ package bwyap.familyfeud.game.state;
 import bwyap.familyfeud.game.FFPlayStateMachine;
 import bwyap.familyfeud.game.FamilyFeudGame;
 import bwyap.familyfeud.game.InvalidDataException;
+import bwyap.familyfeud.game.play.FFPlayStateType;
 
 /**
  * This state is used to control the game play
@@ -12,6 +13,7 @@ import bwyap.familyfeud.game.InvalidDataException;
 public class StatePlay extends FFState {
 	
 	public static final int ACTION_EXECUTEPLAYACTION = 0x0;
+	public static final int CHANGESTATE_FACEOFF = 0x10;
 	
 	private FamilyFeudGame game;
 	private FFPlayStateMachine stateMachine;
@@ -22,7 +24,7 @@ public class StatePlay extends FFState {
 	}
 
 	@Override
-	public void initState() {
+	public void initState(Object data) {
 		stateMachine = new FFPlayStateMachine(game.getQuestionSet());
 		stateMachine.init();
 	}
@@ -38,6 +40,9 @@ public class StatePlay extends FFState {
 				stateMachine.getCurrentState().executeAction((Integer)data[0], data);
 			}
 			else throw new InvalidDataException("Expecting a {Integer, ...} when using action ACTION_EXECUTEPLAYACTION");
+			break;
+		case CHANGESTATE_FACEOFF: 
+			stateMachine.changeState(FFPlayStateType.FACE_OFF.toString());
 			break;
 		}
 		return false;

@@ -11,7 +11,7 @@ public class StateFamilyPlay extends FFPlayState {
 	}
 
 	@Override
-	public void initState() {
+	public void initState(Object data) {
 		// TODO Auto-generated method stub
 
 	}

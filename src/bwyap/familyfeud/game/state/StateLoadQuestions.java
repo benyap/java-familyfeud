@@ -17,7 +17,7 @@ public class StateLoadQuestions extends FFState {
 	}
 
 	@Override
-	public void initState() { }
+	public void initState(Object data) { }
 
 	@Override
 	public void cleanupState() { }

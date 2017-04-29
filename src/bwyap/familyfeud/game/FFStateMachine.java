@@ -44,7 +44,6 @@ public class FFStateMachine extends StateMachine<FFState> {
 	@Override
 	public boolean validateStateTransition(FFState currentState, String nextState) {
 		if (currentState == null) return true;
-		if (!currentState.canAdvance()) return false;
 		
 		switch (currentState.getType()) {
 		case ADD_FAMILY:

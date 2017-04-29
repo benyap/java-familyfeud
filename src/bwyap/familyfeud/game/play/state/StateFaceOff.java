@@ -7,19 +7,16 @@ public class StateFaceOff extends FFPlayState {
 
 	protected StateFaceOff() {
 		super(FFPlayStateType.FACE_OFF);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public void initState() {
-		// TODO Auto-generated method stub
-
+	public void initState(Object data) {
+		if (data instanceof Integer) {
+			System.out.println(getType() + " received data: " + data);
+		}
 	}
 
 	@Override
-	public void cleanupState() {
-		// TODO Auto-generated method stub
-
-	}
+	public void cleanupState() { }
 
 }

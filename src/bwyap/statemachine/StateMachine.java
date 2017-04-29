@@ -14,7 +14,6 @@ public class StateMachine<T extends State> {
 	protected T currentState;
 	protected HashMap<String, T> states = new HashMap<String, T>();
 	
-	
 	/**
 	 * Create a new state machine with the specified name
 	 * @param name
@@ -100,15 +99,22 @@ public class StateMachine<T extends State> {
 	 */
 	public void changeState(String name) {
 		if (validateStateTransition(currentState, name)) {
-			if (currentState != null) currentState.cleanupState();
-			if (states.containsKey(name)) {
-				if (getDebugMode()) printOut(getName() + " > CHANGING STATE from <" + currentState + "> to <" + name + ">");
-				currentState = states.get(name);
-				currentState.initState();
+			if (currentState != null && !currentState.canAdvance()) {
+				if (getDebugMode()) printErr("> Invalid state transition: <" + currentState + "> is not complete and cannot advance to <" + name + ">");
 			}
 			else {
-				// no state 
-				currentState = null;
+				if (currentState != null) currentState.cleanupState();
+				if (states.containsKey(name)) {
+					if (getDebugMode()) printOut(getName() + " > CHANGING STATE from <" + currentState + "> to <" + name + ">");
+					Object data = null;
+					if (currentState != null) data = currentState.getData();
+					currentState = states.get(name);
+					currentState.initState(data);
+				}
+				else {
+					// no state 
+					currentState = null;
+				}
 			}
 		}
 		else {

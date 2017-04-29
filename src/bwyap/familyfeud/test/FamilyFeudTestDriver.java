@@ -6,9 +6,11 @@ import org.json.simple.JSONObject;
 
 import bwyap.familyfeud.FamilyFeud;
 import bwyap.familyfeud.FamilyFeudController;
+import bwyap.familyfeud.game.play.state.StateSelectQuestion;
 import bwyap.familyfeud.game.state.FFStateType;
 import bwyap.familyfeud.game.state.StateAddFamily;
 import bwyap.familyfeud.game.state.StateLoadQuestions;
+import bwyap.familyfeud.game.state.StatePlay;
 import bwyap.familyfeud.res.JSONQuestionSet;
 import bwyap.utility.resource.JSONLoader;
 
@@ -43,6 +45,8 @@ public class FamilyFeudTestDriver {
 		driver.testLoadQuestions();
 		driver.testInitGame();
 		driver.testPlayGame();
+		driver.testSelectQuestion();
+		driver.testFaceOff();
 	}
 	
 	
@@ -121,6 +125,22 @@ public class FamilyFeudTestDriver {
 	 */
 	protected void testPlayGame() {
 		app.getGame().changeState(FFStateType.PLAY);
+	}
+	
+	/**
+	 * Test the selection of question in the PLAY state
+	 */
+	protected void testSelectQuestion() {
+		app.getGame().getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[]{
+				StateSelectQuestion.ACTION_SELECTQUESTION, 2
+		});
+	}
+	
+	/**
+	 * Test face off
+	 */
+	protected void testFaceOff() {
+		app.getGame().getState().executeAction(StatePlay.CHANGESTATE_FACEOFF, null);
 	}
 	
 }

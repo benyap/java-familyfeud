@@ -13,6 +13,7 @@ import bwyap.familyfeud.res.JSONQuestionSet;
 public class QuestionSet {
 	
 	private List<Question> questions;
+	private int selectedIndex = -1;
 	
 	/**
 	 * Create a new question set
@@ -47,6 +48,22 @@ public class QuestionSet {
 	 */
 	public Question getQuestion(int index) {
 		return questions.get(index);
+	}
+	
+	/**
+	 * Get the selected question from the question set
+	 * @return
+	 */
+	public Question getSelectedQuestion() {
+		return questions.get(selectedIndex);
+	}
+	
+	/**
+	 * Set the selected question
+	 * @param index
+	 */
+	public void setSelectedQuestion(int index) {
+		selectedIndex = index;
 	}
 
 	/**
