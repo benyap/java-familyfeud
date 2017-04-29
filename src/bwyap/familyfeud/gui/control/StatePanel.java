@@ -73,6 +73,7 @@ public class StatePanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				if (game.changeState(FFStateType.ADD_FAMILY)) {
 					window.setFamilyPanelEnabled(true);
+					window.setQuestionLoaderEnabled(false);
 				}
 			}
 		});
@@ -83,6 +84,7 @@ public class StatePanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				game.changeState(FFStateType.LOAD_QUESTIONS);
 				window.setFamilyPanelEnabled(false);
+				window.setQuestionLoaderEnabled(true);
 			}
 		});
 		
@@ -91,10 +93,12 @@ public class StatePanel extends JPanel {
 		initGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (game.changeState(FFStateType.INITIALIZE_GAME)) {
+					initGame.setEnabled(false);
 					newGame.setEnabled(false);
 					addFamily.setEnabled(false);
 					loadQuestions.setEnabled(false);
 					window.setFamilyPanelEnabled(false);
+					window.setQuestionLoaderEnabled(false);
 					play.setEnabled(true);
 				}
 			}

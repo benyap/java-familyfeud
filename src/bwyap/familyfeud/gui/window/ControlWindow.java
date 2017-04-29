@@ -13,6 +13,7 @@ import bwyap.familyfeud.game.FamilyFeudGame;
 import bwyap.familyfeud.gui.GBC;
 import bwyap.familyfeud.gui.control.AddFamilyPanel;
 import bwyap.familyfeud.gui.control.ConsolePanel;
+import bwyap.familyfeud.gui.control.QuestionSetLoaderPanel;
 import bwyap.familyfeud.gui.control.StatePanel;
 import bwyap.familyfeud.gui.control.WindowControlPanel;
 import bwyap.utility.logging.Logger;
@@ -38,6 +39,7 @@ public class ControlWindow extends FamilyFeudWindow {
 	private WindowControlPanel windowControlPanel;
 	private StatePanel statePanel;
 	private AddFamilyPanel familyPanel;
+	private QuestionSetLoaderPanel questionLoaderPanel;
 	
 	/**
 	 * Create a new control window
@@ -90,12 +92,20 @@ public class ControlWindow extends FamilyFeudWindow {
 		statePanel = new StatePanel(this, game);
 		contentPane.add(statePanel, new GBC(2, 0).setSpan(1, 2));
 		
+		questionLoaderPanel = new QuestionSetLoaderPanel(game);
+		questionLoaderPanel.setEnabled(false);
+		contentPane.add(questionLoaderPanel, new GBC(1, 0));
+		
 		add(contentPane, BorderLayout.CENTER);
 		Logger.info("Control window initialized.");
 	}
 	
 	public void setFamilyPanelEnabled(boolean enabled) {
 		familyPanel.setEnabled(enabled);
+	}
+	
+	public void setQuestionLoaderEnabled(boolean enabled) {
+		questionLoaderPanel.setEnabled(enabled);
 	}
 
 }
