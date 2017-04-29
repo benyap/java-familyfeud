@@ -12,6 +12,7 @@ import bwyap.utility.logging.Logger;
 public class FamilyFeudController {
 	
 	private FamilyFeudGame game;
+	private FamilyFeudGUI gui;
 	
 	/**
 	 * Create a new Family Feud controller
@@ -26,6 +27,9 @@ public class FamilyFeudController {
 	public void init() {
 		game = new FamilyFeudGame();		
 		game.init();
+		
+		gui = new FamilyFeudGUI();
+		gui.init();
 
 		if (FamilyFeudTestDriver.DEBUG_LOG_CONSOLE) Logger.log("Controller initialized.");
 	}
@@ -34,7 +38,7 @@ public class FamilyFeudController {
 	 * Start the application
 	 */
 	public void start() {
-		
+		gui.start();
 	}
 	
 	/**
