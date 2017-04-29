@@ -15,11 +15,13 @@ public class FamilyFeudGame {
 	
 	private FFStateMachine stateMachine;
 	private FamilyCollection families;
+	private QuestionSet questions;
 	
 	public void init() {
 		families = new FamilyCollection();
+		questions = new QuestionSet();
 		
-		stateMachine = new FFStateMachine(families);
+		stateMachine = new FFStateMachine(families, questions);
 		stateMachine.init();
 		
 		if (FamilyFeudTestDriver.DEBUG_LOG_CONSOLE) System.out.println("Game initialized.");
@@ -48,6 +50,14 @@ public class FamilyFeudGame {
 	 */
 	public List<Family> getFamilies() {
 		return families.getFamilies();
+	}
+	
+	/**
+	 * Get the list of questions in the game
+	 * @return
+	 */
+	public List<Question> getQuestions() {
+		return questions.getQuestions();
 	}
 	
 }

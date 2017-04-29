@@ -1,9 +1,16 @@
 package bwyap.familyfeud.test;
 
+import java.io.File;
+
+import org.json.simple.JSONObject;
+
 import bwyap.familyfeud.FamilyFeud;
 import bwyap.familyfeud.FamilyFeudController;
 import bwyap.familyfeud.game.state.FFStateType;
 import bwyap.familyfeud.game.state.StateAddFamily;
+import bwyap.familyfeud.game.state.StateLoadQuestions;
+import bwyap.familyfeud.res.JSONQuestionSet;
+import bwyap.utility.resource.JSONLoader;
 
 /**
  * Test Driver to test FamilyFeud application
@@ -32,6 +39,7 @@ public class FamilyFeudTestDriver {
 		driver.testInit();
 		driver.testStart();
 		driver.testAddFamilies();
+		driver.testLoadQuestions();
 	}
 	
 	
@@ -52,6 +60,7 @@ public class FamilyFeudTestDriver {
 	 */
 	public void testStart() {
 		app.start();
+		app.getGame().changeState(FFStateType.NEW_GAME);
 	}
 	
 	/**
@@ -65,7 +74,6 @@ public class FamilyFeudTestDriver {
 	 * Test adding families to the game
 	 */
 	public void testAddFamilies() {
-		app.getGame().changeState(FFStateType.NEW_GAME);
 		app.getGame().changeState(FFStateType.ADD_FAMILY);
 		
 		// Add families
@@ -76,7 +84,26 @@ public class FamilyFeudTestDriver {
 		app.getGame().changeState(FFStateType.NEW_GAME);
 		
 		// Verify that families are added to the game
-		System.out.println("Families: " + app.getGame().getFamilies());
+		System.out.println("# VERIFY > Families: " + app.getGame().getFamilies());
+	}
+	
+	/**
+	 * Test the loading of a question set from a JSON file
+	 */
+	public void testLoadQuestions() {
+		File questionFile = new File("res/questionset.json");
+		JSONObject o = JSONLoader.loadJSON(questionFile);
+		JSONQuestionSet q = new JSONQuestionSet(o);
+		
+		app.getGame().changeState(FFStateType.LOAD_QUESTIONS);
+
+		app.getGame().getState().executeAction(StateLoadQuestions.ACTION_LOADQUESTIONSET, new Object[]{q});
+		
+		// Finish adding questions
+		app.getGame().changeState(FFStateType.NEW_GAME);
+
+		// Verify that questions were added to the game
+		System.out.println("# VERIFY > Questions: " + app.getGame().getQuestions());
 	}
 	
 }

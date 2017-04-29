@@ -1,6 +1,7 @@
 package bwyap.familyfeud.game.state;
 
 import bwyap.familyfeud.game.FamilyCollection;
+import bwyap.familyfeud.game.QuestionSet;
 
 /**
  * This class is responsible for creating and initializing the game states of a Family Feud game.
@@ -40,7 +41,11 @@ public class FFStateFactory {
 			if (initializeGame == null) createInitializeGameState();
 			return initializeGame;
 		case LOAD_QUESTIONS:
-			if (loadQuestions == null) createLoadQuestionsState();
+			if (loadQuestions == null) {
+				if (data instanceof QuestionSet)
+					createLoadQuestionsState((QuestionSet)data);
+				else throw new InvalidDataException("FFStateFactory: QuestionSet required when create StateLoadQuestions");
+			}
 			return loadQuestions;
 		case NEW_GAME:
 			if (newGame == null) createNewGameState();
@@ -72,8 +77,8 @@ public class FFStateFactory {
 		newGame = new StateNewGame();
 	}
 
-	private static void createLoadQuestionsState() {
-		loadQuestions = new StateLoadQuestions();
+	private static void createLoadQuestionsState(QuestionSet questions) {
+		loadQuestions = new StateLoadQuestions(questions);
 	}
 
 	private static void createInitializeGameState() {

@@ -35,6 +35,7 @@ public class StateAddFamily extends FFState {
 			if (data[0] instanceof String) {
 				addFamily((String) data[0]);
 			}
+			else throw new InvalidDataException("Expecting a {String} when using action ACTION_ADDFAMILY");
 			break;
 		}
 		return false;

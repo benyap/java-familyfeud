@@ -1,28 +1,45 @@
 package bwyap.familyfeud.game.state;
 
+import bwyap.familyfeud.game.QuestionSet;
+import bwyap.familyfeud.res.JSONQuestionSet;
+
 public class StateLoadQuestions extends FFState {
 
-	protected StateLoadQuestions() {
+	// ACTIONS
+	public static final int ACTION_LOADQUESTIONSET = 0x0;
+		
+	private QuestionSet questions;
+	
+	protected StateLoadQuestions(QuestionSet questions) {
 		super(FFStateType.LOAD_QUESTIONS);
-		// TODO Auto-generated constructor stub
+		this.questions = questions;
 	}
 
 	@Override
-	public void initState() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void initState() { }
 
 	@Override
-	public void updateState(float timeElapsed) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void cleanupState() { }
 
 	@Override
-	public void cleanupState() {
-		// TODO Auto-generated method stub
-		
+	public boolean executeAction(int action, Object[] data) {
+		switch(action) {
+		case ACTION_LOADQUESTIONSET:
+			if (data[0] instanceof JSONQuestionSet) {
+				loadQuestionSet((JSONQuestionSet) data[0]);
+			}
+			else throw new InvalidDataException("Expecting a {JSONQuestionSet} when using action ACTION_LOADQUESTIONSET");
+			break;
+		}
+		return false;
 	}
-
+	
+	/**
+	 * Add a new family to the game
+	 * @param familyName
+	 */
+	private void loadQuestionSet(JSONQuestionSet data) {
+		questions.loadFromJSON(data);
+	}
+	
 }

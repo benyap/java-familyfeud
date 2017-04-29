@@ -14,9 +14,11 @@ import bwyap.statemachine.StateMachine;
 public class FFStateMachine extends StateMachine<FFState> {
 	
 	private FamilyCollection families;
+	private QuestionSet questions;
 	
-	public FFStateMachine(FamilyCollection families) {
+	public FFStateMachine(FamilyCollection families, QuestionSet questions) {
 		this.families = families;
+		this.questions = questions;
 	}
 	
 	@Override
@@ -25,6 +27,9 @@ public class FFStateMachine extends StateMachine<FFState> {
 		for(FFStateType type : FFStateType.values()) {
 			if (type == FFStateType.ADD_FAMILY) {
 				addState(type.toString(), FFStateFactory.getState(type, families));
+			}
+			else if (type == FFStateType.LOAD_QUESTIONS) {
+				addState(type.toString(), FFStateFactory.getState(type, questions));
 			}
 			else {
 				addState(type.toString(), FFStateFactory.getState(type, null));				

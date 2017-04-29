@@ -48,5 +48,13 @@ public class QuestionSet {
 	public Question getQuestion(int index) {
 		return questions.get(index);
 	}
+
+	/**
+	 * Get the list of questions in the question set
+	 * @return
+	 */
+	public List<Question> getQuestions() {
+		return questions;
+	}
 	
 }
