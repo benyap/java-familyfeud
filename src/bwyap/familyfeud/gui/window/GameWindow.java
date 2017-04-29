@@ -76,5 +76,13 @@ public class GameWindow extends FamilyFeudWindow {
 	public void setDefaultFullscreenScreen(int screenIndex) {
 		this.screenIndex = screenIndex;
 	}
+	
+	/**
+	 * Check if the window is currently in fullscreen mode
+	 * @return
+	 */
+	public boolean isFullscreen() {
+		return fullscreen;
+	}
 
 }

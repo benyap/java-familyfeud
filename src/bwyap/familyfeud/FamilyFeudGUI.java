@@ -19,7 +19,7 @@ public class FamilyFeudGUI {
 	
 	public FamilyFeudGUI(RenderingPanel renderPanel) {
 		gameWindow = new GameWindow(TITLE, renderPanel);
-		controlWindow = new ControlWindow(TITLE + " controller " + VERSION);
+		controlWindow = new ControlWindow(TITLE + " controller " + VERSION, gameWindow);
 	}
 	
 	/**
@@ -35,7 +35,6 @@ public class FamilyFeudGUI {
 	 */
 	public void start() {
 		controlWindow.setVisible(true);
-		gameWindow.setVisible(true);
 	}
 	
 }

@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 
 import bwyap.familyfeud.gui.GBC;
 import bwyap.familyfeud.gui.control.ConsolePanel;
+import bwyap.familyfeud.gui.control.WindowControlPanel;
 import bwyap.utility.logging.Logger;
 
 /**
@@ -23,15 +24,18 @@ public class ControlWindow extends FamilyFeudWindow {
 	public static final int WIDTH = 800;
 	public static final int HEIGHT = 600;
 	
+	private GameWindow gameWindow;
 	private JPanel contentPane;
 	private ConsolePanel consolePanel;
+	private WindowControlPanel windowControlPanel;
 	
 	/**
 	 * Create a new control window
 	 * @param title
 	 */
-	public ControlWindow(String title) {
+	public ControlWindow(String title, GameWindow gameWindow) {
 		super(title, WIDTH, HEIGHT);
+		this.gameWindow = gameWindow;
 	}
 
 	/**
@@ -49,7 +53,10 @@ public class ControlWindow extends FamilyFeudWindow {
 		contentPane.setLayout(new GridBagLayout());
 		
 		consolePanel = new ConsolePanel();
-		contentPane.add(consolePanel, new GBC(0, 0));
+		contentPane.add(consolePanel, new GBC(0, 1));
+		
+		windowControlPanel = new WindowControlPanel(gameWindow);
+		contentPane.add(windowControlPanel, new GBC(0, 0));
 		
 		add(contentPane, BorderLayout.CENTER);
 		Logger.info("Control window initialized.");
