@@ -1,5 +1,6 @@
 package bwyap.familyfeud.game.state;
 
+import bwyap.familyfeud.game.InvalidDataException;
 import bwyap.familyfeud.game.QuestionSet;
 import bwyap.familyfeud.res.JSONQuestionSet;
 

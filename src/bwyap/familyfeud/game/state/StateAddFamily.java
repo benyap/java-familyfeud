@@ -1,6 +1,7 @@
 package bwyap.familyfeud.game.state;
 
 import bwyap.familyfeud.game.FamilyCollection;
+import bwyap.familyfeud.game.InvalidDataException;
 
 /**
  * This state is used to add new families to the game before the game starts.

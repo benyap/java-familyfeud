@@ -1,4 +1,4 @@
-package bwyap.familyfeud.game.state;
+package bwyap.familyfeud.game;
 
 /**
  * This exception is thrown a method has been supplied the incorrect data arguments. 
