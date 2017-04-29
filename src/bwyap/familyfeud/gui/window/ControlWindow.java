@@ -2,8 +2,11 @@ package bwyap.familyfeud.gui.window;
 
 import java.awt.BorderLayout;
 import java.awt.GridBagLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import bwyap.familyfeud.gui.GBC;
@@ -43,10 +46,24 @@ public class ControlWindow extends FamilyFeudWindow {
 	 */
 	public void initWindow() {
 		setLocationRelativeTo(null);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setAlwaysOnTop(true);
 		setResizable(false);
 		setLayout(new BorderLayout());
+		
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				if (JOptionPane.showConfirmDialog(ControlWindow.this,
+					"Are you sure you want to exit the program?",
+					"Exit program?",
+					JOptionPane.OK_CANCEL_OPTION,
+					JOptionPane.WARNING_MESSAGE)
+					== JOptionPane.OK_OPTION) {
+					System.exit(0);
+				}
+			}
+		});
 		
 		// init components
 		contentPane = new JPanel();
