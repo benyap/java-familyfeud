@@ -12,7 +12,7 @@ import bwyap.familyfeud.game.play.FFPlayStateType;
  */
 public class StatePlay extends FFState {
 	
-	public static final int ACTION_EXECUTEPLAYACTION = 0x0;
+	public static final int ACTION_EXECUTEPLAYACTION = 0x00;
 	public static final int CHANGESTATE_FACEOFF = 0x10;
 	
 	private FamilyFeudGame game;
@@ -39,7 +39,7 @@ public class StatePlay extends FFState {
 			if (data[0] instanceof Integer) {
 				stateMachine.getCurrentState().executeAction((Integer)data[0], data);
 			}
-			else throw new InvalidDataException("Expecting a {Integer, ...} when using action ACTION_EXECUTEPLAYACTION");
+			else throw new InvalidDataException("Expecting a {Integer, ...} when using action [" + action + "]");
 			break;
 		case CHANGESTATE_FACEOFF: 
 			stateMachine.changeState(FFPlayStateType.FACE_OFF.toString());

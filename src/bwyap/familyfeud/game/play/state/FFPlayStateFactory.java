@@ -32,7 +32,12 @@ public class FFPlayStateFactory {
 			if (allocatePoints == null) createAllocatePointsState();
 			return allocatePoints;
 		case FACE_OFF:
-			if (faceOff == null) createFaceOffState();
+			if (faceOff == null) {
+				if (data instanceof QuestionSet) {
+					createFaceOffState((QuestionSet)data);
+				}
+				else throw new InvalidDataException("FFPlayStateFactory: QuestionSet expected when creating new StateFaceOff");
+			}
 			return faceOff;
 		case FAMILY_PLAY:
 			if (familyPlay == null) createFamilyPlayState();
@@ -76,8 +81,8 @@ public class FFPlayStateFactory {
 		familyPlay = new StateFamilyPlay();
 	}
 
-	private static void createFaceOffState() {
-		faceOff = new StateFaceOff();
+	private static void createFaceOffState(QuestionSet questions) {
+		faceOff = new StateFaceOff(questions);
 	}
 
 	private static void createAllocatePointsState() {

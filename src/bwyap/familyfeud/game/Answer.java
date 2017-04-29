@@ -9,6 +9,7 @@ public class Answer implements Comparable<Answer> {
 	
 	private String answerString;
 	private int value;
+	private boolean revealed;
 	
 	/**
 	 * Create a new answer object
@@ -18,6 +19,7 @@ public class Answer implements Comparable<Answer> {
 	public Answer(String answerString, int value) {
 		this.answerString = answerString;
 		this.value = value;
+		this.revealed = false;
 	}
 	
 	/**
@@ -34,6 +36,22 @@ public class Answer implements Comparable<Answer> {
 	 */
 	public int getValue() {
 		return value;
+	}
+	
+	/**
+	 * Check if the answer has been revealed
+	 * @return
+	 */
+	public boolean isRevealed() {
+		return revealed;
+	}
+	
+	/**
+	 * Set if the answer has been revealed
+	 * @param revealed
+	 */
+	public void setReveal(boolean revealed) {
+		this.revealed = revealed;
 	}
 
 	@Override

@@ -1,6 +1,8 @@
 package bwyap.familyfeud.game;
 
-import java.util.PriorityQueue;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * A question contains a question string and a list of answers.
@@ -11,7 +13,7 @@ import java.util.PriorityQueue;
 public class Question {
 	
 	private String questionString; 
-	private PriorityQueue<Answer> answers;
+	private List<Answer> answers;
 	private boolean answered;
 	
 	/**
@@ -21,7 +23,7 @@ public class Question {
 	public Question(String questionString) {
 		this.questionString = questionString;
 		this.answered = false;
-		this.answers = new PriorityQueue<Answer>();
+		this.answers = new ArrayList<Answer>();
 	}
 	
 	/**
@@ -37,20 +39,9 @@ public class Question {
 	 * Gets a list of the answers to the question, sorted in order from highest points to lower points
 	 * @return
 	 */
-	public Answer[] getAnswers() {
-		Answer[] list = new Answer[answers.size()];
-		
-		// Extract answers in order
-		for(int i = 0; i < answers.size(); i++) {
-			list[i] = answers.remove();
-		}
-		
-		// Add answers back to list
-		for(Answer a : list) {
-			answers.add(a);			
-		}
-		
-		return list;
+	public List<Answer> getAnswers() {		
+		Collections.sort(answers, Collections.reverseOrder());
+		return answers;
 	}
 	
 	/**

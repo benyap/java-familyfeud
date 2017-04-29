@@ -19,7 +19,7 @@ public class FFPlayStateMachine extends StateMachine<FFPlayState> {
 	public void init() {
 		// Add all states to the machine
 		addState(FFPlayStateType.SELECT_QUESTION.toString(), FFPlayStateFactory.getState(FFPlayStateType.SELECT_QUESTION, questions));				
-		addState(FFPlayStateType.FACE_OFF.toString(), FFPlayStateFactory.getState(FFPlayStateType.FACE_OFF, null));				
+		addState(FFPlayStateType.FACE_OFF.toString(), FFPlayStateFactory.getState(FFPlayStateType.FACE_OFF, questions));				
 		addState(FFPlayStateType.FAMILY_PLAY.toString(), FFPlayStateFactory.getState(FFPlayStateType.FAMILY_PLAY, null));				
 		addState(FFPlayStateType.FAMILY_STEAL.toString(), FFPlayStateFactory.getState(FFPlayStateType.FAMILY_STEAL, null));				
 		addState(FFPlayStateType.ALLOCATE_POINTS.toString(), FFPlayStateFactory.getState(FFPlayStateType.ALLOCATE_POINTS, null));				

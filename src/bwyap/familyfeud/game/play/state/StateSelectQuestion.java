@@ -37,7 +37,7 @@ public class StateSelectQuestion extends FFPlayState {
 			if (data[1] instanceof Integer) {
 				return selectQuestion((Integer) data[1]);
 			}
-			else throw new InvalidDataException("Expecting a {Integer, Integer} when using action ACTION_SELECTQUESTION");
+			else throw new InvalidDataException("Expecting a {*, Integer} when using action ACTION_SELECTQUESTION");
 		}
 		return false;
 	}

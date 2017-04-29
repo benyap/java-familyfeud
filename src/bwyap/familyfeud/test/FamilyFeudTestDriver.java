@@ -6,6 +6,9 @@ import org.json.simple.JSONObject;
 
 import bwyap.familyfeud.FamilyFeud;
 import bwyap.familyfeud.FamilyFeudController;
+import bwyap.familyfeud.game.Answer;
+import bwyap.familyfeud.game.Question;
+import bwyap.familyfeud.game.play.state.StateFaceOff;
 import bwyap.familyfeud.game.play.state.StateSelectQuestion;
 import bwyap.familyfeud.game.state.FFStateType;
 import bwyap.familyfeud.game.state.StateAddFamily;
@@ -101,6 +104,7 @@ public class FamilyFeudTestDriver {
 		File questionFile = new File("res/questionset.json");
 		JSONObject o = JSONLoader.loadJSON(questionFile);
 		JSONQuestionSet q = new JSONQuestionSet(o);
+		q.isValid();
 		
 		app.getGame().changeState(FFStateType.LOAD_QUESTIONS);
 
@@ -110,7 +114,16 @@ public class FamilyFeudTestDriver {
 		app.getGame().changeState(FFStateType.NEW_GAME);
 
 		// Verify that questions were added to the game
-		if (LOG_VERIFY) System.out.println("### VERIFY > Questions: " + app.getGame().getQuestions());
+		if (LOG_VERIFY) System.out.println("### VERIFY > Questions: ");
+		if (LOG_VERIFY) {
+			for(Question question : app.getGame().getQuestions()) {
+				System.out.print(question.toString() + ": [ ");
+				for(Answer a : question.getAnswers()) {
+					System.out.print(a + "(" + a.getValue() + ") ");
+				}
+				System.out.println("]");
+			}
+		}
 	}
 	
 	/**
@@ -132,7 +145,7 @@ public class FamilyFeudTestDriver {
 	 */
 	protected void testSelectQuestion() {
 		app.getGame().getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[]{
-				StateSelectQuestion.ACTION_SELECTQUESTION, 2
+				StateSelectQuestion.ACTION_SELECTQUESTION, 1
 		});
 	}
 	
@@ -141,6 +154,14 @@ public class FamilyFeudTestDriver {
 	 */
 	protected void testFaceOff() {
 		app.getGame().getState().executeAction(StatePlay.CHANGESTATE_FACEOFF, null);
+		app.getGame().getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[]{
+				StateFaceOff.ACTION_OPENANSWER, 3
+		});
+		if (LOG_VERIFY) {
+			for(Answer a : app.getGame().getQuestions().get(1).getAnswers()) {
+				System.out.println(a + ": " + a.isRevealed());
+			}
+		}
 	}
 	
 }
