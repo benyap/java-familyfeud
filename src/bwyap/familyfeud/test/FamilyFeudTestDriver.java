@@ -39,15 +39,15 @@ public class FamilyFeudTestDriver {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Logger.print("-----------------------");
-		Logger.print("! Running test driver !");
-		Logger.print("-----------------------");
 		
 		FamilyFeud.init();
 		FamilyFeudTestDriver driver = new FamilyFeudTestDriver(FamilyFeud.app);
 		
 		// TESTS
 		driver.testInit();
+		Logger.print("-----------------------");
+		Logger.print("! Running test driver !");
+		Logger.print("-----------------------");
 		driver.testStart();
 		driver.testAddFamilies();
 		driver.testLoadQuestions();
@@ -84,18 +84,18 @@ public class FamilyFeudTestDriver {
 	}
 	
 	/**
+	 * Test initializing the application
+	 */
+	protected void testInit() {
+		app.init();
+	}
+	
+	/**
 	 * Test starting the application
 	 */
 	protected void testStart() {
 		app.start();
 		app.getGame().changeState(FFStateType.NEW_GAME);
-	}
-	
-	/**
-	 * Test initializing the application
-	 */
-	protected void testInit() {
-		app.init();
 	}
 	
 	/**

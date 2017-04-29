@@ -23,7 +23,7 @@ public class ConsolePanel extends JPanel {
 	private static final long serialVersionUID = 7694955474110163790L;
 
 	public static final int WIDTH = ControlWindow.WIDTH - 10;
-	public static final int HEIGHT = 150;
+	public static final int HEIGHT = 200;
 	
 	private JScrollPane scroll;
 	private static JTextPane text;
