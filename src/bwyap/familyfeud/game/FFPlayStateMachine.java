@@ -10,10 +10,12 @@ import bwyap.utility.logging.Logger;
 public class FFPlayStateMachine extends StateMachine<FFPlayState> {
 	
 	private QuestionSet questions;
+	private FamilyCollection families;
 	
-	public FFPlayStateMachine(QuestionSet questions) {
+	public FFPlayStateMachine(QuestionSet questions, FamilyCollection families) {
 		super("FFGame.Play");
 		this.questions = questions;
+		this.families = families;
 	}
 
 	@Override
@@ -23,7 +25,7 @@ public class FFPlayStateMachine extends StateMachine<FFPlayState> {
 		addState(FFPlayStateType.FACE_OFF.toString(), FFPlayStateFactory.getState(FFPlayStateType.FACE_OFF, questions));				
 		addState(FFPlayStateType.FAMILY_PLAY.toString(), FFPlayStateFactory.getState(FFPlayStateType.FAMILY_PLAY, null));				
 		addState(FFPlayStateType.FAMILY_STEAL.toString(), FFPlayStateFactory.getState(FFPlayStateType.FAMILY_STEAL, null));				
-		addState(FFPlayStateType.ALLOCATE_POINTS.toString(), FFPlayStateFactory.getState(FFPlayStateType.ALLOCATE_POINTS, null));				
+		addState(FFPlayStateType.ALLOCATE_POINTS.toString(), FFPlayStateFactory.getState(FFPlayStateType.ALLOCATE_POINTS, families));				
 		addState(FFPlayStateType.REVEAL_ANSWERS.toString(), FFPlayStateFactory.getState(FFPlayStateType.REVEAL_ANSWERS, null));				
 		
 		// Set the initial state

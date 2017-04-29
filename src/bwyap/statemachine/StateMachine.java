@@ -101,7 +101,7 @@ public class StateMachine<T extends State> {
 	 */
 	public void changeState(String name) {
 		if (validateStateTransition(currentState, name)) {
-			if (currentState != null && !currentState.canAdvance()) {
+			if (currentState != null && !currentState.canAdvance(name)) {
 				if (getDebugMode()) printErr("> Invalid state transition: <" + currentState + "> is not complete and cannot advance to <" + name + ">");
 			}
 			else {

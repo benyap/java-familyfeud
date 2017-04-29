@@ -56,7 +56,7 @@ public class StateSelectQuestion extends FFPlayState {
 	}
 	
 	@Override
-	public boolean canAdvance() {
+	public boolean canAdvance(String nextState) {
 		return selectedIndex > -1;
 	}
 

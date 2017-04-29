@@ -70,5 +70,13 @@ public class FamilyFeudGame {
 	public QuestionSet getQuestionSet() {
 		return questions;
 	}
+
+	/**
+	 * Get the family collection object in the game
+	 * @return
+	 */
+	public FamilyCollection getFamilyCollection() {
+		return families;
+	}
 	
 }

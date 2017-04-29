@@ -28,7 +28,7 @@ public class StatePlay extends FFState {
 
 	@Override
 	public void initState(Object data) {
-		stateMachine = new FFPlayStateMachine(game.getQuestionSet());
+		stateMachine = new FFPlayStateMachine(game.getQuestionSet(), game.getFamilyCollection());
 		stateMachine.init();
 	}
 	
@@ -52,6 +52,9 @@ public class StatePlay extends FFState {
 			break;
 		case CHANGESTATE_FAMILYSTEAL: 
 			stateMachine.changeState(FFPlayStateType.FAMILY_STEAL.toString());
+			break;
+		case CHANGESTATE_ALLOCATEPOINTS:
+			stateMachine.changeState(FFPlayStateType.ALLOCATE_POINTS.toString());
 			break;
 		}
 		return false;

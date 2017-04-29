@@ -36,6 +36,14 @@ public class Family {
 		return points;
 	}
 	
+	/**
+	 * Add points to the family's score
+	 * @param amount
+	 */
+	public void addPoints(int amount) {
+		points += amount;
+	}
+	
 	@Override
 	public String toString() {
 		return getName();

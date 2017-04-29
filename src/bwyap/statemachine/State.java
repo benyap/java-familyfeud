@@ -54,11 +54,12 @@ public abstract class State {
 	}
 	
 	/**
-	 * Check whether this state is ready to advance.
+	 * Check whether this state is ready to advance the given state.
 	 * By default, this is {@code true}. 
 	 * Override this method to implement custom advance control. 
+	 * @param nextState 
 	 */
-	public boolean canAdvance() {
+	public boolean canAdvance(String nextState) {
 		return true;
 	}
 	

@@ -40,7 +40,7 @@ public class StateFamilySteal extends FFPlayState {
 	@Override
 	public void cleanupState() {
 		// Pass the family selected to receive the points
-		data = selectedWinFamilyIndex;
+		data = new Object[]{question, selectedWinFamilyIndex};
 	}
 
 	@Override

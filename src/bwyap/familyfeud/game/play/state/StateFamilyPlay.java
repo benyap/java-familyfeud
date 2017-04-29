@@ -42,16 +42,29 @@ public class StateFamilyPlay extends FFPlayState {
 
 	@Override
 	public void cleanupState() {
-		data = question;
+		if (strikes == 3) {
+			// pass the question if the family is stealing
+			data = question;			
+		}
+		else {
+			// transition to clear allocate points if this family has cleared the board
+			data = new Object[]{question, selectedFamilyIndex};
+		}
 	}
 	
 	@Override
-	public boolean canAdvance() {
-		boolean clearedBoard = true;
-		for(Answer a : question.getAnswers()) {
-			clearedBoard = clearedBoard && a.isRevealed();
+	public boolean canAdvance(String nextState) {
+		if (nextState.equals(FFPlayStateType.ALLOCATE_POINTS.toString())) {
+			boolean clearedBoard = true;
+			for(Answer a : question.getAnswers()) {
+				clearedBoard = clearedBoard && a.isRevealed();
+			}
+			return clearedBoard;
 		}
-		return (strikes == 3) || clearedBoard;
+		else if (nextState.equals(FFPlayStateType.FAMILY_STEAL.toString())) {
+			return strikes == 3;
+		}
+		return false;
 	}
 
 	@Override

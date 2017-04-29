@@ -7,6 +7,7 @@ import org.json.simple.JSONObject;
 import bwyap.familyfeud.FamilyFeud;
 import bwyap.familyfeud.FamilyFeudController;
 import bwyap.familyfeud.game.Answer;
+import bwyap.familyfeud.game.Family;
 import bwyap.familyfeud.game.Question;
 import bwyap.familyfeud.game.play.state.StateFaceOff;
 import bwyap.familyfeud.game.play.state.StateFamilyPlay;
@@ -55,6 +56,7 @@ public class FamilyFeudTestDriver {
 		driver.testFaceOff();
 		driver.testFamilyPlay();
 		driver.testFamilySteal();
+		driver.testAllocatePoints();
 	}
 	
 	
@@ -189,6 +191,18 @@ public class FamilyFeudTestDriver {
 		app.getGame().getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[]{
 				StateFamilyPlay.ACTION_OPENANSWER, 1
 		});
+		app.getGame().getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[]{
+				StateFamilyPlay.ACTION_OPENANSWER, 0
+		});
+		app.getGame().getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[]{
+				StateFamilyPlay.ACTION_OPENANSWER, 2
+		});
+		app.getGame().getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[]{
+				StateFamilyPlay.ACTION_OPENANSWER, 3
+		});
+		app.getGame().getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[]{
+				StateFamilyPlay.ACTION_OPENANSWER, 4
+		});
 	
 		if (LOG_VERIFY) {
 			for(Answer a : app.getGame().getQuestions().get(1).getAnswers()) {
@@ -233,6 +247,21 @@ public class FamilyFeudTestDriver {
 		app.getGame().getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[]{
 				StateFamilySteal.ACTION_SELECTWINFAMILY, 0
 		});	
+	}
+	
+	/**
+	 * Test allocating points to the selected family
+	 */
+	protected void testAllocatePoints() {
+		app.getGame().getState().executeAction(StatePlay.CHANGESTATE_ALLOCATEPOINTS, null);
+		
+		// Verify that points were added to the family
+		if (LOG_VERIFY) {
+			if (LOG_VERIFY) Logger.info("### VERIFY > Family status: ");
+			for(Family f : app.getGame().getFamilies()) {
+				Logger.info(f + " family: " + f.getPoints() + " points");
+			}
+		}
 	}
 	
 }

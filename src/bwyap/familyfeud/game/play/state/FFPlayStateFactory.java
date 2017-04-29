@@ -1,5 +1,6 @@
 package bwyap.familyfeud.game.play.state;
 
+import bwyap.familyfeud.game.FamilyCollection;
 import bwyap.familyfeud.game.InvalidDataException;
 import bwyap.familyfeud.game.QuestionSet;
 import bwyap.familyfeud.game.play.FFPlayState;
@@ -29,7 +30,12 @@ public class FFPlayStateFactory {
 	public static FFPlayState getState(FFPlayStateType type, Object data) {
 		switch(type) {
 		case ALLOCATE_POINTS:
-			if (allocatePoints == null) createAllocatePointsState();
+			if (allocatePoints == null) {
+				if (data instanceof FamilyCollection) {
+					createAllocatePointsState((FamilyCollection)data);
+				}
+				else throw new InvalidDataException("FFPlayStateFactory: Question and FamilyCollection object expected when creating new StateAllocatePoints");
+			}
 			return allocatePoints;
 		case FACE_OFF:
 			if (faceOff == null) {
@@ -40,9 +46,7 @@ public class FFPlayStateFactory {
 			}
 			return faceOff;
 		case FAMILY_PLAY:
-			if (familyPlay == null) {
-				createFamilyPlayState();
-			}
+			if (familyPlay == null) createFamilyPlayState();
 			return familyPlay;
 		case FAMILY_STEAL:
 			if (familySteal == null) createFamilyStealState();
@@ -87,8 +91,8 @@ public class FFPlayStateFactory {
 		faceOff = new StateFaceOff(questions);
 	}
 
-	private static void createAllocatePointsState() {
-		allocatePoints = new StateAllocatePoints();
+	private static void createAllocatePointsState(FamilyCollection families) {
+		allocatePoints = new StateAllocatePoints(families);
 	}
 	
 }

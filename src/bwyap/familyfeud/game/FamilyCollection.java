@@ -46,6 +46,15 @@ public class FamilyCollection {
 		}
 		return null;
 	}
+	
+	/**
+	 * Get the family at the specified index. 
+	 * @param familyName
+	 * @return
+	 */
+	public Family getFamily(int index) {
+		return families.get(index);
+	}
 
 	/**
 	 * Get the list of families in this collection
@@ -54,4 +63,5 @@ public class FamilyCollection {
 	public List<Family> getFamilies() {
 		return families;
 	}
+
 }

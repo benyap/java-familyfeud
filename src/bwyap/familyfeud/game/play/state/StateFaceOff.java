@@ -70,7 +70,7 @@ public class StateFaceOff extends FFPlayState {
 	}
 	
 	@Override
-	public boolean canAdvance() {
+	public boolean canAdvance(String nextState) {
 		// Must selected a family before advancing to the next state
 		return selectedFamilyIndex >= 0;
 	}
