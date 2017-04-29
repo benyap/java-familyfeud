@@ -10,8 +10,8 @@ import java.util.HashMap;
  */
 public class StateMachine<T extends State> {
 	
-	protected State currentState;
-	protected HashMap<String, State> states = new HashMap<String, State>();
+	protected T currentState;
+	protected HashMap<String, T> states = new HashMap<String, T>();
 	
 	/**
 	 * Initialize the state machine's default states.
@@ -28,7 +28,7 @@ public class StateMachine<T extends State> {
 	 * @param nextState
 	 * @return
 	 */
-	public boolean validateStateTransition(State currentState, String nextState) {
+	public boolean validateStateTransition(T currentState, String nextState) {
 		return true;
 	}
 	
@@ -37,7 +37,7 @@ public class StateMachine<T extends State> {
 	 * @param name
 	 * @param state
 	 */
-	public void addState(String name, State state) {
+	public void addState(String name, T state) {
 		states.put(name, state);
 	}
 	
