@@ -10,8 +10,33 @@ import java.util.HashMap;
  */
 public class StateMachine<T extends State> {
 	
+	private final String name;
 	protected T currentState;
 	protected HashMap<String, T> states = new HashMap<String, T>();
+	
+	
+	/**
+	 * Create a new state machine with the specified name
+	 * @param name
+	 */
+	public StateMachine(String name) {
+		this.name = name;
+	}
+	
+	/**
+	 * Create a new state machine with an empty name
+	 */
+	public StateMachine() {
+		this("null");
+	}
+	
+	/**
+	 * Get the name of this state machine
+	 * @return
+	 */
+	public String getName() {
+		return name;
+	}
 	
 	/**
 	 * Initialize the state machine's default states.
@@ -51,6 +76,14 @@ public class StateMachine<T extends State> {
 		}
 		else return "null";
 	}
+
+	/**
+	 * Get the current state
+	 * @return
+	 */
+	public T getCurrentState() {
+		return currentState;
+	}
 	
 	/**
 	 * Remove a state from the state machine
@@ -69,7 +102,7 @@ public class StateMachine<T extends State> {
 		if (validateStateTransition(currentState, name)) {
 			if (currentState != null) currentState.cleanupState();
 			if (states.containsKey(name)) {
-				if (getDebugMode()) printOut("CHANGING STATE from <" + currentState + "> to <" + name + ">");
+				if (getDebugMode()) printOut(getName() + " > CHANGING STATE from <" + currentState + "> to <" + name + ">");
 				currentState = states.get(name);
 				currentState.initState();
 			}
@@ -79,7 +112,7 @@ public class StateMachine<T extends State> {
 			}
 		}
 		else {
-			if (getDebugMode()) printErr("Invalid state transition: <" + currentState + "> to <" + name + ">");
+			if (getDebugMode()) printErr(getName() + " > Invalid state transition: <" + currentState + "> to <" + name + ">");
 		}
 	}
 	

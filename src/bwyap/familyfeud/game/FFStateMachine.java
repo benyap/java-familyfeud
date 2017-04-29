@@ -17,6 +17,7 @@ public class FFStateMachine extends StateMachine<FFState> {
 	private QuestionSet questions;
 	
 	public FFStateMachine(FamilyCollection families, QuestionSet questions) {
+		super("FFGame");
 		this.families = families;
 		this.questions = questions;
 	}
@@ -34,21 +35,13 @@ public class FFStateMachine extends StateMachine<FFState> {
 			else {
 				addState(type.toString(), FFStateFactory.getState(type, null));				
 			}
-			if (FamilyFeudTestDriver.DEBUG_LOG_CONSOLE) System.out.println("  Adding " + type + " state to state machine.");
+			if (FamilyFeudTestDriver.DEBUG_LOG_CONSOLE) System.out.println("  Adding " + type + " state to " + getName() + " state machine.");
 		}
 		
 		// Set the initial state
 		changeState(FFStateType.START.toString());
 		
 		if (FamilyFeudTestDriver.DEBUG_LOG_CONSOLE) System.out.println("FFStateMachine initialized.");
-	}
-	
-	/**
-	 * Get the current state
-	 * @return
-	 */
-	public FFState getCurrentState() {
-		return currentState;
 	}
 	
 	@Override
