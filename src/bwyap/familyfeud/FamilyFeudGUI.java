@@ -17,6 +17,11 @@ public class FamilyFeudGUI {
 	private GameWindow gameWindow;
 	private ControlWindow controlWindow;
 	
+	/**
+	 * Create a new GUI manager which initializes a game window with 
+	 * the provided RenderingPanel and a control window
+	 * @param renderPanel
+	 */
 	public FamilyFeudGUI(RenderingPanel renderPanel) {
 		gameWindow = new GameWindow(TITLE, renderPanel);
 		controlWindow = new ControlWindow(TITLE + " controller " + VERSION, gameWindow);
