@@ -5,7 +5,6 @@ import bwyap.familyfeud.game.play.FFPlayStateType;
 import bwyap.familyfeud.game.play.state.FFPlayStateFactory;
 import bwyap.familyfeud.testdriver.FamilyFeudTestDriver;
 import bwyap.utility.logging.Logger;
-import bwyap.utility.statemachine.StateMachine;
 
 /**
  * A state machine that handles {@code FFPlayState} for Family Feud.
@@ -13,7 +12,7 @@ import bwyap.utility.statemachine.StateMachine;
  * @author bwyap
  *
  */
-public class FFPlayStateMachine extends StateMachine<FFPlayState> {
+public class FFPlayStateMachine extends AbstractFFStateMachine<FFPlayState> {
 	
 	private QuestionSet questions;
 	private FamilyCollection families;
@@ -78,27 +77,6 @@ public class FFPlayStateMachine extends StateMachine<FFPlayState> {
 			return null;
 		}
 		else return currentState.getType();
-	}
-	
-	@Override
-	protected boolean getDebugMode() {
-		// Return the appropriate debug variable
-		return FamilyFeudTestDriver.DEBUG_LOG_CONSOLE;
-	}
-
-	@Override
-	protected void printLog(String message) {
-		Logger.info(message);
-	}
-	
-	@Override
-	protected void printTransition(String message) {
-		Logger.warning(message);
-	}
-	
-	@Override
-	protected void printErr(String message) {
-		Logger.err(message);
 	}
 	
 }
