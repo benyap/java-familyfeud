@@ -64,9 +64,8 @@ public class StateFaceOff extends FFPlayState {
 			// Incorrect answer given
 			strike();
 			break;
-
 		default: 
-			throw new RuntimeException("Invalid action");
+			throw new RuntimeException("Invalid action: " + action);
 		}
 		return false;
 	}

@@ -81,6 +81,8 @@ public class StateFamilyPlay extends FFPlayState {
 		case ACTION_STRIKE:
 			strike();
 			break;
+		default: 
+			throw new RuntimeException("Invalid action: " + action);
 		}
 		return false;
 	}

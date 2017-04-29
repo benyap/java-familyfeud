@@ -41,8 +41,9 @@ public class StateSelectQuestion extends FFPlayState {
 				return selectQuestion((Integer) data[1]);
 			}
 			else throw new InvalidDataException("Expecting a {*, Integer} when using action ACTION_SELECTQUESTION");
+		default: 
+			throw new RuntimeException("Invalid action: " + action);
 		}
-		return false;
 	}
 	
 	/**

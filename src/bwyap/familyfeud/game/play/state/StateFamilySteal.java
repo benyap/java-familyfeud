@@ -73,6 +73,8 @@ public class StateFamilySteal extends FFPlayState {
 			}
 			else throw new InvalidDataException("Expecting a {*, Integer} when using action ACTION_SELECTWINFAMILY");
 			break;
+		default: 
+			throw new RuntimeException("Invalid action: " + action);
 		}
 		return false;
 	}
