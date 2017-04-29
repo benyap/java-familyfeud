@@ -1,4 +1,4 @@
-package bwyap.familyfeud.test;
+package bwyap.familyfeud.testdriver;
 
 import java.io.File;
 

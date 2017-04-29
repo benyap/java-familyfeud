@@ -3,7 +3,7 @@ package bwyap.familyfeud.game;
 import java.util.ArrayList;
 import java.util.List;
 
-import bwyap.familyfeud.test.FamilyFeudTestDriver;
+import bwyap.familyfeud.testdriver.FamilyFeudTestDriver;
 import bwyap.utility.logging.Logger;
 
 /**

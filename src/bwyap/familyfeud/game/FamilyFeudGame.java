@@ -4,7 +4,7 @@ import java.util.List;
 
 import bwyap.familyfeud.game.state.FFState;
 import bwyap.familyfeud.game.state.FFStateType;
-import bwyap.familyfeud.test.FamilyFeudTestDriver;
+import bwyap.familyfeud.testdriver.FamilyFeudTestDriver;
 import bwyap.utility.logging.Logger;
 
 /**

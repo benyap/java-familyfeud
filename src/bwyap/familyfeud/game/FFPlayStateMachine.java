@@ -3,7 +3,7 @@ package bwyap.familyfeud.game;
 import bwyap.familyfeud.game.play.FFPlayState;
 import bwyap.familyfeud.game.play.FFPlayStateType;
 import bwyap.familyfeud.game.play.state.FFPlayStateFactory;
-import bwyap.familyfeud.test.FamilyFeudTestDriver;
+import bwyap.familyfeud.testdriver.FamilyFeudTestDriver;
 import bwyap.utility.logging.Logger;
 import bwyap.utility.statemachine.StateMachine;
 
