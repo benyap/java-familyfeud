@@ -3,7 +3,9 @@ package bwyap.familyfeud;
 import bwyap.familyfeud.game.FamilyFeudGame;
 import bwyap.familyfeud.gui.FFRenderingEngine;
 import bwyap.familyfeud.gui.window.render.RenderingPanel;
+import bwyap.familyfeud.res.FamilyFeudResources;
 import bwyap.familyfeud.test.FamilyFeudTestDriver;
+import bwyap.gridgame.res.ResourceLoader;
 import bwyap.utility.logging.Logger;
 
 /**
@@ -15,6 +17,7 @@ public class FamilyFeudController {
 	
 	private static final int FPS_RATE = 60;
 	
+	private ResourceLoader resourceLoader;
 	private FamilyFeudGame game;
 	private FamilyFeudGUI gui;
 	private FFRenderingEngine engine;
@@ -31,6 +34,9 @@ public class FamilyFeudController {
 	 * Initialize the application
 	 */
 	public void init() {
+		resourceLoader = new FamilyFeudResources();
+		resourceLoader.load();
+		
 		game = new FamilyFeudGame();		
 		game.init();
 		
