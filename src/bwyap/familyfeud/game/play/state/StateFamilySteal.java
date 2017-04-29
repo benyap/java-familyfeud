@@ -116,7 +116,7 @@ public class StateFamilySteal extends FFPlayState {
 	 */
 	private void selectWinFamily(int index) {
 		selectedWinFamilyIndex = index;
-		Logger.log("Family [" + selectedStealFamilyIndex + "] selected to receive points.");
+		Logger.log("Family [" + selectedWinFamilyIndex + "] selected to receive points.");
 	}
 	
 }
