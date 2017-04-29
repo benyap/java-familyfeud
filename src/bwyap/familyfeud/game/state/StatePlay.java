@@ -1,28 +1,21 @@
 package bwyap.familyfeud.game.state;
 
+/**
+ * This state is used to control the game play
+ * @author bwyap
+ *
+ */
 public class StatePlay extends FFState {
 
 	protected StatePlay() {
 		super(FFStateType.PLAY);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public void initState() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	public void initState() { }
+	
 	@Override
-	public void updateState(float timeElapsed) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void cleanupState() { }
 
-	@Override
-	public void cleanupState() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 }

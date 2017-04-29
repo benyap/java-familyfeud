@@ -40,7 +40,8 @@ public class FamilyFeudTestDriver {
 		driver.testStart();
 		driver.testAddFamilies();
 		driver.testLoadQuestions();
-		driver.testStartGame();
+		driver.testInitGame();
+		driver.testPlayGame();
 	}
 	
 	
@@ -108,10 +109,17 @@ public class FamilyFeudTestDriver {
 	}
 	
 	/**
+	 * Test initialize the game
+	 */
+	public void testInitGame() {
+		app.getGame().changeState(FFStateType.INITIALIZE_GAME);
+	}
+	
+	/**
 	 * Test starting the family feud game
 	 */
-	public void testStartGame() {
-		app.getGame().changeState(FFStateType.INITIALIZE_GAME);
+	public void testPlayGame() {
+		app.getGame().changeState(FFStateType.PLAY);
 	}
 	
 }
