@@ -2,7 +2,7 @@ package bwyap.familyfeud;
 
 import bwyap.familyfeud.game.FamilyFeudGame;
 import bwyap.familyfeud.gui.FFRenderingEngine;
-import bwyap.familyfeud.gui.window.render.RenderingPanel;
+import bwyap.familyfeud.render.RenderingPanel;
 import bwyap.familyfeud.res.FamilyFeudResources;
 import bwyap.familyfeud.testdriver.FamilyFeudTestDriver;
 import bwyap.gridgame.res.ResourceLoader;
@@ -39,7 +39,7 @@ public class FamilyFeudController {
 		gui = new FamilyFeudGUI(renderPanel);
 		gui.init();
 		
-		engine = new FFRenderingEngine(FPS_RATE, renderPanel);
+		engine = new FFRenderingEngine(FPS_RATE, renderPanel, game);
 		engineThread = new Thread(engine);
 
 		if (FamilyFeudTestDriver.DEBUG_LOG_CONSOLE) Logger.info("Controller initialized.");

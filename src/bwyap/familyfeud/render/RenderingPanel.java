@@ -1,4 +1,4 @@
-package bwyap.familyfeud.gui.window.render;
+package bwyap.familyfeud.render;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -20,10 +20,13 @@ public class RenderingPanel extends JPanel {
 	private boolean renderFPS = true;
 	private float lastFPS;
 	
+	private RenderStateInterface state;
+	
 	/**
 	 * Render graphics
 	 */
-	public void render() {
+	public void render(RenderStateInterface state) {
+		this.state = state;
 		repaint();
 	}
 	
@@ -31,10 +34,8 @@ public class RenderingPanel extends JPanel {
 	public void paint(Graphics g) {
 		setAntiAlias((Graphics2D)g);
 		
-		// TESTING
-		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, this.getWidth(), this.getHeight());
-		
+		// Render the game state to the screen
+		if (state != null) state.render(this, g);
 		
 		// Draw fps to the screen
 		if (renderFPS) {

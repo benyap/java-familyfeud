@@ -5,7 +5,7 @@ import static bwyap.familyfeud.FamilyFeud.VERSION;
 
 import bwyap.familyfeud.gui.window.ControlWindow;
 import bwyap.familyfeud.gui.window.GameWindow;
-import bwyap.familyfeud.gui.window.render.RenderingPanel;
+import bwyap.familyfeud.render.RenderingPanel;
 
 /**
  * This class is responsible for handling all GUI components of the Family Feud application

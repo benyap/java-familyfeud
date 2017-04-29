@@ -6,7 +6,7 @@ import java.awt.GraphicsEnvironment;
 
 import javax.swing.JFrame;
 
-import bwyap.familyfeud.gui.window.render.RenderingPanel;
+import bwyap.familyfeud.render.RenderingPanel;
 import bwyap.utility.logging.Logger;
 
 /**
