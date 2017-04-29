@@ -44,13 +44,11 @@ public class FFPlayStateMachine extends StateMachine<FFPlayState> {
 		case FACE_OFF:
 			if (nextState == FFPlayStateType.FAMILY_PLAY.toString()) return true;
 		case FAMILY_PLAY:
-			// TODO
 			if (nextState == FFPlayStateType.FAMILY_STEAL.toString()) return true;
 			if (nextState == FFPlayStateType.ALLOCATE_POINTS.toString()) return true;
 		case FAMILY_STEAL:
 			if (nextState == FFPlayStateType.ALLOCATE_POINTS.toString()) return true;
 		case REVEAL_ANSWERS:
-			// TODO
 			if (nextState == FFPlayStateType.SELECT_QUESTION.toString()) return true;
 		case SELECT_QUESTION:
 			if (nextState == FFPlayStateType.FACE_OFF.toString()) return true;

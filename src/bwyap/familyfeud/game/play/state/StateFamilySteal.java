@@ -21,9 +21,9 @@ public class StateFamilySteal extends FFPlayState {
 	public static final int ACTION_SELECTWINFAMILY = 0x5;
 	
 	private Question question;
-	private int selectedWinFamilyIndex = -1;
-	private int selectedStealFamilyIndex = -1;
-	private int strikes = 0;
+	private int selectedWinFamilyIndex;
+	private int selectedStealFamilyIndex;
+	private int strikes;
 
 	protected StateFamilySteal() {
 		super(FFPlayStateType.FAMILY_STEAL);
@@ -31,6 +31,9 @@ public class StateFamilySteal extends FFPlayState {
 
 	@Override
 	public void initState(Object data) {
+		selectedWinFamilyIndex = -1;
+		selectedStealFamilyIndex = -1;
+		strikes = 0;
 		if (data instanceof Question) {
 			this.question = (Question) data;
 		}

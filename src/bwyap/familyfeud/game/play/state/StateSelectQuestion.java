@@ -4,6 +4,7 @@ import bwyap.familyfeud.game.InvalidDataException;
 import bwyap.familyfeud.game.QuestionSet;
 import bwyap.familyfeud.game.play.FFPlayState;
 import bwyap.familyfeud.game.play.FFPlayStateType;
+import bwyap.utility.logging.Logger;
 
 /**
  * This state is used to select a question before the two families face off
@@ -15,7 +16,7 @@ public class StateSelectQuestion extends FFPlayState {
 	public static final int ACTION_SELECTQUESTION = 0x0;
 	
 	private QuestionSet questions;
-	private int selectedIndex = -1;
+	private int selectedIndex;
 	
 	protected StateSelectQuestion(QuestionSet questions) {
 		super(FFPlayStateType.SELECT_QUESTION);
@@ -23,7 +24,9 @@ public class StateSelectQuestion extends FFPlayState {
 	}
 
 	@Override
-	public void initState(Object data) { }
+	public void initState(Object data) {
+		selectedIndex = -1;
+	}
 
 	@Override
 	public void cleanupState() { 
@@ -50,6 +53,7 @@ public class StateSelectQuestion extends FFPlayState {
 	private boolean selectQuestion(int index) {
 		if (index < questions.size()) {
 			selectedIndex = index;
+			Logger.log("Question [" + selectedIndex +  "] selected.");
 			return true;
 		}
 		return false;

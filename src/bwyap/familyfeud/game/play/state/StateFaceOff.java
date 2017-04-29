@@ -20,7 +20,7 @@ public class StateFaceOff extends FFPlayState {
 	
 	private QuestionSet questions;
 	private int selectedIndex;
-	private int selectedFamilyIndex = -1;
+	private int selectedFamilyIndex;
 	
 	protected StateFaceOff(QuestionSet questions) {
 		super(FFPlayStateType.FACE_OFF);
@@ -29,6 +29,8 @@ public class StateFaceOff extends FFPlayState {
 
 	@Override
 	public void initState(Object data) {
+		selectedFamilyIndex = -1;
+		
 		if (data instanceof Integer) {
 			this.selectedIndex = (Integer) data;
 		}

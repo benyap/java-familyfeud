@@ -22,7 +22,7 @@ public class StateFamilyPlay extends FFPlayState {
 	
 	private Question question;
 	private int selectedFamilyIndex;
-	private int strikes = 0;
+	private int strikes;
 	
 	protected StateFamilyPlay() {
 		super(FFPlayStateType.FAMILY_PLAY);
@@ -30,6 +30,7 @@ public class StateFamilyPlay extends FFPlayState {
 	
 	@Override
 	public void initState(Object data) {
+		strikes = 0;
 		try {
 			Object[] d = (Object[]) data;
 			this.question = (Question) d[0];				

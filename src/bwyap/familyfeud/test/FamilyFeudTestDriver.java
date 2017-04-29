@@ -12,6 +12,7 @@ import bwyap.familyfeud.game.Question;
 import bwyap.familyfeud.game.play.state.StateFaceOff;
 import bwyap.familyfeud.game.play.state.StateFamilyPlay;
 import bwyap.familyfeud.game.play.state.StateFamilySteal;
+import bwyap.familyfeud.game.play.state.StateRevealAnswers;
 import bwyap.familyfeud.game.play.state.StateSelectQuestion;
 import bwyap.familyfeud.game.state.FFStateType;
 import bwyap.familyfeud.game.state.StateAddFamily;
@@ -52,11 +53,21 @@ public class FamilyFeudTestDriver {
 		driver.testLoadQuestions();
 		driver.testInitGame();
 		driver.testPlayGame();
-		driver.testSelectQuestion();
+		
+		driver.testSelectQuestion(0);
 		driver.testFaceOff();
 		driver.testFamilyPlay();
 		driver.testFamilySteal();
 		driver.testAllocatePoints();
+		driver.testRevealAnswers();
+		
+		driver.testSelectQuestion(1);
+		driver.testFaceOff();
+		driver.testFamilyPlay();
+		driver.testFamilySteal();
+		driver.testAllocatePoints();
+		driver.testRevealAnswers();
+		
 	}
 	
 	
@@ -152,9 +163,11 @@ public class FamilyFeudTestDriver {
 	/**
 	 * Test the selection of question in the PLAY state
 	 */
-	protected void testSelectQuestion() {
+	protected void testSelectQuestion(int index) {
+		app.getGame().getState().executeAction(StatePlay.CHANGESTATE_SELECTQUESTION, null);
+
 		app.getGame().getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[]{
-				StateSelectQuestion.ACTION_SELECTQUESTION, 1
+				StateSelectQuestion.ACTION_SELECTQUESTION, index
 		});
 	}
 	
@@ -169,7 +182,7 @@ public class FamilyFeudTestDriver {
 				StateFaceOff.ACTION_OPENANSWER, 3
 		});
 		if (LOG_VERIFY) {
-			for(Answer a : app.getGame().getQuestions().get(1).getAnswers()) {
+			for(Answer a : app.getGame().getQuestions().get(0).getAnswers()) {
 				Logger.info(a + ": " + a.isRevealed());
 			}
 		}
@@ -194,18 +207,9 @@ public class FamilyFeudTestDriver {
 		app.getGame().getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[]{
 				StateFamilyPlay.ACTION_OPENANSWER, 0
 		});
-		app.getGame().getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[]{
-				StateFamilyPlay.ACTION_OPENANSWER, 2
-		});
-		app.getGame().getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[]{
-				StateFamilyPlay.ACTION_OPENANSWER, 3
-		});
-		app.getGame().getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[]{
-				StateFamilyPlay.ACTION_OPENANSWER, 4
-		});
 	
 		if (LOG_VERIFY) {
-			for(Answer a : app.getGame().getQuestions().get(1).getAnswers()) {
+			for(Answer a : app.getGame().getQuestions().get(0).getAnswers()) {
 				Logger.info(a + ": " + a.isRevealed());
 			}
 		}
@@ -262,6 +266,23 @@ public class FamilyFeudTestDriver {
 				Logger.info(f + " family: " + f.getPoints() + " points");
 			}
 		}
+	}
+	
+	/**
+	 * Test reveal answers
+	 */
+	protected void testRevealAnswers() {
+		app.getGame().getState().executeAction(StatePlay.CHANGESTATE_REVEALANSWERS, null);
+		
+		app.getGame().getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[]{
+				StateRevealAnswers.ACTION_OPENANSWER, 2
+		});
+		app.getGame().getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[]{
+				StateRevealAnswers.ACTION_OPENANSWER, 3
+		});
+		app.getGame().getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[]{
+				StateRevealAnswers.ACTION_OPENANSWER, 4
+		});
 	}
 	
 }

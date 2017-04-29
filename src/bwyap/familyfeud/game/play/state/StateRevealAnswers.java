@@ -42,6 +42,7 @@ public class StateRevealAnswers extends FFPlayState {
 			}
 			else throw new InvalidDataException("Expecting a {*, Integer} when using action ACTION_OPENANSWER");
 			break;
+		
 		default: 
 			throw new RuntimeException("Invalid action");
 		}
