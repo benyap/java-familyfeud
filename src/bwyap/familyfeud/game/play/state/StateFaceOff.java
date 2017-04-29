@@ -4,6 +4,7 @@ import bwyap.familyfeud.game.InvalidDataException;
 import bwyap.familyfeud.game.QuestionSet;
 import bwyap.familyfeud.game.play.FFPlayState;
 import bwyap.familyfeud.game.play.FFPlayStateType;
+import bwyap.utility.logging.Logger;
 
 /**
  * This state handles when the two families are facing off 
@@ -14,7 +15,8 @@ import bwyap.familyfeud.game.play.FFPlayStateType;
 public class StateFaceOff extends FFPlayState {
 
 	public static final int ACTION_OPENANSWER = 0x0;
-	public static final int ACTION_CHOOSEFAMILY = 0x1;
+	public static final int ACTION_STRIKE = 0x1;
+	public static final int ACTION_CHOOSEFAMILY = 0x2;
 	
 	private QuestionSet questions;
 	private int selectedIndex;
@@ -56,6 +58,11 @@ public class StateFaceOff extends FFPlayState {
 			}
 			else throw new InvalidDataException("Expecting a {*, Integer} when using action ACTION_CHOOSEFAMILY");
 			break;
+		case ACTION_STRIKE:
+			// Incorrect answer given
+			strike();
+			break;
+
 		default: 
 			throw new RuntimeException("Invalid action");
 		}
@@ -69,11 +76,19 @@ public class StateFaceOff extends FFPlayState {
 	}
 	
 	/**
-	 * Reveal and answer
+	 * Answer not on board
+	 */
+	private void strike() {
+		Logger.log("Strike: answer not on board");
+	}
+	
+	/**
+	 * Reveal an answer
 	 * @param index
 	 */
 	private void openAnswer(int index) {
 		questions.getQuestion(selectedIndex).getAnswers().get(index).setReveal(true);
+		Logger.log("Revealed answer: " + questions.getQuestion(selectedIndex).getAnswers().get(index));
 	}
 	
 	/**
