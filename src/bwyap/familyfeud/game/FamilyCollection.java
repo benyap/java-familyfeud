@@ -49,19 +49,37 @@ public class FamilyCollection {
 	
 	/**
 	 * Get the family at the specified index. 
-	 * @param familyName
+	 * @param index
 	 * @return
 	 */
 	public Family getFamily(int index) {
 		return families.get(index);
 	}
-
+	
+	/**
+	 * Remove the family at the specified index. 
+	 * @param index
+	 * @return
+	 */
+	public void removeFamily(int index) {
+		Family f = families.remove(index);
+		if (FamilyFeudTestDriver.DEBUG_LOG_CONSOLE && f != null) Logger.log(" - Removed family: " + f);
+	}
+	
 	/**
 	 * Get the list of families in this collection
 	 * @return
 	 */
 	public List<Family> getFamilies() {
 		return families;
+	}
+
+	/**
+	 * Get the number of families in the famliy collection
+	 * @return
+	 */
+	public int size() {
+		return families.size();
 	}
 
 }

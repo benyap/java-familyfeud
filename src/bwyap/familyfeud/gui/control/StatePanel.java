@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import bwyap.familyfeud.game.FamilyFeudGame;
 import bwyap.familyfeud.game.state.FFStateType;
 import bwyap.familyfeud.gui.GBC;
+import bwyap.familyfeud.gui.window.ControlWindow;
 import bwyap.gridgame.res.ResourceLoader;
 
 /**
@@ -29,6 +30,7 @@ public class StatePanel extends JPanel {
 	public static final int WIDTH = 180;
 	public static final int HEIGHT = 200;
 
+	private ControlWindow window;
 	private FamilyFeudGame game;
 	
 	private JLabel title;
@@ -39,7 +41,8 @@ public class StatePanel extends JPanel {
 	private JButton play;
 	private JButton endGame;
 	
-	public StatePanel(FamilyFeudGame game) {
+	public StatePanel(ControlWindow window, FamilyFeudGame game) {
+		this.window = window;
 		this.game = game;
 		setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 		setLayout(new GridBagLayout());
@@ -59,14 +62,17 @@ public class StatePanel extends JPanel {
 				addFamily.setEnabled(true);
 				loadQuestions.setEnabled(true);
 				initGame.setEnabled(true);
+				window.setFamilyPanelEnabled(false);
 			}
 		});
 		
-		addFamily = new JButton("Add family");
+		addFamily = new JButton("Manage families");
 		addFamily.setEnabled(false);
 		addFamily.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				game.changeState(FFStateType.ADD_FAMILY);
+				if (game.changeState(FFStateType.ADD_FAMILY)) {
+					window.setFamilyPanelEnabled(true);
+				}
 			}
 		});
 		
@@ -75,6 +81,7 @@ public class StatePanel extends JPanel {
 		loadQuestions.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				game.changeState(FFStateType.LOAD_QUESTIONS);
+				window.setFamilyPanelEnabled(false);
 			}
 		});
 		
@@ -86,6 +93,7 @@ public class StatePanel extends JPanel {
 					newGame.setEnabled(false);
 					addFamily.setEnabled(false);
 					loadQuestions.setEnabled(false);
+					window.setFamilyPanelEnabled(false);
 					play.setEnabled(true);
 				}
 			}

@@ -31,7 +31,7 @@ public class RenderMachine {
 		
 		renderStates.put(LOADING, new RenderStateLoading());
 		renderStates.put(MAIN, new RenderStateMain());
-		renderStates.put(NEWGAME, new RenderStateNewGame());
+		renderStates.put(NEWGAME, new RenderStateNewGame(game));
 
 	}
 	
