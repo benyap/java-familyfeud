@@ -15,10 +15,10 @@ import bwyap.utility.logging.Logger;
  */
 public class StateFamilySteal extends FFPlayState {
 
-	public static final int ACTION_OPENANSWER = 0x0;
-	public static final int ACTION_STRIKE = 0x1;
-	public static final int ACTION_SELECTSTEALFAMILY = 0x2;
-	public static final int ACTION_SELECTWINFAMILY = 0x3;
+	public static final int ACTION_OPENANSWER = 0x2;
+	public static final int ACTION_STRIKE = 0x3;
+	public static final int ACTION_SELECTSTEALFAMILY = 0x4;
+	public static final int ACTION_SELECTWINFAMILY = 0x5;
 	
 	private Question question;
 	private int selectedWinFamilyIndex = -1;

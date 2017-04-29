@@ -14,9 +14,9 @@ import bwyap.utility.logging.Logger;
  */
 public class StateFaceOff extends FFPlayState {
 
-	public static final int ACTION_OPENANSWER = 0x0;
-	public static final int ACTION_STRIKE = 0x1;
-	public static final int ACTION_CHOOSEFAMILY = 0x2;
+	public static final int ACTION_CHOOSEFAMILY = 0x1;
+	public static final int ACTION_OPENANSWER = 0x2;
+	public static final int ACTION_STRIKE = 0x3;
 	
 	private QuestionSet questions;
 	private int selectedIndex;
