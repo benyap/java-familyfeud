@@ -52,6 +52,15 @@ public abstract class State {
 	}
 	
 	/**
+	 * Check whether this state is ready to advance.
+	 * By default, this is {@code true}. 
+	 * Override this method to implement custom advance control. 
+	 */
+	public boolean canAdvance() {
+		return true;
+	}
+	
+	/**
 	 * Set the next state to transition to.
 	 * Note that when this is set to a value other than {@code null},
 	 * the state machine will automatically attempt to transition to 
