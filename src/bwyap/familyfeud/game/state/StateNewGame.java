@@ -1,28 +1,21 @@
 package bwyap.familyfeud.game.state;
 
+/**
+ * This state represents the waiting state while the
+ * question set is loaded and families are added before start a new game.
+ * @author bwyap
+ *
+ */
 public class StateNewGame extends FFState {
-
+	
 	protected StateNewGame() {
 		super(FFStateType.NEW_GAME);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public void initState() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void initState() { }
 
 	@Override
-	public void updateState(float timeElapsed) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void cleanupState() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void cleanupState() { }
 
 }

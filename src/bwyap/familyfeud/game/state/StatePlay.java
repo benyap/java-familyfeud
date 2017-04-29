@@ -1,6 +1,7 @@
 package bwyap.familyfeud.game.state;
 
 import bwyap.familyfeud.game.FFPlayStateMachine;
+import bwyap.familyfeud.game.FamilyFeudGame;
 import bwyap.familyfeud.game.InvalidDataException;
 
 /**
@@ -12,15 +13,17 @@ public class StatePlay extends FFState {
 	
 	public static final int ACTION_EXECUTEPLAYACTION = 0x0;
 	
+	private FamilyFeudGame game;
 	private FFPlayStateMachine stateMachine;
 	
-	protected StatePlay() {
+	protected StatePlay(FamilyFeudGame game) {
 		super(FFStateType.PLAY);
+		this.game = game;
 	}
 
 	@Override
 	public void initState() {
-		stateMachine = new FFPlayStateMachine();
+		stateMachine = new FFPlayStateMachine(game.getQuestionSet());
 		stateMachine.init();
 	}
 	

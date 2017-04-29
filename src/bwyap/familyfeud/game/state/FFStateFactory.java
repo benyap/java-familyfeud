@@ -1,6 +1,7 @@
 package bwyap.familyfeud.game.state;
 
 import bwyap.familyfeud.game.FamilyCollection;
+import bwyap.familyfeud.game.FamilyFeudGame;
 import bwyap.familyfeud.game.InvalidDataException;
 import bwyap.familyfeud.game.QuestionSet;
 
@@ -52,7 +53,11 @@ public class FFStateFactory {
 			if (newGame == null) createNewGameState();
 			return newGame;
 		case PLAY:
-			if (play == null) createPlayState();
+			if (play == null) {
+				if (data instanceof FamilyFeudGame)
+					createPlayState((FamilyFeudGame) data);
+				else throw new InvalidDataException("FFStateFactory: FamilyFeudGame required when create StatePlay");
+			}
 			return play;
 		case START:
 			if (start == null) createStartState();
@@ -70,8 +75,8 @@ public class FFStateFactory {
 		start = new StateStart();
 	}
 
-	private static void createPlayState() {
-		play = new StatePlay();
+	private static void createPlayState(FamilyFeudGame game) {
+		play = new StatePlay(game);
 	}
 
 	private static void createNewGameState() {

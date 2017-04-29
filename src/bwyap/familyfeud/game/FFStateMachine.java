@@ -13,11 +13,13 @@ import bwyap.statemachine.StateMachine;
  */
 public class FFStateMachine extends StateMachine<FFState> {
 	
+	private FamilyFeudGame game;
 	private FamilyCollection families;
 	private QuestionSet questions;
 	
-	public FFStateMachine(FamilyCollection families, QuestionSet questions) {
+	public FFStateMachine(FamilyFeudGame game, FamilyCollection families, QuestionSet questions) {
 		super("FFGame");
+		this.game = game;
 		this.families = families;
 		this.questions = questions;
 	}
@@ -25,18 +27,13 @@ public class FFStateMachine extends StateMachine<FFState> {
 	@Override
 	public void init() {
 		// Add all states to the machine
-		for(FFStateType type : FFStateType.values()) {
-			if (type == FFStateType.ADD_FAMILY) {
-				addState(type.toString(), FFStateFactory.getState(type, families));
-			}
-			else if (type == FFStateType.LOAD_QUESTIONS) {
-				addState(type.toString(), FFStateFactory.getState(type, questions));
-			}
-			else {
-				addState(type.toString(), FFStateFactory.getState(type, null));				
-			}
-			if (FamilyFeudTestDriver.DEBUG_LOG_CONSOLE) System.out.println("  Adding " + type + " state to " + getName() + " state machine.");
-		}
+		addState(FFStateType.START.toString(), FFStateFactory.getState(FFStateType.START, null));
+		addState(FFStateType.NEW_GAME.toString(), FFStateFactory.getState(FFStateType.NEW_GAME, null));
+		addState(FFStateType.ADD_FAMILY.toString(), FFStateFactory.getState(FFStateType.ADD_FAMILY, families));
+		addState(FFStateType.LOAD_QUESTIONS.toString(), FFStateFactory.getState(FFStateType.LOAD_QUESTIONS, questions));
+		addState(FFStateType.INITIALIZE_GAME.toString(), FFStateFactory.getState(FFStateType.INITIALIZE_GAME, null));
+		addState(FFStateType.PLAY.toString(), FFStateFactory.getState(FFStateType.PLAY, game));
+		addState(FFStateType.END_GAME.toString(), FFStateFactory.getState(FFStateType.END_GAME, null));
 		
 		// Set the initial state
 		changeState(FFStateType.START.toString());
@@ -47,6 +44,7 @@ public class FFStateMachine extends StateMachine<FFState> {
 	@Override
 	public boolean validateStateTransition(FFState currentState, String nextState) {
 		if (currentState == null) return true;
+		if (!currentState.canAdvance()) return false;
 		
 		switch (currentState.getType()) {
 		case ADD_FAMILY:

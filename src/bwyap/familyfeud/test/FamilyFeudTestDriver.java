@@ -20,7 +20,7 @@ import bwyap.utility.resource.JSONLoader;
 public class FamilyFeudTestDriver {
 	
 	public static final boolean DEBUG_LOG_CONSOLE = true;
-	public static final boolean LOG_VERIFY = false;
+	public static final boolean LOG_VERIFY = true;
 	
 	private FamilyFeudController app;
 
@@ -29,9 +29,9 @@ public class FamilyFeudTestDriver {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		System.out.println("----------------------");
-		System.out.println("> Running test driver ");
-		System.out.println("----------------------");
+		System.out.println("-----------------------");
+		System.out.println("! Running test driver !");
+		System.out.println("-----------------------");
 		
 		FamilyFeud.init();
 		FamilyFeudTestDriver driver = new FamilyFeudTestDriver(FamilyFeud.app);

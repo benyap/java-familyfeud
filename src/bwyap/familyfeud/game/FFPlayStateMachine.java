@@ -8,17 +8,22 @@ import bwyap.statemachine.StateMachine;
 
 public class FFPlayStateMachine extends StateMachine<FFPlayState> {
 	
-	public FFPlayStateMachine() {
+	private QuestionSet questions;
+	
+	public FFPlayStateMachine(QuestionSet questions) {
 		super("FFGame.Play");
+		this.questions = questions;
 	}
 
 	@Override
 	public void init() {
 		// Add all states to the machine
-		for(FFPlayStateType type : FFPlayStateType.values()) {
-			addState(type.toString(), FFPlayStateFactory.getState(type, null));				
-			if (FamilyFeudTestDriver.DEBUG_LOG_CONSOLE) System.out.println("  Adding " + type + " state to " + getName() + " state machine.");
-		}
+		addState(FFPlayStateType.SELECT_QUESTION.toString(), FFPlayStateFactory.getState(FFPlayStateType.SELECT_QUESTION, questions));				
+		addState(FFPlayStateType.FACE_OFF.toString(), FFPlayStateFactory.getState(FFPlayStateType.FACE_OFF, null));				
+		addState(FFPlayStateType.FAMILY_PLAY.toString(), FFPlayStateFactory.getState(FFPlayStateType.FAMILY_PLAY, null));				
+		addState(FFPlayStateType.FAMILY_STEAL.toString(), FFPlayStateFactory.getState(FFPlayStateType.FAMILY_STEAL, null));				
+		addState(FFPlayStateType.ALLOCATE_POINTS.toString(), FFPlayStateFactory.getState(FFPlayStateType.ALLOCATE_POINTS, null));				
+		addState(FFPlayStateType.REVEAL_ANSWERS.toString(), FFPlayStateFactory.getState(FFPlayStateType.REVEAL_ANSWERS, null));				
 		
 		// Set the initial state
 		changeState(FFPlayStateType.SELECT_QUESTION.toString());

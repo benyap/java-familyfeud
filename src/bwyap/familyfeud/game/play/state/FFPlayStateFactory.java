@@ -1,5 +1,7 @@
 package bwyap.familyfeud.game.play.state;
 
+import bwyap.familyfeud.game.InvalidDataException;
+import bwyap.familyfeud.game.QuestionSet;
 import bwyap.familyfeud.game.play.FFPlayState;
 import bwyap.familyfeud.game.play.FFPlayStateType;
 
@@ -42,7 +44,12 @@ public class FFPlayStateFactory {
 			if (revealAnswers == null) createRevealAnswersState();
 			return revealAnswers;
 		case SELECT_QUESTION:
-			if (selectQuestion == null) createSelectQuestionState();
+			if (selectQuestion == null) {
+				if (data instanceof QuestionSet) {
+					createSelectQuestionState((QuestionSet) data);
+				}
+				else throw new InvalidDataException("FFPlayStateFactory: QuestionSet expected when creating new StateSelectQuestion");
+			}
 			return selectQuestion;
 		}
 		return null;
@@ -53,8 +60,8 @@ public class FFPlayStateFactory {
 	// Create the states
 	// =================
 		
-	private static void createSelectQuestionState() {
-		selectQuestion = new StateSelectQuestion();
+	private static void createSelectQuestionState(QuestionSet questions) {
+		selectQuestion = new StateSelectQuestion(questions);
 	}
 
 	private static void createRevealAnswersState() {

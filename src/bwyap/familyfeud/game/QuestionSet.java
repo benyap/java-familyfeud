@@ -56,5 +56,13 @@ public class QuestionSet {
 	public List<Question> getQuestions() {
 		return questions;
 	}
+
+	/**
+	 * Get the number of questions in the question set
+	 * @return
+	 */
+	public int size() {
+		return questions.size();
+	}
 	
 }
