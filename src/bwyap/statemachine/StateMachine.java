@@ -71,7 +71,7 @@ public class StateMachine<T extends State> {
 			if (states.containsKey(name)) {
 				currentState = states.get(name);
 				currentState.initState();
-				System.out.println("CHANGING STATE: " + name);
+				if (getDebugMode()) printOut("CHANGING STATE: " + name);
 			}
 			else {
 				// no state 
@@ -79,7 +79,7 @@ public class StateMachine<T extends State> {
 			}
 		}
 		else {
-			System.err.println("Invalid state transition: <" + currentState.getName() + "> to <" + name + ">");
+			if (getDebugMode()) printErr("Invalid state transition: <" + currentState.getName() + "> to <" + name + ">");
 		}
 	}
 	
@@ -94,6 +94,35 @@ public class StateMachine<T extends State> {
 				changeState(currentState.nextState());
 			}
 		}
+	}
+	
+	/**
+	 * Get the debug mode for the state machine. 
+	 * By default, this is {@code true} so all debug information will be printed. 
+	 * @return
+	 */
+	protected boolean getDebugMode() {
+		return true;
+	}
+	
+	/**
+	 * Log a message to the console.
+	 * By default this logs the message to {@code System.out}. 
+	 * Override this method to direct the message.
+	 * @param message
+	 */
+	protected void printOut(String message) {
+		System.out.println(message);
+	}
+	
+	/**
+	 * Log am error message to the console.
+	 * By default this logs the message to {@code System.err}. 
+	 * Override this method to direct the message.
+	 * @param message
+	 */
+	protected void printErr(String message) {
+		System.err.println(message);
 	}
 	
 }
