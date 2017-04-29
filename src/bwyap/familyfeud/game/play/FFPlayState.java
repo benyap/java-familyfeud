@@ -1,6 +1,6 @@
 package bwyap.familyfeud.game.play;
 
-import bwyap.statemachine.State;
+import bwyap.utility.statemachine.State;
 
 /**
  * A template for a game state in Family Feud.

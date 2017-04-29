@@ -1,4 +1,4 @@
-package bwyap.statemachine;
+package bwyap.utility.statemachine;
 
 import java.util.HashMap;
 

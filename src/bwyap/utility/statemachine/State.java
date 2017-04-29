@@ -1,4 +1,4 @@
-package bwyap.statemachine;
+package bwyap.utility.statemachine;
 
 /**
  * An abstract class that represents a template for a state in a state machine

@@ -4,8 +4,8 @@ import bwyap.familyfeud.game.play.FFPlayState;
 import bwyap.familyfeud.game.play.FFPlayStateType;
 import bwyap.familyfeud.game.play.state.FFPlayStateFactory;
 import bwyap.familyfeud.test.FamilyFeudTestDriver;
-import bwyap.statemachine.StateMachine;
 import bwyap.utility.logging.Logger;
+import bwyap.utility.statemachine.StateMachine;
 
 /**
  * A state machine that handles {@code FFPlayState} for Family Feud.
