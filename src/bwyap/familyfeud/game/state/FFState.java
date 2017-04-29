@@ -10,12 +10,23 @@ import bwyap.statemachine.State;
  */
 public abstract class FFState extends State {
 	
+	private FFStateType type;
+	
 	/**
 	 * Create a new state with the specified name
 	 * @param name
 	 */
-	public FFState(String name) {
-		super(name);
+	protected FFState(FFStateType type) {
+		super(type.toString());
+		this.type = type;
+	}
+	
+	/**
+	 * Get the state type.
+	 * @return
+	 */
+	public FFStateType getType() {
+		return type;
 	}
 
 }
