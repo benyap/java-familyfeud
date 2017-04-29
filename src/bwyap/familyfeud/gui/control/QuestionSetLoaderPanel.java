@@ -17,6 +17,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import org.json.simple.JSONObject;
 
 import bwyap.familyfeud.game.FamilyFeudGame;
+import bwyap.familyfeud.game.state.StateLoadQuestions;
 import bwyap.familyfeud.gui.GBC;
 import bwyap.familyfeud.gui.window.ControlWindow;
 import bwyap.familyfeud.res.JSONQuestionSet;
@@ -100,7 +101,10 @@ public class QuestionSetLoaderPanel extends JPanel {
 				if (q.isValid()) {
 					title.setText("Quesion Set: LOADED [" + fc.getSelectedFile().getName() + "]");
 					Logger.info("Successfully loaded question set <" + fc.getSelectedFile().getName() + ">");
-					game.getQuestionSet().loadFromJSON(q);
+					game.getState().executeAction(StateLoadQuestions.ACTION_LOADQUESTIONSET, new Object[]{q});
+				}
+				else {
+					Logger.err("Error occurred while trying to load question set from <" + fc.getSelectedFile().getName() + ">");
 				}
 			}
 		}
