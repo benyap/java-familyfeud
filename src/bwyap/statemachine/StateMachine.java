@@ -153,7 +153,7 @@ public class StateMachine<T extends State> {
 	 * @param message
 	 */
 	protected void printLog(String message) {
-		Logger.log(message);
+		Logger.info(message);
 	}
 	
 	/**
