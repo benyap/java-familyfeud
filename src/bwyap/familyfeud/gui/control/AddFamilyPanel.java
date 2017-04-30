@@ -51,9 +51,9 @@ public class AddFamilyPanel extends JPanel {
 		
 		addFamily.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (field.getText().length() > 0) {
+				if (field.getText().trim().length() > 0) {
 					if (game.getState().executeAction(StateAddFamily.ACTION_ADDFAMILY, new Object[]{
-						field.getText().toUpperCase()
+						field.getText().trim().toUpperCase()
 					})) {
 						field.setText("");						
 					}
