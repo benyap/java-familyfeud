@@ -39,13 +39,12 @@ public class StateRevealAnswers extends FFPlayState {
 			// Reveal an answer
 			if (data[1] instanceof Integer) {
 				openAnswer((Integer) data[1]);
+				return true;
 			}
 			else throw new InvalidDataException("Expecting a {*, Integer} when using action ACTION_OPENANSWER");
-			break;
 		default: 
 			throw new RuntimeException("Invalid action: " + action);
 		}
-		return false;
 	}
 	
 	/**

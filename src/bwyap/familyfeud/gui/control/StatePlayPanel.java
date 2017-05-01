@@ -112,8 +112,10 @@ public class StatePlayPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				if (game.getState().executeAction(StatePlay.CHANGESTATE_ALLOCATEPOINTS, null)) {
 					game.getState().executeAction(StatePlay.CHANGESTATE_REVEALANSWERS, null);
-					window.setQuestionControlEnabled(false);
+					// State should have automatically changed to reveal questions
 					window.updateFamilyPanel();
+					window.setChooseFamilyEnabled(false);
+					window.setQuestionControlEnabled(true);
 					enableButtons();
 				}
 			}
@@ -123,6 +125,8 @@ public class StatePlayPanel extends JPanel {
 		reveal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (game.getState().executeAction(StatePlay.CHANGESTATE_REVEALANSWERS, null)) {
+					// This may never happen 
+					window.setQuestionControlEnabled(true);
 					enableButtons();
 				}
 			}
