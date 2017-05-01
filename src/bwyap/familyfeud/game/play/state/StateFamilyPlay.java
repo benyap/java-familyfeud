@@ -123,7 +123,7 @@ public class StateFamilyPlay extends FFPlayState {
 			selectedFamilyIndex = index;
 			Logger.log("Family [" + selectedFamilyIndex + "] selected as potential stealers.");			
 		}
-		Logger.err("Cannot assign family [" + index + "] as stealers: " + (FamilyFeudGame.STRIKE_LIMIT - strikes) + " strike(s) remaining");			
+		else Logger.err("Cannot assign family [" + index + "] as stealers: " + (FamilyFeudGame.STRIKE_LIMIT - strikes) + " strike(s) remaining");			
 	}
 	
 }
