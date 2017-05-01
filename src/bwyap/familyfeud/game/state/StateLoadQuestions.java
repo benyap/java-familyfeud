@@ -36,7 +36,7 @@ public class StateLoadQuestions extends FFState {
 	}
 	
 	/**
-	 * Add a new family to the game
+	 * Load a set of questions from a JSONQuestionSet object
 	 * @param familyName
 	 */
 	private void loadQuestionSet(JSONQuestionSet data) {
