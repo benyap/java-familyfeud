@@ -46,8 +46,12 @@ public class ManageFamilyPanel extends JPanel {
 	private void initComponents() {
 		title = new JLabel("Add new family");
 		field = new JTextField(10);
+		
 		addFamily = new JButton("Add");
+		addFamily.setToolTipText("Add a unique family name. Cannot be empty.");
+		
 		removeFamily = new JButton("Remove");
+		removeFamily.setToolTipText("Removes the last added family");
 		
 		addFamily.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
