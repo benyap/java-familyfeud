@@ -1,5 +1,6 @@
 package bwyap.familyfeud.gui.control;
 
+import static bwyap.familyfeud.game.play.FFPlayStateType.ALLOCATE_POINTS;
 import static bwyap.familyfeud.game.play.FFPlayStateType.FACE_OFF;
 import static bwyap.familyfeud.game.play.FFPlayStateType.FAMILY_PLAY;
 import static bwyap.familyfeud.game.play.FFPlayStateType.FAMILY_STEAL;
@@ -38,7 +39,7 @@ public class StatePlayPanel extends JPanel {
 	private static final long serialVersionUID = 4051495798628977025L;
 
 	public static final int WIDTH = StatePanel.WIDTH;
-	public static final int HEIGHT = ControlWindow.HEIGHT - ConsolePanel.HEIGHT - StatePanel.HEIGHT - 30;
+	public static final int HEIGHT = ControlWindow.HEIGHT - ConsolePanel.HEIGHT - StatePanel.HEIGHT - 25;
 
 	private ControlWindow window;
 	private FamilyFeudGame game;
@@ -48,6 +49,7 @@ public class StatePlayPanel extends JPanel {
 	private JButton faceOff;
 	private JButton play;
 	private JButton steal;
+	private JButton allocate;
 	private JButton reveal;
 
 	public StatePlayPanel(ControlWindow window, FamilyFeudGame game) {
@@ -104,6 +106,16 @@ public class StatePlayPanel extends JPanel {
 			}
 		});
 		
+		allocate = new JButton("Allocate points");
+		allocate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (game.getState().executeAction(StatePlay.CHANGESTATE_ALLOCATEPOINTS, null)) {
+					game.getState().executeAction(StatePlay.CHANGESTATE_REVEALANSWERS, null);
+					// TODO
+				}
+			}
+		});
+		
 		reveal = new JButton("Reveal questions");
 		reveal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -118,7 +130,8 @@ public class StatePlayPanel extends JPanel {
 		add(faceOff, new GBC(0, 2).setFill(1));
 		add(play, new GBC(0, 3).setFill(1));
 		add(steal, new GBC(0, 4).setFill(1));
-		add(reveal, new GBC(0, 5).setFill(1));
+		add(allocate, new GBC(0, 5).setFill(1));
+		add(reveal, new GBC(0, 6).setFill(1));
 	}
 	
 	@Override
@@ -136,13 +149,15 @@ public class StatePlayPanel extends JPanel {
 			faceOff.setEnabled(state.getType() == SELECT_QUESTION);
 			play.setEnabled(state.getType() == FACE_OFF);
 			steal.setEnabled(state.getType() == FAMILY_PLAY);
-			reveal.setEnabled(state.getType() == FAMILY_PLAY || state.getType() == FAMILY_STEAL);
+			allocate.setEnabled(state.getType() == FAMILY_PLAY || state.getType() == FAMILY_STEAL);
+			reveal.setEnabled(state.getType() == ALLOCATE_POINTS);
 		}
 		else {
 			select.setEnabled(false);
 			faceOff.setEnabled(false);
 			play.setEnabled(false);
 			steal.setEnabled(false);
+			allocate.setEnabled(false);
 			reveal.setEnabled(false);
 		}
 	}
