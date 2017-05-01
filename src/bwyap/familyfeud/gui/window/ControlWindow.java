@@ -16,6 +16,7 @@ import bwyap.familyfeud.gui.control.ConsolePanel;
 import bwyap.familyfeud.gui.control.QuestionSelectionPanel;
 import bwyap.familyfeud.gui.control.QuestionSetLoaderPanel;
 import bwyap.familyfeud.gui.control.StatePanel;
+import bwyap.familyfeud.gui.control.StatePlayPanel;
 import bwyap.familyfeud.gui.control.WindowControlPanel;
 import bwyap.utility.logging.Logger;
 
@@ -30,7 +31,7 @@ public class ControlWindow extends FamilyFeudWindow {
 	private static final long serialVersionUID = -4445104890877967661L;
 
 	public static final int WIDTH = 800;
-	public static final int HEIGHT = 600;
+	public static final int HEIGHT = 640;
 	
 	private GameWindow gameWindow;
 	private FamilyFeudGame game;
@@ -42,6 +43,7 @@ public class ControlWindow extends FamilyFeudWindow {
 	private AddFamilyPanel familyPanel;
 	private QuestionSetLoaderPanel questionLoaderPanel;
 	private QuestionSelectionPanel questionSelectionPanel;
+	private StatePlayPanel statePlayPanel;
 	
 	/**
 	 * Create a new control window
@@ -95,13 +97,17 @@ public class ControlWindow extends FamilyFeudWindow {
 		
 		questionLoaderPanel = new QuestionSetLoaderPanel(game, questionSelectionPanel);
 		questionLoaderPanel.setEnabled(false);
-				
-		contentPane.add(consolePanel, new GBC(0, 3).setSpan(3, 1));
+
+		statePlayPanel = new StatePlayPanel(this, game);
+		statePlayPanel.setEnabled(false);
+		
+		contentPane.add(consolePanel, new GBC(0, 4).setSpan(3, 1));
 		contentPane.add(windowControlPanel, new GBC(0, 0).setSpan(1, 2));
 		contentPane.add(familyPanel, new GBC(0, 2));
 		contentPane.add(statePanel, new GBC(2, 0).setSpan(1, 3));
 		contentPane.add(questionSelectionPanel, new GBC(1, 1).setSpan(1, 2));
 		contentPane.add(questionLoaderPanel, new GBC(1, 0));
+		contentPane.add(statePlayPanel, new GBC(2, 3));
 		
 		add(contentPane, BorderLayout.CENTER);
 		Logger.info("Control window initialized.");
@@ -117,6 +123,10 @@ public class ControlWindow extends FamilyFeudWindow {
 	
 	public void setQuestionSelectionEnabled(boolean enabled) {
 		questionSelectionPanel.setEnabled(enabled);
+	}
+	
+	public void setStatePlayEnabled(boolean enabled) {
+		statePlayPanel.setEnabled(enabled);
 	}
 
 	/**

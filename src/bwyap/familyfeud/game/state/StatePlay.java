@@ -3,6 +3,7 @@ package bwyap.familyfeud.game.state;
 import bwyap.familyfeud.game.FFPlayStateMachine;
 import bwyap.familyfeud.game.FamilyFeudGame;
 import bwyap.familyfeud.game.InvalidDataException;
+import bwyap.familyfeud.game.play.FFPlayState;
 import bwyap.familyfeud.game.play.FFPlayStateType;
 
 /**
@@ -66,6 +67,14 @@ public class StatePlay extends FFState {
 			break;
 		}
 		return false;
+	}
+	
+	/**
+	 * Get the current play state
+	 * @return
+	 */
+	public FFPlayState getPlayState() {
+		return stateMachine.getCurrentState();
 	}
 	
 }
