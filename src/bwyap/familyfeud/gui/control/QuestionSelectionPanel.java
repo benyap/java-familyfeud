@@ -60,7 +60,11 @@ public class QuestionSelectionPanel extends JPanel {
 		title = new JLabel("QUESTION SELECTOR");
 		title.setFont(new Font(ResourceLoader.DEFAULT_FONT_NAME, Font.BOLD, 14));
 		
-		tableModel = new DefaultTableModel(new Object[]{"Answers", "Question"}, 0);
+		tableModel = new DefaultTableModel(new Object[]{"Answers", "Question"}, 0) {
+			private static final long serialVersionUID = 2222748798265167701L;
+	        public boolean isCellEditable(int row, int column) { return false; }
+        };
+
 		table = new JTable(tableModel);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		

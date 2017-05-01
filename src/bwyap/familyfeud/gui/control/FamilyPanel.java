@@ -60,7 +60,10 @@ public class FamilyPanel extends JPanel {
 		title = new JLabel("FAMILIES");
 		title.setFont(new Font(ResourceLoader.DEFAULT_FONT_NAME, Font.BOLD, 14));
 
-		tableModel = new DefaultTableModel(new Object[]{"Family", "Points"}, 0);
+		tableModel = new DefaultTableModel(new Object[]{"Family", "Points"}, 0){
+			private static final long serialVersionUID = 2222748798265167701L;
+	        public boolean isCellEditable(int row, int column) { return false; }
+        };
 		table = new JTable(tableModel);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
