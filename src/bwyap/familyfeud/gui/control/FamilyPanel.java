@@ -1,5 +1,8 @@
 package bwyap.familyfeud.gui.control;
 
+import static bwyap.familyfeud.gui.window.ControlWindow.DEFAULT_BORDER_WIDTH;
+import static bwyap.familyfeud.gui.window.ControlWindow.SELECTED_BORDER_WIDTH;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -46,7 +49,7 @@ public class FamilyPanel extends JPanel {
 	
 	public FamilyPanel(FamilyFeudGame game) {
 		this.game = game;
-		setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+		setBorder(BorderFactory.createLineBorder(Color.BLACK, DEFAULT_BORDER_WIDTH));
 		setLayout(new GridBagLayout());
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		
@@ -112,6 +115,8 @@ public class FamilyPanel extends JPanel {
 	public void setEnabled(boolean enabled) {
 		super.setEnabled(enabled);
 		select.setEnabled(enabled);
+		if (enabled) setBorder(BorderFactory.createLineBorder(Color.BLUE, SELECTED_BORDER_WIDTH));
+		else setBorder(BorderFactory.createLineBorder(Color.BLACK, DEFAULT_BORDER_WIDTH));
 	}
 	
 }

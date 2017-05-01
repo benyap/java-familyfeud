@@ -34,6 +34,8 @@ public class ControlWindow extends FamilyFeudWindow {
 
 	public static final int WIDTH = 800;
 	public static final int HEIGHT = 640;
+	public static final int DEFAULT_BORDER_WIDTH = 1;
+	public static final int SELECTED_BORDER_WIDTH = 2;
 	
 	private GameWindow gameWindow;
 	private FamilyFeudGame game;

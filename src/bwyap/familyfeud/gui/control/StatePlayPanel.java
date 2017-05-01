@@ -6,6 +6,8 @@ import static bwyap.familyfeud.game.play.FFPlayStateType.FAMILY_PLAY;
 import static bwyap.familyfeud.game.play.FFPlayStateType.FAMILY_STEAL;
 import static bwyap.familyfeud.game.play.FFPlayStateType.REVEAL_ANSWERS;
 import static bwyap.familyfeud.game.play.FFPlayStateType.SELECT_QUESTION;
+import static bwyap.familyfeud.gui.window.ControlWindow.DEFAULT_BORDER_WIDTH;
+import static bwyap.familyfeud.gui.window.ControlWindow.SELECTED_BORDER_WIDTH;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -55,7 +57,7 @@ public class StatePlayPanel extends JPanel {
 	public StatePlayPanel(ControlWindow window, FamilyFeudGame game) {
 		this.window = window;
 		this.game = game;
-		setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+		setBorder(BorderFactory.createLineBorder(Color.BLACK, DEFAULT_BORDER_WIDTH));
 		setLayout(new GridBagLayout());
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		
@@ -152,8 +154,8 @@ public class StatePlayPanel extends JPanel {
 	public void setEnabled(boolean enabled) {
 		super.setEnabled(false);
 		enableButtons();
-		if (enabled) setBorder(BorderFactory.createLineBorder(Color.BLUE, 2));
-		else setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+		if (enabled) setBorder(BorderFactory.createLineBorder(Color.BLACK, SELECTED_BORDER_WIDTH));
+		else setBorder(BorderFactory.createLineBorder(Color.BLACK, DEFAULT_BORDER_WIDTH));
 	}
 	
 	private void enableButtons() {
