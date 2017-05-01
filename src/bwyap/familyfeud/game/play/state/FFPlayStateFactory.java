@@ -1,7 +1,6 @@
 package bwyap.familyfeud.game.play.state;
 
 import bwyap.familyfeud.game.FamilyCollection;
-import bwyap.familyfeud.game.FamilyFeudGame;
 import bwyap.familyfeud.game.InvalidDataException;
 import bwyap.familyfeud.game.QuestionSet;
 import bwyap.familyfeud.game.play.FFPlayState;
