@@ -5,7 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 
 import bwyap.familyfeud.game.FamilyFeudGame;
-import bwyap.familyfeud.render.RenderStateInterface;
+import bwyap.familyfeud.render.RenderableInterface;
 import bwyap.familyfeud.render.RenderingPanel;
 import bwyap.gridgame.res.ResourceLoader;
 
@@ -14,7 +14,7 @@ import bwyap.gridgame.res.ResourceLoader;
  * @author bwyap
  *
  */
-public class RenderStatePlay implements RenderStateInterface {
+public class RenderStatePlay implements RenderableInterface {
 	
 	private FamilyFeudGame game;
 	private String title = "PLAY";

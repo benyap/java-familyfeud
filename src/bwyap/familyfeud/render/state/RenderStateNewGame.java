@@ -1,15 +1,15 @@
 package bwyap.familyfeud.render.state;
 
-import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 
 import bwyap.familyfeud.game.Family;
 import bwyap.familyfeud.game.FamilyFeudGame;
-import bwyap.familyfeud.render.RenderStateInterface;
+import bwyap.familyfeud.render.RenderableInterface;
 import bwyap.familyfeud.render.RenderingPanel;
+import bwyap.familyfeud.render.component.Fader;
+import bwyap.familyfeud.render.component.RenderableImage;
 import bwyap.gridgame.res.ResourceLoader;
 
 /**
@@ -17,34 +17,29 @@ import bwyap.gridgame.res.ResourceLoader;
  * @author bwyap
  *
  */
-public class RenderStateNewGame implements RenderStateInterface {
-	
-	private final float TRANSITION_TIME = 1000.0f;
+public class RenderStateNewGame implements RenderableInterface {
 	
 	private FamilyFeudGame game;
 	
 	private String title = "NEW GAME";
 	private int title_w = -1;
-	private float counter = 0.0f;
+	private Fader bg;
 	
 	public RenderStateNewGame(FamilyFeudGame game) {
 		this.game = game;
+		RenderableImage over = new RenderableImage(ResourceLoader.getImage("blur"));
+		RenderableImage base = new RenderableImage(ResourceLoader.getImage("title"));
+		bg = new Fader(1000, over, base, false);
 	}
 	
 	@Override
 	public void update(float timeElapsed) {
-		if (counter < TRANSITION_TIME) counter += timeElapsed;
+		bg.update(timeElapsed);
 	}
 	
 	@Override
 	public void render(RenderingPanel panel, Graphics g) {
-		if (counter < TRANSITION_TIME) {
-			g.drawImage(ResourceLoader.getImage("title"), 0, 0, panel.getWidth(), panel.getHeight(), null);
-			Graphics2D g2d = (Graphics2D)g;
-			g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, counter / TRANSITION_TIME));
-			g2d.drawImage(ResourceLoader.getImage("blur"), 0, 0, panel.getWidth(), panel.getHeight(), null);
-		}
-		else g.drawImage(ResourceLoader.getImage("blur"), 0, 0, panel.getWidth(), panel.getHeight(), null);
+		bg.render(panel, g);
 		
 		// Draw 'NEW GAME'
 		g.setFont(new Font(ResourceLoader.getFontName("Bebas Neue"), Font.PLAIN, 100));

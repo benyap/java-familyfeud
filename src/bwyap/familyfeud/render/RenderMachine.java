@@ -22,8 +22,8 @@ import bwyap.familyfeud.render.state.RenderStatePlay;
 public class RenderMachine {
 	
 	private FamilyFeudGame game;
-	private RenderStateInterface renderState;
-	private HashMap<RenderStateType, RenderStateInterface> renderStates;
+	private RenderableInterface renderState;
+	private HashMap<RenderStateType, RenderableInterface> renderStates;
 	
 	public RenderMachine(FamilyFeudGame game) {
 		this.game = game;		
@@ -31,7 +31,7 @@ public class RenderMachine {
 	}
 	
 	private void initRenderStates() {
-		renderStates = new HashMap<RenderStateType, RenderStateInterface>();
+		renderStates = new HashMap<RenderStateType, RenderableInterface>();
 		
 		renderStates.put(LOADING, new RenderStateLoading());
 		renderStates.put(MAIN, new RenderStateMain());
@@ -70,7 +70,7 @@ public class RenderMachine {
 	 * Get the state to render
 	 * @return
 	 */
-	public RenderStateInterface getState() {
+	public RenderableInterface getState() {
 		return renderState;
 	}
 	

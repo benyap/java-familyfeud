@@ -1,5 +1,6 @@
 package bwyap.familyfeud.render;
 
+import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -20,12 +21,12 @@ public class RenderingPanel extends JPanel {
 	private boolean renderFPS = true;
 	private float lastFPS;
 	
-	private RenderStateInterface state;
+	private RenderableInterface state;
 	
 	/**
 	 * Render graphics
 	 */
-	public void render(RenderStateInterface state) {
+	public void render(RenderableInterface state) {
 		this.state = state;
 		repaint();
 	}
@@ -39,6 +40,8 @@ public class RenderingPanel extends JPanel {
 		
 		// Draw fps to the screen
 		if (renderFPS) {
+			// Reset any alpha settings
+			((Graphics2D)g).setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
 			g.setColor(Color.YELLOW);
 			g.setFont(new Font("SansSerif", Font.PLAIN, 12));
 			g.drawString((int) lastFPS + " fps", 2, 12);			
