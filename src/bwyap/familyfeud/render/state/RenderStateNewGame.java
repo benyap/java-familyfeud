@@ -3,6 +3,7 @@ package bwyap.familyfeud.render.state;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.List;
 
 import bwyap.familyfeud.game.Family;
@@ -51,10 +52,16 @@ public class RenderStateNewGame implements RenderableInterface {
 		families.clear();
 		final int INTERVAL = 80;
 		int count = 0;
-		for(Family f : game.getFamilies()) {
-			RenderableString s = new RenderableString(f.getName(), 250 + INTERVAL * count++, ResourceLoader.getFontName("Bebas Neue"), 70);
-			s.setColor(new Color(0x333333));
-			families.add(s);
+		
+		try {
+			for(Family f : game.getFamilies()) {
+				RenderableString s = new RenderableString(f.getName(), 250 + INTERVAL * count++, ResourceLoader.getFontName("Bebas Neue"), 70);
+				s.setColor(new Color(0x333333));
+				families.add(s);
+			}
+		}
+		catch (ConcurrentModificationException e) {
+			System.err.println(e.getLocalizedMessage());
 		}
 	}
 	
