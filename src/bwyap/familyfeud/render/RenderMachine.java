@@ -5,8 +5,6 @@ import static bwyap.familyfeud.render.RenderStateType.MAIN;
 import static bwyap.familyfeud.render.RenderStateType.NEWGAME;
 import static bwyap.familyfeud.render.RenderStateType.PLAY;
 
-import java.util.HashMap;
-
 import bwyap.familyfeud.game.FamilyFeudGame;
 import bwyap.familyfeud.render.state.RenderStateLoading;
 import bwyap.familyfeud.render.state.RenderStateMain;
@@ -19,30 +17,25 @@ import bwyap.familyfeud.render.state.RenderStatePlay;
  * @author bwyap
  *
  */
-public class RenderMachine {
+public class RenderMachine extends AbstractRenderMachine {
 	
-	private FamilyFeudGame game;
-	private RenderableInterface renderState;
-	private HashMap<RenderStateType, RenderableInterface> renderStates;
-	
+	/**
+	 * Create a render machine that generates Family Feud render states
+	 * @param game
+	 */
 	public RenderMachine(FamilyFeudGame game) {
-		this.game = game;		
-		initRenderStates();
+		super(game);
 	}
 	
-	private void initRenderStates() {
-		renderStates = new HashMap<RenderStateType, RenderableInterface>();
-		
+	@Override
+	protected void initRenderStates() {		
 		renderStates.put(LOADING, new RenderStateLoading());
 		renderStates.put(MAIN, new RenderStateMain());
 		renderStates.put(NEWGAME, new RenderStateNewGame(game));
 		renderStates.put(PLAY, new RenderStatePlay(game));
 	}
 	
-	/**
-	 * Update the render state
-	 * @param timeElapse
-	 */
+	@Override
 	public void update(float timeElapsed) {
 		switch (game.getState().getType()) {
 		case END_GAME:
@@ -63,15 +56,7 @@ public class RenderMachine {
 			break;
 		}
 		
-		renderState.update(timeElapsed);
-	}
-	
-	/**
-	 * Get the state to render
-	 * @return
-	 */
-	public RenderableInterface getState() {
-		return renderState;
+		if (renderState != null) renderState.update(timeElapsed);
 	}
 	
 }
