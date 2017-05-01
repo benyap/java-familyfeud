@@ -27,7 +27,7 @@ public class RenderStateNewGame implements RenderStateInterface {
 	
 	@Override
 	public void render(RenderingPanel panel, Graphics g) {
-		g.drawImage(ResourceLoader.getImage("bg"), 0, 0, panel.getWidth(), panel.getHeight(), null);
+		g.drawImage(ResourceLoader.getImage("blur"), 0, 0, panel.getWidth(), panel.getHeight(), null);
 		
 		// Draw 'NEW GAME'
 		g.setFont(new Font(ResourceLoader.getFontName("Bebas Neue"), Font.PLAIN, 100));
