@@ -101,6 +101,7 @@ public class StatePanel extends JPanel {
 					loadQuestions.setEnabled(false);
 					window.setFamilyPanelEnabled(false);
 					window.setQuestionLoaderEnabled(false);
+					window.loadFamilies();
 					play.setEnabled(true);
 				}
 			}

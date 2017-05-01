@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import bwyap.familyfeud.game.FamilyFeudGame;
 import bwyap.familyfeud.gui.GBC;
 import bwyap.familyfeud.gui.control.AddFamilyPanel;
+import bwyap.familyfeud.gui.control.ChooseFamilyPanel;
 import bwyap.familyfeud.gui.control.ConsolePanel;
 import bwyap.familyfeud.gui.control.QuestionSelectionPanel;
 import bwyap.familyfeud.gui.control.QuestionSetLoaderPanel;
@@ -40,10 +41,11 @@ public class ControlWindow extends FamilyFeudWindow {
 	private ConsolePanel consolePanel;
 	private WindowControlPanel windowControlPanel;
 	private StatePanel statePanel;
-	private AddFamilyPanel familyPanel;
+	private AddFamilyPanel addFamilyPanel;
 	private QuestionSetLoaderPanel questionLoaderPanel;
 	private QuestionSelectionPanel questionSelectionPanel;
 	private StatePlayPanel statePlayPanel;
+	private ChooseFamilyPanel chooseFamilyPanel;
 	
 	/**
 	 * Create a new control window
@@ -87,8 +89,8 @@ public class ControlWindow extends FamilyFeudWindow {
 		
 		windowControlPanel = new WindowControlPanel(gameWindow);
 		
-		familyPanel = new AddFamilyPanel(game);
-		familyPanel.setEnabled(false);
+		addFamilyPanel = new AddFamilyPanel(game);
+		addFamilyPanel.setEnabled(false);
 		
 		statePanel = new StatePanel(this, game);
 		
@@ -101,20 +103,24 @@ public class ControlWindow extends FamilyFeudWindow {
 		statePlayPanel = new StatePlayPanel(this, game);
 		statePlayPanel.setEnabled(false);
 		
+		chooseFamilyPanel = new ChooseFamilyPanel(game);
+		chooseFamilyPanel.setEnabled(false);
+		
 		contentPane.add(consolePanel, new GBC(0, 4).setSpan(3, 1));
 		contentPane.add(windowControlPanel, new GBC(0, 0).setSpan(1, 2));
-		contentPane.add(familyPanel, new GBC(0, 2));
+		contentPane.add(addFamilyPanel, new GBC(0, 2));
 		contentPane.add(statePanel, new GBC(2, 0).setSpan(1, 3));
 		contentPane.add(questionSelectionPanel, new GBC(1, 1).setSpan(1, 2));
 		contentPane.add(questionLoaderPanel, new GBC(1, 0));
 		contentPane.add(statePlayPanel, new GBC(2, 3));
+		contentPane.add(chooseFamilyPanel, new GBC(0, 3));
 		
 		add(contentPane, BorderLayout.CENTER);
 		Logger.info("Control window initialized.");
 	}
 	
 	public void setFamilyPanelEnabled(boolean enabled) {
-		familyPanel.setEnabled(enabled);
+		addFamilyPanel.setEnabled(enabled);
 	}
 	
 	public void setQuestionLoaderEnabled(boolean enabled) {
@@ -127,6 +133,10 @@ public class ControlWindow extends FamilyFeudWindow {
 	
 	public void setStatePlayEnabled(boolean enabled) {
 		statePlayPanel.setEnabled(enabled);
+	}
+	
+	public void loadFamilies() {
+		chooseFamilyPanel.loadFamilies();
 	}
 
 	/**
