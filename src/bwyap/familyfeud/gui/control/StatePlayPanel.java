@@ -78,6 +78,7 @@ public class StatePlayPanel extends JPanel {
 		});
 		
 		faceOff = new JButton("Face off");
+		faceOff.setToolTipText("REQ: select a question from the QUESTION SELECTOR panel");
 		faceOff.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (game.getState().executeAction(StatePlay.CHANGESTATE_FACEOFF, null)) {
@@ -90,6 +91,7 @@ public class StatePlayPanel extends JPanel {
 		});
 		
 		play = new JButton("Family play");
+		play.setToolTipText("REQ: select a family from the FAMILIES panel");
 		play.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (game.getState().executeAction(StatePlay.CHANGESTATE_FAMILYPLAY, null)) {
@@ -100,6 +102,7 @@ public class StatePlayPanel extends JPanel {
 		});
 		
 		steal = new JButton("Family steal");
+		steal.setToolTipText("REQ: current family must have three strikes");
 		steal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (game.getState().executeAction(StatePlay.CHANGESTATE_FAMILYSTEAL, null)) {
@@ -110,6 +113,7 @@ public class StatePlayPanel extends JPanel {
 		});
 		
 		allocate = new JButton("Allocate points");
+		allocate.setToolTipText("REQ: steal attempt complete or board cleared");
 		allocate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (game.getState().executeAction(StatePlay.CHANGESTATE_ALLOCATEPOINTS, null)) {

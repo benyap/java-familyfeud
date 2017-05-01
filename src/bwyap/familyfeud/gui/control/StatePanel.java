@@ -57,6 +57,7 @@ public class StatePanel extends JPanel {
 		title.setFont(new Font(ResourceLoader.DEFAULT_FONT_NAME, Font.BOLD, 14));
 		
 		newGame = new JButton("New Game");
+		newGame.setToolTipText("Start a new game (removes any questions and families)");
 		newGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				game.changeState(FFStateType.NEW_GAME);
@@ -70,6 +71,7 @@ public class StatePanel extends JPanel {
 		});
 		
 		addFamily = new JButton("Manage families");
+		addFamily.setToolTipText("Add or remove families");
 		addFamily.setEnabled(false);
 		addFamily.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -80,7 +82,8 @@ public class StatePanel extends JPanel {
 			}
 		});
 		
-		loadQuestions = new JButton("Load questions");
+		loadQuestions = new JButton("Load question set");
+		loadQuestions.setToolTipText("Load a set of questions from an external JSON file");
 		loadQuestions.setEnabled(false);
 		loadQuestions.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -91,6 +94,7 @@ public class StatePanel extends JPanel {
 		});
 		
 		initGame = new JButton("Initialize game");
+		initGame.setToolTipText("Initialize the game (must have loaded a question and have at least two families)");
 		initGame.setEnabled(false);
 		initGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -108,6 +112,7 @@ public class StatePanel extends JPanel {
 		});
 		
 		play = new JButton("Play game");
+		play.setToolTipText("Switch the game into PLAY mode (use PLAY CONTROL to control game flow)");
 		play.setEnabled(false);
 		play.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -122,6 +127,7 @@ public class StatePanel extends JPanel {
 		});
 		
 		endGame = new JButton("End game");
+		endGame.setToolTipText("End the game and show the scores");
 		endGame.setEnabled(false);
 		endGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
