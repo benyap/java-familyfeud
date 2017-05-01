@@ -107,6 +107,13 @@ public class QuestionControlPanel extends JPanel {
 		}
 		if (selected > -1) table.setRowSelectionInterval(selected, selected);
 	}
+
+	/**
+	 * Disable the strike feature
+	 */
+	public void disableStrike() {
+		strike.setEnabled(false);
+	}
 	
 	@Override
 	public void setEnabled(boolean enabled) {

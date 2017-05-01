@@ -163,6 +163,10 @@ public class ControlWindow extends FamilyFeudWindow {
 		questionControlPanel.setEnabled(enabled);
 	}
 	
+	public void disableQuestionStrike() {
+		questionControlPanel.disableStrike();
+	}
+	
 	/**
 	 * Reset GUI components for a new game
 	 */

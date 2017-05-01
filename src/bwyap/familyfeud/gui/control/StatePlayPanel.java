@@ -72,6 +72,7 @@ public class StatePlayPanel extends JPanel {
 				if (game.getState().executeAction(StatePlay.CHANGESTATE_SELECTQUESTION, null)) {
 					enableButtons();
 					window.setQuestionSelectionEnabled(true);
+					window.setQuestionControlEnabled(false);
 				}
 			}
 		});
@@ -102,6 +103,7 @@ public class StatePlayPanel extends JPanel {
 		steal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (game.getState().executeAction(StatePlay.CHANGESTATE_FAMILYSTEAL, null)) {
+					enableButtons();
 					window.setChooseFamily(StateFamilySteal.ACTION_SELECTWINFAMILY);
 				}
 			}
@@ -116,6 +118,7 @@ public class StatePlayPanel extends JPanel {
 					window.updateFamilyPanel();
 					window.setChooseFamilyEnabled(false);
 					window.setQuestionControlEnabled(true);
+					window.disableQuestionStrike();
 					enableButtons();
 				}
 			}
