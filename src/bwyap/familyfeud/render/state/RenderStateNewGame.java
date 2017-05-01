@@ -34,7 +34,7 @@ public class RenderStateNewGame implements RenderableInterface {
 	 */
 	public RenderStateNewGame(FamilyFeudGame game) {
 		this.game = game;
-		bg = new Fader(1000, 
+		bg = new Fader(500, 
 				new RenderableImage(ResourceLoader.getImage("blur")), 
 				new RenderableImage(ResourceLoader.getImage("title")), false);
 		
