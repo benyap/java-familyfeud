@@ -21,7 +21,6 @@ import bwyap.familyfeud.game.FamilyFeudGame;
 import bwyap.familyfeud.game.state.StatePlay;
 import bwyap.familyfeud.gui.GBC;
 import bwyap.gridgame.res.ResourceLoader;
-import bwyap.utility.logging.Logger;
 
 /**
  * A panel used to select a family for an action
