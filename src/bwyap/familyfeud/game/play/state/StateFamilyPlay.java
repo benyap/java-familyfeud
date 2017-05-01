@@ -105,8 +105,11 @@ public class StateFamilyPlay extends FFPlayState {
 	 */
 	private void openAnswer(int index) {
 		if (strikes < FamilyFeudGame.STRIKE_LIMIT) {
-			question.getAnswers().get(index).setReveal(true);
-			Logger.log("Revealed answer: " + question.getAnswers().get(index));
+			if (!question.getAnswers().get(index).isRevealed()) {
+				question.getAnswers().get(index).setReveal(true);
+				Logger.log("Revealed answer: " + question.getAnswers().get(index));
+			}
+			else Logger.log("Answer already revealed!");
 		}
 		else Logger.err("Strike limit reached: cannot reveal more answers for family [" + selectedFamilyIndex + "]");
 	}

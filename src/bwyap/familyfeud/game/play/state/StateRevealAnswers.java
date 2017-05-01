@@ -52,8 +52,11 @@ public class StateRevealAnswers extends FFPlayState {
 	 * @param index
 	 */
 	private void openAnswer(int index) {
-		question.getAnswers().get(index).setReveal(true);
-		Logger.log("Revealed answer: " + question.getAnswers().get(index));
+		if (!question.getAnswers().get(index).isRevealed()) {
+			question.getAnswers().get(index).setReveal(true);
+			Logger.log("Revealed answer: " + question.getAnswers().get(index));
+		}
+		else Logger.log("Answer already revealed!");
 	}
 	
 }

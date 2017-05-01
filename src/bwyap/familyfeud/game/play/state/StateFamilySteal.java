@@ -99,8 +99,12 @@ public class StateFamilySteal extends FFPlayState {
 	 * @param index
 	 */
 	private void openAnswer(int index) {
-		if (selectedStealFamilyIndex > -1) {			
-			question.getAnswers().get(index).setReveal(true);
+		if (selectedStealFamilyIndex > -1) {
+			if (!question.getAnswers().get(index).isRevealed()) {
+				question.getAnswers().get(index).setReveal(true);
+				Logger.log("Revealed answer: " + question.getAnswers().get(index));
+			}
+			else Logger.log("Answer already revealed!");
 		}
 		else Logger.err("No family selected as potential stealers");
 	}

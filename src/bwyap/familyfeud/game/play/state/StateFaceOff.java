@@ -87,8 +87,11 @@ public class StateFaceOff extends FFPlayState {
 	 * @param index
 	 */
 	private void openAnswer(int index) {
-		questions.getQuestion(selectedIndex).getAnswers().get(index).setReveal(true);
-		Logger.log("Revealed answer: " + questions.getQuestion(selectedIndex).getAnswers().get(index));
+		if (!questions.getQuestion(selectedIndex).getAnswers().get(index).isRevealed()) {
+			questions.getQuestion(selectedIndex).getAnswers().get(index).setReveal(true);			
+			Logger.log("Revealed answer: " + questions.getQuestion(selectedIndex).getAnswers().get(index));
+		}
+		else Logger.log("Answer already revealed!");
 	}
 	
 	/**
