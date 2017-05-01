@@ -40,7 +40,7 @@ public class QuestionControlPanel extends JPanel {
 	public static final int HEIGHT = StatePlayPanel.HEIGHT;
 	
 	private JLabel title;
-	private JScrollPane listScroll;
+	private JScrollPane tableScroll;
 	private JTable table;
 	private DefaultTableModel tableModel;
 	private JButton reveal;
@@ -65,9 +65,14 @@ public class QuestionControlPanel extends JPanel {
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setFillsViewportHeight(true);
 
-		listScroll = new JScrollPane(table);
-		listScroll.setPreferredSize(new Dimension(WIDTH - 30, (int)(HEIGHT*0.65)));
+		tableScroll = new JScrollPane(table);
+		tableScroll.setPreferredSize(new Dimension(WIDTH - 30, (int)(HEIGHT*0.65)));
 		
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        table.getColumnModel().getColumn(2).setPreferredWidth(60);
+        table.getColumnModel().getColumn(1).setPreferredWidth(60);
+		table.getColumnModel().getColumn(0).setPreferredWidth(WIDTH - 30 - 60 - 60 - 5);
+
 		reveal = new JButton("Reveal answer");
 		reveal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -91,7 +96,7 @@ public class QuestionControlPanel extends JPanel {
 		});
 		
 		add(title, new GBC(0, 0).setInsets(5).setSpan(2, 1));
-		add(listScroll, new GBC(0, 1).setSpan(2, 1));
+		add(tableScroll, new GBC(0, 1).setSpan(2, 1));
 		add(reveal, new GBC(0, 2).setWeight(0.4, 1.0).setFill(1).setInsets(2, 6, 2, 2));
 		add(strike, new GBC(1, 2).setWeight(0.6, 1.0).setFill(1).setInsets(2, 2, 2, 6));
 	}

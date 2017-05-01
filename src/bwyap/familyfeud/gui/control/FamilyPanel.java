@@ -38,7 +38,7 @@ public class FamilyPanel extends JPanel {
 	public static final int HEIGHT = StatePlayPanel.HEIGHT;
 	
 	private JLabel title;
-	private JScrollPane listScroll;
+	private JScrollPane tableScroll;
 	private JTable table;
 	private DefaultTableModel tableModel;
 	private JButton select;
@@ -64,8 +64,12 @@ public class FamilyPanel extends JPanel {
 		table = new JTable(tableModel);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
-		listScroll = new JScrollPane(table);
-		listScroll.setMinimumSize(new Dimension(WIDTH - 20, (int)(HEIGHT*0.65)));
+		tableScroll = new JScrollPane(table);
+		tableScroll.setMinimumSize(new Dimension(WIDTH - 20, (int)(HEIGHT*0.65)));
+		
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		table.getColumnModel().getColumn(0).setPreferredWidth(100);
+		table.getColumnModel().getColumn(1).setPreferredWidth(WIDTH - 20 - 100 - 5);
 		
 		select = new JButton("Select");
 		select.addActionListener(new ActionListener() {
@@ -78,7 +82,7 @@ public class FamilyPanel extends JPanel {
 		});
 		
 		add(title, new GBC(0, 0));
-		add(listScroll, new GBC(0, 1));
+		add(tableScroll, new GBC(0, 1));
 		add(select, new GBC(0, 2));
 	}
 	

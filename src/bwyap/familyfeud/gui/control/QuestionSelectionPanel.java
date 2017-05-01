@@ -11,13 +11,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
 
 import bwyap.familyfeud.game.FamilyFeudGame;
 import bwyap.familyfeud.game.Question;
@@ -41,9 +41,9 @@ public class QuestionSelectionPanel extends JPanel {
 	public static final int HEIGHT = (int)(StatePanel.HEIGHT*0.8);
 	
 	private JLabel title;
-	private JScrollPane listScroll;
-	private JList<Question> list;
-	private DefaultListModel<Question> listModel;
+	private JScrollPane tableScroll;
+	private JTable table;
+	private DefaultTableModel tableModel;
 	private JButton select;
 	
 	private FamilyFeudGame game;
@@ -60,25 +60,29 @@ public class QuestionSelectionPanel extends JPanel {
 		title = new JLabel("QUESTION SELECTOR");
 		title.setFont(new Font(ResourceLoader.DEFAULT_FONT_NAME, Font.BOLD, 14));
 		
-		listModel = new DefaultListModel<Question>();
-		list = new JList<Question>(listModel);
-		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tableModel = new DefaultTableModel(new Object[]{"Answers", "Question"}, 0);
+		table = new JTable(tableModel);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
-		listScroll = new JScrollPane(list);
-		listScroll.setMinimumSize(new Dimension(WIDTH - 20, (int)(HEIGHT*0.65)));
+		tableScroll = new JScrollPane(table);
+		tableScroll.setMinimumSize(new Dimension(WIDTH - 20, (int)(HEIGHT*0.65)));
+		
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		table.getColumnModel().getColumn(0).setPreferredWidth(55);
+		table.getColumnModel().getColumn(1).setPreferredWidth(WIDTH - 20 - 55 - 5);
 		
 		select = new JButton("Select");
 		select.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (list.getSelectedIndex() > -1) {
+				if (table.getSelectedRow() > -1) {
 					game.getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[]{
-							StateSelectQuestion.ACTION_SELECTQUESTION, list.getSelectedIndex()});
+							StateSelectQuestion.ACTION_SELECTQUESTION, table.getSelectedRow()});
 				}
 			}
 		});
 		
 		add(title, new GBC(0, 0).setInsets(5));
-		add(listScroll, new GBC(0, 1));
+		add(tableScroll, new GBC(0, 1));
 		add(select, new GBC(0, 2));
 	}
 	
@@ -87,9 +91,9 @@ public class QuestionSelectionPanel extends JPanel {
 	 * @param questions
 	 */
 	public void loadQuestions(QuestionSet questions) {
-		listModel.clear();
+		reset();
 		for(Question q : questions.getQuestions()) {
-			listModel.addElement(q);
+			tableModel.addRow(new Object[]{q.getAnswers().size(), q.getQuestionString()});
 		}
 	}
 	
@@ -97,7 +101,9 @@ public class QuestionSelectionPanel extends JPanel {
 	 * Clear the questions loaded 
 	 */
 	public void reset() {
-		listModel.clear();
+		for(int i = tableModel.getRowCount(); i > 0; i--) {
+			tableModel.removeRow(i - 1);
+		}
 	}
 	
 	@Override
