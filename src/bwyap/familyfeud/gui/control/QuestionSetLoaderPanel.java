@@ -35,16 +35,18 @@ public class QuestionSetLoaderPanel extends JPanel {
 	private static final long serialVersionUID = 689335015288245441L;
 
 	public static final int WIDTH = ControlWindow.WIDTH - StatePanel.WIDTH - WindowControlPanel.WIDTH - 10;
-	public static final int HEIGHT = WindowControlPanel.HEIGHT/2;
+	public static final int HEIGHT = WindowControlPanel.HEIGHT - QuestionSelectionPanel.HEIGHT;
 	
 	private FamilyFeudGame game;
+	private QuestionSelectionPanel panel;
 	
 	private JFileChooser fc;
 	private JLabel title;
 	private JButton load;	
 	
-	public QuestionSetLoaderPanel(FamilyFeudGame game) {
+	public QuestionSetLoaderPanel(FamilyFeudGame game, QuestionSelectionPanel panel) {
 		this.game = game;
+		this.panel = panel;
 		setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		setLayout(new GridBagLayout());
@@ -102,6 +104,7 @@ public class QuestionSetLoaderPanel extends JPanel {
 					title.setText("Quesion Set: LOADED [" + fc.getSelectedFile().getName() + "]");
 					Logger.info("Successfully loaded question set <" + fc.getSelectedFile().getName() + ">");
 					game.getState().executeAction(StateLoadQuestions.ACTION_LOADQUESTIONSET, new Object[]{q});
+					panel.loadQuestions(game.getQuestionSet());
 				}
 				else {
 					Logger.err("Error occurred while trying to load question set from <" + fc.getSelectedFile().getName() + ">");

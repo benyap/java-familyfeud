@@ -13,6 +13,7 @@ import bwyap.familyfeud.game.FamilyFeudGame;
 import bwyap.familyfeud.gui.GBC;
 import bwyap.familyfeud.gui.control.AddFamilyPanel;
 import bwyap.familyfeud.gui.control.ConsolePanel;
+import bwyap.familyfeud.gui.control.QuestionSelectionPanel;
 import bwyap.familyfeud.gui.control.QuestionSetLoaderPanel;
 import bwyap.familyfeud.gui.control.StatePanel;
 import bwyap.familyfeud.gui.control.WindowControlPanel;
@@ -40,6 +41,7 @@ public class ControlWindow extends FamilyFeudWindow {
 	private StatePanel statePanel;
 	private AddFamilyPanel familyPanel;
 	private QuestionSetLoaderPanel questionLoaderPanel;
+	private QuestionSelectionPanel questionSelectionPanel;
 	
 	/**
 	 * Create a new control window
@@ -80,19 +82,23 @@ public class ControlWindow extends FamilyFeudWindow {
 		contentPane.setLayout(new GridBagLayout());
 		
 		consolePanel = new ConsolePanel();
-		contentPane.add(consolePanel, new GBC(0, 2).setSpan(3, 1));
+		contentPane.add(consolePanel, new GBC(0, 3).setSpan(3, 1));
 		
 		windowControlPanel = new WindowControlPanel(gameWindow);
-		contentPane.add(windowControlPanel, new GBC(0, 0));
+		contentPane.add(windowControlPanel, new GBC(0, 0).setSpan(1, 2));
 		
 		familyPanel = new AddFamilyPanel(game);
 		familyPanel.setEnabled(false);
-		contentPane.add(familyPanel, new GBC(0, 1));
+		contentPane.add(familyPanel, new GBC(0, 2));
 		
 		statePanel = new StatePanel(this, game);
 		contentPane.add(statePanel, new GBC(2, 0).setSpan(1, 2));
 		
-		questionLoaderPanel = new QuestionSetLoaderPanel(game);
+		questionSelectionPanel = new QuestionSelectionPanel(game);
+		questionSelectionPanel.setEnabled(false);
+		contentPane.add(questionSelectionPanel, new GBC(1, 1));
+		
+		questionLoaderPanel = new QuestionSetLoaderPanel(game, questionSelectionPanel);
 		questionLoaderPanel.setEnabled(false);
 		contentPane.add(questionLoaderPanel, new GBC(1, 0));
 		
@@ -107,12 +113,17 @@ public class ControlWindow extends FamilyFeudWindow {
 	public void setQuestionLoaderEnabled(boolean enabled) {
 		questionLoaderPanel.setEnabled(enabled);
 	}
+	
+	public void setQuestionSelectionEnabled(boolean enabled) {
+		questionSelectionPanel.setEnabled(enabled);
+	}
 
 	/**
 	 * Reset GUI components for a new game
 	 */
 	public void reset() {
 		questionLoaderPanel.reset();
+		questionSelectionPanel.reset();
 	}
 
 }

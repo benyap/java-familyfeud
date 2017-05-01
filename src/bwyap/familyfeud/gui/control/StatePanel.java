@@ -114,6 +114,7 @@ public class StatePanel extends JPanel {
 					play.setEnabled(false);
 					initGame.setEnabled(false);
 					endGame.setEnabled(true);
+					window.setQuestionSelectionEnabled(true);
 				}
 			}
 		});
@@ -132,6 +133,7 @@ public class StatePanel extends JPanel {
 						play.setEnabled(false);
 						endGame.setEnabled(false);
 						newGame.setEnabled(true);
+						window.setQuestionSelectionEnabled(false);
 					}
 				}
 			}
