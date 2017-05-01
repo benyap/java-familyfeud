@@ -1,5 +1,10 @@
 package bwyap.familyfeud.render;
 
+import static bwyap.familyfeud.render.RenderStateType.LOADING;
+import static bwyap.familyfeud.render.RenderStateType.MAIN;
+import static bwyap.familyfeud.render.RenderStateType.NEWGAME;
+import static bwyap.familyfeud.render.RenderStateType.PLAY;
+
 import java.util.HashMap;
 
 import bwyap.familyfeud.game.FamilyFeudGame;
@@ -7,8 +12,6 @@ import bwyap.familyfeud.render.state.RenderStateLoading;
 import bwyap.familyfeud.render.state.RenderStateMain;
 import bwyap.familyfeud.render.state.RenderStateNewGame;
 import bwyap.familyfeud.render.state.RenderStatePlay;
-
-import static bwyap.familyfeud.render.RenderStateType.*;
 
 /**
  * The RenderMachine analyzes a FamilyFeud game and generates 
@@ -40,7 +43,7 @@ public class RenderMachine {
 	 * Update the render state
 	 * @param timeElapse
 	 */
-	public void update(float timeElapse) {
+	public void update(float timeElapsed) {
 		switch (game.getState().getType()) {
 		case END_GAME:
 			break;
@@ -59,6 +62,8 @@ public class RenderMachine {
 			renderState = renderStates.get(MAIN);
 			break;
 		}
+		
+		renderState.update(timeElapsed);
 	}
 	
 	/**

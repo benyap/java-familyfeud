@@ -9,6 +9,8 @@ import java.awt.Graphics;
  */
 public interface RenderStateInterface {
 	
+	default void update(float timeElapsed) { }
+	
 	public void render(RenderingPanel panel, Graphics g); 
 	
 }
