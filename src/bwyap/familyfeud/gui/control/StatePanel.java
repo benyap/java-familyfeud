@@ -29,7 +29,7 @@ public class StatePanel extends JPanel {
 	private static final long serialVersionUID = 4051495798628977025L;
 
 	public static final int WIDTH = 180;
-	public static final int HEIGHT = 200;
+	public static final int HEIGHT = 220;
 
 	private ControlWindow window;
 	private FamilyFeudGame game;

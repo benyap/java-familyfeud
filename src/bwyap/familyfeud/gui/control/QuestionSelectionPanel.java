@@ -35,7 +35,7 @@ public class QuestionSelectionPanel extends JPanel {
 	private static final long serialVersionUID = 689335015288245441L;
 
 	public static final int WIDTH = ControlWindow.WIDTH - StatePanel.WIDTH - WindowControlPanel.WIDTH - 10;
-	public static final int HEIGHT = (int)(WindowControlPanel.HEIGHT*0.75);
+	public static final int HEIGHT = (int)(StatePanel.HEIGHT*0.8);
 	
 	private JLabel title;
 	private JScrollPane listScroll;

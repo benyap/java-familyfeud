@@ -35,7 +35,7 @@ public class QuestionSetLoaderPanel extends JPanel {
 	private static final long serialVersionUID = 689335015288245441L;
 
 	public static final int WIDTH = ControlWindow.WIDTH - StatePanel.WIDTH - WindowControlPanel.WIDTH - 10;
-	public static final int HEIGHT = WindowControlPanel.HEIGHT - QuestionSelectionPanel.HEIGHT;
+	public static final int HEIGHT = StatePanel.HEIGHT - QuestionSelectionPanel.HEIGHT;
 	
 	private FamilyFeudGame game;
 	private QuestionSelectionPanel panel;
@@ -47,20 +47,20 @@ public class QuestionSetLoaderPanel extends JPanel {
 	public QuestionSetLoaderPanel(FamilyFeudGame game, QuestionSelectionPanel panel) {
 		this.game = game;
 		this.panel = panel;
-		setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		setLayout(new GridBagLayout());
 		initComponents();
 	}
 	
 	private void initComponents() {
-		title = new JLabel("Quesion Set: No file loaded...");
+		title = new JLabel("Question Set: No file loaded...");
 		title.setFont(new Font(ResourceLoader.DEFAULT_FONT_NAME, Font.PLAIN, 12));
 		
 		load = new JButton("Load file");
 		load.addActionListener(new ChooseJSON());
 		
-		add(title, new GBC(0, 0).setInsets(5));
+		add(title, new GBC(0, 0).setInsets(5, 0, 0, 0));
 		add(load, new GBC(0, 1));
 		
 		fc = new JFileChooser();
@@ -73,8 +73,8 @@ public class QuestionSetLoaderPanel extends JPanel {
 	public void setEnabled(boolean enabled) {
 		super.setEnabled(enabled);
 		load.setEnabled(enabled);
-		if (enabled) setBorder(BorderFactory.createLineBorder(Color.RED));
-		else setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		if (enabled) setBorder(BorderFactory.createLineBorder(Color.RED, 2));
+		else setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 	}
 	
 	/**

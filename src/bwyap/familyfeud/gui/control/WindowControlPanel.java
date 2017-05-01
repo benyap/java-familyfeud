@@ -26,7 +26,7 @@ public class WindowControlPanel extends JPanel {
 	private static final long serialVersionUID = 3506047425993585668L;
 
 	public static final int WIDTH = 180;
-	public static final int HEIGHT = StatePanel.HEIGHT;
+	public static final int HEIGHT = 120;
 	
 	private GameWindow window;
 	private JLabel title;

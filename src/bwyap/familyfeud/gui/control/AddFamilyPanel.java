@@ -26,7 +26,7 @@ public class AddFamilyPanel extends JPanel {
 	private static final long serialVersionUID = 3506047425993585668L;
 	
 	public static final int WIDTH = StatePanel.WIDTH;
-	public static final int HEIGHT = 120;
+	public static final int HEIGHT = StatePanel.HEIGHT - WindowControlPanel.HEIGHT;
 	
 	private FamilyFeudGame game;
 	
@@ -67,10 +67,10 @@ public class AddFamilyPanel extends JPanel {
 			}
 		});
 		
-		add(title, new GBC(0, 0));
-		add(field, new GBC(0, 1).setFill(1));
-		add(addFamily, new GBC(0, 2).setFill(1));
-		add(removeFamily, new GBC(0, 3).setFill(1));
+		add(title, new GBC(0, 0).setSpan(2, 1));
+		add(field, new GBC(0, 1).setSpan(2, 1).setFill(1));
+		add(addFamily, new GBC(0, 2));
+		add(removeFamily, new GBC(1, 2));
 	}
 	
 	@Override

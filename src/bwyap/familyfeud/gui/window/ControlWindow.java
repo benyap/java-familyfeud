@@ -82,24 +82,25 @@ public class ControlWindow extends FamilyFeudWindow {
 		contentPane.setLayout(new GridBagLayout());
 		
 		consolePanel = new ConsolePanel();
-		contentPane.add(consolePanel, new GBC(0, 3).setSpan(3, 1));
 		
 		windowControlPanel = new WindowControlPanel(gameWindow);
-		contentPane.add(windowControlPanel, new GBC(0, 0).setSpan(1, 2));
 		
 		familyPanel = new AddFamilyPanel(game);
 		familyPanel.setEnabled(false);
-		contentPane.add(familyPanel, new GBC(0, 2));
 		
 		statePanel = new StatePanel(this, game);
-		contentPane.add(statePanel, new GBC(2, 0).setSpan(1, 2));
 		
 		questionSelectionPanel = new QuestionSelectionPanel(game);
 		questionSelectionPanel.setEnabled(false);
-		contentPane.add(questionSelectionPanel, new GBC(1, 1));
 		
 		questionLoaderPanel = new QuestionSetLoaderPanel(game, questionSelectionPanel);
 		questionLoaderPanel.setEnabled(false);
+				
+		contentPane.add(consolePanel, new GBC(0, 3).setSpan(3, 1));
+		contentPane.add(windowControlPanel, new GBC(0, 0).setSpan(1, 2));
+		contentPane.add(familyPanel, new GBC(0, 2));
+		contentPane.add(statePanel, new GBC(2, 0).setSpan(1, 3));
+		contentPane.add(questionSelectionPanel, new GBC(1, 1).setSpan(1, 2));
 		contentPane.add(questionLoaderPanel, new GBC(1, 0));
 		
 		add(contentPane, BorderLayout.CENTER);
