@@ -124,6 +124,7 @@ public class StatePlayPanel extends JPanel {
 					window.updateFamilyPanel();
 					window.setChooseFamilyEnabled(false);
 					window.setQuestionControlEnabled(true);
+					window.reloadQuestions();
 					window.disableQuestionStrike();
 					enableButtons();
 				}

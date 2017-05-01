@@ -135,6 +135,10 @@ public class ControlWindow extends FamilyFeudWindow {
 		questionLoaderPanel.setEnabled(enabled);
 	}
 	
+	public void reloadQuestions() {
+		questionSelectionPanel.reload();
+	}
+	
 	public void setQuestionSelectionEnabled(boolean enabled) {
 		questionSelectionPanel.setEnabled(enabled);
 	}

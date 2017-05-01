@@ -40,6 +40,7 @@ public class StateAllocatePoints extends FFPlayState {
 		for(Answer a : question.getAnswers()) {
 			if (a.isRevealed()) total += a.getValue();
 		}
+		question.setAnswered(true);
 		
 		families.getFamily(selectedFamilyIndex).addPoints(total);
 		

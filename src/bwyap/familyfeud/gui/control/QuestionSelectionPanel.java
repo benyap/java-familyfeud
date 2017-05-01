@@ -60,7 +60,7 @@ public class QuestionSelectionPanel extends JPanel {
 		title = new JLabel("QUESTION SELECTOR");
 		title.setFont(new Font(ResourceLoader.DEFAULT_FONT_NAME, Font.BOLD, 14));
 		
-		tableModel = new DefaultTableModel(new Object[]{"Answers", "Question"}, 0) {
+		tableModel = new DefaultTableModel(new Object[]{"No. Ans", "Done", "Question"}, 0) {
 			private static final long serialVersionUID = 2222748798265167701L;
 	        public boolean isCellEditable(int row, int column) { return false; }
         };
@@ -72,8 +72,9 @@ public class QuestionSelectionPanel extends JPanel {
 		tableScroll.setMinimumSize(new Dimension(WIDTH - 20, (int)(HEIGHT*0.65)));
 		
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		table.getColumnModel().getColumn(0).setPreferredWidth(55);
-		table.getColumnModel().getColumn(1).setPreferredWidth(WIDTH - 20 - 55 - 5);
+		table.getColumnModel().getColumn(0).setPreferredWidth(50);
+		table.getColumnModel().getColumn(1).setPreferredWidth(40);
+		table.getColumnModel().getColumn(2).setPreferredWidth(400);
 		
 		select = new JButton("Select");
 		select.addActionListener(new ActionListener() {
@@ -99,8 +100,16 @@ public class QuestionSelectionPanel extends JPanel {
 	public void loadQuestions(QuestionSet questions) {
 		reset();
 		for(Question q : questions.getQuestions()) {
-			tableModel.addRow(new Object[]{q.getAnswers().size(), q.getQuestionString()});
+			tableModel.addRow(new Object[]{q.getAnswers().size(), q.isAnswered(), q.getQuestionString()});
 		}
+	}
+
+	/**
+	 * Reload the questions in the list to update their state
+	 */
+	public void reload() {
+		reset();
+		loadQuestions(game.getQuestionSet());
 	}
 	
 	/**
