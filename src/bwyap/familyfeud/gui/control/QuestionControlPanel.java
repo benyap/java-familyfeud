@@ -8,13 +8,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
 
 import bwyap.familyfeud.game.Answer;
 import bwyap.familyfeud.game.FamilyFeudGame;
@@ -38,8 +38,8 @@ public class QuestionControlPanel extends JPanel {
 	
 	private JLabel title;
 	private JScrollPane listScroll;
-	private JList<Answer> list;
-	private DefaultListModel<Answer> listModel;
+	private JTable table;
+	private DefaultTableModel tableModel;
 	private JButton reveal;
 	private JButton strike;
 	
@@ -57,20 +57,23 @@ public class QuestionControlPanel extends JPanel {
 		title = new JLabel("QUESTION CONTROL");
 		title.setFont(new Font(ResourceLoader.DEFAULT_FONT_NAME, Font.BOLD, 14));
 		
-		listModel = new DefaultListModel<Answer>();
-		list = new JList<Answer>(listModel);
-		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		
-		listScroll = new JScrollPane(list);
+		tableModel = new DefaultTableModel(new Object[]{"Answer", "Points", "Revealed"}, 0);
+		table = new JTable(tableModel);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table.setFillsViewportHeight(true);
+
+		listScroll = new JScrollPane(table);
 		listScroll.setPreferredSize(new Dimension(WIDTH - 30, (int)(HEIGHT*0.65)));
 		
 		reveal = new JButton("Reveal answer");
 		reveal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (list.getSelectedIndex() > -1) {
-					game.getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[] {
-						StateFamilyPlay.ACTION_OPENANSWER, list.getSelectedIndex()	
-					});
+				if (table.getSelectedRow() > -1) {
+					if (game.getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[] {
+						StateFamilyPlay.ACTION_OPENANSWER, table.getSelectedRow()
+					})) {
+						loadQuestion();
+					}
 				}
 			}
 		});
@@ -95,10 +98,14 @@ public class QuestionControlPanel extends JPanel {
 	 * @param questions
 	 */
 	public void loadQuestion() {
-		listModel.clear();
-		for(Answer a : game.getQuestionSet().getSelectedQuestion().getAnswers()) {
-			listModel.addElement(a);
+		int selected = table.getSelectedRow();
+		for(int i = tableModel.getRowCount(); i > 0; i--) {
+			tableModel.removeRow(i - 1);
 		}
+		for(Answer a : game.getQuestionSet().getSelectedQuestion().getAnswers()) {
+			tableModel.addRow(new Object[]{a.getAnswerString(), a.getValue(), a.isRevealed()});
+		}
+		if (selected > -1) table.setRowSelectionInterval(selected, selected);
 	}
 	
 	@Override

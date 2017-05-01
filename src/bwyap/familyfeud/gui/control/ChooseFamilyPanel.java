@@ -95,7 +95,6 @@ public class ChooseFamilyPanel extends JPanel {
 	 */
 	public void setCommand(int command) {
 		this.command = command;
-		Logger.warning("Command set as " + command);
 	}
 	
 	/**
