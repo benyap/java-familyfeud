@@ -81,6 +81,7 @@ public class QuestionSelectionPanel extends JPanel {
 				if (table.getSelectedRow() > -1) {
 					game.getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[]{
 							StateSelectQuestion.ACTION_SELECTQUESTION, table.getSelectedRow()});
+					table.clearSelection();
 				}
 			}
 		});

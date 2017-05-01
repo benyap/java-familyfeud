@@ -78,8 +78,10 @@ public class FamilyPanel extends JPanel {
 		select.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (table.getSelectedRow() > -1 && command > -1) {
-					game.getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[]{
-							command, table.getSelectedRow()});
+					if(game.getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[]{
+							command, table.getSelectedRow()})) {
+						table.clearSelection();
+					}
 				}
 			}
 		});

@@ -84,6 +84,7 @@ public class QuestionControlPanel extends JPanel {
 						StateFamilyPlay.ACTION_OPENANSWER, table.getSelectedRow()
 					})) {
 						loadQuestion();
+						table.clearSelection();
 					}
 				}
 			}
