@@ -239,7 +239,7 @@ public class FamilyFeudTestDriver {
 		
 		// Choose steal family
 		app.getGame().getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[]{
-				StateFamilySteal.ACTION_SELECTSTEALFAMILY, 1
+				StateFamilyPlay.ACTION_SELECTSTEALFAMILY, 1
 		});	
 		
 		// Apply strike

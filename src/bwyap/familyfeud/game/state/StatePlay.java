@@ -43,28 +43,21 @@ public class StatePlay extends FFState {
 		switch(action) {
 		case ACTION_EXECUTEPLAYACTION:
 			if (data[0] instanceof Integer) {
-				stateMachine.getCurrentState().executeAction((Integer)data[0], data);
+				return stateMachine.getCurrentState().executeAction((Integer)data[0], data);
 			}
 			else throw new InvalidDataException("Expecting a {Integer, ...} when using action [" + action + "]");
-			break;
 		case CHANGESTATE_FACEOFF: 
-			stateMachine.changeState(FFPlayStateType.FACE_OFF.toString());
-			break;
+			return stateMachine.changeState(FFPlayStateType.FACE_OFF.toString());
 		case CHANGESTATE_FAMILYPLAY: 
-			stateMachine.changeState(FFPlayStateType.FAMILY_PLAY.toString());
-			break;
+			return stateMachine.changeState(FFPlayStateType.FAMILY_PLAY.toString());
 		case CHANGESTATE_FAMILYSTEAL: 
-			stateMachine.changeState(FFPlayStateType.FAMILY_STEAL.toString());
-			break;
+			return stateMachine.changeState(FFPlayStateType.FAMILY_STEAL.toString());
 		case CHANGESTATE_ALLOCATEPOINTS:
-			stateMachine.changeState(FFPlayStateType.ALLOCATE_POINTS.toString());
-			break;
+			return stateMachine.changeState(FFPlayStateType.ALLOCATE_POINTS.toString());
 		case CHANGESTATE_REVEALANSWERS:
-			stateMachine.changeState(FFPlayStateType.REVEAL_ANSWERS.toString());
-			break;
+			return stateMachine.changeState(FFPlayStateType.REVEAL_ANSWERS.toString());
 		case CHANGESTATE_SELECTQUESTION:
-			stateMachine.changeState(FFPlayStateType.SELECT_QUESTION.toString());
-			break;
+			return stateMachine.changeState(FFPlayStateType.SELECT_QUESTION.toString());
 		}
 		return false;
 	}

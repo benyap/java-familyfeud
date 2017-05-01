@@ -63,7 +63,7 @@ public class ControlWindow extends FamilyFeudWindow {
 	public void initWindow() {
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		setAlwaysOnTop(true);
+		//setAlwaysOnTop(true);
 		setResizable(false);
 		setLayout(new BorderLayout());
 		
@@ -139,12 +139,22 @@ public class ControlWindow extends FamilyFeudWindow {
 		chooseFamilyPanel.loadFamilies();
 	}
 
+	public void setChooseFamilyEnabled(boolean enabled) {
+		chooseFamilyPanel.setEnabled(enabled);
+	}
+	
+	public void setChooseFamily(int command) {
+		chooseFamilyPanel.setCommand(command);
+		chooseFamilyPanel.setEnabled(true);
+	}
+	
 	/**
 	 * Reset GUI components for a new game
 	 */
 	public void reset() {
 		questionLoaderPanel.reset();
 		questionSelectionPanel.reset();
+		chooseFamilyPanel.reset();
 	}
 
 }

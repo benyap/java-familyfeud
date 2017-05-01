@@ -19,6 +19,7 @@ public class StateFamilyPlay extends FFPlayState {
 
 	public static final int ACTION_OPENANSWER = 0x2;
 	public static final int ACTION_STRIKE = 0x3;
+	public static final int ACTION_SELECTSTEALFAMILY = 0x4;
 	
 	private Question question;
 	private int selectedFamilyIndex;
@@ -43,14 +44,7 @@ public class StateFamilyPlay extends FFPlayState {
 
 	@Override
 	public void cleanupState() {
-		if (strikes == 3) {
-			// pass the question if the family is stealing
-			data = question;			
-		}
-		else {
-			// transition to clear allocate points if this family has cleared the board
-			data = new Object[]{question, selectedFamilyIndex};
-		}
+		data = new Object[]{question, selectedFamilyIndex};
 	}
 	
 	@Override
@@ -75,16 +69,21 @@ public class StateFamilyPlay extends FFPlayState {
 			// Reveal an answer
 			if (data[1] instanceof Integer) {
 				openAnswer((Integer) data[1]);
+				return true;
 			}
 			else throw new InvalidDataException("Expecting a {*, Integer} when using action ACTION_OPENANSWER");
-			break;
 		case ACTION_STRIKE:
 			strike();
-			break;
+			return true;
+		case ACTION_SELECTSTEALFAMILY:
+			if (data[1] instanceof Integer) {
+				selectStealFamily((Integer) data[1]);
+				return true;
+			}
+			else throw new InvalidDataException("Expecting a {*, Integer} when using action ACTION_SELECTSTEALFAMILY");
 		default: 
 			throw new RuntimeException("Invalid action: " + action);
 		}
-		return false;
 	}
 	
 	/**
@@ -111,5 +110,15 @@ public class StateFamilyPlay extends FFPlayState {
 		}
 		else Logger.err("Strike limit reached: cannot reveal more answers for family [" + selectedFamilyIndex + "]");
 	}
+
+	/**
+	 * Set the family selected to attempt to steal
+	 * @param index
+	 */
+	private void selectStealFamily(int index) {
+		selectedFamilyIndex = index;
+		Logger.log("Family [" + selectedFamilyIndex + "] selected as potential stealers.");
+	}
+	
 	
 }

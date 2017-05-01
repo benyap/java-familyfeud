@@ -101,6 +101,9 @@ public class QuestionSelectionPanel extends JPanel {
 	public void setEnabled(boolean enabled) {
 		super.setEnabled(enabled);
 		select.setEnabled(enabled);
+		if (enabled) setBorder(BorderFactory.createLineBorder(Color.BLUE));
+		else setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
 	}
 
 }

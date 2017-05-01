@@ -20,6 +20,9 @@ import javax.swing.JPanel;
 
 import bwyap.familyfeud.game.FamilyFeudGame;
 import bwyap.familyfeud.game.play.FFPlayState;
+import bwyap.familyfeud.game.play.state.StateFaceOff;
+import bwyap.familyfeud.game.play.state.StateFamilyPlay;
+import bwyap.familyfeud.game.play.state.StateFamilySteal;
 import bwyap.familyfeud.game.state.StatePlay;
 import bwyap.familyfeud.gui.GBC;
 import bwyap.familyfeud.gui.window.ControlWindow;
@@ -64,39 +67,49 @@ public class StatePlayPanel extends JPanel {
 		select = new JButton("Select question");
 		select.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				game.getState().executeAction(StatePlay.CHANGESTATE_SELECTQUESTION, null);
-				enableButtons();
+				if (game.getState().executeAction(StatePlay.CHANGESTATE_SELECTQUESTION, null)) {
+					enableButtons();
+					window.setQuestionSelectionEnabled(true);
+				}
 			}
 		});
 		
 		faceOff = new JButton("Face off");
 		faceOff.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				game.getState().executeAction(StatePlay.CHANGESTATE_FACEOFF, null);
-				enableButtons();
+				if (game.getState().executeAction(StatePlay.CHANGESTATE_FACEOFF, null)) {
+					enableButtons();
+					window.setChooseFamily(StateFaceOff.ACTION_CHOOSEFAMILY);	
+					window.setQuestionSelectionEnabled(false);
+				}
 			}
 		});
 		
 		play = new JButton("Family play");
 		play.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				game.getState().executeAction(StatePlay.CHANGESTATE_FAMILYPLAY, null);
-				enableButtons();
+				if (game.getState().executeAction(StatePlay.CHANGESTATE_FAMILYPLAY, null)) {
+					enableButtons();
+					window.setChooseFamily(StateFamilyPlay.ACTION_SELECTSTEALFAMILY);					
+				}
 			}
 		});
 		
 		steal = new JButton("Family steal");
 		steal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				game.getState().executeAction(StatePlay.CHANGESTATE_FAMILYSTEAL, null);
+				if (game.getState().executeAction(StatePlay.CHANGESTATE_FAMILYSTEAL, null)) {
+					window.setChooseFamily(StateFamilySteal.ACTION_SELECTWINFAMILY);
+				}
 			}
 		});
 		
 		reveal = new JButton("Reveal questions");
 		reveal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				game.getState().executeAction(StatePlay.CHANGESTATE_REVEALANSWERS, null);
-				enableButtons();
+				if (game.getState().executeAction(StatePlay.CHANGESTATE_REVEALANSWERS, null)) {
+					enableButtons();
+				}
 			}
 		});
 		

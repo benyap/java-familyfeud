@@ -17,7 +17,6 @@ public class StateFamilySteal extends FFPlayState {
 
 	public static final int ACTION_OPENANSWER = 0x2;
 	public static final int ACTION_STRIKE = 0x3;
-	public static final int ACTION_SELECTSTEALFAMILY = 0x4;
 	public static final int ACTION_SELECTWINFAMILY = 0x5;
 	
 	private Question question;
@@ -49,13 +48,6 @@ public class StateFamilySteal extends FFPlayState {
 	@Override
 	public boolean executeAction(int action, Object[] data) {
 		switch(action) {
-		case ACTION_SELECTSTEALFAMILY:
-			// Reveal an answer
-			if (data[1] instanceof Integer) {
-				selectStealFamily((Integer) data[1]);
-			}
-			else throw new InvalidDataException("Expecting a {*, Integer} when using action ACTION_SELECTSTEALFAMILY");
-			break;
 		case ACTION_OPENANSWER:
 			// Reveal an answer
 			if (data[1] instanceof Integer) {
@@ -67,7 +59,6 @@ public class StateFamilySteal extends FFPlayState {
 			strike();
 			break;
 		case ACTION_SELECTWINFAMILY:
-			// Reveal an answer
 			if (data[1] instanceof Integer) {
 				selectWinFamily((Integer) data[1]);
 			}
@@ -104,15 +95,6 @@ public class StateFamilySteal extends FFPlayState {
 			question.getAnswers().get(index).setReveal(true);
 		}
 		else Logger.err("No family selected as potential stealers");
-	}
-	
-	/**
-	 * Set the family selected to attempt to steal
-	 * @param index
-	 */
-	private void selectStealFamily(int index) {
-		selectedStealFamilyIndex = index;
-		Logger.log("Family [" + selectedStealFamilyIndex + "] selected as potential stealers.");
 	}
 	
 	/**

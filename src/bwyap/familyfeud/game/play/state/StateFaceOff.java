@@ -50,24 +50,23 @@ public class StateFaceOff extends FFPlayState {
 			// Reveal an answer
 			if (data[1] instanceof Integer) {
 				openAnswer((Integer) data[1]);
+				return true;
 			}
 			else throw new InvalidDataException("Expecting a {*, Integer} when using action ACTION_OPENANSWER");
-			break;
 		case ACTION_CHOOSEFAMILY:
 			// Choose the family that won the face off
 			if (data[1] instanceof Integer) {
 				selectFamily((Integer) data[1]);
+				return true;
 			}
 			else throw new InvalidDataException("Expecting a {*, Integer} when using action ACTION_CHOOSEFAMILY");
-			break;
 		case ACTION_STRIKE:
 			// Incorrect answer given
 			strike();
-			break;
+			return true;
 		default: 
 			throw new RuntimeException("Invalid action: " + action);
 		}
-		return false;
 	}
 	
 	@Override
@@ -98,6 +97,8 @@ public class StateFaceOff extends FFPlayState {
 	 */
 	private void selectFamily(int index) {
 		selectedFamilyIndex = index;
+		Logger.log("Family [" + selectedFamilyIndex + "] selected.");
+
 	}
 	
 }
