@@ -11,8 +11,8 @@ import javax.swing.JPanel;
 
 import bwyap.familyfeud.game.FamilyFeudGame;
 import bwyap.familyfeud.gui.GBC;
-import bwyap.familyfeud.gui.control.AddFamilyPanel;
-import bwyap.familyfeud.gui.control.ChooseFamilyPanel;
+import bwyap.familyfeud.gui.control.ManageFamilyPanel;
+import bwyap.familyfeud.gui.control.FamilyPanel;
 import bwyap.familyfeud.gui.control.ConsolePanel;
 import bwyap.familyfeud.gui.control.QuestionControlPanel;
 import bwyap.familyfeud.gui.control.QuestionSelectionPanel;
@@ -42,11 +42,11 @@ public class ControlWindow extends FamilyFeudWindow {
 	private ConsolePanel consolePanel;
 	private WindowControlPanel windowControlPanel;
 	private StatePanel statePanel;
-	private AddFamilyPanel addFamilyPanel;
+	private ManageFamilyPanel manageFamilyPanel;
 	private QuestionSetLoaderPanel questionLoaderPanel;
 	private QuestionSelectionPanel questionSelectionPanel;
 	private StatePlayPanel statePlayPanel;
-	private ChooseFamilyPanel chooseFamilyPanel;
+	private FamilyPanel familyPanel;
 	private QuestionControlPanel questionControlPanel;
 	
 	/**
@@ -91,8 +91,8 @@ public class ControlWindow extends FamilyFeudWindow {
 		
 		windowControlPanel = new WindowControlPanel(gameWindow);
 		
-		addFamilyPanel = new AddFamilyPanel(game);
-		addFamilyPanel.setEnabled(false);
+		manageFamilyPanel = new ManageFamilyPanel(game);
+		manageFamilyPanel.setEnabled(false);
 		
 		statePanel = new StatePanel(this, game);
 		
@@ -105,20 +105,20 @@ public class ControlWindow extends FamilyFeudWindow {
 		statePlayPanel = new StatePlayPanel(this, game);
 		statePlayPanel.setEnabled(false);
 		
-		chooseFamilyPanel = new ChooseFamilyPanel(game);
-		chooseFamilyPanel.setEnabled(false);
+		familyPanel = new FamilyPanel(game);
+		familyPanel.setEnabled(false);
 		
 		questionControlPanel = new QuestionControlPanel(game);
 		questionControlPanel.setEnabled(false);
 		
 		contentPane.add(consolePanel, new GBC(0, 4).setSpan(3, 1));
 		contentPane.add(windowControlPanel, new GBC(0, 0).setSpan(1, 2));
-		contentPane.add(addFamilyPanel, new GBC(0, 2));
+		contentPane.add(manageFamilyPanel, new GBC(0, 2));
 		contentPane.add(statePanel, new GBC(2, 0).setSpan(1, 3));
 		contentPane.add(questionSelectionPanel, new GBC(1, 1).setSpan(1, 2));
 		contentPane.add(questionLoaderPanel, new GBC(1, 0));
 		contentPane.add(statePlayPanel, new GBC(2, 3));
-		contentPane.add(chooseFamilyPanel, new GBC(0, 3));
+		contentPane.add(familyPanel, new GBC(0, 3));
 		contentPane.add(questionControlPanel, new GBC(1, 3));
 		
 		add(contentPane, BorderLayout.CENTER);
@@ -126,7 +126,7 @@ public class ControlWindow extends FamilyFeudWindow {
 	}
 	
 	public void setFamilyPanelEnabled(boolean enabled) {
-		addFamilyPanel.setEnabled(enabled);
+		manageFamilyPanel.setEnabled(enabled);
 	}
 	
 	public void setQuestionLoaderEnabled(boolean enabled) {
@@ -142,20 +142,20 @@ public class ControlWindow extends FamilyFeudWindow {
 	}
 	
 	public void loadFamilies() {
-		chooseFamilyPanel.loadFamilies();
+		familyPanel.loadFamilies();
 	}
 
 	public void setChooseFamilyEnabled(boolean enabled) {
-		chooseFamilyPanel.setEnabled(enabled);
+		familyPanel.setEnabled(enabled);
 	}
 	
 	public void setChooseFamily(int command) {
-		chooseFamilyPanel.setCommand(command);
-		chooseFamilyPanel.setEnabled(true);
+		familyPanel.setCommand(command);
+		familyPanel.setEnabled(true);
 	}
 	
 	public void updateFamilyPanel() {
-		chooseFamilyPanel.loadFamilies();
+		familyPanel.loadFamilies();
 	}
 	
 	public void setQuestionControlEnabled(boolean enabled) {
@@ -169,7 +169,7 @@ public class ControlWindow extends FamilyFeudWindow {
 	public void reset() {
 		questionLoaderPanel.reset();
 		questionSelectionPanel.reset();
-		chooseFamilyPanel.reset();
+		familyPanel.reset();
 	}
 
 }

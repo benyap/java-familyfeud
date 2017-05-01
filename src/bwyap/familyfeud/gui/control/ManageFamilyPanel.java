@@ -21,7 +21,7 @@ import bwyap.familyfeud.gui.GBC;
  * @author bwyap
  *
  */
-public class AddFamilyPanel extends JPanel {
+public class ManageFamilyPanel extends JPanel {
 
 	private static final long serialVersionUID = 3506047425993585668L;
 	
@@ -35,7 +35,7 @@ public class AddFamilyPanel extends JPanel {
 	private JButton addFamily;
 	private JButton removeFamily;
 	
-	public AddFamilyPanel(FamilyFeudGame game) {
+	public ManageFamilyPanel(FamilyFeudGame game) {
 		this.game = game;
 		setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 		setLayout(new GridBagLayout());

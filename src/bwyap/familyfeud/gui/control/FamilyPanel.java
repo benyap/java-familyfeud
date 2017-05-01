@@ -27,7 +27,7 @@ import bwyap.gridgame.res.ResourceLoader;
  * @author bwyap
  * 
  */
-public class ChooseFamilyPanel extends JPanel {
+public class FamilyPanel extends JPanel {
 	
 	private static final long serialVersionUID = -5811924958007378691L;
 
@@ -44,7 +44,7 @@ public class ChooseFamilyPanel extends JPanel {
 	
 	private FamilyFeudGame game;
 	
-	public ChooseFamilyPanel(FamilyFeudGame game) {
+	public FamilyPanel(FamilyFeudGame game) {
 		this.game = game;
 		setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 		setLayout(new GridBagLayout());
