@@ -14,6 +14,7 @@ import bwyap.familyfeud.gui.GBC;
 import bwyap.familyfeud.gui.control.AddFamilyPanel;
 import bwyap.familyfeud.gui.control.ChooseFamilyPanel;
 import bwyap.familyfeud.gui.control.ConsolePanel;
+import bwyap.familyfeud.gui.control.QuestionControlPanel;
 import bwyap.familyfeud.gui.control.QuestionSelectionPanel;
 import bwyap.familyfeud.gui.control.QuestionSetLoaderPanel;
 import bwyap.familyfeud.gui.control.StatePanel;
@@ -46,6 +47,7 @@ public class ControlWindow extends FamilyFeudWindow {
 	private QuestionSelectionPanel questionSelectionPanel;
 	private StatePlayPanel statePlayPanel;
 	private ChooseFamilyPanel chooseFamilyPanel;
+	private QuestionControlPanel questionControlPanel;
 	
 	/**
 	 * Create a new control window
@@ -106,6 +108,9 @@ public class ControlWindow extends FamilyFeudWindow {
 		chooseFamilyPanel = new ChooseFamilyPanel(game);
 		chooseFamilyPanel.setEnabled(false);
 		
+		questionControlPanel = new QuestionControlPanel(game);
+		questionControlPanel.setEnabled(false);
+		
 		contentPane.add(consolePanel, new GBC(0, 4).setSpan(3, 1));
 		contentPane.add(windowControlPanel, new GBC(0, 0).setSpan(1, 2));
 		contentPane.add(addFamilyPanel, new GBC(0, 2));
@@ -114,6 +119,7 @@ public class ControlWindow extends FamilyFeudWindow {
 		contentPane.add(questionLoaderPanel, new GBC(1, 0));
 		contentPane.add(statePlayPanel, new GBC(2, 3));
 		contentPane.add(chooseFamilyPanel, new GBC(0, 3));
+		contentPane.add(questionControlPanel, new GBC(1, 3));
 		
 		add(contentPane, BorderLayout.CENTER);
 		Logger.info("Control window initialized.");
