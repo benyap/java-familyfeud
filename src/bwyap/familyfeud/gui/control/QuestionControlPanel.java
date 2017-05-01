@@ -111,15 +111,22 @@ public class QuestionControlPanel extends JPanel {
 	 */
 	public void loadQuestion() {
 		int selected = table.getSelectedRow();
-		for(int i = tableModel.getRowCount(); i > 0; i--) {
-			tableModel.removeRow(i - 1);
-		}
+		reset();
 		for(Answer a : game.getQuestionSet().getSelectedQuestion().getAnswers()) {
 			tableModel.addRow(new Object[]{a.getAnswerString(), a.getValue(), a.isRevealed()});
 		}
 		if (selected > -1) table.setRowSelectionInterval(selected, selected);
 	}
 
+	/**
+	 * Reset the question list
+	 */
+	public void reset() {
+		for(int i = tableModel.getRowCount(); i > 0; i--) {
+			tableModel.removeRow(i - 1);
+		}
+	}
+	
 	/**
 	 * Disable the strike feature
 	 */

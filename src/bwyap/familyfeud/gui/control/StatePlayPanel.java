@@ -98,7 +98,7 @@ public class StatePlayPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				if (game.getState().executeAction(StatePlay.CHANGESTATE_FAMILYPLAY, null)) {
 					enableButtons();
-					window.setChooseFamily(StateFamilyPlay.ACTION_SELECTSTEALFAMILY);					
+					window.setChooseFamily(StateFamilyPlay.ACTION_SELECTSTEALFAMILY);
 				}
 			}
 		});

@@ -175,6 +175,7 @@ public class ControlWindow extends FamilyFeudWindow {
 	public void reset() {
 		questionLoaderPanel.reset();
 		questionSelectionPanel.reset();
+		questionControlPanel.reset();
 		familyPanel.reset();
 	}
 

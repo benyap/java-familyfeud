@@ -78,10 +78,8 @@ public class FamilyPanel extends JPanel {
 		select.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (table.getSelectedRow() > -1 && command > -1) {
-					if(game.getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[]{
-							command, table.getSelectedRow()})) {
-						table.clearSelection();
-					}
+					game.getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[]{
+							command, table.getSelectedRow()});
 				}
 			}
 		});
@@ -124,6 +122,7 @@ public class FamilyPanel extends JPanel {
 	public void setEnabled(boolean enabled) {
 		super.setEnabled(enabled);
 		select.setEnabled(enabled);
+		table.setRowSelectionAllowed(enabled);
 		if (enabled) setBorder(BorderFactory.createLineBorder(Color.BLUE, SELECTED_BORDER_WIDTH));
 		else setBorder(BorderFactory.createLineBorder(Color.BLACK, DEFAULT_BORDER_WIDTH));
 	}
