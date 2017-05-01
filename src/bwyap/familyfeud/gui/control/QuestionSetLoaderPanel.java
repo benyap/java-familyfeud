@@ -81,7 +81,7 @@ public class QuestionSetLoaderPanel extends JPanel {
 	 * Reset the GUI components
 	 */
 	public void reset() {
-		title.setText("Quesion Set: No file loaded...");
+		title.setText("Question Set: No file loaded...");
 	}
 	
 	/**
