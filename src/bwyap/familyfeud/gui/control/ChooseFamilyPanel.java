@@ -8,13 +8,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
 
 import bwyap.familyfeud.game.Family;
 import bwyap.familyfeud.game.FamilyFeudGame;
@@ -36,8 +36,8 @@ public class ChooseFamilyPanel extends JPanel {
 	
 	private JLabel title;
 	private JScrollPane listScroll;
-	private JList<Family> list;
-	private DefaultListModel<Family> listModel;
+	private JTable table;
+	private DefaultTableModel tableModel;
 	private JButton select;
 	
 	private int command = -1;
@@ -57,19 +57,19 @@ public class ChooseFamilyPanel extends JPanel {
 		title = new JLabel("FAMILIES");
 		title.setFont(new Font(ResourceLoader.DEFAULT_FONT_NAME, Font.BOLD, 14));
 
-		listModel = new DefaultListModel<Family>();
-		list = new JList<Family>(listModel);
-		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tableModel = new DefaultTableModel(new Object[]{"Family", "Points"}, 0);
+		table = new JTable(tableModel);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
-		listScroll = new JScrollPane(list);
+		listScroll = new JScrollPane(table);
 		listScroll.setMinimumSize(new Dimension(WIDTH - 20, (int)(HEIGHT*0.65)));
 		
 		select = new JButton("Select");
 		select.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (list.getSelectedIndex() > -1 && command > -1) {
+				if (table.getSelectedRow() > -1 && command > -1) {
 					game.getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[]{
-							command, list.getSelectedIndex()});
+							command, table.getSelectedRow()});
 				}
 			}
 		});
@@ -83,9 +83,12 @@ public class ChooseFamilyPanel extends JPanel {
 	 * Load families into panel list
 	 */
 	public void loadFamilies() {
-		for (Family f : game.getFamilies()) {
-			listModel.addElement(f);
+		int selected = table.getSelectedRow();
+		reset();
+		for(Family f : game.getFamilies()) {
+			tableModel.addRow(new Object[]{f.getName(), f.getPoints()});
 		}
+		if (selected > -1) table.setRowSelectionInterval(selected, selected);
 	}
 	
 	/**
@@ -100,7 +103,9 @@ public class ChooseFamilyPanel extends JPanel {
 	 * Reset the families for a new game
 	 */
 	public void reset() {
-		listModel.clear();
+		for(int i = tableModel.getRowCount(); i > 0; i--) {
+			tableModel.removeRow(i - 1);
+		}
 	}
 	
 	@Override

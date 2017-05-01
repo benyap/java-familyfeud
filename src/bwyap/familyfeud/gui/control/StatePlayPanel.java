@@ -113,6 +113,7 @@ public class StatePlayPanel extends JPanel {
 				if (game.getState().executeAction(StatePlay.CHANGESTATE_ALLOCATEPOINTS, null)) {
 					game.getState().executeAction(StatePlay.CHANGESTATE_REVEALANSWERS, null);
 					window.setQuestionControlEnabled(false);
+					window.updateFamilyPanel();
 					enableButtons();
 				}
 			}
