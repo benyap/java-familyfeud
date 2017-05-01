@@ -154,6 +154,11 @@ public class ControlWindow extends FamilyFeudWindow {
 		chooseFamilyPanel.setEnabled(true);
 	}
 	
+	public void setQuestionControlEnabled(boolean enabled) {
+		questionControlPanel.loadQuestion();
+		questionControlPanel.setEnabled(enabled);
+	}
+	
 	/**
 	 * Reset GUI components for a new game
 	 */

@@ -18,7 +18,8 @@ import javax.swing.ListSelectionModel;
 
 import bwyap.familyfeud.game.Answer;
 import bwyap.familyfeud.game.FamilyFeudGame;
-import bwyap.familyfeud.game.Question;
+import bwyap.familyfeud.game.play.state.StateFamilyPlay;
+import bwyap.familyfeud.game.state.StatePlay;
 import bwyap.familyfeud.gui.GBC;
 import bwyap.gridgame.res.ResourceLoader;
 
@@ -40,6 +41,7 @@ public class QuestionControlPanel extends JPanel {
 	private JList<Answer> list;
 	private DefaultListModel<Answer> listModel;
 	private JButton reveal;
+	private JButton strike;
 	
 	private FamilyFeudGame game;
 
@@ -66,23 +68,35 @@ public class QuestionControlPanel extends JPanel {
 		reveal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (list.getSelectedIndex() > -1) {
-					
+					game.getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[] {
+						StateFamilyPlay.ACTION_OPENANSWER, list.getSelectedIndex()	
+					});
 				}
 			}
 		});
 		
-		add(title, new GBC(0, 0).setInsets(5));
-		add(listScroll, new GBC(0, 1));
-		add(reveal, new GBC(0, 2));
+		strike = new JButton("Strike");
+		strike.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				game.getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[] {
+						StateFamilyPlay.ACTION_STRIKE
+					});
+			}
+		});
+		
+		add(title, new GBC(0, 0).setInsets(5).setSpan(2, 1));
+		add(listScroll, new GBC(0, 1).setSpan(2, 1));
+		add(reveal, new GBC(0, 2).setWeight(0.4, 1.0).setFill(1).setInsets(2, 6, 2, 2));
+		add(strike, new GBC(1, 2).setWeight(0.6, 1.0).setFill(1).setInsets(2, 2, 2, 6));
 	}
 	
 	/**
 	 * Load a question into the list to display
 	 * @param questions
 	 */
-	public void loadQuestion(Question question) {
+	public void loadQuestion() {
 		listModel.clear();
-		for(Answer a : question.getAnswers()) {
+		for(Answer a : game.getQuestionSet().getSelectedQuestion().getAnswers()) {
 			listModel.addElement(a);
 		}
 	}
@@ -91,6 +105,7 @@ public class QuestionControlPanel extends JPanel {
 	public void setEnabled(boolean enabled) {
 		super.setEnabled(enabled);
 		reveal.setEnabled(enabled);
+		strike.setEnabled(enabled);
 	}
 	
 }

@@ -79,7 +79,7 @@ public class StateFaceOff extends FFPlayState {
 	 * Answer not on board
 	 */
 	private void strike() {
-		Logger.log("Strike: answer not on board");
+		Logger.log("Strike!");
 	}
 	
 	/**

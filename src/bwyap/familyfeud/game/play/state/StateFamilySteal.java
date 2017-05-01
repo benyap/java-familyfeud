@@ -29,14 +29,17 @@ public class StateFamilySteal extends FFPlayState {
 	}
 
 	@Override
-	public void initState(Object data) {
-		selectedWinFamilyIndex = -1;
-		selectedStealFamilyIndex = -1;
-		strikes = 0;
-		if (data instanceof Question) {
-			this.question = (Question) data;
+	public void initState(Object data) {		
+		try {
+			Object[] d = (Object[]) data;
+			question = (Question)d[0];
+			selectedStealFamilyIndex = (Integer)d[1];
 		}
-		else throw new InvalidDataException("StateFamilySteal: Question object expected from intialization data");
+		catch (Exception e) {
+			throw new InvalidDataException("StateFamilySteal: Question and Integer object expected from intialization data");
+		}
+		selectedWinFamilyIndex = -1;		
+		strikes = 0;
 	}
 
 	@Override
@@ -68,6 +71,11 @@ public class StateFamilySteal extends FFPlayState {
 			throw new RuntimeException("Invalid action: " + action);
 		}
 		return false;
+	}
+
+	@Override
+	public boolean canAdvance(String nextState) {
+		return selectedWinFamilyIndex > -1;
 	}
 	
 	/**

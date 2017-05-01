@@ -29,7 +29,7 @@ public class StateSelectQuestion extends FFPlayState {
 	}
 
 	@Override
-	public void cleanupState() { 
+	public void cleanupState() {
 		data = selectedIndex;
 	}
 	
@@ -54,6 +54,7 @@ public class StateSelectQuestion extends FFPlayState {
 	private boolean selectQuestion(int index) {
 		if (index < questions.size()) {
 			selectedIndex = index;
+			questions.setSelectedQuestion(selectedIndex);
 			Logger.log("Question [" + selectedIndex +  "] selected.");
 			return true;
 		}

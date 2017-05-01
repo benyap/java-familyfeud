@@ -83,6 +83,7 @@ public class StatePlayPanel extends JPanel {
 					enableButtons();
 					window.setChooseFamily(StateFaceOff.ACTION_CHOOSEFAMILY);	
 					window.setQuestionSelectionEnabled(false);
+					window.setQuestionControlEnabled(true);
 				}
 			}
 		});
@@ -111,7 +112,8 @@ public class StatePlayPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				if (game.getState().executeAction(StatePlay.CHANGESTATE_ALLOCATEPOINTS, null)) {
 					game.getState().executeAction(StatePlay.CHANGESTATE_REVEALANSWERS, null);
-					// TODO
+					window.setQuestionControlEnabled(false);
+					enableButtons();
 				}
 			}
 		});
