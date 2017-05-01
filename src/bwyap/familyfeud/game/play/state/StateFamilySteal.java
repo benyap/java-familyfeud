@@ -55,22 +55,21 @@ public class StateFamilySteal extends FFPlayState {
 			// Reveal an answer
 			if (data[1] instanceof Integer) {
 				openAnswer((Integer) data[1]);
+				return true;
 			}
 			else throw new InvalidDataException("Expecting a {*, Integer} when using action ACTION_OPENANSWER");
-			break;
 		case ACTION_STRIKE:
 			strike();
-			break;
+			return true;
 		case ACTION_SELECTWINFAMILY:
 			if (data[1] instanceof Integer) {
 				selectWinFamily((Integer) data[1]);
+				return true;
 			}
 			else throw new InvalidDataException("Expecting a {*, Integer} when using action ACTION_SELECTWINFAMILY");
-			break;
 		default: 
 			throw new RuntimeException("Invalid action: " + action);
 		}
-		return false;
 	}
 
 	@Override
