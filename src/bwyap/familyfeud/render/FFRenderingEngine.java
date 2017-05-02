@@ -1,8 +1,6 @@
-package bwyap.familyfeud.gui;
+package bwyap.familyfeud.render;
 
 import bwyap.familyfeud.game.FamilyFeudGame;
-import bwyap.familyfeud.render.RenderMachine;
-import bwyap.familyfeud.render.RenderingPanel;
 import bwyap.gridgame.engine.FixedTimeStepGameEngine;
 
 /**

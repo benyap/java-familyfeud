@@ -1,7 +1,7 @@
 package bwyap.familyfeud;
 
 import bwyap.familyfeud.game.FamilyFeudGame;
-import bwyap.familyfeud.gui.FFRenderingEngine;
+import bwyap.familyfeud.render.FFRenderingEngine;
 import bwyap.familyfeud.render.RenderingPanel;
 import bwyap.familyfeud.res.FamilyFeudResources;
 import bwyap.familyfeud.testdriver.FamilyFeudTestDriver;
