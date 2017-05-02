@@ -55,6 +55,7 @@ public class QuestionSet {
 	 * @return
 	 */
 	public Question getSelectedQuestion() {
+		if (selectedIndex < 0) return null;
 		return questions.get(selectedIndex);
 	}
 	
