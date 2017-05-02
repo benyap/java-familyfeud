@@ -38,7 +38,7 @@ public abstract class AbstractRenderMachine {
 	 * Get the state to render
 	 * @return
 	 */
-	public RenderableInterface getState() {
+	public AbstractRenderState getState() {
 		return renderState;
 	}
 	

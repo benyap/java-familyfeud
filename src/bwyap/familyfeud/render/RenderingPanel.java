@@ -21,12 +21,12 @@ public class RenderingPanel extends JPanel {
 	private boolean renderFPS = true;
 	private float lastFPS;
 	
-	private RenderableInterface state;
+	private AbstractRenderState state;
 	
 	/**
 	 * Render graphics
 	 */
-	public void render(RenderableInterface state) {
+	public void render(AbstractRenderState state) {
 		this.state = state;
 		repaint();
 	}
