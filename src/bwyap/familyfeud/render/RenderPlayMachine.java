@@ -5,7 +5,7 @@ import bwyap.familyfeud.game.FamilyFeudGame;
 /**
  * This render machine analyzes a FamilyFeud game in the PLAY state 
  * and generates the appropriate RenderState to render the 
- * appropriat components.
+ * appropriate components.
  * @author bwyap
  *
  */
