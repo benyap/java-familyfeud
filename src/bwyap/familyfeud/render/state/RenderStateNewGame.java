@@ -25,6 +25,7 @@ public class RenderStateNewGame extends AbstractRenderState {
 	private FamilyFeudGame game;
 	
 	private Fader bg;
+	private Fader load;
 	private RenderableString newgame;
 	private List<RenderableString> families;
 	
@@ -37,6 +38,10 @@ public class RenderStateNewGame extends AbstractRenderState {
 		bg = new Fader(500, 
 				new RenderableImage(ResourceLoader.getImage("blur")), 
 				new RenderableImage(ResourceLoader.getImage("title")), false);
+		
+		load = new Fader(300,
+				new RenderableImage(ResourceLoader.getImage("blur")),
+				null, false);
 		
 		newgame = new RenderableString("NEW GAME", 150, ResourceLoader.getFontName("Bebas Neue"), 100);
 		newgame.setColor(Color.WHITE);
@@ -56,6 +61,21 @@ public class RenderStateNewGame extends AbstractRenderState {
 			s.setColor(new Color(0x333333));
 			families.add(s);
 		}
+		
+		switch (game.getState().getType()) {
+		case ADD_FAMILY:
+		case LOAD_QUESTIONS:
+		case NEW_GAME:
+			break;
+		default: 
+			load.update(timeElapsed); 
+			break;
+		}
+	}
+	
+	@Override
+	public boolean canTransition() {
+		return load.finished();
 	}
 	
 	@Override
@@ -69,6 +89,8 @@ public class RenderStateNewGame extends AbstractRenderState {
 		for(int i = 0; i < families.size(); i++) {
 			families.get(i).render(panel, g);
 		}
+		
+		load.render(panel, g);
 	}
 
 }

@@ -18,7 +18,7 @@ public class RenderStateLoading extends AbstractRenderState {
 	private Fader bg;
 	
 	public RenderStateLoading() {
-		bg = new Fader(500, 
+		bg = new Fader(300, 
 				new RenderableImage(ResourceLoader.getImage("load")), 
 				new RenderableImage(ResourceLoader.getImage("blur")), false);
 	}

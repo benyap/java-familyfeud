@@ -89,6 +89,14 @@ public class Fader implements RenderableInterface {
 	public void setResetAlpha(boolean resetAlpha) {
 		this.resetAlpha = resetAlpha;
 	}
+	
+	/**
+	 * Check if the fader has finished its fading cycle
+	 * @return
+	 */
+	public boolean finished() {
+		return counter >= TRANSITION_TIME;
+	}
 
 	@Override
 	public void update(float timeElapsed) {
@@ -99,13 +107,15 @@ public class Fader implements RenderableInterface {
 	@Override
 	public void render(RenderingPanel panel, Graphics g) {
 		if (counter < TRANSITION_TIME) {
-			base.render(panel, g);
+			if (base!= null) base.render(panel, g);
 			Graphics2D g2d = (Graphics2D)g;
-			g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, counter / TRANSITION_TIME));
-			over.render(panel, g2d);
+			if (over != null) {
+				g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, counter / TRANSITION_TIME));
+				over.render(panel, g2d);
+			}
 			if (resetAlpha) g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
 		}
-		else over.render(panel, g);
+		else if (over != null) over.render(panel, g);
 	}
 
 }
