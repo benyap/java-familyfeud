@@ -7,7 +7,7 @@ import static bwyap.familyfeud.render.RenderStateType.PLAY;
 
 import bwyap.familyfeud.game.FamilyFeudGame;
 import bwyap.familyfeud.render.state.RenderStateLoading;
-import bwyap.familyfeud.render.state.RenderStateMain;
+import bwyap.familyfeud.render.state.RenderStateTitle;
 import bwyap.familyfeud.render.state.RenderStateNewGame;
 import bwyap.familyfeud.render.state.RenderStatePlay;
 
@@ -30,7 +30,7 @@ public class RenderMachine extends AbstractRenderMachine {
 	@Override
 	protected void initRenderStates() {		
 		renderStates.put(LOADING, new RenderStateLoading());
-		renderStates.put(MAIN, new RenderStateMain());
+		renderStates.put(MAIN, new RenderStateTitle());
 		renderStates.put(NEWGAME, new RenderStateNewGame(game));
 		renderStates.put(PLAY, new RenderStatePlay(game));
 	}

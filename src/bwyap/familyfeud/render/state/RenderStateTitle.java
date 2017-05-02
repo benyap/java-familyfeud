@@ -7,11 +7,11 @@ import bwyap.familyfeud.render.RenderingPanel;
 import bwyap.gridgame.res.ResourceLoader;
 
 /**
- * Renders the loading screen
+ * Renders the title screen
  * @author bwyap
  *
  */
-public class RenderStateMain extends AbstractRenderState {
+public class RenderStateTitle extends AbstractRenderState {
 
 	@Override
 	public void render(RenderingPanel panel, Graphics g) {
