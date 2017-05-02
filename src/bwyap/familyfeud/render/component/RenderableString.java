@@ -58,6 +58,18 @@ public class RenderableString extends Renderable {
 	}
 	
 	/**
+	 * Create a new renderable string at the specified location.
+	 * @param text the string to render
+	 * @param x the x position
+	 * @param y the y position
+	 * @param fontname the font name
+	 * @param size the font size
+	 */
+	public RenderableString(String text, int x, int y, String fontname, int size) {
+		this(text, x, y, fontname, Font.PLAIN, size, Color.BLACK, false);
+	}
+	
+	/**
 	 * Check if the font is rendered in the center of the screen (horizontally)
 	 * @return
 	 */
