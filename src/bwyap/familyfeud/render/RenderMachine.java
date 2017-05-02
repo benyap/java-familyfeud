@@ -47,6 +47,9 @@ public class RenderMachine extends AbstractRenderMachine {
 		if (renderState != null) renderState.update(timeElapsed);
 	}
 	
+	/**
+	 * Assign the appropriate state according to the current game state
+	 */
 	private void switchState() {
 		switch (game.getState().getType()) {
 		case END_GAME:

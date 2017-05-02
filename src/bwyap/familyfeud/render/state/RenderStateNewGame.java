@@ -56,7 +56,6 @@ public class RenderStateNewGame extends AbstractRenderState {
 			s.setColor(new Color(0x333333));
 			families.add(s);
 		}
-		
 	}
 	
 	@Override
