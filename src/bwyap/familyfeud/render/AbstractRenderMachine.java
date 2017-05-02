@@ -33,7 +33,7 @@ public abstract class AbstractRenderMachine {
 	 * @param timeElapsed
 	 */
 	public abstract void update(float timeElapsed);
-
+	
 	/**
 	 * Get the state to render
 	 * @return
