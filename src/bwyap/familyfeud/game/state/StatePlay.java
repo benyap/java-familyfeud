@@ -67,7 +67,8 @@ public class StatePlay extends FFState {
 	 * @return
 	 */
 	public FFPlayState getPlayState() {
-		return stateMachine.getCurrentState();
+		if (stateMachine!= null) return stateMachine.getCurrentState();
+		return null;
 	}
 	
 }

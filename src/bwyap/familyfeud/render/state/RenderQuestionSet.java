@@ -27,8 +27,11 @@ public class RenderQuestionSet implements RenderableInterface {
 			if (game.getQuestionSet().getSelectedQuestion().getAnswers().size() > 6) {
 				render = answer8;
 			}
-			else render = answer6;
+			else {
+				render = answer6;
+			}
 		}
+		if (render != null) render.update(timeElapsed);
 	}
 	
 	@Override

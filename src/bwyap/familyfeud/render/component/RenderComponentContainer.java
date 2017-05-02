@@ -1,4 +1,4 @@
-package bwyap.familyfeud.render.state;
+package bwyap.familyfeud.render.component;
 
 import java.awt.Graphics;
 import java.util.LinkedList;
@@ -62,6 +62,14 @@ public class RenderComponentContainer extends AbstractRenderState {
 	 */
 	public void removeState(RenderableInterface component) {
 		components.remove(component);
+	}
+	
+	@Override
+	public void update(float timeElapsed) {
+		// Update each state
+		for(RenderableInterface component : components) {
+			component.update(timeElapsed);
+		}
 	}
 	
 	@Override

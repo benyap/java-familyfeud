@@ -14,7 +14,7 @@ import bwyap.familyfeud.render.RenderingPanel;
 public class RenderFaceoff implements RenderableInterface {
 
 	private FamilyFeudGame game;
-	
+		
 	public RenderFaceoff(FamilyFeudGame game) {
 		this.game = game;
 	}

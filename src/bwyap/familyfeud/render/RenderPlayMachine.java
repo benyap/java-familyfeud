@@ -6,7 +6,7 @@ import java.util.Map;
 import bwyap.familyfeud.game.FamilyFeudGame;
 import bwyap.familyfeud.game.play.FFPlayStateType;
 import bwyap.familyfeud.game.state.StatePlay;
-import bwyap.familyfeud.render.state.RenderComponentContainer;
+import bwyap.familyfeud.render.component.RenderComponentContainer;
 import bwyap.familyfeud.render.state.RenderFaceoff;
 import bwyap.familyfeud.render.state.RenderQuestionSet;
 
@@ -50,36 +50,53 @@ public class RenderPlayMachine extends AbstractRenderMachine {
 	public void update(float timeElapsed) {
 		if (game.getState() instanceof StatePlay) {
 			StatePlay state = (StatePlay) game.getState();
-			if (previousStateType != state.getPlayState().getType()) {
-				// Update the state if it is different and ready to update
-				if (container.canTransition()) {
-					switch (state.getPlayState().getType()) {
-					case ALLOCATE_POINTS:
-						break;
-					case FACE_OFF:
-						container.addComponent(renderComponents.get(RenderStateType.FACEOFF));
-						container.addComponent(questionRender);
-						break;
-					case FAMILY_PLAY:
-						break;
-					case FAMILY_STEAL:
-						break;
-					case REVEAL_ANSWERS:
-						break;
-					case SELECT_QUESTION:
-						break;
-					default:
-						break;
-					}
-				}
-			}
-			previousStateType = state.getPlayState().getType();
+			if (state.getPlayState() != null) chooseState(state);
 		}
-		
-		questionRender.update(timeElapsed);
 		
 		renderState = container;
 		if (renderState != null) renderState.update(timeElapsed);
+	}
+	
+	/**
+	 * Choose the appropriate state to render if it has changed
+	 * @param state
+	 */
+	private void chooseState(StatePlay state) {
+		// Update the state if it is different and ready to update
+		if (previousStateType != state.getPlayState().getType()) {
+			if (container.canTransition()) {
+				switch (state.getPlayState().getType()) {
+				case ALLOCATE_POINTS:
+					container.clear();
+					container.addComponent(questionRender);
+					break;
+				case FACE_OFF:
+					container.clear();
+					container.addComponent(renderComponents.get(RenderStateType.FACEOFF));
+					container.addComponent(questionRender);
+					break;
+				case FAMILY_PLAY:
+					container.clear();
+					container.addComponent(questionRender);
+					break;
+				case FAMILY_STEAL:
+					container.clear();
+					container.addComponent(questionRender);
+					break;
+				case REVEAL_ANSWERS:
+					container.clear();
+					container.addComponent(questionRender);
+					break;
+				case SELECT_QUESTION:
+					container.clear();
+					container.addComponent(questionRender);
+					break;
+				default:
+					break;
+				}
+			}
+		}
+		previousStateType = state.getPlayState().getType();
 	}
 	
 }
