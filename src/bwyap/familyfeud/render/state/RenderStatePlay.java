@@ -3,6 +3,7 @@ package bwyap.familyfeud.render.state;
 import java.awt.Graphics;
 
 import bwyap.familyfeud.game.FamilyFeudGame;
+import bwyap.familyfeud.render.AbstractRenderState;
 import bwyap.familyfeud.render.RenderPlayMachine;
 import bwyap.familyfeud.render.RenderableInterface;
 import bwyap.familyfeud.render.RenderingPanel;
@@ -15,7 +16,7 @@ import bwyap.gridgame.res.ResourceLoader;
  * @author bwyap
  *
  */
-public class RenderStatePlay implements RenderableInterface {
+public class RenderStatePlay extends AbstractRenderState {
 	
 	private FamilyFeudGame game;
 	

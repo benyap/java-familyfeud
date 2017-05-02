@@ -2,7 +2,7 @@ package bwyap.familyfeud.render.state;
 
 import java.awt.Graphics;
 
-import bwyap.familyfeud.render.RenderableInterface;
+import bwyap.familyfeud.render.AbstractRenderState;
 import bwyap.familyfeud.render.RenderingPanel;
 import bwyap.familyfeud.render.component.Fader;
 import bwyap.familyfeud.render.component.RenderableImage;
@@ -13,7 +13,7 @@ import bwyap.gridgame.res.ResourceLoader;
  * @author bwyap
  *
  */
-public class RenderStateLoading implements RenderableInterface {
+public class RenderStateLoading extends AbstractRenderState {
 
 	private Fader bg;
 	

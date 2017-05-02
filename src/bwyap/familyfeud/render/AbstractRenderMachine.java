@@ -14,12 +14,12 @@ import bwyap.familyfeud.game.FamilyFeudGame;
 public abstract class AbstractRenderMachine {
 		
 	protected FamilyFeudGame game;
-	protected RenderableInterface renderState;
-	protected HashMap<RenderStateType, RenderableInterface> renderStates;
+	protected AbstractRenderState renderState;
+	protected HashMap<RenderStateType, AbstractRenderState> renderStates;
 
 	public AbstractRenderMachine(FamilyFeudGame game) {
 		this.game = game;	
-		this.renderStates = new HashMap<RenderStateType, RenderableInterface>();
+		this.renderStates = new HashMap<RenderStateType, AbstractRenderState>();
 		initRenderStates();
 	}
 	

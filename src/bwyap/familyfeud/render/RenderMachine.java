@@ -37,6 +37,17 @@ public class RenderMachine extends AbstractRenderMachine {
 	
 	@Override
 	public void update(float timeElapsed) {
+		if (renderState == null) {
+			switchState();
+		}
+		else if (renderState.canTransition()) {
+			switchState();
+		}
+
+		if (renderState != null) renderState.update(timeElapsed);
+	}
+	
+	private void switchState() {
 		switch (game.getState().getType()) {
 		case END_GAME:
 			break;
@@ -55,8 +66,6 @@ public class RenderMachine extends AbstractRenderMachine {
 			renderState = renderStates.get(MAIN);
 			break;
 		}
-		
-		if (renderState != null) renderState.update(timeElapsed);
 	}
 	
 }
