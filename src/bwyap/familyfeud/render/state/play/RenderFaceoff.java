@@ -1,4 +1,4 @@
-package bwyap.familyfeud.render.state;
+package bwyap.familyfeud.render.state.play;
 
 import java.awt.Graphics;
 
