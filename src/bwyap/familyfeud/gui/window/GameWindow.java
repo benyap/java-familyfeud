@@ -40,7 +40,7 @@ public class GameWindow extends FamilyFeudWindow {
 	 * Initialize window components
 	 */
 	public void initWindow() {
-		setLocationRelativeTo(null);
+		//setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLayout(new BorderLayout());
 		add(renderSurface, BorderLayout.CENTER);
