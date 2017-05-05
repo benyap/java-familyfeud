@@ -12,7 +12,8 @@ import bwyap.familyfeud.render.component.RenderableImage;
 import bwyap.gridgame.res.ResourceLoader;
 
 /**
- * Renders the game screen
+ * Renders the game screen background and the 
+ * game state using a RenderPlayMachine object.
  * @author bwyap
  *
  */
