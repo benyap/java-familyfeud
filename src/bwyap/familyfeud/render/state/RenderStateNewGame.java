@@ -56,8 +56,9 @@ public class RenderStateNewGame extends AbstractRenderState {
 		final int INTERVAL = 80;
 		int count = 0;
 		families.clear();
-		for(Family f : game.getFamilies()) {
-			RenderableString s = new RenderableString(f.getName(), 250 + INTERVAL * count++, ResourceLoader.getFontName("Bebas Neue"), 70);
+		List<Family> f = game.getFamilies();
+		for(int i = 0; i < f.size(); i++) {
+			RenderableString s = new RenderableString(f.get(i).getName(), 250 + INTERVAL * count++, ResourceLoader.getFontName("Bebas Neue"), 70);
 			s.setColor(new Color(0x333333));
 			families.add(s);
 		}

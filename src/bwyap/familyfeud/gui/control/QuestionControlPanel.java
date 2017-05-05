@@ -9,6 +9,7 @@ import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -112,8 +113,9 @@ public class QuestionControlPanel extends JPanel {
 	public void loadQuestion() {
 		int selected = table.getSelectedRow();
 		reset();
-		for(Answer a : game.getQuestionSet().getSelectedQuestion().getAnswers()) {
-			tableModel.addRow(new Object[]{a.getAnswerString(), a.getValue(), a.isRevealed()});
+		List<Answer> answers = game.getQuestionSet().getSelectedQuestion().getAnswers();
+		for(int i = 0; i < answers.size(); i++) {
+			tableModel.addRow(new Object[]{answers.get(i).getAnswerString(), answers.get(i).getValue(), answers.get(i).isRevealed()});
 		}
 		if (selected > -1) table.setRowSelectionInterval(selected, selected);
 	}
