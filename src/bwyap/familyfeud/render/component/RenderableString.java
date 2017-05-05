@@ -16,13 +16,12 @@ public class RenderableString extends Renderable {
 
 	private String text; 
 	private Color color;
-	private int text_width = -1;
 	
 	private String fontname;
 	private int style;
 	private boolean centered = true;
 	private int size;
-	
+	private int textWidth = -1;
 	
 	/**
 	 * Create a new renderable string at the specified location.
@@ -67,6 +66,23 @@ public class RenderableString extends Renderable {
 	 */
 	public RenderableString(String text, int x, int y, String fontname, int size) {
 		this(text, x, y, fontname, Font.PLAIN, size, Color.BLACK, false);
+	}
+	
+	/**
+	 * Set the to be rendered
+	 * @param text
+	 */
+	public void setText(String text) {
+		this.text = text;
+		textWidth = -1; // recalculate text width
+	}
+	
+	/**
+	 * Get the text being rendered
+	 * @return
+	 */
+	public String getText() {
+		return text;
 	}
 	
 	/**
@@ -154,10 +170,10 @@ public class RenderableString extends Renderable {
 		g.setFont(new Font(ResourceLoader.getFontName(fontname), style, size));
 		g.setColor(color);
 		if (centered) {
-			if (text_width == -1) {
-				text_width = g.getFontMetrics().stringWidth(text);
+			if (textWidth < 0) {
+				textWidth = g.getFontMetrics().stringWidth(text);				
 			}
-			g.drawString(text, (panel.getWidth() - text_width)/2, y);
+			g.drawString(text, (panel.getWidth() - textWidth)/2, y);
 		}
 		else g.drawString(text, x, y);
 	}
