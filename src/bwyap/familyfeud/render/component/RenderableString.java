@@ -20,8 +20,8 @@ public class RenderableString extends Renderable {
 	private String fontname;
 	private int style;
 	private boolean centered = true;
+	private boolean visible = true;
 	private int size;
-	private int textWidth = -1;
 	
 	/**
 	 * Create a new renderable string at the specified location.
@@ -164,15 +164,51 @@ public class RenderableString extends Renderable {
 		return color;
 	}
 	
+	/**
+	 * Set whether this string is visible
+	 * @param visible
+	 */
+	public void setVisible(boolean visible) {
+		this.visible = visible;
+	}
+	
+	/**
+	 * Check if this string is visible
+	 * @return
+	 */
+	public boolean isVisible() {
+		return visible;
+	}
+	
 	@Override
 	public void render(RenderingPanel panel, Graphics g) {
-		g.setFont(new Font(ResourceLoader.getFontName(fontname), style, panel.scaleY(size)));
-		g.setColor(color);
-		if (centered) {
-			textWidth = g.getFontMetrics().stringWidth(text);
-			g.drawString(text, (panel.getWidth() - textWidth)/2, panel.scaleY(y));
+		if(visible) {
+			g.setFont(new Font(ResourceLoader.getFontName(fontname), style, panel.scaleY(size)));
+			g.setColor(color);
+			if (centered) {
+				int textWidth = getTextWidth(g, g.getFont());
+				g.drawString(text, (panel.getWidth() - textWidth)/2, panel.scaleY(y));
+			}
+			else g.drawString(text, panel.scaleX(x), panel.scaleY(y));
 		}
-		else g.drawString(text, panel.scaleX(x), panel.scaleY(y));
+	}
+
+	/**
+	 * Get the width of the text using the provided Graphics object
+	 * @param g
+	 * @return
+	 */
+	public int getTextWidth(Graphics g, Font f) {
+		g.setFont(f);
+		return g.getFontMetrics().stringWidth(text);
+	}
+	
+	/**
+	 * Create the font used to render this string
+	 * @return
+	 */
+	public Font getFont() {
+		return new Font(getFontname(), getStyle(), getSize());
 	}
 
 }
