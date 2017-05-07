@@ -9,6 +9,8 @@ import java.awt.RenderingHints;
 
 import javax.swing.JPanel;
 
+import bwyap.familyfeud.gui.window.GameWindow;
+
 /**
  * A panel used to render game graphics using Java's Graphics API.
  * @author bwyap
@@ -18,10 +20,33 @@ public class RenderingPanel extends JPanel {
 
 	private static final long serialVersionUID = 8000180076902777265L;
 	
+	public static final int DEFAULT_WIDTH = GameWindow.WIDTH;
+	public static final int DEFAULT_HEIGHT = GameWindow.HEIGHT;
+	
 	private boolean renderFPS = true;
 	private float lastFPS;
 	
 	private AbstractRenderState state;
+	
+	/**
+	 * Get the scaled x value according to the size of the panel,
+	 * using the original intended GameWindow width as its reference
+	 * @param x
+	 * @return
+	 */
+	public int scaleX(int x) {
+		return (int)((float)this.getWidth()/(float)DEFAULT_WIDTH * x);
+	}
+	
+	/**
+	 * Get the scaled y value according to the size of the panel,
+	 * using the original intended GameWindow height as its reference
+	 * @param y
+	 * @return
+	 */
+	public int scaleY(int y) {
+		return (int)((float)this.getHeight()/(float)DEFAULT_HEIGHT * y);
+	}
 	
 	/**
 	 * Render graphics

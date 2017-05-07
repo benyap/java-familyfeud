@@ -48,7 +48,7 @@ public class RenderableImage extends Renderable {
 
 	@Override
 	public void render(RenderingPanel panel, Graphics g) {
-		g.drawImage(img, x, y, w < 0 ? panel.getWidth() : w, h < 0 ? panel.getHeight() : h, null);
+		g.drawImage(img, panel.scaleX(x), panel.scaleY(y), w < 0 ? panel.getWidth() : panel.scaleX(w), h < 0 ? panel.getHeight() : panel.scaleY(h), null);
 	}
 
 }

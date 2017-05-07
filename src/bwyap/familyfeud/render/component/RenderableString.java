@@ -74,7 +74,6 @@ public class RenderableString extends Renderable {
 	 */
 	public void setText(String text) {
 		this.text = text;
-		textWidth = -1; // recalculate text width
 	}
 	
 	/**
@@ -167,15 +166,13 @@ public class RenderableString extends Renderable {
 	
 	@Override
 	public void render(RenderingPanel panel, Graphics g) {
-		g.setFont(new Font(ResourceLoader.getFontName(fontname), style, size));
+		g.setFont(new Font(ResourceLoader.getFontName(fontname), style, panel.scaleY(size)));
 		g.setColor(color);
 		if (centered) {
-			if (textWidth < 0) {
-				textWidth = g.getFontMetrics().stringWidth(text);				
-			}
-			g.drawString(text, (panel.getWidth() - textWidth)/2, y);
+			textWidth = g.getFontMetrics().stringWidth(text);
+			g.drawString(text, (panel.getWidth() - textWidth)/2, panel.scaleY(y));
 		}
-		else g.drawString(text, x, y);
+		else g.drawString(text, panel.scaleX(x), panel.scaleY(y));
 	}
 
 }
