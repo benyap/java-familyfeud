@@ -76,7 +76,11 @@ public class RenderStateNewGame extends AbstractRenderState {
 	
 	@Override
 	public boolean canTransition() {
-		return load.finished();
+		if (load.finished()) {
+			load.reset();
+			return true;
+		}
+		return false;
 	}
 	
 	@Override
