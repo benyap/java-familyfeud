@@ -29,6 +29,8 @@ public class RenderPlayMachine extends AbstractRenderMachine {
 	protected static final int STATE_REVEAL = 0x05;
 	
 	protected HashMap<Integer, AbstractRenderState> renderPlayStates;
+	protected RenderQuestionSet questionRenderer;
+	protected FFPlayStateType previousStateType;
 	
 	/**
 	 * Create a new render play machine
@@ -41,7 +43,7 @@ public class RenderPlayMachine extends AbstractRenderMachine {
 	@Override
 	protected void initRenderStates() {
 		renderPlayStates = new HashMap<Integer, AbstractRenderState>();
-		RenderQuestionSet questionRenderer = new RenderQuestionSet(game);
+		questionRenderer = new RenderQuestionSet(game);
 		RenderComponentContainer container = null;
 		
 		// Create containers for each stage
@@ -79,26 +81,30 @@ public class RenderPlayMachine extends AbstractRenderMachine {
 			
 			if (playState != null) {
 				FFPlayStateType type = playState.getType();
-				switch (type) {
-				case ALLOCATE_POINTS:
-					renderState = renderPlayStates.get(STATE_ALLOCATEPOINTS);
-					break;
-				case FACE_OFF:
-					renderState = renderPlayStates.get(STATE_FACEOFF);
-					break;
-				case FAMILY_PLAY:
-					renderState = renderPlayStates.get(STATE_FAMILYPLAY);
-					break;
-				case FAMILY_STEAL:
-					renderState = renderPlayStates.get(STATE_FAMILYSTEAL);
-					break;
-				case REVEAL_ANSWERS:
-					renderState = renderPlayStates.get(STATE_REVEAL);
-					break;
-				case SELECT_QUESTION:
-					renderState = renderPlayStates.get(STATE_SELECT);
-					break;
+				if (previousStateType != type) {
+					switch (type) {
+					case ALLOCATE_POINTS:
+						renderState = renderPlayStates.get(STATE_ALLOCATEPOINTS);
+						break;
+					case FACE_OFF:
+						questionRenderer.reset();
+						renderState = renderPlayStates.get(STATE_FACEOFF);
+						break;
+					case FAMILY_PLAY:
+						renderState = renderPlayStates.get(STATE_FAMILYPLAY);
+						break;
+					case FAMILY_STEAL:
+						renderState = renderPlayStates.get(STATE_FAMILYSTEAL);
+						break;
+					case REVEAL_ANSWERS:
+						renderState = renderPlayStates.get(STATE_REVEAL);
+						break;
+					case SELECT_QUESTION:
+						renderState = renderPlayStates.get(STATE_SELECT);
+						break;
+					}
 				}
+				previousStateType = playState.getType();
 			}
 		}
 		

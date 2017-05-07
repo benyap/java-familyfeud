@@ -88,7 +88,8 @@ public class RenderStateNewGame extends AbstractRenderState {
 		
 		// Draw families
 		for(int i = 0; i < families.size(); i++) {
-			families.get(i).render(panel, g);
+			if (families.get(i) != null)
+				families.get(i).render(panel, g);
 		}
 		
 		load.render(panel, g);

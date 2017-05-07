@@ -17,7 +17,7 @@ public class FamilyFeudResources extends ResourceLoader {
 		addResource("bg", "/bwyap/familyfeud/res/ar4_3/Background.png", ResourceType.PNG);
 		addResource("blur", "/bwyap/familyfeud/res/ar4_3/Blur1280.png", ResourceType.PNG);
 		addResource("title", "/bwyap/familyfeud/res/ar4_3/FamilyFeud1280.png", ResourceType.PNG);
-		addResource("panel", "/bwyap/familyfeud/res/ar4_3/panel.png", ResourceType.PNG);
+		addResource("panel", "/bwyap/familyfeud/res/ar4_3/panel1280.png", ResourceType.PNG);
 		addResource("scoreboard", "/bwyap/familyfeud/res/ar4_3/scoreboard1280.png", ResourceType.PNG);
 		
 		// Load fonts
