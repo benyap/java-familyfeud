@@ -43,7 +43,7 @@ public class RenderStateNewGame extends AbstractRenderState {
 				new RenderableImage(ResourceLoader.getImage("blur")),
 				null, false);
 		
-		newgame = new RenderableString("NEW GAME", 150, ResourceLoader.getFontName("Bebas Neue"), 100);
+		newgame = new RenderableString("NEW GAME", 180, ResourceLoader.getFontName("Bebas Neue"), 150);
 		newgame.setColor(Color.WHITE);
 		
 		families = new ArrayList<RenderableString>();
@@ -53,12 +53,12 @@ public class RenderStateNewGame extends AbstractRenderState {
 	public void update(float timeElapsed) {
 		bg.update(timeElapsed);
 		
-		final int INTERVAL = 80;
+		final int INTERVAL = 120;
 		int count = 0;
 		families.clear();
 		List<Family> f = game.getFamilies();
 		for(int i = 0; i < f.size(); i++) {
-			RenderableString s = new RenderableString(f.get(i).getName(), 250 + INTERVAL * count++, ResourceLoader.getFontName("Bebas Neue"), 70);
+			RenderableString s = new RenderableString(f.get(i).getName(), 300 + INTERVAL * count++, ResourceLoader.getFontName("Bebas Neue"), 100);
 			s.setColor(new Color(0x333333));
 			families.add(s);
 		}
