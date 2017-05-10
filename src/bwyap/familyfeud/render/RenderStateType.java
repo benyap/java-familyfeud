@@ -9,6 +9,7 @@ enum RenderStateType {
 	LOADING,
 	MAIN,
 	NEWGAME,
-	PLAY
+	PLAY,
+	ENDGAME
 
 }

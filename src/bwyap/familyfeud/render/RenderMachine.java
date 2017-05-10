@@ -4,8 +4,10 @@ import static bwyap.familyfeud.render.RenderStateType.LOADING;
 import static bwyap.familyfeud.render.RenderStateType.MAIN;
 import static bwyap.familyfeud.render.RenderStateType.NEWGAME;
 import static bwyap.familyfeud.render.RenderStateType.PLAY;
+import static bwyap.familyfeud.render.RenderStateType.ENDGAME;
 
 import bwyap.familyfeud.game.FamilyFeudGame;
+import bwyap.familyfeud.render.state.RenderEndGame;
 import bwyap.familyfeud.render.state.RenderStateLoading;
 import bwyap.familyfeud.render.state.RenderStateTitle;
 import bwyap.familyfeud.render.state.RenderStateNewGame;
@@ -33,6 +35,7 @@ public class RenderMachine extends AbstractRenderMachine {
 		renderStates.put(MAIN, new RenderStateTitle());
 		renderStates.put(NEWGAME, new RenderStateNewGame(game));
 		renderStates.put(PLAY, new RenderStatePlay(game));
+		renderStates.put(ENDGAME, new RenderEndGame(game));
 	}
 	
 	@Override
@@ -53,6 +56,7 @@ public class RenderMachine extends AbstractRenderMachine {
 	private void switchState() {
 		switch (game.getState().getType()) {
 		case END_GAME:
+			renderState = renderStates.get(ENDGAME);
 			break;
 		case INITIALIZE_GAME:
 			renderState = renderStates.get(LOADING);

@@ -39,6 +39,14 @@ public class RenderStatePlay extends AbstractRenderState {
 	}
 	
 	@Override
+	public boolean canTransition() {
+		if (machine.getState() != null) {
+			return machine.getState().canTransition();
+		}
+		return true;
+	}
+	
+	@Override
 	public void update(float timeElapsed) {
 		bg.update(timeElapsed);
 		machine.update(timeElapsed);
