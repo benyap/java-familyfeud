@@ -37,7 +37,11 @@ public class FFStateFactory {
 			}
 			return addFamily;
 		case END_GAME:
-			if (endGame == null) createEndGameState();
+			if (endGame == null) {
+				if (data instanceof FamilyFeudGame)
+					createEndGameState((FamilyFeudGame) data);
+				else throw new InvalidDataException("FFStateFactory: FamilyFeudGame required when create StateEndGame");
+			}
 			return endGame;
 		case INITIALIZE_GAME:
 			if (initializeGame == null) createInitializeGameState();
@@ -95,8 +99,8 @@ public class FFStateFactory {
 		initializeGame = new StateInitializeGame();
 	}
 
-	private static void createEndGameState() {
-		endGame = new StateEndGame();
+	private static void createEndGameState(FamilyFeudGame game) {
+		endGame = new StateEndGame(game);
 	}
 
 	private static void createAddFamilyState(FamilyCollection families) {

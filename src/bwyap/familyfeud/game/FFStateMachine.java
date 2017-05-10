@@ -33,7 +33,7 @@ public class FFStateMachine extends AbstractFFStateMachine<FFState> {
 		addState(FFStateType.LOAD_QUESTIONS.toString(), FFStateFactory.getState(FFStateType.LOAD_QUESTIONS, questions));
 		addState(FFStateType.INITIALIZE_GAME.toString(), FFStateFactory.getState(FFStateType.INITIALIZE_GAME, null));
 		addState(FFStateType.PLAY.toString(), FFStateFactory.getState(FFStateType.PLAY, game));
-		addState(FFStateType.END_GAME.toString(), FFStateFactory.getState(FFStateType.END_GAME, null));
+		addState(FFStateType.END_GAME.toString(), FFStateFactory.getState(FFStateType.END_GAME, game));
 		
 		// Set the initial state
 		changeState(FFStateType.START.toString());

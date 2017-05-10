@@ -20,12 +20,15 @@ public class FamilyFeudGame {
 	private FamilyCollection families;
 	private QuestionSet questions;
 	
+	private Family winner;
+	
 	/**
 	 * Initialize the game
 	 */
 	public void init() {
 		families = new FamilyCollection();
 		questions = new QuestionSet();
+		winner = null;
 		
 		stateMachine = new FFStateMachine(this, families, questions);
 		stateMachine.init();
@@ -81,6 +84,30 @@ public class FamilyFeudGame {
 	 */
 	public FamilyCollection getFamilyCollection() {
 		return families;
+	}
+	
+	/**
+	 * Set the winner of the game. Assuming that the game has finished,
+	 * this method will set the winner as the family with the highest points.
+	 */
+	public void setWinner() {
+		int index = 0;
+		List<Family> families = getFamilies();
+		for(int i = 0; i < families.size(); i++) {
+			if (families.get(i).getPoints() > families.get(index).getPoints()) {
+				index = i;
+			}
+		}
+		winner = families.get(index);
+	}
+	
+	/**
+	 * Get the winning family as set by {@code setWinner}.
+	 * This will return null if the method {@code setWinnder} has not been run.
+	 * @return
+	 */
+	public Family getWinningFamily() {
+		return winner;
 	}
 	
 }
