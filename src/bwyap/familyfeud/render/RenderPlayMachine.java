@@ -52,7 +52,7 @@ public class RenderPlayMachine extends AbstractRenderMachine {
 		renderPlayStates.put(STATE_SELECT, container);
 		
 		container = new RenderComponentContainer();
-		container.addComponent(new RenderFaceoff(game));
+		container.addComponent(new RenderFaceoff());
 		container.addComponent(questionRenderer);
 		renderPlayStates.put(STATE_FACEOFF, container);
 		
