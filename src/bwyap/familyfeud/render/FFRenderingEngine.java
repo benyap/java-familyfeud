@@ -2,6 +2,7 @@ package bwyap.familyfeud.render;
 
 import bwyap.familyfeud.game.FamilyFeudGame;
 import bwyap.gridgame.engine.FixedTimeStepGameEngine;
+import bwyap.utility.logging.Logger;
 
 /**
  * A custom implementation of a game engine to render 
@@ -32,8 +33,14 @@ public class FFRenderingEngine extends FixedTimeStepGameEngine {
 	
 	@Override
 	public void update(float timeElapsed) {
-		machine.update(timeElapsed);
-		renderSurface.updateFPS(getMeasuredfps());
+		try {
+			machine.update(timeElapsed);
+			renderSurface.updateFPS(getMeasuredfps());			
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			Logger.err("Unexpected RuntimeError occured: " + e.getMessage());
+		}
 	}
 	
 }
