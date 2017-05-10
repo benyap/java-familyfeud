@@ -13,7 +13,7 @@ import bwyap.utility.logging.Logger;
  * @author bwyap
  *
  */
-public class StateFamilySteal extends FFPlayState {
+public class StateFamilySteal extends FFPlayState implements StrikeInterface {
 
 	public static final int ACTION_OPENANSWER = 0x2;
 	public static final int ACTION_STRIKE = 0x3;
@@ -46,6 +46,7 @@ public class StateFamilySteal extends FFPlayState {
 	public void cleanupState() {
 		// Pass the family selected to receive the points
 		data = new Object[]{question, selectedWinFamilyIndex};
+		strikes = 0;
 	}
 
 	@Override
@@ -91,6 +92,11 @@ public class StateFamilySteal extends FFPlayState {
 			strikes++;
 			Logger.log("Family [" + selectedStealFamilyIndex + "] now has " + strikes + " strike(s).");			
 		}
+	}
+	
+	@Override
+	public int getStrikes() {
+		return strikes;
 	}
 	
 	/**

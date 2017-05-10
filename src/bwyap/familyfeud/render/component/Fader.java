@@ -71,6 +71,13 @@ public class Fader implements RenderableInterface {
 	}
 	
 	/**
+	 * Force the fader to be in the finished state
+	 */
+	public void forceFinish() {
+		counter = TRANSITION_TIME;
+	}
+	
+	/**
 	 * Check whether the fader resets the alpha 
 	 * before rendering other components.
 	 * Default is true.

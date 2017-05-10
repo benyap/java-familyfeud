@@ -12,7 +12,7 @@ import bwyap.utility.logging.Logger;
  * @author bwyap
  *
  */
-public class StateFaceOff extends FFPlayState {
+public class StateFaceOff extends FFPlayState implements StrikeInterface {
 
 	public static final int ACTION_CHOOSEFAMILY = 0x1;
 	public static final int ACTION_OPENANSWER = 0x2;
@@ -21,6 +21,7 @@ public class StateFaceOff extends FFPlayState {
 	private QuestionSet questions;
 	private int selectedIndex;
 	private int selectedFamilyIndex;
+	private int strikes;
 	
 	protected StateFaceOff(QuestionSet questions) {
 		super(FFPlayStateType.FACE_OFF);
@@ -41,6 +42,7 @@ public class StateFaceOff extends FFPlayState {
 	public void cleanupState() {
 		// Set the selected question and selected family as the data for the next state
 		data = new Object[]{questions.getQuestion(selectedIndex), selectedFamilyIndex};
+		strikes = 0;
 	}
 
 	@Override
@@ -80,6 +82,12 @@ public class StateFaceOff extends FFPlayState {
 	 */
 	private void strike() {
 		Logger.log("Strike!");
+		strikes++;
+	}
+	
+	@Override
+	public int getStrikes() {
+		return strikes;
 	}
 	
 	/**

@@ -8,9 +8,9 @@ import bwyap.familyfeud.game.play.FFPlayStateType;
 import bwyap.familyfeud.game.state.FFStateType;
 import bwyap.familyfeud.game.state.StatePlay;
 import bwyap.familyfeud.render.component.RenderComponentContainer;
-import bwyap.familyfeud.render.state.play.RenderFaceoff;
 import bwyap.familyfeud.render.state.play.RenderQuestionSet;
 import bwyap.familyfeud.render.state.play.RenderSelectQuestion;
+import bwyap.familyfeud.render.state.play.RenderStrikes;
 
 /**
  * This render machine analyzes a FamilyFeud game in the PLAY state 
@@ -30,6 +30,7 @@ public class RenderPlayMachine extends AbstractRenderMachine {
 	
 	protected HashMap<Integer, AbstractRenderState> renderPlayStates;
 	protected RenderQuestionSet questionRenderer;
+	protected RenderStrikes strikeRenderer;
 	protected FFPlayStateType previousStateType;
 	
 	/**
@@ -44,6 +45,7 @@ public class RenderPlayMachine extends AbstractRenderMachine {
 	protected void initRenderStates() {
 		renderPlayStates = new HashMap<Integer, AbstractRenderState>();
 		questionRenderer = new RenderQuestionSet(game);
+		strikeRenderer = new RenderStrikes(game);
 		RenderComponentContainer container = null;
 		
 		// Create containers for each stage
@@ -52,16 +54,18 @@ public class RenderPlayMachine extends AbstractRenderMachine {
 		renderPlayStates.put(STATE_SELECT, container);
 		
 		container = new RenderComponentContainer();
-		container.addComponent(new RenderFaceoff());
 		container.addComponent(questionRenderer);
+		container.addComponent(strikeRenderer);
 		renderPlayStates.put(STATE_FACEOFF, container);
 		
 		container = new RenderComponentContainer();
 		container.addComponent(questionRenderer);
+		container.addComponent(strikeRenderer);
 		renderPlayStates.put(STATE_FAMILYPLAY, container);
 		
 		container = new RenderComponentContainer();
 		container.addComponent(questionRenderer);
+		container.addComponent(strikeRenderer);
 		renderPlayStates.put(STATE_FAMILYSTEAL, container);
 
 		container = new RenderComponentContainer();
