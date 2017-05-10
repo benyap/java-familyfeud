@@ -2,6 +2,7 @@ package bwyap.familyfeud.render.state.play;
 
 import java.awt.Graphics;
 
+import bwyap.familyfeud.game.FamilyFeudGame;
 import bwyap.familyfeud.render.RenderableInterface;
 import bwyap.familyfeud.render.RenderingPanel;
 
@@ -13,14 +14,22 @@ import bwyap.familyfeud.render.RenderingPanel;
  */
 public class RenderSelectQuestion implements RenderableInterface {
 		
-	public RenderSelectQuestion() {
-		
+	private FamilyFeudGame game;
+	private RenderFamilyScores scores;
+	
+	public RenderSelectQuestion(FamilyFeudGame game) {
+		this.game = game;
+		this.scores = new RenderFamilyScores(this.game);
 	}
 	
 	@Override
+	public void update(float timeElapsed) {
+		scores.update(timeElapsed);
+	}
+
+	@Override
 	public void render(RenderingPanel panel, Graphics g) {
-		// TODO render family scoreboard?
-		
+		scores.render(panel, g);
 	}
 
 }

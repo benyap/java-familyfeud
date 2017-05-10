@@ -196,10 +196,21 @@ public class RenderableString extends Renderable {
 	/**
 	 * Get the width of the text using the provided Graphics object
 	 * @param g
+	 * @param f the font 
 	 * @return
 	 */
 	public int getTextWidth(Graphics g, Font f) {
 		g.setFont(f);
+		return g.getFontMetrics().stringWidth(text);
+	}
+	
+	/**
+	 * Get the width of the text using the provided Graphics object
+	 * @param g
+	 * @return
+	 */
+	public int getTextWidth(Graphics g) {
+		g.setFont(getFont());
 		return g.getFontMetrics().stringWidth(text);
 	}
 	

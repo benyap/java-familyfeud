@@ -48,7 +48,7 @@ public class RenderPlayMachine extends AbstractRenderMachine {
 		
 		// Create containers for each stage
 		container = new RenderComponentContainer();
-		container.addComponent(new RenderSelectQuestion());
+		container.addComponent(new RenderSelectQuestion(game));
 		renderPlayStates.put(STATE_SELECT, container);
 		
 		container = new RenderComponentContainer();
