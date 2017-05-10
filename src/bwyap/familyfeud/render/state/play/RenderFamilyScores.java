@@ -46,12 +46,12 @@ public class RenderFamilyScores implements RenderableInterface {
 				RenderableString name = new RenderableString(
 						f.getName(), 
 						0, y, 
-						ResourceLoader.getFontName("Bebas Neue"), 120);
+						ResourceLoader.getFontName("Bebas Neue"), 100);
 				name.setColor(Color.WHITE);
 				
 				RenderableString score = new RenderableString(
 						" " + f.getPoints(), 0, y, 
-						ResourceLoader.getFontName("Bebas Neue"), 120);
+						ResourceLoader.getFontName("Bebas Neue"), 100);
 				score.setColor(Color.WHITE);
 				
 				familyNames.add(name);
@@ -72,7 +72,7 @@ public class RenderFamilyScores implements RenderableInterface {
 	public void render(RenderingPanel panel, Graphics g) {
 		title.render(panel, g);
 		
-		int center = GameWindow.WIDTH / 2;//+ panel.scaleX(120);
+		int center = GameWindow.WIDTH / 2;
 		int padding = 100;
 		
 		// Render each family name and their scores
