@@ -75,7 +75,7 @@ public class WindowControlPanel extends JPanel {
 			}
 		}); 
 		
-		showFPS = new JButton("Show fps");
+		showFPS = new JButton("Hide fps");
 		showFPS.setEnabled(false);
 		showFPS.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
