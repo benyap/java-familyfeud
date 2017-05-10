@@ -75,6 +75,7 @@ public class QuestionSelectionPanel extends JPanel {
 		table.getColumnModel().getColumn(0).setPreferredWidth(50);
 		table.getColumnModel().getColumn(1).setPreferredWidth(40);
 		table.getColumnModel().getColumn(2).setPreferredWidth(400);
+		table.setAutoscrolls(false);
 		
 		select = new JButton("Select");
 		select.addActionListener(new ActionListener() {
