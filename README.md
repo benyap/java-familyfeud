@@ -6,17 +6,21 @@ A game master will control the game flow using one screen whilst the game screen
 This program requires Java to run. 
 Download and install the latest Java runtime environment [here](https://java.com/download).
 
+## Usage
+1. Download the latest release from the repository.
+2. Ensure that you have the latest Java runtime environment installed (see requirements).
+3. The program comes as a runnable `jar` file. Double click on the file to run the program.
+
+*See the Wiki for usage documentation*.
+
 ## Dependencies
 * [json-simple](https://github.com/fangyidong/json-simple): Uses the json-simple library to parse and read JSON files.
 
-## Setup
-This section is for those who want to use modify the source code of this program.
+## Project Setup
+This section is for those who want to use or modify the source code of this program using an IDE.
 1. Clone this repository to your local workspace and import the project into your IDE.
 2. Ensure that the required dependencies are linked in your project workspace.
-
-## Usage
-*This application is still under development.*
-*This section will be updated once a release is available.*
+3. Run the program from the `bwyap.familyfeud.FamilyFeud` class.
 
 ## License
 **MIT License**
