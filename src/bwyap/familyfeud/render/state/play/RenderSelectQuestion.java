@@ -23,6 +23,11 @@ public class RenderSelectQuestion implements RenderableInterface {
 	}
 	
 	@Override
+	public void reset() {
+		scores.reset();
+	}
+	
+	@Override
 	public void update(float timeElapsed) {
 		scores.update(timeElapsed);
 	}

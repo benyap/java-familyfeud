@@ -41,8 +41,16 @@ public class RenderPlayMachine extends AbstractRenderMachine {
 		super(game);
 	}
 	
+	/**
+	 * Reset the render machine
+	 */
+	public void reset() {
+		initRenderStates();
+	}
+	
 	@Override
 	protected void initRenderStates() {
+		previousStateType = null;
 		renderPlayStates = new HashMap<Integer, AbstractRenderState>();
 		questionRenderer = new RenderQuestionSet(game);
 		strikeRenderer = new RenderStrikes(game);
@@ -107,6 +115,7 @@ public class RenderPlayMachine extends AbstractRenderMachine {
 						renderState = renderPlayStates.get(STATE_SELECT);
 						break;
 					}
+					renderState.reset();
 				}
 				previousStateType = playState.getType();
 			}

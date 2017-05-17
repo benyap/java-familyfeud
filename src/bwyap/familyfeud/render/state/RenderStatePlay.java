@@ -39,6 +39,11 @@ public class RenderStatePlay extends AbstractRenderState {
 	}
 	
 	@Override
+	public void reset() {
+		machine.reset();
+	}
+	
+	@Override
 	public boolean canTransition() {
 		if (machine.getState() != null) {
 			return machine.getState().canTransition();

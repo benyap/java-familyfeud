@@ -34,10 +34,17 @@ public class RenderFamilyScores implements RenderableInterface {
 	}
 	
 	@Override
+	public void reset() {
+		familyNames.clear();
+		System.out.println("Resetting family names");
+	}
+	
+	@Override
 	public void update(float timeElapsed) {
 		// Create family labels if not created
-		boolean updated = false;
+		boolean updated = false;		
 		if (familyNames.size() == 0) {
+			System.out.println("Creating new family names");
 			familyScores.clear();
 			updated = true;
 			for(int i = 0; i < game.getFamilies().size(); i++) {

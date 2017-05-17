@@ -65,6 +65,14 @@ public class RenderComponentContainer extends AbstractRenderState {
 	}
 	
 	@Override
+	public void reset() {
+		// Reset each state
+		for(RenderableInterface component : components) {
+			component.reset();
+		}
+	}
+	
+	@Override
 	public void update(float timeElapsed) {
 		// Update each state
 		for(RenderableInterface component : components) {

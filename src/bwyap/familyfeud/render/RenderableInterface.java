@@ -10,6 +10,11 @@ import java.awt.Graphics;
 public interface RenderableInterface {
 	
 	/**
+	 * Reset the renderable state
+	 */
+	default void reset() { }
+	
+	/**
 	 * Update the renderable component
 	 * @param timeElapsed
 	 */

@@ -40,6 +40,12 @@ public class RenderEndGame extends AbstractRenderState {
 	}
 	
 	@Override
+	public void reset() {
+		bg.reset();
+		family = null;
+	}
+	
+	@Override
 	public void update(float timeElapsed) {
 		if (family == null) {
 			Family f = game.getWinningFamily();
