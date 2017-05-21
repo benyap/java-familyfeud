@@ -99,6 +99,7 @@ public class RenderPlayMachine extends AbstractRenderMachine {
 						renderState = renderPlayStates.get(STATE_ALLOCATEPOINTS);
 						break;
 					case FACE_OFF:
+						renderState.reset();
 						questionRenderer.reset();
 						renderState = renderPlayStates.get(STATE_FACEOFF);
 						break;
@@ -115,7 +116,6 @@ public class RenderPlayMachine extends AbstractRenderMachine {
 						renderState = renderPlayStates.get(STATE_SELECT);
 						break;
 					}
-					renderState.reset();
 				}
 				previousStateType = playState.getType();
 			}
