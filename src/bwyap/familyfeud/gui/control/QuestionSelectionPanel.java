@@ -82,7 +82,10 @@ public class QuestionSelectionPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				if (table.getSelectedRow() > -1) {
 					if (game.getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[]{
-							StateSelectQuestion.ACTION_SELECTQUESTION, table.getSelectedRow()})) {
+							StateSelectQuestion.ACTION_SELECTQUESTION, table.getSelectedRow(),
+							// TODO put multipler here 
+							1
+							})) {
 						table.clearSelection();
 					}
 				}

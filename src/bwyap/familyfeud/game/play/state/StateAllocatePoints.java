@@ -38,7 +38,7 @@ public class StateAllocatePoints extends FFPlayState {
 		// No actions needed - allocate points to the selected family right away
 		int total = 0;
 		for(Answer a : question.getAnswers()) {
-			if (a.isRevealed()) total += a.getValue();
+			if (a.isRevealed()) total += a.getValue() * question.getMultiplier();
 		}
 		question.setAnswered(true);
 		

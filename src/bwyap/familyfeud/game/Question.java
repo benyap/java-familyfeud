@@ -15,7 +15,8 @@ public class Question {
 	private String questionString; 
 	private List<Answer> answers;
 	private boolean answered;
-	
+	private int multiplier = 1;
+
 	/**
 	 * Create a new question object with the specified question string
 	 * @param question
@@ -66,6 +67,21 @@ public class Question {
 	 */
 	public void setAnswered(boolean answered) {
 		this.answered = answered;
+	}
+	
+	/**
+	 * Set the multiplier for this question
+	 * @param multipler
+	 */
+	public void setMultiplier(int multiplier) {
+		this.multiplier = multiplier;
+	}
+	
+	/**
+	 * Get the multiplier for this question
+	 */
+	public int getMultiplier() {
+		return multiplier;
 	}
 	
 	@Override

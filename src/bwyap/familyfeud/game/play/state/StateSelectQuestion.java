@@ -37,10 +37,10 @@ public class StateSelectQuestion extends FFPlayState {
 	public boolean executeAction(int action, Object[] data) {
 		switch(action) {
 		case ACTION_SELECTQUESTION:
-			if (data[1] instanceof Integer) {
-				return selectQuestion((Integer) data[1]);
+			if (data[1] instanceof Integer && data[2] instanceof Integer) {
+				return selectQuestion((Integer) data[1], (Integer) data[2]);
 			}
-			else throw new InvalidDataException("Expecting a {*, Integer} when using action ACTION_SELECTQUESTION");
+			else throw new InvalidDataException("Expecting a {*, Integer, Integer} when using action ACTION_SELECTQUESTION");
 		default: 
 			throw new RuntimeException("Invalid action: " + action);
 		}
@@ -51,7 +51,7 @@ public class StateSelectQuestion extends FFPlayState {
 	 * @param index
 	 * @return
 	 */
-	private boolean selectQuestion(int index) {
+	private boolean selectQuestion(int index, int multiplier) {
 		if (index < questions.size()) {
 			if (questions.getQuestion(index).isAnswered()) {
 				Logger.err("Question already answered! ");
@@ -59,7 +59,8 @@ public class StateSelectQuestion extends FFPlayState {
 			else {
 				selectedIndex = index;
 				questions.setSelectedQuestion(selectedIndex);
-				Logger.log("Question [" + selectedIndex +  "] selected.");
+				questions.getSelectedQuestion().setMultiplier(multiplier);
+				Logger.log("Question [" + selectedIndex +  "] selected with multiplier of " + multiplier + "x.");
 				return true;				
 			}
 		}
