@@ -11,9 +11,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
@@ -40,11 +42,13 @@ public class QuestionSelectionPanel extends JPanel {
 	public static final int WIDTH = ControlWindow.WIDTH - StatePanel.WIDTH - WindowControlPanel.WIDTH - 10;
 	public static final int HEIGHT = (int)(StatePanel.HEIGHT*0.8);
 	
-	private JLabel title;
+	private JLabel title, multiplierLabel;
 	private JScrollPane tableScroll;
 	private JTable table;
 	private DefaultTableModel tableModel;
 	private JButton select;
+	private JRadioButton singlePoints, doublePoints, triplePoints;
+	private ButtonGroup group;
 	
 	private FamilyFeudGame game;
 
@@ -59,6 +63,8 @@ public class QuestionSelectionPanel extends JPanel {
 	private void initComponents() {
 		title = new JLabel("QUESTION SELECTOR");
 		title.setFont(new Font(ResourceLoader.DEFAULT_FONT_NAME, Font.BOLD, 14));
+		
+		multiplierLabel = new JLabel("MULTIPLIER: ");
 		
 		tableModel = new DefaultTableModel(new Object[]{"No. Ans", "Done", "Question"}, 0) {
 			private static final long serialVersionUID = 2222748798265167701L;
@@ -77,24 +83,41 @@ public class QuestionSelectionPanel extends JPanel {
 		table.getColumnModel().getColumn(2).setPreferredWidth(400);
 		table.setAutoscrolls(false);
 		
+		singlePoints = new JRadioButton("Single");
+		singlePoints.setSelected(true);
+		doublePoints = new JRadioButton("Double");
+		triplePoints = new JRadioButton("Triple");
+		group = new ButtonGroup();
+		group.add(singlePoints);
+		group.add(doublePoints);
+		group.add(triplePoints);
+		
 		select = new JButton("Select");
 		select.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (table.getSelectedRow() > -1) {
+					
+					// Determine selected multiplier
+					int multiplier = 1; 
+					if (doublePoints.isSelected()) multiplier = 2;
+					else if (triplePoints.isSelected()) multiplier = 3;
+					
 					if (game.getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[]{
 							StateSelectQuestion.ACTION_SELECTQUESTION, table.getSelectedRow(),
-							// TODO put multipler here 
-							1
-							})) {
+							multiplier})) {
 						table.clearSelection();
 					}
 				}
 			}
 		});
 		
-		add(title, new GBC(0, 0).setInsets(5));
-		add(tableScroll, new GBC(0, 1));
-		add(select, new GBC(0, 2));
+		add(title, new GBC(0, 0).setSpan(5, 1).setInsets(5));
+		add(tableScroll, new GBC(0, 1).setSpan(5, 1));
+		add(multiplierLabel, new GBC(0, 2));
+		add(singlePoints, new GBC(1, 2));
+		add(doublePoints, new GBC(2, 2));
+		add(triplePoints, new GBC(3, 2));
+		add(select, new GBC(4, 2));
 	}
 	
 	/**

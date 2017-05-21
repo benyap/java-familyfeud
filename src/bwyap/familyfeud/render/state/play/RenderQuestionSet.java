@@ -6,8 +6,8 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 
-import bwyap.familyfeud.game.Answer;
 import bwyap.familyfeud.game.FamilyFeudGame;
+import bwyap.familyfeud.game.Question;
 import bwyap.familyfeud.render.RenderableInterface;
 import bwyap.familyfeud.render.RenderingPanel;
 import bwyap.familyfeud.render.component.Fader;
@@ -55,11 +55,11 @@ public class RenderQuestionSet implements RenderableInterface {
 	private int next = -1;
 	@Override
 	public void update(float timeElapsed) {
-		List<Answer> answerList = game.getQuestionSet().getSelectedQuestion().getAnswers();
+		Question question = game.getQuestionSet().getSelectedQuestion();
 
 		// load renderable strings if empty
 		if (numbers.size() == 0) {
-			for(int i = 0; i < answerList.size(); i++) {
+			for(int i = 0; i < question.getAnswers().size(); i++) {
 				RenderableString s = new RenderableString("- " + (i + 1) + " -", 0, 0, 
 						ResourceLoader.getFontName("Bebas Neue"), 
 						Font.PLAIN, 100, Color.WHITE, false);
@@ -68,16 +68,17 @@ public class RenderQuestionSet implements RenderableInterface {
 			}
 		}
 		if (answers.size() == 0) {
-			for(int i = 0; i < answerList.size(); i++) {
+			for(int i = 0; i < question.getAnswers().size(); i++) {
 				// Create answer string
-				RenderableString a = new RenderableString(answerList.get(i).getAnswerString(), 0, 0, 
+				RenderableString a = new RenderableString(question.getAnswers().get(i).getAnswerString(), 0, 0, 
 						ResourceLoader.getFontName("Bebas Neue"), 
 						Font.PLAIN, 100, Color.WHITE, false);
 				a.setVisible(false);
 				answers.add(a);
 
 				// Create score string
-				RenderableString s = new RenderableString(answerList.get(i).getValue() + "", 0, 0, 
+				RenderableString s = new RenderableString((question.getAnswers().get(i).getValue()) + "", 
+						0, 0, 
 						ResourceLoader.getFontName("Bebas Neue"), 
 						Font.PLAIN, 100, Color.WHITE, false);
 				s.setVisible(false);
@@ -88,12 +89,12 @@ public class RenderQuestionSet implements RenderableInterface {
 		
 		// Get the game score
 		int num = 0;
-		for (int i = 0; i < answerList.size(); i++) {
-			if (answerList.get(i).isRevealed()) {
+		for (int i = 0; i < question.getAnswers().size(); i++) {
+			if (question.getAnswers().get(i).isRevealed()) {
 				numbers.get(i).setVisible(false);
 				answers.get(i).setVisible(true);
 				scores.get(i).setVisible(true);
-				num += (answerList.get(i).getValue());
+				num += (question.getAnswers().get(i).getValue() * question.getMultiplier());
 			}
 			else {
 				// Incrementally display answer text if not revealed yet
@@ -108,7 +109,7 @@ public class RenderQuestionSet implements RenderableInterface {
 							counter += timeElapsed;
 						}
 					}
-					else if (!numbers.get(0).isVisible() && !answerList.get(0).isRevealed()) {
+					else if (!numbers.get(0).isVisible() && !question.getAnswers().get(0).isRevealed()) {
 						numbers.get(0).setVisible(true);
 						next = 1;
 					}
