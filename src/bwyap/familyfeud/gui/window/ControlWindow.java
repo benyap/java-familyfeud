@@ -2,18 +2,24 @@ package bwyap.familyfeud.gui.window;
 
 import java.awt.BorderLayout;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.InputEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import javax.swing.AbstractAction;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
+
+import com.sun.glass.events.KeyEvent;
 
 import bwyap.familyfeud.game.FamilyFeudGame;
 import bwyap.familyfeud.gui.GBC;
-import bwyap.familyfeud.gui.control.ManageFamilyPanel;
-import bwyap.familyfeud.gui.control.FamilyPanel;
 import bwyap.familyfeud.gui.control.ConsolePanel;
+import bwyap.familyfeud.gui.control.FamilyPanel;
+import bwyap.familyfeud.gui.control.ManageFamilyPanel;
 import bwyap.familyfeud.gui.control.QuestionControlPanel;
 import bwyap.familyfeud.gui.control.QuestionSelectionPanel;
 import bwyap.familyfeud.gui.control.QuestionSetLoaderPanel;
@@ -123,8 +129,36 @@ public class ControlWindow extends FamilyFeudWindow {
 		contentPane.add(familyPanel, new GBC(0, 3));
 		contentPane.add(questionControlPanel, new GBC(1, 3));
 		
+		addKeyBindings();
+		
 		add(contentPane, BorderLayout.CENTER);
 		Logger.info("Control window initialized.");
+	}
+	
+	/**
+	 * Add key bindings to help control the game window
+	 */
+	private void addKeyBindings() {
+		// Toggle full screen 
+		getRootPane().getInputMap(JPanel.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.META_DOWN_MASK), "togglefullscreen");
+		getRootPane().getInputMap(JPanel.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_DOWN_MASK), "togglefullscreen");
+		getRootPane().getActionMap().put("togglefullscreen", new AbstractAction() {
+			private static final long serialVersionUID = 8226153971656224768L;
+			public void actionPerformed(ActionEvent e) {
+				windowControlPanel.toggleFullscreen();
+			}
+		});
+		
+		// Toggle show game window
+		getRootPane().getInputMap(JPanel.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.META_DOWN_MASK), "toggleshowscreen");
+		getRootPane().getInputMap(JPanel.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.CTRL_DOWN_MASK), "toggleshowscreen");
+		getRootPane().getActionMap().put("toggleshowscreen", new AbstractAction() {
+			private static final long serialVersionUID = 8226153971656224768L;
+			public void actionPerformed(ActionEvent e) {
+				windowControlPanel.toggleShowscreen();
+			}
+		});
+
 	}
 	
 	public void setFamilyPanelEnabled(boolean enabled) {

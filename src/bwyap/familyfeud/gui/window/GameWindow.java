@@ -41,17 +41,19 @@ public class GameWindow extends FamilyFeudWindow {
 	 */
 	public void initWindow() {
 		//setLocationRelativeTo(null);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setFocusableWindowState(false);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setLayout(new BorderLayout());
 		add(renderSurface, BorderLayout.CENTER);
-		
+
 		Logger.info("Game window initialized.");
 	}
 	
 	/**
 	 * Toggle the full screen state of this window
+	 * @return true if the screen is now fullscreen, false otherwise
 	 */
-	public void toggleFullscreen() {
+	public boolean toggleFullscreen() {
 		dispose();
 		if (fullscreen) {
 			setSize(width, height);
@@ -67,6 +69,7 @@ public class GameWindow extends FamilyFeudWindow {
 		}
 		fullscreen = !fullscreen;
 		setVisible(true);
+		return fullscreen;
 	}
 	
 	/**
