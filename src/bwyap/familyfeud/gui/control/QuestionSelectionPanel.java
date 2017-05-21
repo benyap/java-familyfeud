@@ -153,7 +153,16 @@ public class QuestionSelectionPanel extends JPanel {
 		super.setEnabled(enabled);
 		select.setEnabled(enabled);
 		table.setRowSelectionAllowed(enabled);
-		if (enabled) setBorder(BorderFactory.createLineBorder(Color.BLUE, SELECTED_BORDER_WIDTH));
+		singlePoints.setEnabled(enabled);
+		doublePoints.setEnabled(enabled);
+		triplePoints.setEnabled(enabled);
+		if (enabled) {
+			setBorder(BorderFactory.createLineBorder(Color.BLUE, SELECTED_BORDER_WIDTH));
+			// Default set to single points
+			singlePoints.setSelected(true);
+			doublePoints.setSelected(false);
+			triplePoints.setSelected(false);
+		}
 		else setBorder(BorderFactory.createLineBorder(Color.BLACK, DEFAULT_BORDER_WIDTH));
 	}
 
