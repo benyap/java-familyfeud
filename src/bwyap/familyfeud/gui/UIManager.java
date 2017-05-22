@@ -128,9 +128,13 @@ public class UIManager {
 		map.put("windowcontrolpanel.height", 130);
 		map.put("statepanel.height", 230);
 		map.put("questionsetloaderpanel.height", map.get("statepanel.height") - map.get("questionselectionpanel.height"));
+				
+		map.put("controlwindow.height", 680);
 		
-		map.put("controlwindow.height", 670);
-		
+		map.put("stateplaypanel.height", map.get("stateplaypanel.height") + 10);
+		map.put("questioncontrolpanel.height", map.get("questioncontrolpanel.height") + 10);
+		map.put("familypanel.height", map.get("familypanel.height") + 10);
+
 		map.put("questionselectionpanel.col1.width", 75);
 		map.put("questionselectionpanel.col2.width", 50);
 		map.put("questionselectionpanel.col3.width", 400);
