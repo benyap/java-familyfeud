@@ -78,9 +78,9 @@ public class QuestionSelectionPanel extends JPanel {
 		tableScroll.setMinimumSize(new Dimension(WIDTH - 20, (int)(HEIGHT*0.65)));
 		
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		table.getColumnModel().getColumn(0).setPreferredWidth(50);
-		table.getColumnModel().getColumn(1).setPreferredWidth(40);
-		table.getColumnModel().getColumn(2).setPreferredWidth(400);
+		table.getColumnModel().getColumn(0).setPreferredWidth(UIManager.getInstance().getDimension("questionselectionpanel.col1.width"));
+		table.getColumnModel().getColumn(1).setPreferredWidth(UIManager.getInstance().getDimension("questionselectionpanel.col2.width"));
+		table.getColumnModel().getColumn(2).setPreferredWidth(UIManager.getInstance().getDimension("questionselectionpanel.col3.width"));
 		table.setAutoscrolls(false);
 		
 		singlePoints = new JRadioButton("Single");

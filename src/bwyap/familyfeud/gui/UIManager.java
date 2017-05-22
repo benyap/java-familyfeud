@@ -3,7 +3,10 @@ package bwyap.familyfeud.gui;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.UIManager.LookAndFeelInfo;
+
 import bwyap.familyfeud.OSValidator;
+import bwyap.utility.logging.ConsoleLogger;
 
 /**
  * This class is responsible for handling UI settings to allow macOS and win10 compatibility.
@@ -20,7 +23,7 @@ public class UIManager {
 	
 	private static UIManager INSTANCE;
 	
-	private Map<String, Integer> currentOSDimensions;
+	private Map<String, Integer> map;
 	
 	/**
 	 * Get the UI Manager instance.
@@ -34,9 +37,36 @@ public class UIManager {
 	}
 	
 	private UIManager() {
+		map = new HashMap<String, Integer>();
+		
 		// Load dimensions according to detected UI
-		if (OSValidator.isMac()) loadMacOSDimensions();
-		else if (OSValidator.isWindows()) loadWindowsDimensions();
+		if (OSValidator.isMac()) loadMacOSUI();
+		else if (OSValidator.isWindows()) loadWindowsUI();
+	}
+	
+	/**
+	 * Load macOS UI settings
+	 */
+	private void loadMacOSUI() {
+		loadMacOSDimensions();
+	}
+	
+	/**
+	 * Load Windows UI settings
+	 */
+	private void loadWindowsUI() {
+		loadWindowsDimensions();
+		// Set the look and feel
+		try {
+			for (LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+				//System.out.println(info.getName());
+				if ("Windows".equals(info.getName())) {
+					javax.swing.UIManager.setLookAndFeel(info.getClassName());
+		        	break;
+				}
+			}
+		} 
+		catch (Exception e) { }
 	}
 	
 	/**
@@ -44,8 +74,6 @@ public class UIManager {
 	 */
 	private void loadMacOSDimensions() {
 		// TODO make this more dynamic
-		Map<String, Integer> map = new HashMap<String, Integer>();
-		
 		map.put("controlwindow.width", 800);
 		map.put("controlwindow.height", 640);
 		  
@@ -79,50 +107,39 @@ public class UIManager {
 		map.put("gamewindow.width", 1024);
 		map.put("gamewindow.height", 768);
 		
-		currentOSDimensions = map;
+		map.put("questionselectionpanel.col1.width", 50);
+		map.put("questionselectionpanel.col2.width", 40);
+		map.put("questionselectionpanel.col3.width", 400);
+		
+		map.put("questioncontrolpanel.col2.width", 60);
+		map.put("questioncontrolpanel.col1.width", 60);
+		map.put("questioncontrolpanel.col0.width", map.get("questioncontrolpanel.width") - 30 - map.get("questioncontrolpanel.col1.width") - map.get("questioncontrolpanel.col2.width")  - 5);
+		
+		ConsoleLogger.getInstance().setFontSize(12);	
 	}
 	
 	/**
 	 * Load Windows dimensions
 	 */
 	private void loadWindowsDimensions() {
-		// TODO make this more dynamic
-		Map<String, Integer> map = new HashMap<String, Integer>();
+		loadMacOSDimensions();
 		
-		map.put("controlwindow.width", 800);
-		map.put("controlwindow.height", 640);
-		  
-		map.put("windowcontrolpanel.width", 180);
-		map.put("windowcontrolpanel.height", 120);
-		
-		map.put("statepanel.width", 180);
-		map.put("statepanel.height", 220);
-		  
-		map.put("consolepanel.width", map.get("controlwindow.width") - 10);
-		map.put("consolepanel.height", 200);
-		  
-		map.put("stateplaypanel.width", map.get("statepanel.width"));
-		map.put("stateplaypanel.height", map.get("controlwindow.height") - map.get("consolepanel.height") - map.get("statepanel.height") - 25);
-		  
-		map.put("familypanel.width", map.get("windowcontrolpanel.width"));
-		map.put("familypanel.height", map.get("stateplaypanel.height"));
-		
-		map.put("managefamilypanel.width", map.get("statepanel.width"));
-		map.put("managefamilypanel.height", map.get("statepanel.height") - map.get("windowcontrolpanel.height"));
-		  
-		map.put("questionselectionpanel.width", map.get("controlwindow.width") - map.get("statepanel.width") - map.get("windowcontrolpanel.width") - 10);
-		map.put("questionselectionpanel.height", (int)(0.8 * map.get("statepanel.height")));
-		  
-		map.put("questionsetloaderpanel.width", map.get("controlwindow.width") - map.get("statepanel.width") - map.get("windowcontrolpanel.width") - 10);
+		// Windows10 Fix
+		map.put("windowcontrolpanel.height", 130);
+		map.put("statepanel.height", 230);
 		map.put("questionsetloaderpanel.height", map.get("statepanel.height") - map.get("questionselectionpanel.height"));
-
-		map.put("questioncontrolpanel.width", map.get("questionselectionpanel.width"));
-		map.put("questioncontrolpanel.height", map.get("stateplaypanel.height"));
 		
-		map.put("gamewindow.width", 1024);
-		map.put("gamewindow.height", 768);
+		map.put("controlwindow.height", 670);
 		
-		currentOSDimensions = map;
+		map.put("questionselectionpanel.col1.width", 75);
+		map.put("questionselectionpanel.col2.width", 50);
+		map.put("questionselectionpanel.col3.width", 400);
+		
+		map.put("questioncontrolpanel.col2.width", 80);
+		map.put("questioncontrolpanel.col1.width", 60);
+		map.put("questioncontrolpanel.col0.width", map.get("questioncontrolpanel.width") - 30 - map.get("questioncontrolpanel.col1.width") - map.get("questioncontrolpanel.col2.width")  - 5);
+				
+		ConsoleLogger.getInstance().setFontSize(14);
 	}
 	
 	/**
@@ -131,7 +148,7 @@ public class UIManager {
 	 * @return
 	 */
 	public int getDimension(String propertyname) {
-		return currentOSDimensions.get(propertyname);
+		return map.get(propertyname);
 	}
 	
 }

@@ -74,9 +74,9 @@ public class QuestionControlPanel extends JPanel {
 		tableScroll.setPreferredSize(new Dimension(WIDTH - 30, (int)(HEIGHT*0.65)));
 		
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        table.getColumnModel().getColumn(2).setPreferredWidth(60);
-        table.getColumnModel().getColumn(1).setPreferredWidth(60);
-		table.getColumnModel().getColumn(0).setPreferredWidth(WIDTH - 30 - 60 - 60 - 5);
+        table.getColumnModel().getColumn(2).setPreferredWidth(UIManager.getInstance().getDimension("questioncontrolpanel.col2.width"));
+        table.getColumnModel().getColumn(1).setPreferredWidth(UIManager.getInstance().getDimension("questioncontrolpanel.col1.width"));
+		table.getColumnModel().getColumn(0).setPreferredWidth(UIManager.getInstance().getDimension("questioncontrolpanel.col0.width"));
 
 		reveal = new JButton("Reveal answer");
 		reveal.addActionListener(new ActionListener() {

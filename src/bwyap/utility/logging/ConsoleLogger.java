@@ -73,6 +73,16 @@ public class ConsoleLogger extends JTextPane implements LoggerInterface {
 		StyleConstants.setFontFamily(WARNING_COLOUR, ResourceLoader.getFontName(FONT_NAME));
 		StyleConstants.setForeground(WARNING_COLOUR, new Color(0xffff00));
 	}
+	
+	/**
+	 * Set the font size of the logger
+	 * @param size
+	 */
+	public void setFontSize(int size) {
+		SIZE = size;
+		setFont(new Font(ResourceLoader.getFontName(FONT_NAME), Font.PLAIN, SIZE));
+	}
+	
 
 	@Override
 	public void printMessage(String msg) {
