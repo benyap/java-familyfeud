@@ -1,5 +1,6 @@
 package bwyap.familyfeud.res;
 
+import bwyap.familyfeud.sound.SoundManager;
 import bwyap.gridgame.res.ResourceLoader;
 import bwyap.gridgame.res.ResourceType;
 
@@ -25,7 +26,12 @@ public class FamilyFeudResources extends ResourceLoader {
 		// Load fonts
 		addResource("Bebas Neue", "", ResourceType.FONTNAME);
 		addResource("Monaco", "", ResourceType.FONTNAME);
-
+		
+		// Load sounds
+		SoundManager.getInstance().loadClip("blip", "/bwyap/familyfeud/res/sound/blip.wav");
+		SoundManager.getInstance().loadClip("bell", "/bwyap/familyfeud/res/sound/bell.wav");
+		SoundManager.getInstance().loadClip("strike", "/bwyap/familyfeud/res/sound/strike.wav");
+		
 	}
 	
 }
