@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import bwyap.familyfeud.game.FamilyFeudGame;
 import bwyap.familyfeud.game.state.FFStateType;
 import bwyap.familyfeud.gui.GBC;
+import bwyap.familyfeud.gui.UIManager;
 import bwyap.familyfeud.gui.window.ControlWindow;
 import bwyap.gridgame.res.ResourceLoader;
 
@@ -30,8 +31,8 @@ public class StatePanel extends JPanel {
 
 	private static final long serialVersionUID = 4051495798628977025L;
 
-	public static final int WIDTH = 180;
-	public static final int HEIGHT = 220;
+	public static final int WIDTH = UIManager.getInstance().getDimension("statepanel.width");
+	public static final int HEIGHT = UIManager.getInstance().getDimension("statepanel.height");
 
 	private ControlWindow window;
 	private FamilyFeudGame game;

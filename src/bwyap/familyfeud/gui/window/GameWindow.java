@@ -6,6 +6,7 @@ import java.awt.GraphicsEnvironment;
 
 import javax.swing.JFrame;
 
+import bwyap.familyfeud.gui.UIManager;
 import bwyap.familyfeud.render.RenderingPanel;
 import bwyap.utility.logging.Logger;
 
@@ -19,8 +20,8 @@ public class GameWindow extends FamilyFeudWindow {
 	
 	private static final long serialVersionUID = 5046186767241215679L;
 
-	public static final int WIDTH = 1024;
-	public static final int HEIGHT = 768;
+	public static final int WIDTH = UIManager.getInstance().getDimension("gamewindow.width");
+	public static final int HEIGHT = UIManager.getInstance().getDimension("gamewindow.height");
 	
 	private boolean fullscreen;
 	private int screenIndex = 1;

@@ -18,6 +18,7 @@ import javax.swing.JTextField;
 import bwyap.familyfeud.game.FamilyFeudGame;
 import bwyap.familyfeud.game.state.StateAddFamily;
 import bwyap.familyfeud.gui.GBC;
+import bwyap.familyfeud.gui.UIManager;
 
 /**
  * Control panel component responsible for adding families to the game
@@ -28,8 +29,8 @@ public class ManageFamilyPanel extends JPanel {
 
 	private static final long serialVersionUID = 3506047425993585668L;
 	
-	public static final int WIDTH = StatePanel.WIDTH;
-	public static final int HEIGHT = StatePanel.HEIGHT - WindowControlPanel.HEIGHT;
+	public static final int WIDTH = UIManager.getInstance().getDimension("managefamilypanel.width");
+	public static final int HEIGHT = UIManager.getInstance().getDimension("managefamilypanel.height");
 	
 	private FamilyFeudGame game;
 	

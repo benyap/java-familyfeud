@@ -27,7 +27,7 @@ import bwyap.familyfeud.game.QuestionSet;
 import bwyap.familyfeud.game.play.state.StateSelectQuestion;
 import bwyap.familyfeud.game.state.StatePlay;
 import bwyap.familyfeud.gui.GBC;
-import bwyap.familyfeud.gui.window.ControlWindow;
+import bwyap.familyfeud.gui.UIManager;
 import bwyap.gridgame.res.ResourceLoader;
 
 /**
@@ -39,8 +39,8 @@ public class QuestionSelectionPanel extends JPanel {
 
 	private static final long serialVersionUID = 689335015288245441L;
 
-	public static final int WIDTH = ControlWindow.WIDTH - StatePanel.WIDTH - WindowControlPanel.WIDTH - 10;
-	public static final int HEIGHT = (int)(StatePanel.HEIGHT*0.8);
+	public static final int WIDTH = UIManager.getInstance().getDimension("questionselectionpanel.width");
+	public static final int HEIGHT = UIManager.getInstance().getDimension("questionselectionpanel.height");
 	
 	private JLabel title, multiplierLabel;
 	private JScrollPane tableScroll;

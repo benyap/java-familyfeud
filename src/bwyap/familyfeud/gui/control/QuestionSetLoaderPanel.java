@@ -22,7 +22,7 @@ import org.json.simple.JSONObject;
 import bwyap.familyfeud.game.FamilyFeudGame;
 import bwyap.familyfeud.game.state.StateLoadQuestions;
 import bwyap.familyfeud.gui.GBC;
-import bwyap.familyfeud.gui.window.ControlWindow;
+import bwyap.familyfeud.gui.UIManager;
 import bwyap.familyfeud.res.JSONQuestionSet;
 import bwyap.gridgame.res.ResourceLoader;
 import bwyap.utility.logging.Logger;
@@ -37,8 +37,8 @@ public class QuestionSetLoaderPanel extends JPanel {
 
 	private static final long serialVersionUID = 689335015288245441L;
 
-	public static final int WIDTH = ControlWindow.WIDTH - StatePanel.WIDTH - WindowControlPanel.WIDTH - 10;
-	public static final int HEIGHT = StatePanel.HEIGHT - QuestionSelectionPanel.HEIGHT;
+	public static final int WIDTH = UIManager.getInstance().getDimension("questionsetloaderpanel.width");
+	public static final int HEIGHT = UIManager.getInstance().getDimension("questionsetloaderpanel.height");
 	
 	private FamilyFeudGame game;
 	private QuestionSelectionPanel panel;

@@ -17,6 +17,7 @@ import com.sun.glass.events.KeyEvent;
 
 import bwyap.familyfeud.game.FamilyFeudGame;
 import bwyap.familyfeud.gui.GBC;
+import bwyap.familyfeud.gui.UIManager;
 import bwyap.familyfeud.gui.control.ConsolePanel;
 import bwyap.familyfeud.gui.control.FamilyPanel;
 import bwyap.familyfeud.gui.control.ManageFamilyPanel;
@@ -39,8 +40,8 @@ public class ControlWindow extends FamilyFeudWindow {
 	
 	private static final long serialVersionUID = -4445104890877967661L;
 
-	public static final int WIDTH = 800;
-	public static final int HEIGHT = 640;
+	public static final int WIDTH = UIManager.getInstance().getDimension("controlwindow.width");
+	public static final int HEIGHT = UIManager.getInstance().getDimension("controlwindow.height");
 	public static final int DEFAULT_BORDER_WIDTH = 1;
 	public static final int SELECTED_BORDER_WIDTH = 2;
 	

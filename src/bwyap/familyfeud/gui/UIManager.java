@@ -1,4 +1,4 @@
-package bwyap.familyfeud.gui.window;
+package bwyap.familyfeud.gui;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -74,6 +74,9 @@ public class UIManager {
 
 		map.put("questioncontrolpanel.width", map.get("questionselectionpanel.width"));
 		map.put("questioncontrolpanel.height", map.get("stateplaypanel.height"));
+		
+		map.put("gamewindow.width", 1024);
+		map.put("gamewindow.height", 768);
 		
 		dimensions.put(SupportedOS.MACOS, map);
 	}

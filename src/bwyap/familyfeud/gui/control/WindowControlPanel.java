@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import bwyap.familyfeud.gui.GBC;
+import bwyap.familyfeud.gui.UIManager;
 import bwyap.familyfeud.gui.window.GameWindow;
 import bwyap.gridgame.res.ResourceLoader;
 
@@ -27,8 +28,8 @@ public class WindowControlPanel extends JPanel {
 
 	private static final long serialVersionUID = 3506047425993585668L;
 
-	public static final int WIDTH = 180;
-	public static final int HEIGHT = 120;
+	public static final int WIDTH = UIManager.getInstance().getDimension("windowcontrolpanel.width");
+	public static final int HEIGHT = UIManager.getInstance().getDimension("windowcontrolpanel.height");
 	
 	private GameWindow window;
 	private JLabel title;
