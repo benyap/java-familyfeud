@@ -7,5 +7,6 @@ package bwyap.gridgame.res;
  */
 public enum ResourceType {
 	PNG,
+	FONT,
 	FONTNAME;
 }

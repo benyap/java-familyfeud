@@ -1,8 +1,11 @@
 package bwyap.gridgame.res;
 
+import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 
 import javax.imageio.ImageIO;
@@ -75,6 +78,9 @@ public class ResourceLoader {
 			case FONTNAME:
 				loadFont(r.id());
 				break;
+			case FONT:
+				loadFont(r.id(), r.location());
+				break;
 			}
 		}
 	}
@@ -112,6 +118,22 @@ public class ResourceLoader {
         }
         // put default font if font does not exist
         fontNames.put(fontname, DEFAULT_FONT_NAME);
+	}
+	
+	/**
+	 * Load a new font onto the system
+	 * @param fontname
+	 */
+	protected void loadFont(String fontname, String path) {
+		try {
+			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+			InputStream is = this.getClass().getResourceAsStream(path);
+			ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, is));
+		} 
+		catch (IOException|FontFormatException e) { 
+			System.err.println("An error occurred when trying to load font " + fontname);
+		}
+		loadFont(fontname);
 	}
 
 }

@@ -24,8 +24,8 @@ public class FamilyFeudResources extends ResourceLoader {
 		addResource("strike", "/bwyap/familyfeud/res/universal/strike.png", ResourceType.PNG);
 
 		// Load fonts
-		addResource("Bebas Neue", "", ResourceType.FONTNAME);
-		addResource("Monaco", "", ResourceType.FONTNAME);
+		addResource("Bebas Neue", "/bwyap/familyfeud/res/universal/BebasNeue.otf", ResourceType.FONT);
+		addResource("Monaco", "/bwyap/familyfeud/res/universal/Monaco.ttf", ResourceType.FONT);
 		
 		// Load sounds
 		SoundManager.getInstance().loadClip("blip", "/bwyap/familyfeud/res/sound/blip.wav");
