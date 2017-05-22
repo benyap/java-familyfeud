@@ -121,7 +121,7 @@ public class RenderQuestionSet implements RenderableInterface {
 		}
 		
 		if (prevRevealed != revealed) {
-			SoundManager.getInstance().playClip("bell");
+			if (revealed > 0) SoundManager.getInstance().playClip("bell");
 			prevRevealed = revealed;
 		}
 		
