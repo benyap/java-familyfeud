@@ -11,6 +11,7 @@ import bwyap.familyfeud.render.RenderableInterface;
 import bwyap.familyfeud.render.RenderingPanel;
 import bwyap.familyfeud.render.component.Fader;
 import bwyap.familyfeud.render.component.RenderableImage;
+import bwyap.familyfeud.sound.SoundManager;
 import bwyap.gridgame.res.ResourceLoader;
 
 /**
@@ -65,6 +66,7 @@ public class RenderStrikes implements RenderableInterface {
 				
 				// Detect if number of strikes has changed
 				if (strikes != state.getStrikes()) {
+					SoundManager.getInstance().playClip("strike");
 					strikes = state.getStrikes();
 					// Check if there are strikes to be rendered
 					if (strikes > 0) {
