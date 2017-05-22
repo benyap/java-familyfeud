@@ -57,9 +57,11 @@ public class GameWindow extends FamilyFeudWindow {
 		dispose();
 		if (fullscreen) {
 			setSize(width, height);
+			setUndecorated(false);
 		}
 		else {
 			GraphicsDevice[] screens = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices();
+			setUndecorated(true);
 			if (screens.length == 1) {
 				screens[0].setFullScreenWindow(this);
 			}
