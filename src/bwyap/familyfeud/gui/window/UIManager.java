@@ -45,7 +45,35 @@ public class UIManager {
 		// TODO make this more dynamic
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		
+		map.put("controlwindow.width", 800);
+		map.put("controlwindow.height", 640);
+		  
+		map.put("windowcontrolpanel.width", 180);
+		map.put("windowcontrolpanel.height", 120);
 		
+		map.put("statepanel.width", 180);
+		map.put("statepanel.height", 220);
+		  
+		map.put("consolepanel.width", map.get("controlwindow.width") - 10);
+		map.put("consolepanel.height", 200);
+		  
+		map.put("stateplaypanel.width", map.get("statepanel.width"));
+		map.put("stateplaypanel.height", map.get("controlwindow.height") - map.get("consolepanel.height") - map.get("statepanel.height") - 25);
+		  
+		map.put("familypanel.width", map.get("windowcontrolpanel.width"));
+		map.put("familypanel.height", map.get("stateplaypanel.height"));
+		
+		map.put("managefamilypanel.width", map.get("statepanel.width"));
+		map.put("managefamilypanel.height", map.get("statepanel.height") - map.get("windowcontrolpanel.height"));
+		  
+		map.put("questionselectionpanel.width", map.get("controlwindow.width") - map.get("statepanel.width") - map.get("windowcontrolpanel.width") - 10);
+		map.put("questionselectionpanel.height", (int)(0.8 * map.get("statepanel.height")));
+		  
+		map.put("questionsetloaderpanel.width", map.get("controlwindow.width") - map.get("statepanel.width") - map.get("windowcontrolpanel.width") - 10);
+		map.put("questionsetloaderpanel.height", map.get("statepanel.height") - map.get("questionselectionpanel.height"));
+
+		map.put("questioncontrolpanel.width", map.get("questionselectionpanel.width"));
+		map.put("questioncontrolpanel.height", map.get("stateplaypanel.height"));
 		
 		dimensions.put(SupportedOS.MACOS, map);
 	}
