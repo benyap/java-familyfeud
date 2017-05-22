@@ -13,6 +13,7 @@ import bwyap.familyfeud.render.RenderingPanel;
 import bwyap.familyfeud.render.component.Fader;
 import bwyap.familyfeud.render.component.RenderableImage;
 import bwyap.familyfeud.render.component.RenderableString;
+import bwyap.familyfeud.sound.SoundManager;
 import bwyap.gridgame.res.ResourceLoader;
 
 /**
@@ -31,6 +32,7 @@ public class RenderQuestionSet implements RenderableInterface {
 	private List<RenderableString> numbers;
 	private List<RenderableString> answers;
 	private List<RenderableString> scores;
+	private int prevRevealed;
 	
 	public RenderQuestionSet(FamilyFeudGame game) {
 		this.game = game;
@@ -84,13 +86,14 @@ public class RenderQuestionSet implements RenderableInterface {
 				s.setVisible(false);
 				scores.add(s);
 			}
-
 		}
 		
 		// Get the game score
 		int num = 0;
+		int revealed = 0;
 		for (int i = 0; i < question.getAnswers().size(); i++) {
 			if (question.getAnswers().get(i).isRevealed()) {
+				revealed++;
 				numbers.get(i).setVisible(false);
 				answers.get(i).setVisible(true);
 				scores.get(i).setVisible(true);
@@ -115,6 +118,11 @@ public class RenderQuestionSet implements RenderableInterface {
 					}
 				}
 			}
+		}
+		
+		if (prevRevealed != revealed) {
+			SoundManager.getInstance().playClip("bell");
+			prevRevealed = revealed;
 		}
 		
 		score.setText(num + "");

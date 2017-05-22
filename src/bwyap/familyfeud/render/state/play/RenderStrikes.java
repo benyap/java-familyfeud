@@ -66,8 +66,9 @@ public class RenderStrikes implements RenderableInterface {
 				
 				// Detect if number of strikes has changed
 				if (strikes != state.getStrikes()) {
-					SoundManager.getInstance().playClip("strike");
 					strikes = state.getStrikes();
+					if (strikes > 0) SoundManager.getInstance().playClip("strike");
+					
 					// Check if there are strikes to be rendered
 					if (strikes > 0) {
 						strike1.reset();
