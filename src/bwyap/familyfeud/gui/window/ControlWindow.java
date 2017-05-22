@@ -26,6 +26,7 @@ import bwyap.familyfeud.gui.control.QuestionSetLoaderPanel;
 import bwyap.familyfeud.gui.control.StatePanel;
 import bwyap.familyfeud.gui.control.StatePlayPanel;
 import bwyap.familyfeud.gui.control.WindowControlPanel;
+import bwyap.familyfeud.sound.SoundManager;
 import bwyap.utility.logging.Logger;
 
 /**
@@ -146,6 +147,7 @@ public class ControlWindow extends FamilyFeudWindow {
 			private static final long serialVersionUID = 8226153971656224768L;
 			public void actionPerformed(ActionEvent e) {
 				windowControlPanel.toggleFullscreen();
+				Logger.info("Toggled fullscreen");
 			}
 		});
 		
@@ -156,9 +158,26 @@ public class ControlWindow extends FamilyFeudWindow {
 			private static final long serialVersionUID = 8226153971656224768L;
 			public void actionPerformed(ActionEvent e) {
 				windowControlPanel.toggleShowscreen();
+				Logger.info("Toggled show screen");
+
+			}
+		});
+		
+		// Toggle mute 
+		getRootPane().getInputMap(JPanel.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_M, InputEvent.META_DOWN_MASK), "togglemute");
+		getRootPane().getInputMap(JPanel.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_M, InputEvent.CTRL_DOWN_MASK), "togglemute");
+		getRootPane().getActionMap().put("togglemute", new AbstractAction() {
+			private static final long serialVersionUID = 8226153971656224768L;
+			public void actionPerformed(ActionEvent e) {
+				SoundManager.getInstance().toggleMute();
+				Logger.info("Toggled mute");
 			}
 		});
 
+		// Dislpay help commands
+		Logger.warning("HINT: Use <cmd + D> or <ctrl + D> to toggle show game window");
+		Logger.warning("HINT: Use <cmd + F> or <ctrl + F> to toggle fullscreen");
+		Logger.warning("HINT: Use <cmd + M> or <ctrl + M> to toggle mute");
 	}
 	
 	public void setFamilyPanelEnabled(boolean enabled) {

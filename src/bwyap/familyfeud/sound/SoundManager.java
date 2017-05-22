@@ -128,5 +128,13 @@ public class SoundManager {
 	private Clip getClip(String name) {
 		return sounds.get(name);
 	}
+
+	/**
+	 * Toggle if the sound manager is muted
+	 */
+	public void toggleMute() {
+		if (isMuted()) setMuted(false);
+		else setMuted(true);
+	}
 	
 }
