@@ -104,7 +104,7 @@ public class QuestionSetLoaderPanel extends JPanel {
 				
 				// validate questions
 				if (q.isValid()) {
-					title.setText("Quesion Set: LOADED [" + fc.getSelectedFile().getName() + "]");
+					title.setText("Question Set: LOADED [" + fc.getSelectedFile().getName() + "]");
 					Logger.info("Successfully loaded question set <" + fc.getSelectedFile().getName() + ">");
 					game.getState().executeAction(StateLoadQuestions.ACTION_LOADQUESTIONSET, new Object[]{q});
 					panel.loadQuestions(game.getQuestionSet());
