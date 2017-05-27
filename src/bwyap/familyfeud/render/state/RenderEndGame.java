@@ -22,6 +22,7 @@ import bwyap.gridgame.res.ResourceLoader;
 public class RenderEndGame extends AbstractRenderState {
 	
 	private FamilyFeudGame game;
+	private Family winner;
 	
 	private Fader bg;
 	private RenderableString congrats;
@@ -47,11 +48,13 @@ public class RenderEndGame extends AbstractRenderState {
 	
 	@Override
 	public void update(float timeElapsed) {
+		winner = game.getWinningFamily();
 		if (family == null) {
-			Family f = game.getWinningFamily();
-			this.family = new RenderableString(f.getName(), 0, 360, ResourceLoader.getFontName("Bebas Neue"), Font.BOLD, 180, Color.BLACK, true);
-			this.description = new RenderableString("won with " + f.getPoints() + " points", 0, 430, ResourceLoader.getFontName("Bebas Neue"), Font.PLAIN, 60, Color.WHITE, true);
+			family = new RenderableString("", 0, 360, ResourceLoader.getFontName("Bebas Neue"), Font.BOLD, 180, Color.BLACK, true);
+			description = new RenderableString("", 0, 430, ResourceLoader.getFontName("Bebas Neue"), Font.PLAIN, 60, Color.WHITE, true);			
 		}
+		family.setText(winner.getName());
+		description.setText("won with " + winner.getPoints() + " points");
 		bg.update(timeElapsed);
 	}
 	

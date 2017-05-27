@@ -69,6 +69,7 @@ public class StatePanel extends JPanel {
 				initGame.setEnabled(true);
 				newGame.setEnabled(false);
 				window.setFamilyPanelEnabled(false);
+				window.setChooseFamilyEnabled(false);
 				window.reset();
 			}
 		});

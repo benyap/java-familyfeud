@@ -1,5 +1,7 @@
 package bwyap.familyfeud.game;
 
+import bwyap.utility.logging.Logger;
+
 /**
  * Represents a family in the game.
  * @author bwyap
@@ -42,6 +44,16 @@ public class Family {
 	 */
 	public void addPoints(int amount) {
 		points += amount;
+	}
+	
+	/**
+	 * Set a family's points.
+	 * This should only be used as a hard override if necessary.
+	 * @param amount
+	 */
+	public void setPoints(int points) {
+		Logger.warning(familyName + "'s score modified from " + this.points + " to " + points);
+		this.points = points;
 	}
 	
 	@Override

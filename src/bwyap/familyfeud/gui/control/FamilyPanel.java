@@ -9,14 +9,19 @@ import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.BorderFactory;
+import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 import bwyap.familyfeud.game.Family;
@@ -43,6 +48,7 @@ public class FamilyPanel extends JPanel {
 	private JTable table;
 	private DefaultTableModel tableModel;
 	private JButton select;
+	private JButton updateScores;
 	
 	private int command = -1;
 	
@@ -63,10 +69,41 @@ public class FamilyPanel extends JPanel {
 
 		tableModel = new DefaultTableModel(new Object[]{"Family", "Points"}, 0){
 			private static final long serialVersionUID = 2222748798265167701L;
-	        public boolean isCellEditable(int row, int column) { return false; }
+	        public boolean isCellEditable(int row, int column) {
+	        	return column == 1 && updateScores.isEnabled();
+	        }
         };
+        
 		table = new JTable(tableModel);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		table.setDefaultEditor(Object.class, new DefaultCellEditor(new JTextField()) {
+			private static final long serialVersionUID = -5275940432999486004L;
+			
+			public boolean stopCellEditing() {
+				// Ensure that an entered value is a positive integer
+				try {
+					JTextField textField = (JTextField) getComponent();
+					textField.setBorder(new LineBorder(Color.BLACK));
+					String editingValue = (String) getCellEditorValue();
+					int value = Integer.parseInt(editingValue);
+					if (value < 0) throw new Exception();
+					textField.setText(value + "");
+				}
+				catch (Exception e) {
+					JTextField textField = (JTextField) getComponent();
+					textField.setBorder(new LineBorder(Color.RED));
+					textField.selectAll();
+					textField.requestFocusInWindow();
+					
+					JOptionPane.showMessageDialog(null, "Invalid score entered. Must be a positive integer.", "Invalid score!", JOptionPane.ERROR_MESSAGE);
+					
+					return false;
+				}
+				return super.stopCellEditing();
+			}
+			
+		});
 		
 		tableScroll = new JScrollPane(table);
 		tableScroll.setMinimumSize(new Dimension(WIDTH - 20, (int)(HEIGHT*0.65)));
@@ -76,6 +113,7 @@ public class FamilyPanel extends JPanel {
 		table.getColumnModel().getColumn(1).setPreferredWidth(WIDTH - 20 - 100 - 5);
 		
 		select = new JButton("Select");
+		select.setToolTipText("Select the family for the next action");
 		select.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (table.getSelectedRow() > -1 && command > -1) {
@@ -85,9 +123,36 @@ public class FamilyPanel extends JPanel {
 			}
 		});
 		
-		add(title, new GBC(0, 0));
-		add(tableScroll, new GBC(0, 1));
-		add(select, new GBC(0, 2));
+		updateScores = new JButton("Update");
+		updateScores.setToolTipText("Update the family score");
+		updateScores.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// Check if there are any families in table
+				if (table.getRowCount() > 0) {
+					if (JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(null, "Are you sure you want to modify the scores?", "Modifying family scores", JOptionPane.OK_CANCEL_OPTION)) {
+						List<Family> families = game.getFamilies();
+						for(int i = 0; i < families.size(); i++) {
+							
+							try {
+								if (!(table.getValueAt(i, 1) instanceof Integer)) {
+									int value = Integer.parseInt((String)table.getValueAt(i, 1));
+									families.get(i).setPoints(value);
+								}
+							}
+							catch (Exception ex) {
+								ex.printStackTrace();
+							}
+						}
+					}
+				}
+				else JOptionPane.showMessageDialog(null, "No families loaded.", "No families", JOptionPane.OK_OPTION);
+			}
+		});
+		
+		add(title, new GBC(0, 0).setSpan(2, 1));
+		add(tableScroll, new GBC(0, 1).setSpan(2, 1));
+		add(updateScores, new GBC(0, 2));
+		add(select, new GBC(1, 2));
 	}
 	
 	/**

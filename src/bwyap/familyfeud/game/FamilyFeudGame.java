@@ -103,10 +103,11 @@ public class FamilyFeudGame {
 	
 	/**
 	 * Get the winning family as set by {@code setWinner}.
-	 * This will return null if the method {@code setWinnder} has not been run.
+	 * Automatically calls the {@code setWinnder} method.
 	 * @return
 	 */
 	public Family getWinningFamily() {
+		setWinner();
 		return winner;
 	}
 	
