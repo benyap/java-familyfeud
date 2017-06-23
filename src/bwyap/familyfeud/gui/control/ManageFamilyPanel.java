@@ -29,8 +29,8 @@ public class ManageFamilyPanel extends JPanel {
 
 	private static final long serialVersionUID = 3506047425993585668L;
 	
-	public static final int WIDTH = UIManager.getInstance().getDimension("managefamilypanel.width");
-	public static final int HEIGHT = UIManager.getInstance().getDimension("managefamilypanel.height");
+	public static final int WIDTH = UIManager.getInstance().getProperty("managefamilypanel.width");
+	public static final int HEIGHT = UIManager.getInstance().getProperty("managefamilypanel.height");
 	
 	private FamilyFeudGame game;
 	

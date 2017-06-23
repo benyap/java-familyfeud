@@ -40,8 +40,8 @@ public class ControlWindow extends FamilyFeudWindow {
 	
 	private static final long serialVersionUID = -4445104890877967661L;
 
-	public static final int WIDTH = UIManager.getInstance().getDimension("controlwindow.width");
-	public static final int HEIGHT = UIManager.getInstance().getDimension("controlwindow.height");
+	public static final int WIDTH = UIManager.getInstance().getProperty("controlwindow.width");
+	public static final int HEIGHT = UIManager.getInstance().getProperty("controlwindow.height");
 	public static final int DEFAULT_BORDER_WIDTH = 1;
 	public static final int SELECTED_BORDER_WIDTH = 2;
 	

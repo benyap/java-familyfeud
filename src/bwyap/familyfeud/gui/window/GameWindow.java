@@ -20,8 +20,8 @@ public class GameWindow extends FamilyFeudWindow {
 	
 	private static final long serialVersionUID = 5046186767241215679L;
 
-	public static final int WIDTH = UIManager.getInstance().getDimension("gamewindow.width");
-	public static final int HEIGHT = UIManager.getInstance().getDimension("gamewindow.height");
+	public static final int WIDTH = UIManager.getInstance().getProperty("gamewindow.width");
+	public static final int HEIGHT = UIManager.getInstance().getProperty("gamewindow.height");
 	
 	private boolean fullscreen;
 	private int screenIndex = 1;

@@ -1,6 +1,9 @@
 package bwyap.familyfeud;
 
+import javax.swing.JOptionPane;
+
 import bwyap.familyfeud.game.FamilyFeudGame;
+import bwyap.familyfeud.gui.UIManager;
 import bwyap.familyfeud.render.FFRenderingEngine;
 import bwyap.familyfeud.render.RenderingPanel;
 import bwyap.familyfeud.res.FamilyFeudResources;
@@ -27,6 +30,10 @@ public class FamilyFeudController {
 	 * Initialize the application
 	 */
 	public void init() {
+		// Select resolution
+		int widescreen = JOptionPane.showConfirmDialog(null, "Use widescreen resolution?", "Widescreen", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
+		UIManager.setWidescreen(widescreen == JOptionPane.YES_OPTION);
+		
 		resourceLoader = new FamilyFeudResources();
 		resourceLoader.init();
 		resourceLoader.load();

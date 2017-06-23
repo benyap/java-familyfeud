@@ -8,6 +8,7 @@ import java.util.List;
 
 import bwyap.familyfeud.game.FamilyFeudGame;
 import bwyap.familyfeud.game.Question;
+import bwyap.familyfeud.gui.UIManager;
 import bwyap.familyfeud.render.RenderableInterface;
 import bwyap.familyfeud.render.RenderingPanel;
 import bwyap.familyfeud.render.component.Fader;
@@ -141,8 +142,15 @@ public class RenderQuestionSet implements RenderableInterface {
 				RenderableString r = numbers.get(i);
 				if (r.isVisible()) {
 					// NOTES: uses hard-coded x values
-					int x = i / 4 < 1 ? 280 - (r.getTextWidth(g, r.getFont())/2): 730 - (r.getTextWidth(g, r.getFont())/2);
-					int y = 345 + 120 * (i % 4);
+					int x, y;
+					if(UIManager.isWidescreen()) {
+						x = i / 4 < 1 ? 420 - (r.getTextWidth(g, r.getFont())/2): 850 - (r.getTextWidth(g, r.getFont())/2);
+						y = 325 + 113 * (i % 4);
+					}
+					else {
+						x = i / 4 < 1 ? 280 - (r.getTextWidth(g, r.getFont())/2): 730 - (r.getTextWidth(g, r.getFont())/2);
+						y = 345 + 120 * (i % 4);
+					}
 					r.setPosition(x, y);
 					r.render(panel, g);
 				}
@@ -153,11 +161,20 @@ public class RenderQuestionSet implements RenderableInterface {
 				RenderableString s = scores.get(i);
 				if (a.isVisible()) {
 					// NOTES: uses hard-coded x values
-					int x = i / 4 < 1 ? 80: 530;
-					int y = 345 + 120 * (i % 4);
-					a.setPosition(x, y);
-					s.setPosition(x + 420 - (s.getTextWidth(g, s.getFont())), y);
-					if (a.getText().length() > 8) a.setSize((int)(100 * (9.0/a.getText().length())));
+					if (UIManager.isWidescreen()) {
+						int x = i / 4 < 1 ? 225: 655;
+						int y = 325 + 113 * (i % 4);
+						a.setPosition(x, y);
+						s.setPosition(x + 400 - (s.getTextWidth(g, s.getFont())), y);
+						if (a.getText().length() > 8) a.setSize((int)(100 * (9.0/a.getText().length())));
+					}
+					else {
+						int x = i / 4 < 1 ? 80: 530;
+						int y = 345 + 120 * (i % 4);
+						a.setPosition(x, y);
+						s.setPosition(x + 420 - (s.getTextWidth(g, s.getFont())), y);
+						if (a.getText().length() > 8) a.setSize((int)(100 * (9.0/a.getText().length())));
+					}
 					a.render(panel, g);
 					s.render(panel, g);
 				}

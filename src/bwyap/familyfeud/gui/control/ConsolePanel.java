@@ -24,8 +24,8 @@ public class ConsolePanel extends JPanel {
 	
 	private static final long serialVersionUID = 7694955474110163790L;
 
-	public static final int WIDTH = UIManager.getInstance().getDimension("consolepanel.width");
-	public static final int HEIGHT = UIManager.getInstance().getDimension("consolepanel.height");
+	public static final int WIDTH = UIManager.getInstance().getProperty("consolepanel.width");
+	public static final int HEIGHT = UIManager.getInstance().getProperty("consolepanel.height");
 	
 	private JScrollPane scroll;
 	private static JTextPane text;

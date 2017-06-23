@@ -22,6 +22,7 @@ public class UIManager {
 	}
 	
 	private static UIManager INSTANCE;
+	private static boolean widescreen = false;
 	
 	private Map<String, Integer> map;
 	
@@ -42,6 +43,25 @@ public class UIManager {
 		// Load dimensions according to detected UI
 		if (OSValidator.isMac()) loadMacOSUI();
 		else if (OSValidator.isWindows()) loadWindowsUI();
+	}
+	
+	/**
+	 * Set whether wide screen dimensions should be used.
+	 * This must be called before the first {@code getInstance} call.
+	 * Default is false.
+	 * @param widescreen
+	 */
+	public static void setWidescreen(boolean widescreen) {
+		UIManager.widescreen = widescreen;
+	}
+	
+	/**
+	 * Get whether wide screen dimensions should be used.
+	 * Default is false, unless otherwise set by the user.
+	 * @return
+	 */
+	public static boolean isWidescreen() {
+		return UIManager.widescreen;
 	}
 	
 	/**
@@ -104,8 +124,14 @@ public class UIManager {
 		map.put("questioncontrolpanel.width", map.get("questionselectionpanel.width"));
 		map.put("questioncontrolpanel.height", map.get("stateplaypanel.height"));
 		
-		map.put("gamewindow.width", 1024);
-		map.put("gamewindow.height", 768);
+		if (widescreen) {
+			map.put("gamewindow.width", 1280);
+			map.put("gamewindow.height", 720);
+		}
+		else {
+			map.put("gamewindow.width", 1024);
+			map.put("gamewindow.height", 768);
+		}
 		
 		map.put("questionselectionpanel.col1.width", 50);
 		map.put("questionselectionpanel.col2.width", 40);
@@ -147,11 +173,11 @@ public class UIManager {
 	}
 	
 	/**
-	 * Get the dimension for the specified property for the current OS.
+	 * Get the value for the specified property for the current OS.
 	 * @param propertyname
 	 * @return
 	 */
-	public int getDimension(String propertyname) {
+	public int getProperty(String propertyname) {
 		return map.get(propertyname);
 	}
 	

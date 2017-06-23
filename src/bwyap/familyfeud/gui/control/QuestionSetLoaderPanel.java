@@ -37,8 +37,8 @@ public class QuestionSetLoaderPanel extends JPanel {
 
 	private static final long serialVersionUID = 689335015288245441L;
 
-	public static final int WIDTH = UIManager.getInstance().getDimension("questionsetloaderpanel.width");
-	public static final int HEIGHT = UIManager.getInstance().getDimension("questionsetloaderpanel.height");
+	public static final int WIDTH = UIManager.getInstance().getProperty("questionsetloaderpanel.width");
+	public static final int HEIGHT = UIManager.getInstance().getProperty("questionsetloaderpanel.height");
 	
 	private FamilyFeudGame game;
 	private QuestionSelectionPanel panel;
