@@ -21,6 +21,7 @@ import bwyap.familyfeud.gui.GBC;
 import bwyap.familyfeud.gui.UIManager;
 import bwyap.familyfeud.gui.window.ControlWindow;
 import bwyap.gridgame.res.ResourceLoader;
+import bwyap.utility.logging.Logger;
 
 /**
  * A panel to control state transitions
@@ -44,6 +45,7 @@ public class StatePanel extends JPanel {
 	private JButton initGame;
 	private JButton play;
 	private JButton endGame;
+	private JButton fastmoney;
 	
 	public StatePanel(ControlWindow window, FamilyFeudGame game) {
 		this.window = window;
@@ -153,6 +155,17 @@ public class StatePanel extends JPanel {
 			}
 		});
 		
+		fastmoney = new JButton("Fast money");
+		fastmoney.setToolTipText("Play fast money");
+		fastmoney.setEnabled(true);
+		fastmoney.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO implement fast money
+				Logger.info("Playing fast money!");
+				Logger.err("Feature not implemented.");
+			}
+		});
+		
 		add(title, new GBC(0, 0));
 		add(newGame, new GBC(0, 1).setFill(1));
 		add(addFamily, new GBC(0, 2).setFill(1));
@@ -160,6 +173,7 @@ public class StatePanel extends JPanel {
 		add(initGame, new GBC(0, 4).setFill(1));
 		add(play, new GBC(0, 5).setFill(1));
 		add(endGame, new GBC(0, 6).setFill(1));
+		add(fastmoney, new GBC(0, 7).setFill(1));
 	}
 	
 }
