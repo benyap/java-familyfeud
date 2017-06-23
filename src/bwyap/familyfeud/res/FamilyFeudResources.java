@@ -35,9 +35,10 @@ public class FamilyFeudResources extends ResourceLoader {
 		addResource("Monaco", "/bwyap/familyfeud/res/universal/Monaco.ttf", ResourceType.FONT);
 		
 		// Load sounds
-		SoundManager.getInstance().loadClip("blip", "/bwyap/familyfeud/res/sound/blip.wav");
-		SoundManager.getInstance().loadClip("bell", "/bwyap/familyfeud/res/sound/bell.wav");
-		SoundManager.getInstance().loadClip("strike", "/bwyap/familyfeud/res/sound/strike.wav");
+		SoundManager.getInstance().loadClip("blip", "/bwyap/familyfeud/res/sound/us_blip.wav");
+		SoundManager.getInstance().loadClip("answer", "/bwyap/familyfeud/res/sound/us_bell.wav");
+		SoundManager.getInstance().loadClip("topanswer", "/bwyap/familyfeud/res/sound/us_bell.wav");
+		SoundManager.getInstance().loadClip("strike", "/bwyap/familyfeud/res/sound/us_strike.wav");
 		
 	}
 	
