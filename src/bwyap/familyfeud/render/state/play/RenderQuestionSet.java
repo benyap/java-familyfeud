@@ -65,7 +65,7 @@ public class RenderQuestionSet implements RenderableInterface {
 			for(int i = 0; i < question.getAnswers().size(); i++) {
 				RenderableString s = new RenderableString("- " + (i + 1) + " -", 0, 0, 
 						ResourceLoader.getFontName("Bebas Neue"), 
-						Font.PLAIN, 100, Color.WHITE, false);
+						Font.PLAIN, 90, Color.WHITE, false);
 				s.setVisible(false);
 				numbers.add(s);
 			}
@@ -75,7 +75,7 @@ public class RenderQuestionSet implements RenderableInterface {
 				// Create answer string
 				RenderableString a = new RenderableString(question.getAnswers().get(i).getAnswerString(), 0, 0, 
 						ResourceLoader.getFontName("Bebas Neue"), 
-						Font.PLAIN, 100, Color.WHITE, false);
+						Font.PLAIN, 90, Color.WHITE, false);
 				a.setVisible(false);
 				answers.add(a);
 
@@ -173,7 +173,7 @@ public class RenderQuestionSet implements RenderableInterface {
 						int y = 345 + 120 * (i % 4);
 						a.setPosition(x, y);
 						s.setPosition(x + 420 - (s.getTextWidth(g, s.getFont())), y);
-						if (a.getText().length() > 8) a.setSize((int)(100 * (9.0/a.getText().length())));
+						if (a.getText().length() > 7) a.setSize((int)(100 * (10.0/a.getText().length())));
 					}
 					a.render(panel, g);
 					s.render(panel, g);
