@@ -40,8 +40,8 @@ public class FamilyPanel extends JPanel {
 	
 	private static final long serialVersionUID = -5811924958007378691L;
 
-	public static final int WIDTH = UIManager.getInstance().getDimension("familypanel.width");
-	public static final int HEIGHT = UIManager.getInstance().getDimension("familypanel.height");
+	public static final int WIDTH = UIManager.getInstance().getProperty("familypanel.width");
+	public static final int HEIGHT = UIManager.getInstance().getProperty("familypanel.height");
 	
 	private JLabel title;
 	private JScrollPane tableScroll;

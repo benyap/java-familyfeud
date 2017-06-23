@@ -28,8 +28,8 @@ public class WindowControlPanel extends JPanel {
 
 	private static final long serialVersionUID = 3506047425993585668L;
 
-	public static final int WIDTH = UIManager.getInstance().getDimension("windowcontrolpanel.width");
-	public static final int HEIGHT = UIManager.getInstance().getDimension("windowcontrolpanel.height");
+	public static final int WIDTH = UIManager.getInstance().getProperty("windowcontrolpanel.width");
+	public static final int HEIGHT = UIManager.getInstance().getProperty("windowcontrolpanel.height");
 	
 	private GameWindow window;
 	private JLabel title;

@@ -38,8 +38,8 @@ public class QuestionControlPanel extends JPanel {
 
 	private static final long serialVersionUID = 689335015288245441L;
 
-	public static final int WIDTH = UIManager.getInstance().getDimension("questioncontrolpanel.width");
-	public static final int HEIGHT = UIManager.getInstance().getDimension("questioncontrolpanel.height");
+	public static final int WIDTH = UIManager.getInstance().getProperty("questioncontrolpanel.width");
+	public static final int HEIGHT = UIManager.getInstance().getProperty("questioncontrolpanel.height");
 	
 	private JLabel title;
 	private JScrollPane tableScroll;
@@ -74,9 +74,9 @@ public class QuestionControlPanel extends JPanel {
 		tableScroll.setPreferredSize(new Dimension(WIDTH - 30, (int)(HEIGHT*0.65)));
 		
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        table.getColumnModel().getColumn(2).setPreferredWidth(UIManager.getInstance().getDimension("questioncontrolpanel.col2.width"));
-        table.getColumnModel().getColumn(1).setPreferredWidth(UIManager.getInstance().getDimension("questioncontrolpanel.col1.width"));
-		table.getColumnModel().getColumn(0).setPreferredWidth(UIManager.getInstance().getDimension("questioncontrolpanel.col0.width"));
+        table.getColumnModel().getColumn(2).setPreferredWidth(UIManager.getInstance().getProperty("questioncontrolpanel.col2.width"));
+        table.getColumnModel().getColumn(1).setPreferredWidth(UIManager.getInstance().getProperty("questioncontrolpanel.col1.width"));
+		table.getColumnModel().getColumn(0).setPreferredWidth(UIManager.getInstance().getProperty("questioncontrolpanel.col0.width"));
 
 		reveal = new JButton("Reveal answer");
 		reveal.addActionListener(new ActionListener() {

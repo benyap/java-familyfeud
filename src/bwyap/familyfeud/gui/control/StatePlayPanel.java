@@ -41,8 +41,8 @@ public class StatePlayPanel extends JPanel {
 
 	private static final long serialVersionUID = 4051495798628977025L;
 
-	public static final int WIDTH = UIManager.getInstance().getDimension("stateplaypanel.width");
-	public static final int HEIGHT = UIManager.getInstance().getDimension("stateplaypanel.height");
+	public static final int WIDTH = UIManager.getInstance().getProperty("stateplaypanel.width");
+	public static final int HEIGHT = UIManager.getInstance().getProperty("stateplaypanel.height");
 
 	private ControlWindow window;
 	private FamilyFeudGame game;

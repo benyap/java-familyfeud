@@ -39,8 +39,8 @@ public class QuestionSelectionPanel extends JPanel {
 
 	private static final long serialVersionUID = 689335015288245441L;
 
-	public static final int WIDTH = UIManager.getInstance().getDimension("questionselectionpanel.width");
-	public static final int HEIGHT = UIManager.getInstance().getDimension("questionselectionpanel.height");
+	public static final int WIDTH = UIManager.getInstance().getProperty("questionselectionpanel.width");
+	public static final int HEIGHT = UIManager.getInstance().getProperty("questionselectionpanel.height");
 	
 	private JLabel title, multiplierLabel;
 	private JScrollPane tableScroll;
@@ -78,9 +78,9 @@ public class QuestionSelectionPanel extends JPanel {
 		tableScroll.setMinimumSize(new Dimension(WIDTH - 20, (int)(HEIGHT*0.65)));
 		
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		table.getColumnModel().getColumn(0).setPreferredWidth(UIManager.getInstance().getDimension("questionselectionpanel.col1.width"));
-		table.getColumnModel().getColumn(1).setPreferredWidth(UIManager.getInstance().getDimension("questionselectionpanel.col2.width"));
-		table.getColumnModel().getColumn(2).setPreferredWidth(UIManager.getInstance().getDimension("questionselectionpanel.col3.width"));
+		table.getColumnModel().getColumn(0).setPreferredWidth(UIManager.getInstance().getProperty("questionselectionpanel.col1.width"));
+		table.getColumnModel().getColumn(1).setPreferredWidth(UIManager.getInstance().getProperty("questionselectionpanel.col2.width"));
+		table.getColumnModel().getColumn(2).setPreferredWidth(UIManager.getInstance().getProperty("questionselectionpanel.col3.width"));
 		table.setAutoscrolls(false);
 		
 		singlePoints = new JRadioButton("Single");
