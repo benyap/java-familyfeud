@@ -28,7 +28,7 @@ public class RenderFamilyScores implements RenderableInterface {
 	
 	public RenderFamilyScores(FamilyFeudGame game) {
 		this.game = game;
-		this.title = new RenderableString("Scoreboard", 0, 200, "Bebas Neue", Font.PLAIN, 140, Color.ORANGE, true);
+		this.title = new RenderableString("Scoreboard", 0, 170, "Bebas Neue", Font.PLAIN, 140, Color.ORANGE, true);
 		this.familyNames = new ArrayList<RenderableString>();
 		this.familyScores = new ArrayList<RenderableString>();
 	}
@@ -47,7 +47,7 @@ public class RenderFamilyScores implements RenderableInterface {
 			updated = true;
 			for(int i = 0; i < game.getFamilies().size(); i++) {
 				Family f = game.getFamilies().get(i);
-				int y = 330 + (i * 120);
+				int y = 310 + (i * 120);
 				RenderableString name = new RenderableString(
 						f.getName(), 
 						0, y, 
