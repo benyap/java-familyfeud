@@ -129,6 +129,7 @@ public class RenderQuestionSet implements RenderableInterface {
 							numberRevealCounter = 0;
 							numbers.get(numberRevealNext).setVisible(true);
 							numberRevealNext++;
+							SoundManager.getInstance().playClip("click");
 						}
 					}
 				}
