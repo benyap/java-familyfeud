@@ -1,6 +1,7 @@
 package bwyap.familyfeud.res;
 import bwyap.familyfeud.gui.UIManager;
 import bwyap.familyfeud.sound.SoundManager;
+import bwyap.familyfeud.sound.SoundManager.SoundRegion;
 import bwyap.gridgame.res.ResourceLoader;
 import bwyap.gridgame.res.ResourceType;
 
@@ -35,11 +36,15 @@ public class FamilyFeudResources extends ResourceLoader {
 		addResource("Monaco", "/bwyap/familyfeud/res/universal/Monaco.ttf", ResourceType.FONT);
 		
 		// Load sounds
-		SoundManager.getInstance().loadClip("blip", "/bwyap/familyfeud/res/sound/us_blip.wav");
-		SoundManager.getInstance().loadClip("answer", "/bwyap/familyfeud/res/sound/us_bell.wav");
-		SoundManager.getInstance().loadClip("topanswer", "/bwyap/familyfeud/res/sound/us_bell.wav");
-		SoundManager.getInstance().loadClip("strike", "/bwyap/familyfeud/res/sound/us_strike.wav");
-		
+		SoundManager.getInstance().loadClip("answer", SoundRegion.AU, "/bwyap/familyfeud/res/sound/au_answer.wav");
+		SoundManager.getInstance().loadClip("topanswer", SoundRegion.AU, "/bwyap/familyfeud/res/sound/au_topanswer.wav");
+		SoundManager.getInstance().loadClip("strike", SoundRegion.AU, "/bwyap/familyfeud/res/sound/au_strike.wav");
+		SoundManager.getInstance().loadClip("theme", SoundRegion.AU, "/bwyap/familyfeud/res/sound/au_theme_short.wav");
+
+		SoundManager.getInstance().loadClip("blip", SoundRegion.US, "/bwyap/familyfeud/res/sound/us_blip.wav");
+		SoundManager.getInstance().loadClip("answer", SoundRegion.US, "/bwyap/familyfeud/res/sound/us_bell.wav");
+		SoundManager.getInstance().loadClip("strike", SoundRegion.US, "/bwyap/familyfeud/res/sound/us_strike.wav");
+
 	}
 	
 }
