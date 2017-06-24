@@ -20,12 +20,14 @@ public class FamilyFeudResources extends ResourceLoader {
 			addResource("blur", "/bwyap/familyfeud/res/ar16_9/blur1080-widescreen.png", ResourceType.PNG);
 			addResource("title", "/bwyap/familyfeud/res/ar16_9/familyFeud1080-widescreen.png", ResourceType.PNG);
 			addResource("panel", "/bwyap/familyfeud/res/ar16_9/panel1080-widescreen.png", ResourceType.PNG);
+			addResource("fastmoney", "/bwyap/familyfeud/res/ar16_9/fastmoney1080-widescreen.png", ResourceType.PNG);
 		}
 		else {
 			addResource("load", "/bwyap/familyfeud/res/ar4_3/loading960.png", ResourceType.PNG);
 			addResource("blur", "/bwyap/familyfeud/res/ar4_3/blur960.png", ResourceType.PNG);
 			addResource("title", "/bwyap/familyfeud/res/ar4_3/familyFeud960.png", ResourceType.PNG);
 			addResource("panel", "/bwyap/familyfeud/res/ar4_3/panel960.png", ResourceType.PNG);
+			addResource("fastmoney", "/bwyap/familyfeud/res/ar4_3/fastmoney960.png", ResourceType.PNG);
 		}
 		
 		addResource("bg", "/bwyap/familyfeud/res/universal/background.png", ResourceType.PNG);
