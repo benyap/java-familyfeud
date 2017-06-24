@@ -34,7 +34,9 @@ public class RenderQuestionSet implements RenderableInterface {
 	private List<RenderableString> answers;
 	private List<RenderableString> scores;
 	private int prevRevealed;
-	
+	private float numberRevealCounter;
+	private int numberRevealNext;
+
 	public RenderQuestionSet(FamilyFeudGame game) {
 		this.game = game;
 		this.board = new Fader(1000, new RenderableImage(ResourceLoader.getImage("panel")), null);
@@ -47,15 +49,22 @@ public class RenderQuestionSet implements RenderableInterface {
 	/**
 	 * Reset animations on the question set board
 	 */
+	@Override
 	public void reset() {
 		board.reset();
 		numbers.clear();
 		answers.clear();
 		scores.clear();
+		prevRevealed = 0;
+		numberRevealCounter = 0;
+		numberRevealNext = 0;
+		Question question = game.getQuestionSet().getSelectedQuestion();
+		for (int i = 0; i < question.getAnswers().size(); i++) {
+			if (question.getAnswers().get(i).isRevealed()) prevRevealed++;
+		}
 	}
 
-	private float counter = 0;
-	private int next = -1;
+
 	@Override
 	public void update(float timeElapsed) {
 		Question question = game.getQuestionSet().getSelectedQuestion();
@@ -89,40 +98,47 @@ public class RenderQuestionSet implements RenderableInterface {
 			}
 		}
 		
-		// Get the game score
 		int num = 0;
 		int revealed = 0;
 		for (int i = 0; i < question.getAnswers().size(); i++) {
-			if (question.getAnswers().get(i).isRevealed()) {
-				revealed++;
-				numbers.get(i).setVisible(false);
-				answers.get(i).setVisible(true);
-				scores.get(i).setVisible(true);
-				num += (question.getAnswers().get(i).getValue() * question.getMultiplier());
+			if (prevRevealed > 0) {
+				if (question.getAnswers().get(i).isRevealed()) {
+					revealed++;
+					numbers.get(i).setVisible(false);
+					answers.get(i).setVisible(true);
+					scores.get(i).setVisible(true);
+					// Get the game score
+					num += (question.getAnswers().get(i).getValue() * question.getMultiplier());
+				}
+				else numbers.get(i).setVisible(true);
 			}
 			else {
 				// Incrementally display answer text if not revealed yet
 				if (board.finished()) {
-					if (i == next) {
-						if (numbers.get(next - 1).isVisible()) {
-							if (counter > 500) {
-								numbers.get(i).setVisible(true);
-								counter = 0;
-								next++;
-							}
-							counter += timeElapsed;
-						}
+					if (question.getAnswers().get(i).isRevealed()) {
+						revealed++;
+						numbers.get(i).setVisible(false);
+						answers.get(i).setVisible(true);
+						scores.get(i).setVisible(true);
+						// Get the game score
+						num += (question.getAnswers().get(i).getValue() * question.getMultiplier());
 					}
-					else if (!numbers.get(0).isVisible() && !question.getAnswers().get(0).isRevealed()) {
-						numbers.get(0).setVisible(true);
-						next = 1;
+					if (i == numberRevealNext && !numbers.get(numberRevealNext).isVisible()) {
+						if (numberRevealCounter < 400.0) numberRevealCounter += timeElapsed;
+						else {
+							numberRevealCounter = 0;
+							numbers.get(numberRevealNext).setVisible(true);
+							numberRevealNext++;
+						}
 					}
 				}
 			}
 		}
 		
 		if (prevRevealed != revealed) {
-			if (revealed > 0) SoundManager.getInstance().playClip("bell");
+			if (revealed > 0) {
+				SoundManager.getInstance().playClip("answer");
+			}
 			prevRevealed = revealed;
 		}
 		

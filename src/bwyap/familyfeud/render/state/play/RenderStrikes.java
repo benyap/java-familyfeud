@@ -57,6 +57,21 @@ public class RenderStrikes implements RenderableInterface {
 		this.strike3.forceFinish();
 	}
 	
+	
+	/**
+	 * Reset the number of strikes
+	 */
+	@Override
+	public void reset() {
+		if (game.getState() instanceof StatePlay) {
+			StatePlay play = (StatePlay) game.getState();
+			if (play.getPlayState() instanceof StrikeInterface) {
+				strikes = ((StrikeInterface) play.getPlayState()).getStrikes();
+			}
+		}
+	}
+	
+	
 	@Override
 	public void update(float timeElapsed) {
 		if (game.getState() instanceof StatePlay) {
