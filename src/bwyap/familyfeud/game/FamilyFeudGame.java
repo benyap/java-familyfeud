@@ -37,6 +37,16 @@ public class FamilyFeudGame {
 	}
 	
 	/**
+	 * Reset the game
+	 */
+	public void reset() {
+		families.reset();
+		questions.reset();
+		winner = null;
+		if (FamilyFeudTestDriver.DEBUG_LOG_CONSOLE) Logger.info("Game reset.");
+	}
+	
+	/**
 	 * Change the state of the game.
 	 * State changes must be validated by the state machine to work.
 	 * @param type
@@ -90,7 +100,7 @@ public class FamilyFeudGame {
 	 * Set the winner of the game. Assuming that the game has finished,
 	 * this method will set the winner as the family with the highest points.
 	 */
-	public void setWinner() {
+	private void setWinner() {
 		int index = 0;
 		List<Family> families = getFamilies();
 		for(int i = 0; i < families.size(); i++) {
@@ -109,6 +119,14 @@ public class FamilyFeudGame {
 	public Family getWinningFamily() {
 		setWinner();
 		return winner;
+	}
+
+	/**
+	 * Check if the game is finished
+	 * @return
+	 */
+	public boolean finished() {
+		return winner != null;
 	}
 	
 }

@@ -34,6 +34,7 @@ public class FFStateMachine extends AbstractFFStateMachine<FFState> {
 		addState(FFStateType.INITIALIZE_GAME.toString(), FFStateFactory.getState(FFStateType.INITIALIZE_GAME, null));
 		addState(FFStateType.PLAY.toString(), FFStateFactory.getState(FFStateType.PLAY, game));
 		addState(FFStateType.END_GAME.toString(), FFStateFactory.getState(FFStateType.END_GAME, game));
+		addState(FFStateType.FAST_MONEY.toString(), FFStateFactory.getState(FFStateType.FAST_MONEY, null));
 		
 		// Set the initial state
 		changeState(FFStateType.START.toString());
@@ -41,10 +42,12 @@ public class FFStateMachine extends AbstractFFStateMachine<FFState> {
 		if (FamilyFeudTestDriver.DEBUG_LOG_CONSOLE) Logger.info("FFStateMachine initialized.");
 	}
 	
+	private FFStateType fromFastMoney = null; 
+	
 	@Override
 	public boolean validateStateTransition(FFState currentState, String nextState) {
 		if (currentState == null) return true;
-		
+				
 		switch (currentState.getType()) {
 		case ADD_FAMILY:
 		case LOAD_QUESTIONS:
@@ -67,16 +70,28 @@ public class FFStateMachine extends AbstractFFStateMachine<FFState> {
 			break;
 		case END_GAME:
 			if (nextState == FFStateType.NEW_GAME.toString()) return true;
+			if (nextState == FFStateType.FAST_MONEY.toString()) {
+				fromFastMoney = currentState.getType();
+				return true;
+			}
 			break;
 		case INITIALIZE_GAME:
 			if (nextState == FFStateType.PLAY.toString()) return true;
 			break;
 		case PLAY:
 			if (nextState == FFStateType.END_GAME.toString()) return true;
+			if (nextState == FFStateType.FAST_MONEY.toString()) {
+				fromFastMoney = currentState.getType();
+				return true;
+			}
 			break;
 		case START:
 			if (nextState == FFStateType.NEW_GAME.toString()) return true;
 			break;
+		case FAST_MONEY:
+			// Fast money must transition back into previous state
+			if (nextState == fromFastMoney.toString()) return true;
+			return true;
 		}
 		return false;
 	}

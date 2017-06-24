@@ -70,6 +70,7 @@ public class StatePanel extends JPanel {
 				loadQuestions.setEnabled(true);
 				initGame.setEnabled(true);
 				newGame.setEnabled(false);
+				fastmoney.setEnabled(false);
 				window.setFamilyPanelEnabled(false);
 				window.setChooseFamilyEnabled(false);
 				window.reset();
@@ -125,6 +126,7 @@ public class StatePanel extends JPanel {
 				if (game.changeState(FFStateType.PLAY)) {
 					play.setEnabled(false);
 					initGame.setEnabled(false);
+					fastmoney.setEnabled(true);
 					endGame.setEnabled(true);
 					window.setQuestionSelectionEnabled(true);
 					window.setStatePlayEnabled(true);
@@ -137,32 +139,40 @@ public class StatePanel extends JPanel {
 		endGame.setEnabled(false);
 		endGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (JOptionPane.showConfirmDialog(StatePanel.this, 
-						"Are you sure you want to end the game?",
-						"Ending game",
-						JOptionPane.OK_CANCEL_OPTION,
-						JOptionPane.WARNING_MESSAGE) == 
-						JOptionPane.OK_OPTION) {
-					if (game.changeState(FFStateType.END_GAME)) {
-						play.setEnabled(false);
-						endGame.setEnabled(false);
-						newGame.setEnabled(true);
-						window.setQuestionSelectionEnabled(false);
-						window.setStatePlayEnabled(false);
-						window.setQuestionControlEnabled(false);
-					}
+				boolean transition = false;
+				if (!game.finished())  {
+					transition = (JOptionPane.showConfirmDialog(StatePanel.this, 
+							"Are you sure you want to end the game?",
+							"Ending game",
+							JOptionPane.OK_CANCEL_OPTION,
+							JOptionPane.WARNING_MESSAGE) == 
+							JOptionPane.OK_OPTION);
+				}
+				else transition = true;
+				if (transition && game.changeState(FFStateType.END_GAME)) {
+					play.setEnabled(false);
+					endGame.setEnabled(false);
+					newGame.setEnabled(true);
+					fastmoney.setEnabled(true);
+					window.setQuestionSelectionEnabled(false);
+					window.setStatePlayEnabled(false);
+					window.setQuestionControlEnabled(false);
 				}
 			}
 		});
 		
 		fastmoney = new JButton("Fast money");
 		fastmoney.setToolTipText("Play fast money");
-		fastmoney.setEnabled(true);
+		fastmoney.setEnabled(false);
 		fastmoney.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO implement fast money
-				Logger.info("Playing fast money!");
-				Logger.err("Feature not implemented.");
+				if (game.changeState(FFStateType.FAST_MONEY)) {
+					Logger.info("Playing fast money!");
+					Logger.err("Feature not implemented.");
+					fastmoney.setEnabled(false);
+					if (!game.finished()) play.setEnabled(true);
+					endGame.setEnabled(true);
+				}
 			}
 		});
 		

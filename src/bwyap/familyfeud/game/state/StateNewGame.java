@@ -20,8 +20,7 @@ public class StateNewGame extends FFState {
 
 	@Override
 	public void initState(Object data) {
-		game.getFamilyCollection().reset();
-		game.getQuestionSet().reset();
+		game.reset();
 		Logger.info("New game created.");
 	}
 

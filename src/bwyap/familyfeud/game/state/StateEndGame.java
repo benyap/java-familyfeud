@@ -21,7 +21,7 @@ public class StateEndGame extends FFState {
 	@Override
 	public void initState(Object data) {
 		// Set the winner
-		game.setWinner();
+		game.getWinningFamily();
 		
 		// Log the winner
 		Logger.info("Congratulations to <" + game.getWinningFamily().getName() + "> for winning with " + game.getWinningFamily().getPoints() + " points!");

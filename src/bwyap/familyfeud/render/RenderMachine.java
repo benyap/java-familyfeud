@@ -1,6 +1,7 @@
 package bwyap.familyfeud.render;
 
 import static bwyap.familyfeud.render.RenderStateType.ENDGAME;
+import static bwyap.familyfeud.render.RenderStateType.FASTMONEY;
 import static bwyap.familyfeud.render.RenderStateType.LOADING;
 import static bwyap.familyfeud.render.RenderStateType.MAIN;
 import static bwyap.familyfeud.render.RenderStateType.NEWGAME;
@@ -9,6 +10,7 @@ import static bwyap.familyfeud.render.RenderStateType.PLAY;
 import bwyap.familyfeud.game.FamilyFeudGame;
 import bwyap.familyfeud.game.state.FFStateType;
 import bwyap.familyfeud.render.state.RenderEndGame;
+import bwyap.familyfeud.render.state.RenderFastMoney;
 import bwyap.familyfeud.render.state.RenderStateLoading;
 import bwyap.familyfeud.render.state.RenderStateNewGame;
 import bwyap.familyfeud.render.state.RenderStatePlay;
@@ -39,6 +41,7 @@ public class RenderMachine extends AbstractRenderMachine {
 		renderStates.put(NEWGAME, new RenderStateNewGame(game));
 		renderStates.put(PLAY, new RenderStatePlay(game));
 		renderStates.put(ENDGAME, new RenderEndGame(game));
+		renderStates.put(FASTMONEY, new RenderFastMoney());
 	}
 	
 	@Override
@@ -77,6 +80,8 @@ public class RenderMachine extends AbstractRenderMachine {
 			case START:
 				renderState = renderStates.get(MAIN);
 				break;
+			case FAST_MONEY:
+				renderState = renderStates.get(FASTMONEY);
 			}
 			renderState.reset();
 			previous = game.getState().getType();
