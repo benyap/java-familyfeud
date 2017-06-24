@@ -135,8 +135,9 @@ public class UIManager {
 			map.put("gamewindow.width", 1024);
 			map.put("gamewindow.height", 768);
 		}
-		
-		map.put("questionselectionpanel.col1.width", 50);
+
+		map.put("questionselectionpanel.col0.width", 20);
+		map.put("questionselectionpanel.col1.width", 40);
 		map.put("questionselectionpanel.col2.width", 40);
 		map.put("questionselectionpanel.col3.width", 400);
 		
@@ -163,8 +164,9 @@ public class UIManager {
 		map.put("stateplaypanel.height", map.get("stateplaypanel.height") + 10);
 		map.put("questioncontrolpanel.height", map.get("questioncontrolpanel.height") + 10);
 		map.put("familypanel.height", map.get("familypanel.height") + 10);
-
-		map.put("questionselectionpanel.col1.width", 75);
+		
+		map.put("questionselectionpanel.col0.width", 50);
+		map.put("questionselectionpanel.col1.width", 50);
 		map.put("questionselectionpanel.col2.width", 50);
 		map.put("questionselectionpanel.col3.width", 400);
 		
