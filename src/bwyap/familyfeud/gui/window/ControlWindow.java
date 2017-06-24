@@ -48,6 +48,7 @@ public class ControlWindow extends FamilyFeudWindow {
 	
 	private GameWindow gameWindow;
 	private FamilyFeudGame game;
+	private FastMoneyWindow fastmoneyWindow;
 	
 	private JPanel contentPane;
 	private ConsolePanel consolePanel;
@@ -95,6 +96,9 @@ public class ControlWindow extends FamilyFeudWindow {
 			}
 		});
 		
+		fastmoneyWindow = new FastMoneyWindow(gameWindow, this, game);
+		fastmoneyWindow.initWindow();
+				
 		// init components
 		contentPane = new JPanel();
 		contentPane.setLayout(new GridBagLayout());
@@ -240,6 +244,28 @@ public class ControlWindow extends FamilyFeudWindow {
 		questionSelectionPanel.reset();
 		questionControlPanel.reset();
 		familyPanel.reset();
+	}
+	
+	/**
+	 * Start Fast Money
+	 */
+	public void playFastMoney() {
+		fastmoneyWindow.reset();
+		fastmoneyWindow.setVisible(true);
+	}
+	
+	/**
+	 * Check if fast money is being played
+	 */
+	public boolean playingFastMoney() {
+		return fastmoneyWindow.isVisible();
+	}
+	
+	/**
+	 * Close the fast money window
+	 */
+	public void closeFastMoney() {
+		fastmoneyWindow.setVisible(false);
 	}
 
 }

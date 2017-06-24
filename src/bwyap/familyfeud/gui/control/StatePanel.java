@@ -127,6 +127,7 @@ public class StatePanel extends JPanel {
 					play.setEnabled(false);
 					initGame.setEnabled(false);
 					fastmoney.setEnabled(true);
+					if (window.playingFastMoney()) window.closeFastMoney();
 					endGame.setEnabled(true);
 					window.setQuestionSelectionEnabled(true);
 					window.setStatePlayEnabled(true);
@@ -154,6 +155,7 @@ public class StatePanel extends JPanel {
 					endGame.setEnabled(false);
 					newGame.setEnabled(true);
 					fastmoney.setEnabled(true);
+					if (window.playingFastMoney()) window.closeFastMoney();
 					window.setQuestionSelectionEnabled(false);
 					window.setStatePlayEnabled(false);
 					window.setQuestionControlEnabled(false);
@@ -174,6 +176,7 @@ public class StatePanel extends JPanel {
 					window.setQuestionControlEnabled(false);
 					if (!game.finished()) play.setEnabled(true);
 					endGame.setEnabled(true);
+					if (!window.playingFastMoney()) window.playFastMoney();
 				}
 			}
 		});
