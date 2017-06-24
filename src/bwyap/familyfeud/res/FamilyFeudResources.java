@@ -40,6 +40,7 @@ public class FamilyFeudResources extends ResourceLoader {
 		// Load sounds
 		SoundManager.getInstance().loadClip("answer", SoundRegion.AU, "/bwyap/familyfeud/res/sound/au_answer.wav");
 		SoundManager.getInstance().loadClip("topanswer", SoundRegion.AU, "/bwyap/familyfeud/res/sound/au_topanswer.wav");
+		SoundManager.getInstance().loadClip("blip", SoundRegion.AU, "/bwyap/familyfeud/res/sound/au_blip.wav");
 		SoundManager.getInstance().loadClip("strike", SoundRegion.AU, "/bwyap/familyfeud/res/sound/au_strike.wav");
 		SoundManager.getInstance().loadClip("theme", SoundRegion.AU, "/bwyap/familyfeud/res/sound/au_theme_short.wav");
 

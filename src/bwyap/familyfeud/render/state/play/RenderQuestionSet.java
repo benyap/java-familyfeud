@@ -138,7 +138,7 @@ public class RenderQuestionSet implements RenderableInterface {
 		
 		if (prevRevealed != revealed) {
 			if (revealed > 0) {
-				SoundManager.getInstance().playClip("answer");
+				SoundManager.getInstance().playClips(new String[]{"blip", "answer"});
 			}
 			prevRevealed = revealed;
 		}

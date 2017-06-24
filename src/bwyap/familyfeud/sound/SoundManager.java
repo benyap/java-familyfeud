@@ -8,6 +8,8 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
+import javax.sound.sampled.LineEvent;
+import javax.sound.sampled.LineListener;
 
 import bwyap.utility.logging.Logger;
 
@@ -114,6 +116,38 @@ public class SoundManager {
 	 */
 	public void playClip(String name) {
 		playClip(name, currentRegion);
+	}
+	
+	/**
+	 * Play the clips listed in the array in succession
+	 * @param clipnames
+	 * @param region
+	 */
+	public void playClips(String[] clipnames, SoundRegion region) {
+		for(int i = 0; i < clipnames.length; i++) {
+			final int index = i;
+			// Add listeners to each clip to trigger once the previous one is finished
+			getClip(clipnames[i], region).addLineListener(new LineListener() {
+				@Override
+				public void update(LineEvent event) {
+					if (event.getType() == LineEvent.Type.STOP) {
+						if (index + 1 < clipnames.length) {
+							playClip(clipnames[index + 1], region);
+						}
+					}
+				}
+			});
+		}
+		// Start the chain by playing the first clip
+		playClip(clipnames[0], region);
+	}
+	
+	/**
+	 * Play the clips listed in the array in succession
+	 * @param clipnames
+	 */
+	public void playClips(String[] clipnames) {
+		playClips(clipnames, currentRegion);
 	}
 	
 	/**
