@@ -103,9 +103,12 @@ public class UIManager {
 		map.put("statepanel.width", 180);
 		map.put("statepanel.height", 220);
 		  
-		map.put("consolepanel.width", map.get("controlwindow.width") - 10);
+		map.put("consolepanel.width", map.get("controlwindow.width") - 10 - 180);
 		map.put("consolepanel.height", 200);
-		  
+		
+		map.put("soundpanel.width", 180);
+		map.put("soundpanel.height", map.get("consolepanel.height"));
+		
 		map.put("stateplaypanel.width", map.get("statepanel.width"));
 		map.put("stateplaypanel.height", map.get("controlwindow.height") - map.get("consolepanel.height") - map.get("statepanel.height") - 25);
 		  

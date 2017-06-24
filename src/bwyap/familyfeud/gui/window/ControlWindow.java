@@ -24,6 +24,7 @@ import bwyap.familyfeud.gui.control.ManageFamilyPanel;
 import bwyap.familyfeud.gui.control.QuestionControlPanel;
 import bwyap.familyfeud.gui.control.QuestionSelectionPanel;
 import bwyap.familyfeud.gui.control.QuestionSetLoaderPanel;
+import bwyap.familyfeud.gui.control.SoundControlPanel;
 import bwyap.familyfeud.gui.control.StatePanel;
 import bwyap.familyfeud.gui.control.StatePlayPanel;
 import bwyap.familyfeud.gui.control.WindowControlPanel;
@@ -58,6 +59,7 @@ public class ControlWindow extends FamilyFeudWindow {
 	private StatePlayPanel statePlayPanel;
 	private FamilyPanel familyPanel;
 	private QuestionControlPanel questionControlPanel;
+	private SoundControlPanel soundControlPanel;
 	
 	/**
 	 * Create a new control window
@@ -121,7 +123,9 @@ public class ControlWindow extends FamilyFeudWindow {
 		questionControlPanel = new QuestionControlPanel(game);
 		questionControlPanel.setEnabled(false);
 		
-		contentPane.add(consolePanel, new GBC(0, 4).setSpan(3, 1));
+		soundControlPanel = new SoundControlPanel();
+		
+		contentPane.add(consolePanel, new GBC(0, 4).setSpan(2, 1));
 		contentPane.add(windowControlPanel, new GBC(0, 0).setSpan(1, 2));
 		contentPane.add(manageFamilyPanel, new GBC(0, 2));
 		contentPane.add(statePanel, new GBC(2, 0).setSpan(1, 3));
@@ -130,6 +134,7 @@ public class ControlWindow extends FamilyFeudWindow {
 		contentPane.add(statePlayPanel, new GBC(2, 3));
 		contentPane.add(familyPanel, new GBC(0, 3));
 		contentPane.add(questionControlPanel, new GBC(1, 3));
+		contentPane.add(soundControlPanel, new GBC(2, 4));
 		
 		addKeyBindings();
 		
