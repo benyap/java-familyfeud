@@ -5,10 +5,11 @@ import java.util.HashMap;
 import bwyap.familyfeud.game.FamilyFeudGame;
 import bwyap.familyfeud.game.fastmoney.state.FFFastMoneyState;
 import bwyap.familyfeud.game.fastmoney.state.FFFastMoneyStateType;
-import bwyap.familyfeud.game.play.state.FFPlayStateType;
+import bwyap.familyfeud.game.fastmoney.state.FastMoney;
 import bwyap.familyfeud.game.state.FFStateType;
 import bwyap.familyfeud.game.state.StateFastMoney;
 import bwyap.familyfeud.render.component.RenderComponentContainer;
+import bwyap.familyfeud.render.state.fastmoney.RenderFastMoneyAnswers;
 import bwyap.familyfeud.render.state.play.RenderQuestionSet;
 import bwyap.familyfeud.render.state.play.RenderStrikes;
 
@@ -40,13 +41,21 @@ public class RenderFastMoneyMachine extends AbstractRenderMachine {
 	}
 	
 	@Override
-	protected void initRenderStates() {
-		previousStateType = null;
-		renderFastMoneyStates = new HashMap<Integer, AbstractRenderState>();
-		RenderComponentContainer container = null;
-		
-		// Create containers for each stage
-		
+	protected void initRenderStates() {		
+		if (game.getState().getType() == FFStateType.FAST_MONEY) {
+			previousStateType = null;
+			renderFastMoneyStates = new HashMap<Integer, AbstractRenderState>();
+			RenderComponentContainer container = null;
+
+			FastMoney fastmoney = ((StateFastMoney)game.getState()).getFastMoneyState().getFastMoney();
+			
+			// Create containers for each stage
+			container = new RenderComponentContainer();
+			container.addComponent(new RenderFastMoneyAnswers(fastmoney));
+			renderFastMoneyStates.put(STATE_P1_ANSWER, container);
+			renderFastMoneyStates.put(STATE_P2_ANSWER, container);
+
+		}
 	}
 	
 	@Override
@@ -59,7 +68,14 @@ public class RenderFastMoneyMachine extends AbstractRenderMachine {
 				FFFastMoneyStateType type = fastMoneyState.getType();
 				if (previousStateType != type) {
 					switch (type) {
-					
+					case P1_ANSWER:
+						renderState = renderFastMoneyStates.get(STATE_P1_ANSWER);
+						break;
+					case P1_REVEAL:
+					case P2_ANSWER:
+						renderState = renderFastMoneyStates.get(STATE_P2_ANSWER);
+						break;
+					case P2_REVEAL:
 					}
 				}
 				previousStateType = fastMoneyState.getType();

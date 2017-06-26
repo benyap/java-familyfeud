@@ -12,10 +12,12 @@ import java.util.Map;
  */
 public class FastMoney {
 	
-	public static final int QUESTIONS = 5;
+	public final int QUESTIONS = 5;
 	
 	private Map<Integer, List<FastMoneyAnswer>> answers;
+	private Map<Integer, Boolean> show;
 	private final int players;
+	private int timer;
 	
 	/**
 	 * Create a new Fast Money game
@@ -46,6 +48,7 @@ public class FastMoney {
 	 */
 	public void reset() {
 		answers = new HashMap<Integer, List<FastMoneyAnswer>>();
+		show = new HashMap<Integer, Boolean>();
 		
 		// Fill answers and scores with blank answers		
 		for(int i = 0; i < players; i++) {
@@ -54,6 +57,7 @@ public class FastMoney {
 				answerList.add(new FastMoneyAnswer());
 			}
 			answers.put(i, answerList);
+			show.put(i, false);
 		}
 	}
 	
@@ -98,6 +102,41 @@ public class FastMoney {
 	}
 	
 	/**
+	 * Check if the player's answers should be shown
+	 * @param player
+	 * @return
+	 */
+	public boolean showAnswers(int player) {
+		return show.get(player);
+	}
+	
+	/**
+	 * Set whether a player's answers should be shown
+	 * @param player
+	 * @param question
+	 * @param revealed
+	 */
+	public void setRevealed(int player, boolean show) {
+		this.show.put(player, show);
+	}
+	
+	/**
+	 * Get the timer 
+	 * @return
+	 */
+	public int getTimer() {
+		return timer;
+	}
+	
+	/**
+	 * Set the timer
+	 * @param timer
+	 */
+	public void setTimer(int timer) {
+		this.timer = timer;
+	}
+	
+	/**
 	 * Check if a player has answered all questions
 	 * @param player
 	 * @return
@@ -115,7 +154,7 @@ public class FastMoney {
 	 * @author bwyap
 	 *
 	 */
-	class FastMoneyAnswer {
+	public class FastMoneyAnswer {
 		private String answer = "";
 		private int score = -1;
 		private boolean revealed;
