@@ -1,7 +1,6 @@
-package bwyap.familyfeud.game;
+package bwyap.familyfeud.game.fastmoney.state;
 
-import bwyap.familyfeud.game.fastmoney.state.FFFastMoneyState;
-import bwyap.familyfeud.game.fastmoney.state.FFFastMoneyStateType;
+import bwyap.familyfeud.game.AbstractFFStateMachine;
 import bwyap.familyfeud.testdriver.FamilyFeudTestDriver;
 import bwyap.utility.logging.Logger;
 

@@ -1,7 +1,7 @@
 package bwyap.familyfeud.game.state;
 
-import bwyap.familyfeud.game.FFFastMoneyStateMachine;
 import bwyap.familyfeud.game.fastmoney.state.FFFastMoneyState;
+import bwyap.familyfeud.game.fastmoney.state.FFFastMoneyStateMachine;
 
 /**
  * A state used to render fast money game play

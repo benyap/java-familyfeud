@@ -1,8 +1,9 @@
-package bwyap.familyfeud.game;
+package bwyap.familyfeud.game.state;
 
-import bwyap.familyfeud.game.state.FFState;
-import bwyap.familyfeud.game.state.FFStateFactory;
-import bwyap.familyfeud.game.state.FFStateType;
+import bwyap.familyfeud.game.AbstractFFStateMachine;
+import bwyap.familyfeud.game.FamilyCollection;
+import bwyap.familyfeud.game.FamilyFeudGame;
+import bwyap.familyfeud.game.QuestionSet;
 import bwyap.familyfeud.testdriver.FamilyFeudTestDriver;
 import bwyap.utility.logging.Logger;
 
