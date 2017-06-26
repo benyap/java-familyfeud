@@ -27,10 +27,10 @@ public class FFFastMoneyStateMachine extends AbstractFFStateMachine<FFFastMoneyS
 	@Override
 	public void init() {
 		// Add all states to the machine
-		addState(P1_ANSWER.toString(), FFFastMoneyStateFactory.getState(P1_ANSWER, null));
-		addState(P1_REVEAL.toString(), FFFastMoneyStateFactory.getState(P1_REVEAL, null));
-		addState(P2_ANSWER.toString(), FFFastMoneyStateFactory.getState(P2_ANSWER, null));
-		addState(P2_REVEAL.toString(), FFFastMoneyStateFactory.getState(P2_REVEAL, null));
+		addState(P1_ANSWER.toString(), FFFastMoneyStateFactory.getState(P1_ANSWER, fastmoney));
+		addState(P1_REVEAL.toString(), FFFastMoneyStateFactory.getState(P1_REVEAL, fastmoney));
+		addState(P2_ANSWER.toString(), FFFastMoneyStateFactory.getState(P2_ANSWER, fastmoney));
+		addState(P2_REVEAL.toString(), FFFastMoneyStateFactory.getState(P2_REVEAL, fastmoney));
 
 		// Set the initial state
 		fastmoney.reset();
