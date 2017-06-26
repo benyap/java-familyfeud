@@ -1,10 +1,17 @@
-package bwyap.familyfeud.game;
+package bwyap.familyfeud.game.play.state;
 
-import bwyap.familyfeud.game.play.FFPlayState;
-import bwyap.familyfeud.game.play.FFPlayStateType;
-import bwyap.familyfeud.game.play.state.FFPlayStateFactory;
+import bwyap.familyfeud.game.AbstractFFStateMachine;
+import bwyap.familyfeud.game.FamilyCollection;
+import bwyap.familyfeud.game.QuestionSet;
 import bwyap.familyfeud.testdriver.FamilyFeudTestDriver;
 import bwyap.utility.logging.Logger;
+
+import static bwyap.familyfeud.game.play.state.FFPlayStateType.ALLOCATE_POINTS;
+import static bwyap.familyfeud.game.play.state.FFPlayStateType.FACE_OFF;
+import static bwyap.familyfeud.game.play.state.FFPlayStateType.FAMILY_PLAY;
+import static bwyap.familyfeud.game.play.state.FFPlayStateType.FAMILY_STEAL;
+import static bwyap.familyfeud.game.play.state.FFPlayStateType.REVEAL_ANSWERS;
+import static bwyap.familyfeud.game.play.state.FFPlayStateType.SELECT_QUESTION;
 
 /**
  * A state machine that handles {@code FFPlayState} for Family Feud.
@@ -26,12 +33,12 @@ public class FFPlayStateMachine extends AbstractFFStateMachine<FFPlayState> {
 	@Override
 	public void init() {
 		// Add all states to the machine
-		addState(FFPlayStateType.SELECT_QUESTION.toString(), FFPlayStateFactory.getState(FFPlayStateType.SELECT_QUESTION, questions));				
-		addState(FFPlayStateType.FACE_OFF.toString(), FFPlayStateFactory.getState(FFPlayStateType.FACE_OFF, questions));				
-		addState(FFPlayStateType.FAMILY_PLAY.toString(), FFPlayStateFactory.getState(FFPlayStateType.FAMILY_PLAY, null));				
-		addState(FFPlayStateType.FAMILY_STEAL.toString(), FFPlayStateFactory.getState(FFPlayStateType.FAMILY_STEAL, null));				
-		addState(FFPlayStateType.ALLOCATE_POINTS.toString(), FFPlayStateFactory.getState(FFPlayStateType.ALLOCATE_POINTS, families));				
-		addState(FFPlayStateType.REVEAL_ANSWERS.toString(), FFPlayStateFactory.getState(FFPlayStateType.REVEAL_ANSWERS, null));				
+		addState(SELECT_QUESTION.toString(), FFPlayStateFactory.getState(SELECT_QUESTION, questions));				
+		addState(FACE_OFF.toString(), FFPlayStateFactory.getState(FACE_OFF, questions));				
+		addState(FAMILY_PLAY.toString(), FFPlayStateFactory.getState(FAMILY_PLAY, null));				
+		addState(FAMILY_STEAL.toString(), FFPlayStateFactory.getState(FAMILY_STEAL, null));				
+		addState(ALLOCATE_POINTS.toString(), FFPlayStateFactory.getState(ALLOCATE_POINTS, families));				
+		addState(REVEAL_ANSWERS.toString(), FFPlayStateFactory.getState(REVEAL_ANSWERS, null));				
 		
 		// Set the initial state
 		changeState(FFPlayStateType.SELECT_QUESTION.toString());

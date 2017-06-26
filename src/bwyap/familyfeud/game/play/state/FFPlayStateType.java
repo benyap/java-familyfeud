@@ -1,4 +1,4 @@
-package bwyap.familyfeud.game.play;
+package bwyap.familyfeud.game.play.state;
 
 /**
  * States in a family feud game whilst in play

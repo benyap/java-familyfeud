@@ -8,7 +8,7 @@ import java.util.HashMap;
  *
  * @param <T> A subclass of {@code State} 
  */
-public class StateMachine<T extends State> {
+public class StateMachine<T extends State<?>> {
 	
 	private final String name;
 	protected T currentState;

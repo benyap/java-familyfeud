@@ -10,6 +10,7 @@ enum RenderStateType {
 	MAIN,
 	NEWGAME,
 	PLAY,
-	ENDGAME
+	ENDGAME,
+	FASTMONEY
 
 }

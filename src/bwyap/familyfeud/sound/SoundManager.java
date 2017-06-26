@@ -2,11 +2,14 @@ package bwyap.familyfeud.sound;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
+import javax.sound.sampled.LineEvent;
+import javax.sound.sampled.LineListener;
 
 import bwyap.utility.logging.Logger;
 
@@ -20,7 +23,18 @@ public class SoundManager {
 	
 	private static SoundManager INSTANCE;
 	
-	private Map<String, Clip> sounds;
+	/**
+	 * Regions for which sound is supported
+	 * @author bwyap
+	 *
+	 */
+	public enum SoundRegion {
+		US, AU
+	}
+	
+	private SoundRegion currentRegion = SoundRegion.AU;	// Default sound region is AU
+	private Map<SoundRegion, Map<String, Clip>> sounds;
+	
 	private boolean muted = false;
 	
 	/**
@@ -35,22 +49,42 @@ public class SoundManager {
 	}
 	
 	private SoundManager() {
-		sounds = new HashMap<String, Clip>();
+		sounds = new HashMap<SoundRegion, Map<String, Clip>>();
+		for (SoundRegion region : SoundRegion.values()) {
+			sounds.put(region, new HashMap<String, Clip>());
+		}
+	}
+	
+	/**
+	 * Get the current sound region the sound manager is set to use
+	 * @return
+	 */
+	public SoundRegion getCurrentRegion() {
+		return currentRegion;
+	}
+	
+	/**
+	 * Set the sound region that the sound manager should use
+	 * @param region
+	 */
+	public void setSoundRegion(SoundRegion region) {
+		this.currentRegion = region;
 	}
 	
 	/**
 	 * Load a sound file into the sound manager
 	 * @param name
+	 * @param region
 	 * @param path
 	 */
-	public void loadClip(String name, String path) {
+	public void loadClip(String name, SoundRegion region, String path) {
 		Clip in = null;
 		
 		try {
 			AudioInputStream audioIn = AudioSystem.getAudioInputStream(getClass().getResource(path));
 			in = AudioSystem.getClip();
 			in.open(audioIn);
-			sounds.put(name, in);
+			sounds.get(region).put(name, in);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -58,14 +92,16 @@ public class SoundManager {
 		}
 	}
 	
+	
 	/**
 	 * Play the clip with the specified name from the beginning.
 	 * If the clip was already playing, it is reset and played from the beginning.
 	 * @param name
+	 * @param region
 	 */
-	public void playClip(String name) {
+	public void playClip(String name, SoundRegion region) {
 		if (muted) return;
-		Clip clip = getClip(name);
+		Clip clip = getClip(name, region);
 		if (clip != null) {
 			stopClip(name);
 			clip.setFramePosition(0);
@@ -74,21 +110,86 @@ public class SoundManager {
 	}
 	
 	/**
+	 * Play the clip with the specified name from the current region from the beginning.
+	 * If the clip was already playing, it is reset and played from the beginning.
+	 * @param name
+	 */
+	public void playClip(String name) {
+		playClip(name, currentRegion);
+	}
+	
+	/**
+	 * Play the clips listed in the array in succession
+	 * @param clipnames
+	 * @param region
+	 */
+	public void playClips(String[] clipnames, SoundRegion region) {
+		for(int i = 0; i < clipnames.length; i++) {
+			final int index = i;
+			// Add listeners to each clip to trigger once the previous one is finished
+			getClip(clipnames[i], region).addLineListener(new LineListener() {
+				@Override
+				public void update(LineEvent event) {
+					if (event.getType() == LineEvent.Type.STOP) {
+						if (index + 1 < clipnames.length) {
+							playClip(clipnames[index + 1], region);
+						}
+					}
+				}
+			});
+		}
+		// Start the chain by playing the first clip
+		playClip(clipnames[0], region);
+	}
+	
+	/**
+	 * Play the clips listed in the array in succession
+	 * @param clipnames
+	 */
+	public void playClips(String[] clipnames) {
+		playClips(clipnames, currentRegion);
+	}
+	
+	/**
+	 * Stop the specified clip from playing
+	 * @param name
+	 * @param region
+	 */
+	public void stopClip(String name, SoundRegion region) {
+		Clip clip = getClip(name, region);
+		if (clip.isRunning()) clip.stop();
+	}
+	
+	/**
 	 * Stop the specified clip from playing
 	 * @param name
 	 */
 	public void stopClip(String name) {
-		Clip clip = getClip(name);
-		if (clip.isRunning()) clip.stop();
+		stopClip(name, currentRegion);
 	}
 	
 	/**
 	 * Stop all clips from playing
 	 */
 	public void stopAllClips() {
-		for(String clipName : sounds.keySet()) {
-			stopClip(clipName);
+		for(SoundRegion region : sounds.keySet()) {
+			for(String clipName : sounds.get(region).keySet()) {
+				stopClip(clipName);
+			}
 		}
+	}
+	
+	/**
+	 * Adjust the gain of the specified clip by the level in decibels 
+	 * @param name
+	 * @param region
+	 * @param level
+	 */
+	public void setClipVolume(String name, SoundRegion region, float level) {
+		Clip clip = getClip(name, region);
+		
+		FloatControl gainControl =  (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+		gainControl.setValue(level);
 	}
 	
 	/**
@@ -97,10 +198,7 @@ public class SoundManager {
 	 * @param level
 	 */
 	public void setClipVolume(String name, float level) {
-		Clip clip = getClip(name);
-		
-		FloatControl gainControl =  (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-		gainControl.setValue(level);
+		setClipVolume(name, currentRegion, level);
 	}
 	
 	/**
@@ -123,12 +221,21 @@ public class SoundManager {
 	/**
 	 * Get the clip with the specified name
 	 * @param name
+	 * @param region
 	 * @return
 	 */
-	private Clip getClip(String name) {
-		return sounds.get(name);
+	private Clip getClip(String name, SoundRegion region) {
+		return sounds.get(region).get(name);
 	}
-
+	
+	/**
+	 * Get the set containing all sound clips loaded in the system for the specified region
+	 * @param region
+	 */
+	public Set<String> getClips(SoundRegion region) {
+		return sounds.get(region).keySet();
+	}
+	
 	/**
 	 * Toggle if the sound manager is muted
 	 */

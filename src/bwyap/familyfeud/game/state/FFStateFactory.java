@@ -4,6 +4,7 @@ import bwyap.familyfeud.game.FamilyCollection;
 import bwyap.familyfeud.game.FamilyFeudGame;
 import bwyap.familyfeud.game.InvalidDataException;
 import bwyap.familyfeud.game.QuestionSet;
+import bwyap.familyfeud.game.fastmoney.state.FastMoney;
 
 /**
  * This class is responsible for creating and initializing the game states of a Family Feud game.
@@ -20,7 +21,8 @@ public class FFStateFactory {
 	private static FFState initializeGame;
 	private static FFState play;
 	private static FFState endGame;
-	
+	private static FFState fastMoney;
+
 	/**
 	 * Get the FFState object for the specified state.
 	 * A new state object is created if it has not already been created.
@@ -70,6 +72,14 @@ public class FFStateFactory {
 		case START:
 			if (start == null) createStartState();
 			return start;
+		case FAST_MONEY:
+			if (fastMoney == null) {
+				if (data instanceof FamilyFeudGame) {
+					createFastMoneyState(((FamilyFeudGame) data).getFastMoney());
+				}
+				else throw new InvalidDataException("FFStateFactory: FamilyFeudGame required when create StateFastMoney");
+			}
+			return fastMoney;
 		}
 		return null;
 	}
@@ -105,6 +115,10 @@ public class FFStateFactory {
 
 	private static void createAddFamilyState(FamilyCollection families) {
 		addFamily = new StateAddFamily(families);
+	}
+	
+	private static void createFastMoneyState(FastMoney fastmoney) {
+		fastMoney = new StateFastMoney(fastmoney);
 	}
 	
 }

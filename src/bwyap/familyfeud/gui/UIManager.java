@@ -103,9 +103,12 @@ public class UIManager {
 		map.put("statepanel.width", 180);
 		map.put("statepanel.height", 220);
 		  
-		map.put("consolepanel.width", map.get("controlwindow.width") - 10);
+		map.put("consolepanel.width", map.get("controlwindow.width") - 10 - 180);
 		map.put("consolepanel.height", 200);
-		  
+		
+		map.put("soundpanel.width", 180);
+		map.put("soundpanel.height", map.get("consolepanel.height"));
+		
 		map.put("stateplaypanel.width", map.get("statepanel.width"));
 		map.put("stateplaypanel.height", map.get("controlwindow.height") - map.get("consolepanel.height") - map.get("statepanel.height") - 25);
 		  
@@ -132,14 +135,25 @@ public class UIManager {
 			map.put("gamewindow.width", 1024);
 			map.put("gamewindow.height", 768);
 		}
-		
-		map.put("questionselectionpanel.col1.width", 50);
+
+		map.put("questionselectionpanel.col0.width", 20);
+		map.put("questionselectionpanel.col1.width", 40);
 		map.put("questionselectionpanel.col2.width", 40);
 		map.put("questionselectionpanel.col3.width", 400);
 		
 		map.put("questioncontrolpanel.col2.width", 60);
 		map.put("questioncontrolpanel.col1.width", 60);
 		map.put("questioncontrolpanel.col0.width", map.get("questioncontrolpanel.width") - 30 - map.get("questioncontrolpanel.col1.width") - map.get("questioncontrolpanel.col2.width")  - 5);
+		
+		map.put("fastmoneywindow.width", 350);
+		map.put("fastmoneywindow.height", 600);
+		
+		map.put("fastmoneyanswerpanel.width", 340);
+		map.put("fastmoneyanswerpanel.height", 200);
+
+		map.put("fastmoneytimerpanel.width", 150);
+		map.put("fastmoneytimerpanel.height", 150);
+		
 		
 		ConsoleLogger.getInstance().setFontSize(12);	
 	}
@@ -160,8 +174,9 @@ public class UIManager {
 		map.put("stateplaypanel.height", map.get("stateplaypanel.height") + 10);
 		map.put("questioncontrolpanel.height", map.get("questioncontrolpanel.height") + 10);
 		map.put("familypanel.height", map.get("familypanel.height") + 10);
-
-		map.put("questionselectionpanel.col1.width", 75);
+		
+		map.put("questionselectionpanel.col0.width", 50);
+		map.put("questionselectionpanel.col1.width", 50);
 		map.put("questionselectionpanel.col2.width", 50);
 		map.put("questionselectionpanel.col3.width", 400);
 		

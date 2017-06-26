@@ -11,7 +11,7 @@ import bwyap.utility.statemachine.StateMachine;
  *
  * @param <T>
  */
-public class AbstractFFStateMachine<T extends State> extends StateMachine<T> {
+public class AbstractFFStateMachine<T extends State<?>> extends StateMachine<T> {
 	
 	public AbstractFFStateMachine(String string) {
 		super(string);

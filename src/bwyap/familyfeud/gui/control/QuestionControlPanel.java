@@ -26,6 +26,7 @@ import bwyap.familyfeud.game.play.state.StateFamilyPlay;
 import bwyap.familyfeud.game.state.StatePlay;
 import bwyap.familyfeud.gui.GBC;
 import bwyap.familyfeud.gui.UIManager;
+import bwyap.familyfeud.sound.SoundManager;
 import bwyap.gridgame.res.ResourceLoader;
 
 /**
@@ -82,12 +83,17 @@ public class QuestionControlPanel extends JPanel {
 		reveal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (table.getSelectedRow() > -1) {
-					if (game.getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[] {
-						StateFamilyPlay.ACTION_OPENANSWER, table.getSelectedRow()
-					})) {
+					if (!game.getQuestionSet().getSelectedQuestion().getAnswers().get(table.getSelectedRow()).isRevealed()) {
+						SoundManager.getInstance().playClip("blip");
+						try { Thread.sleep(1000); }
+						catch (Exception ex) { }
+						if (game.getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[] {
+							StateFamilyPlay.ACTION_OPENANSWER, table.getSelectedRow()
+						})) SoundManager.getInstance().playClip("answer");
 						loadQuestion();
 						table.clearSelection();
 					}
+					else game.getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[] {StateFamilyPlay.ACTION_OPENANSWER, table.getSelectedRow()}); 
 				}
 			}
 		});
@@ -95,9 +101,9 @@ public class QuestionControlPanel extends JPanel {
 		strike = new JButton("Strike");
 		strike.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				game.getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[] {
-						StateFamilyPlay.ACTION_STRIKE
-					});
+				if (game.getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[] {
+					StateFamilyPlay.ACTION_STRIKE
+				})) SoundManager.getInstance().playClip("strike");
 			}
 		});
 		

@@ -2,7 +2,9 @@ package bwyap.familyfeud.game;
 
 import java.util.List;
 
+import bwyap.familyfeud.game.fastmoney.state.FastMoney;
 import bwyap.familyfeud.game.state.FFState;
+import bwyap.familyfeud.game.state.FFStateMachine;
 import bwyap.familyfeud.game.state.FFStateType;
 import bwyap.familyfeud.testdriver.FamilyFeudTestDriver;
 import bwyap.utility.logging.Logger;
@@ -19,6 +21,7 @@ public class FamilyFeudGame {
 	private FFStateMachine stateMachine;
 	private FamilyCollection families;
 	private QuestionSet questions;
+	private FastMoney fastmoney;
 	
 	private Family winner;
 	
@@ -28,12 +31,23 @@ public class FamilyFeudGame {
 	public void init() {
 		families = new FamilyCollection();
 		questions = new QuestionSet();
+		fastmoney = new FastMoney();
 		winner = null;
 		
 		stateMachine = new FFStateMachine(this, families, questions);
 		stateMachine.init();
 		
 		if (FamilyFeudTestDriver.DEBUG_LOG_CONSOLE) Logger.info("Game initialized.");
+	}
+	
+	/**
+	 * Reset the game
+	 */
+	public void reset() {
+		families.reset();
+		questions.reset();
+		winner = null;
+		if (FamilyFeudTestDriver.DEBUG_LOG_CONSOLE) Logger.info("Game reset.");
 	}
 	
 	/**
@@ -52,6 +66,14 @@ public class FamilyFeudGame {
 	 */
 	public FFState getState() {
 		return stateMachine.getCurrentState();
+	}
+	
+	/**
+	 * Get the Fast Money instance 
+	 * @return
+	 */
+	public FastMoney getFastMoney() {
+		return fastmoney;
 	}
 	
 	/**
@@ -90,7 +112,7 @@ public class FamilyFeudGame {
 	 * Set the winner of the game. Assuming that the game has finished,
 	 * this method will set the winner as the family with the highest points.
 	 */
-	public void setWinner() {
+	private void setWinner() {
 		int index = 0;
 		List<Family> families = getFamilies();
 		for(int i = 0; i < families.size(); i++) {
@@ -109,6 +131,14 @@ public class FamilyFeudGame {
 	public Family getWinningFamily() {
 		setWinner();
 		return winner;
+	}
+
+	/**
+	 * Check if the game is finished
+	 * @return
+	 */
+	public boolean finished() {
+		return winner != null;
 	}
 	
 }

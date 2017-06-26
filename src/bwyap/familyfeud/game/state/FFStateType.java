@@ -13,7 +13,8 @@ public enum FFStateType {
 	LOAD_QUESTIONS("load questions"),
 	INITIALIZE_GAME("initialize game"),
 	PLAY("play"),
-	END_GAME("end game");
+	END_GAME("end game"), 
+	FAST_MONEY("fast money");
 	
 	private String name;
 	

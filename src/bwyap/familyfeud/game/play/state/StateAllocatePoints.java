@@ -4,8 +4,6 @@ import bwyap.familyfeud.game.Answer;
 import bwyap.familyfeud.game.FamilyCollection;
 import bwyap.familyfeud.game.InvalidDataException;
 import bwyap.familyfeud.game.Question;
-import bwyap.familyfeud.game.play.FFPlayState;
-import bwyap.familyfeud.game.play.FFPlayStateType;
 import bwyap.utility.logging.Logger;
 
 /**

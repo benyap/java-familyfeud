@@ -3,8 +3,6 @@ package bwyap.familyfeud.game.play.state;
 import bwyap.familyfeud.game.FamilyCollection;
 import bwyap.familyfeud.game.InvalidDataException;
 import bwyap.familyfeud.game.QuestionSet;
-import bwyap.familyfeud.game.play.FFPlayState;
-import bwyap.familyfeud.game.play.FFPlayStateType;
 
 /**
  * This class is responsible for creating and initializing the game states within the Family Feud game play.

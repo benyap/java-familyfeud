@@ -27,6 +27,8 @@ public class RenderQuestionSet implements RenderableInterface {
 	public static final int PANEL_WIDTH = 400;
 	public static final int PANEL_HEIGHT = 100;
 	
+	private static final int CLICK_TIME = 200;
+	
 	private FamilyFeudGame game;
 	private Fader board;
 	private RenderableString score;
@@ -34,7 +36,9 @@ public class RenderQuestionSet implements RenderableInterface {
 	private List<RenderableString> answers;
 	private List<RenderableString> scores;
 	private int prevRevealed;
-	
+	private float numberRevealCounter;
+	private int numberRevealNext;
+
 	public RenderQuestionSet(FamilyFeudGame game) {
 		this.game = game;
 		this.board = new Fader(1000, new RenderableImage(ResourceLoader.getImage("panel")), null);
@@ -47,15 +51,22 @@ public class RenderQuestionSet implements RenderableInterface {
 	/**
 	 * Reset animations on the question set board
 	 */
+	@Override
 	public void reset() {
 		board.reset();
 		numbers.clear();
 		answers.clear();
 		scores.clear();
+		prevRevealed = 0;
+		numberRevealCounter = 0;
+		numberRevealNext = 0;
+		Question question = game.getQuestionSet().getSelectedQuestion();
+		for (int i = 0; i < question.getAnswers().size(); i++) {
+			if (question.getAnswers().get(i).isRevealed()) prevRevealed++;
+		}
 	}
 
-	private float counter = 0;
-	private int next = -1;
+
 	@Override
 	public void update(float timeElapsed) {
 		Question question = game.getQuestionSet().getSelectedQuestion();
@@ -65,7 +76,7 @@ public class RenderQuestionSet implements RenderableInterface {
 			for(int i = 0; i < question.getAnswers().size(); i++) {
 				RenderableString s = new RenderableString("- " + (i + 1) + " -", 0, 0, 
 						ResourceLoader.getFontName("Bebas Neue"), 
-						Font.PLAIN, 100, Color.WHITE, false);
+						Font.PLAIN, 90, Color.WHITE, false);
 				s.setVisible(false);
 				numbers.add(s);
 			}
@@ -75,7 +86,7 @@ public class RenderQuestionSet implements RenderableInterface {
 				// Create answer string
 				RenderableString a = new RenderableString(question.getAnswers().get(i).getAnswerString(), 0, 0, 
 						ResourceLoader.getFontName("Bebas Neue"), 
-						Font.PLAIN, 100, Color.WHITE, false);
+						Font.PLAIN, 90, Color.WHITE, false);
 				a.setVisible(false);
 				answers.add(a);
 
@@ -89,40 +100,45 @@ public class RenderQuestionSet implements RenderableInterface {
 			}
 		}
 		
-		// Get the game score
 		int num = 0;
 		int revealed = 0;
 		for (int i = 0; i < question.getAnswers().size(); i++) {
-			if (question.getAnswers().get(i).isRevealed()) {
-				revealed++;
-				numbers.get(i).setVisible(false);
-				answers.get(i).setVisible(true);
-				scores.get(i).setVisible(true);
-				num += (question.getAnswers().get(i).getValue() * question.getMultiplier());
+			if (prevRevealed > 0) {
+				if (question.getAnswers().get(i).isRevealed()) {
+					revealed++;
+					numbers.get(i).setVisible(false);
+					answers.get(i).setVisible(true);
+					scores.get(i).setVisible(true);
+					// Get the game score
+					num += (question.getAnswers().get(i).getValue() * question.getMultiplier());
+				}
+				else numbers.get(i).setVisible(true);
 			}
 			else {
 				// Incrementally display answer text if not revealed yet
 				if (board.finished()) {
-					if (i == next) {
-						if (numbers.get(next - 1).isVisible()) {
-							if (counter > 500) {
-								numbers.get(i).setVisible(true);
-								counter = 0;
-								next++;
-							}
-							counter += timeElapsed;
-						}
+					if (question.getAnswers().get(i).isRevealed()) {
+						revealed++;
+						numbers.get(i).setVisible(false);
+						answers.get(i).setVisible(true);
+						scores.get(i).setVisible(true);
+						// Get the game score
+						num += (question.getAnswers().get(i).getValue() * question.getMultiplier());
 					}
-					else if (!numbers.get(0).isVisible() && !question.getAnswers().get(0).isRevealed()) {
-						numbers.get(0).setVisible(true);
-						next = 1;
+					if (i == numberRevealNext && !numbers.get(numberRevealNext).isVisible()) {
+						if (numberRevealCounter < CLICK_TIME) numberRevealCounter += timeElapsed;
+						else {
+							numberRevealCounter = 0;
+							numbers.get(numberRevealNext).setVisible(true);
+							numberRevealNext++;
+							SoundManager.getInstance().playClip("click");
+						}
 					}
 				}
 			}
 		}
 		
 		if (prevRevealed != revealed) {
-			if (revealed > 0) SoundManager.getInstance().playClip("bell");
 			prevRevealed = revealed;
 		}
 		
@@ -173,7 +189,7 @@ public class RenderQuestionSet implements RenderableInterface {
 						int y = 345 + 120 * (i % 4);
 						a.setPosition(x, y);
 						s.setPosition(x + 420 - (s.getTextWidth(g, s.getFont())), y);
-						if (a.getText().length() > 8) a.setSize((int)(100 * (9.0/a.getText().length())));
+						if (a.getText().length() > 7) a.setSize((int)(100 * (10.0/a.getText().length())));
 					}
 					a.render(panel, g);
 					s.render(panel, g);

@@ -29,6 +29,14 @@ public class RenderingPanel extends JPanel {
 	private AbstractRenderState state;
 	
 	/**
+	 * Get the aspect ratio of the rendering panel
+	 * @return
+	 */
+	public float getRatio() {
+		return (float)DEFAULT_WIDTH/(float)DEFAULT_HEIGHT;
+	}
+	
+	/**
 	 * Get the scaled x value according to the size of the panel,
 	 * using the original intended GameWindow width as its reference
 	 * @param x
