@@ -6,8 +6,11 @@ package bwyap.familyfeud.game.fastmoney.state;
  *
  */
 public enum FFFastMoneyStateType {
-	// TODO
-	;
+	
+	P1_ANSWER("p1 answer"),
+	P1_REVEAL("p1 reveal"),
+	P2_ANSWER("p2 answer"),
+	P2_REVEAL("p2 reveal");
 	
 	private String name;
 	
