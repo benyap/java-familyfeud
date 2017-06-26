@@ -45,7 +45,7 @@ public class RenderFastMoneyAnswers implements RenderableInterface {
 		score = 0;
 		for(int i = 0; i < COLUMNS; i++) {
 			for(int j = 0; j < FastMoney.QUESTIONS; j++) {
-				if (fastmoney.getAnswer(i, j).isRevealed() && fastmoney.getAnswer(i, j).getScore() >= 0) {
+				if (fastmoney.getAnswer(i, j).isRevealedScore() && fastmoney.getAnswer(i, j).getScore() >= 0) {
 					score += fastmoney.getAnswer(i, j).getScore();
 				}
 			}
@@ -74,16 +74,16 @@ public class RenderFastMoneyAnswers implements RenderableInterface {
 		// Set the answers and numbers text for both players
 		for(int i = 0; i < FastMoney.QUESTIONS; i++) {
 			answers1.get(i).setText(fastmoney.getAnswer(0, i).getAnswer());
-			answers1.get(i).setVisible(fastmoney.getAnswer(0, i).isRevealed());
+			answers1.get(i).setVisible(fastmoney.getAnswer(0, i).isRevealedAnswer());
 			
 			scores1.get(i).setText(fastmoney.getAnswer(0, i).getScore() + "");
-			scores1.get(i).setVisible(fastmoney.getAnswer(0, i).isRevealed());
+			scores1.get(i).setVisible(fastmoney.getAnswer(0, i).isRevealedScore());
 			
 			answers2.get(i).setText(fastmoney.getAnswer(1, i).getAnswer());
-			answers2.get(i).setVisible(fastmoney.getAnswer(1, i).isRevealed());
+			answers2.get(i).setVisible(fastmoney.getAnswer(1, i).isRevealedAnswer());
 			
 			scores2.get(i).setText(fastmoney.getAnswer(1, i).getScore() + "");
-			scores2.get(i).setVisible(fastmoney.getAnswer(1, i).isRevealed());
+			scores2.get(i).setVisible(fastmoney.getAnswer(1, i).isRevealedScore());
 		}
 	}
 	

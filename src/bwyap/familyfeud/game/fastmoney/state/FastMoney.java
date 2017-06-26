@@ -100,8 +100,18 @@ public class FastMoney {
 	 * @param question
 	 * @param revealed
 	 */
-	public void setRevealed(int player, int question, boolean revealed) {
-		answers.get(player).get(question).setRevealed(revealed);
+	public void setRevealedAnswer(int player, int question, boolean revealed) {
+		answers.get(player).get(question).setRevealedAnswer(revealed);
+	}
+	
+	/**
+	 * Set whether a player's answer is revealed
+	 * @param player
+	 * @param question
+	 * @param revealed
+	 */
+	public void setRevealedScore(int player, int question, boolean revealed) {
+		answers.get(player).get(question).setRevealedScore(revealed);
 	}
 	
 	/**
@@ -190,13 +200,16 @@ public class FastMoney {
 	public class FastMoneyAnswer {
 		private String answer = "";
 		private int score = -1;
-		private boolean revealed;
+		private boolean revealedAnswer;
+		private boolean revealedScore;
 		public String getAnswer() { return answer; }
 		public int getScore() { return score; }
-		public boolean isRevealed() { return revealed; }
+		public boolean isRevealedAnswer() { return revealedAnswer; }
+		public boolean isRevealedScore() { return revealedScore; }
 		public void setAnswer(String answer) { this.answer = answer; }
 		public void setScore(int score) { this.score = score; }
-		public void setRevealed(boolean revealed) { this.revealed = revealed; }
+		public void setRevealedAnswer(boolean revealed) { this.revealedAnswer = revealed; }
+		public void setRevealedScore(boolean revealed) { this.revealedScore = revealed; }
 	}
 
 }

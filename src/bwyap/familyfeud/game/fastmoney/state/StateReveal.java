@@ -54,7 +54,7 @@ public class StateReveal extends FFFastMoneyState {
 	 * Reveal a player's answer
 	 */
 	private void revealAnswer(int question, boolean revealed) {
-		fastmoney.setRevealed(PLAYER, question, revealed);
+		fastmoney.setRevealedAnswer(PLAYER, question, revealed);
 	}
 
 }

@@ -105,7 +105,7 @@ public class FastMoneyTimerPanel extends JPanel {
 		tryAgainSound.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				SoundManager.getInstance().playClip("tryagain");
+				SoundManager.getInstance().playClip("fm_tryagain");
 			}
 		});
 		
@@ -115,7 +115,6 @@ public class FastMoneyTimerPanel extends JPanel {
 		add(reset, new GBC(0, 2));
 		add(time, new GBC(1, 2));
 		add(tryAgainSound, new GBC(0, 3).setSpan(2, 1));
-		revalidate();
 	}
 	
 	/**

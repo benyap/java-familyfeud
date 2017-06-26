@@ -134,22 +134,22 @@ public class FastMoneyAnswerPanel extends JPanel {
 			button.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					if (fastmoney.getAnswer(PLAYER, question).isRevealed()) {
-						fastmoney.setRevealed(PLAYER, question, false);
+					if (fastmoney.getAnswer(PLAYER, question).isRevealedAnswer()) {
+						fastmoney.setRevealedAnswer(PLAYER, question, false);
+						fastmoney.setRevealedScore(PLAYER, question, false);
 						button.setText("Reveal");
 					}
 					else {
-						try {
-							SoundManager.getInstance().playClip("blip");
-							Thread.sleep(1000);
-							fastmoney.setRevealed(PLAYER, question, true);
-							button.setText("Hide");
-							if (fastmoney.getAnswer(PLAYER, question).getScore() > 0) {
-								SoundManager.getInstance().playClip("answer");
-							}
-							else SoundManager.getInstance().playClip("strike");
-						}
+						SoundManager.getInstance().playClip("blip");
+						fastmoney.setRevealedAnswer(PLAYER, question, true);
+						try { Thread.sleep(1000); }
 						catch (Exception ex) { }
+						fastmoney.setRevealedScore(PLAYER, question, true);
+						button.setText("Hide");
+						if (fastmoney.getAnswer(PLAYER, question).getScore() > 0) {
+							SoundManager.getInstance().playClip("fm_answer");
+						}
+						else SoundManager.getInstance().playClip("fm_strike");
 					}
 				}
 			});
