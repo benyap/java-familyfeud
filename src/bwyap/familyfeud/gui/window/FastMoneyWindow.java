@@ -62,7 +62,7 @@ public class FastMoneyWindow extends FamilyFeudWindow {
 	
 		answerPanel1 = new FastMoneyAnswerPanel(fastmoney, 0);
 		answerPanel2 = new FastMoneyAnswerPanel(fastmoney, 1);
-		timerPanel = new FastMoneyTimerPanel(fastmoney);
+		timerPanel = new FastMoneyTimerPanel(fastmoney, this);
 		
 		add(answerPanel1, new GBC(0, 0).setSpan(2, 1));
 		add(answerPanel2, new GBC(0, 1).setSpan(2, 1));
@@ -75,6 +75,20 @@ public class FastMoneyWindow extends FamilyFeudWindow {
 	public void reset() {
 		setLocationRelativeTo(null);
 		fastmoney.reset();
+	}
+	
+	/**
+	 * Set whether the user is allowed to reveal the answers
+	 * @param player
+	 * @param reveal
+	 */
+	public void enableReveal(int player, boolean reveal) {
+		if (player == 0) {
+			answerPanel1.enableReveal(reveal);			
+		}
+		else if (player == 1) {
+			answerPanel2.enableReveal(reveal);
+		}
 	}
 	
 }

@@ -169,7 +169,7 @@ public class FastMoneyAnswerPanel extends JPanel {
 						fastmoney.setAnswer(PLAYER, i, answers.get(i).getText());
 						save.setEnabled(false);
 						save.setText("Saved");
-						reveal.get(i).setEnabled(true);
+						if (!fastmoney.isTimerRunning()) reveal.get(i).setEnabled(true);
 					}
 				}
 			}
@@ -204,6 +204,25 @@ public class FastMoneyAnswerPanel extends JPanel {
 		}
 		
 		save.setEnabled(valid);
+	}
+	
+	/**
+	 * Set whether the user can reveal answers or not
+	 * @param reveal
+	 */
+	public void enableReveal(boolean reveal) {
+		if (reveal) {
+			for(int i = 0; i < FastMoney.QUESTIONS; i++) {
+				if (!scores.get(i).getText().equals("")) {
+					this.reveal.get(i).setEnabled(true);
+				}
+			}
+		}
+		else {
+			for(int i = 0; i < FastMoney.QUESTIONS; i++) {
+				this.reveal.get(i).setEnabled(false);
+			}
+		}
 	}
 
 }

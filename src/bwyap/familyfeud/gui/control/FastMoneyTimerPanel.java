@@ -20,6 +20,7 @@ import javax.swing.event.DocumentListener;
 import bwyap.familyfeud.game.fastmoney.state.FastMoney;
 import bwyap.familyfeud.gui.GBC;
 import bwyap.familyfeud.gui.UIManager;
+import bwyap.familyfeud.gui.window.FastMoneyWindow;
 import bwyap.familyfeud.sound.SoundManager;
 import bwyap.gridgame.res.ResourceLoader;
 
@@ -30,6 +31,7 @@ public class FastMoneyTimerPanel extends JPanel {
 	public static final int WIDTH = UIManager.getInstance().getProperty("fastmoneytimerpanel.width");
 	public static final int HEIGHT = UIManager.getInstance().getProperty("fastmoneytimerpanel.height");
 	
+	private FastMoneyWindow window;
 	private FastMoney fastmoney;
 	
 	private JLabel title;
@@ -39,8 +41,9 @@ public class FastMoneyTimerPanel extends JPanel {
 	private JTextField time;
 	private JButton tryAgainSound;
 	
-	public FastMoneyTimerPanel(FastMoney fastmoney) {
+	public FastMoneyTimerPanel(FastMoney fastmoney, FastMoneyWindow window) {
 		this.fastmoney = fastmoney;
+		this.window = window;
 		
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		setBorder(BorderFactory.createLineBorder(Color.BLACK, DEFAULT_BORDER_WIDTH));
@@ -63,6 +66,8 @@ public class FastMoneyTimerPanel extends JPanel {
 				fastmoney.setTimerRunning(true);
 				stop.setEnabled(true);
 				start.setEnabled(false);
+				window.enableReveal(0, false);
+				window.enableReveal(1, false);
 			}
 		});
 		
@@ -75,6 +80,8 @@ public class FastMoneyTimerPanel extends JPanel {
 				fastmoney.setTimerRunning(false);
 				stop.setEnabled(false);
 				start.setEnabled(true);
+				window.enableReveal(0, true);
+				window.enableReveal(1, true);
 			}
 		});
 
