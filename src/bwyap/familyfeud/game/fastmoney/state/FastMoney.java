@@ -119,7 +119,7 @@ public class FastMoney {
 	 * @param question
 	 * @param revealed
 	 */
-	public void setRevealed(int player, boolean show) {
+	public void setShow(int player, boolean show) {
 		this.show.put(player, show);
 	}
 	
