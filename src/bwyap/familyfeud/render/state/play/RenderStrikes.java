@@ -23,6 +23,7 @@ import bwyap.gridgame.res.ResourceLoader;
 public class RenderStrikes implements RenderableInterface {
 
 	public static final int STRIKE_SIZE = 200;
+	public static final int STRIKE_TIME = 1500;
 	
 	private FamilyFeudGame game;
 	private int strikes;
@@ -46,9 +47,9 @@ public class RenderStrikes implements RenderableInterface {
 		this.img2 = new RenderableImage(ResourceLoader.getImage("strike"), STRIKE_SIZE, STRIKE_SIZE);
 		this.img3 = new RenderableImage(ResourceLoader.getImage("strike"), STRIKE_SIZE, STRIKE_SIZE);
 		
-		this.strike1 = new Fader(1000, null, img1);
-		this.strike2 = new Fader(1000, null, img2);
-		this.strike3 = new Fader(1000, null, img3);
+		this.strike1 = new Fader(STRIKE_TIME, null, img1);
+		this.strike2 = new Fader(STRIKE_TIME, null, img2);
+		this.strike3 = new Fader(STRIKE_TIME, null, img3);
 		
 		// Strikes should initially be disabled
 		this.strike1.forceFinish();
