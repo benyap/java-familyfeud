@@ -67,13 +67,11 @@ public class StateFamilyPlay extends FFPlayState implements StrikeInterface {
 		case ACTION_OPENANSWER:
 			// Reveal an answer
 			if (data[1] instanceof Integer) {
-				openAnswer((Integer) data[1]);
-				return true;
+				return openAnswer((Integer) data[1]);
 			}
 			else throw new InvalidDataException("Expecting a {*, Integer} when using action ACTION_OPENANSWER");
 		case ACTION_STRIKE:
-			strike();
-			return true;
+			return strike();
 		case ACTION_SELECTSTEALFAMILY:
 			if (data[1] instanceof Integer) {
 				selectStealFamily((Integer) data[1]);
@@ -88,13 +86,15 @@ public class StateFamilyPlay extends FFPlayState implements StrikeInterface {
 	/**
 	 * Give the selected family a strike
 	 */
-	private void strike() {
+	private boolean strike() {
 		if (strikes >= FamilyFeudGame.STRIKE_LIMIT) {
 			Logger.err("Strike limit reached: other family should be given the chance to steal.");
+			return false;
 		}
 		else {
 			strikes++;
 			Logger.log("Family [" + selectedFamilyIndex + "] now has " + strikes + " strike(s).");
+			return true;
 		}
 	}
 	
@@ -107,15 +107,17 @@ public class StateFamilyPlay extends FFPlayState implements StrikeInterface {
 	 * Reveal and answer
 	 * @param index
 	 */
-	private void openAnswer(int index) {
+	private boolean openAnswer(int index) {
 		if (strikes < FamilyFeudGame.STRIKE_LIMIT) {
 			if (!question.getAnswers().get(index).isRevealed()) {
 				question.getAnswers().get(index).setReveal(true);
 				Logger.log("Revealed answer: " + question.getAnswers().get(index));
+				return true;
 			}
 			else Logger.log("Answer already revealed!");
 		}
 		else Logger.err("Strike limit reached: cannot reveal more answers for family [" + selectedFamilyIndex + "]");
+		return false;
 	}
 
 	/**

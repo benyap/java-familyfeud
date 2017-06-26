@@ -89,11 +89,9 @@ public class QuestionControlPanel extends JPanel {
 						catch (Exception ex) { }
 						if (game.getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[] {
 							StateFamilyPlay.ACTION_OPENANSWER, table.getSelectedRow()
-						})) {
-							loadQuestion();
-							table.clearSelection();
-						}
-						SoundManager.getInstance().playClip("answer");
+						})) SoundManager.getInstance().playClip("answer");
+						loadQuestion();
+						table.clearSelection();
 					}
 					else game.getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[] {StateFamilyPlay.ACTION_OPENANSWER, table.getSelectedRow()}); 
 				}
@@ -103,10 +101,9 @@ public class QuestionControlPanel extends JPanel {
 		strike = new JButton("Strike");
 		strike.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				game.getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[] {
+				if (game.getState().executeAction(StatePlay.ACTION_EXECUTEPLAYACTION, new Object[] {
 					StateFamilyPlay.ACTION_STRIKE
-				});
-				SoundManager.getInstance().playClip("strike");
+				})) SoundManager.getInstance().playClip("strike");
 			}
 		});
 		
