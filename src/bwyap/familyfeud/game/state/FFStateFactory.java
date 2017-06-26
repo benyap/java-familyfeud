@@ -4,6 +4,7 @@ import bwyap.familyfeud.game.FamilyCollection;
 import bwyap.familyfeud.game.FamilyFeudGame;
 import bwyap.familyfeud.game.InvalidDataException;
 import bwyap.familyfeud.game.QuestionSet;
+import bwyap.familyfeud.game.fastmoney.state.FastMoney;
 
 /**
  * This class is responsible for creating and initializing the game states of a Family Feud game.
@@ -112,7 +113,7 @@ public class FFStateFactory {
 	}
 	
 	private static void createFastMoneyState() {
-		fastMoney = new StateFastMoney();
+		fastMoney = new StateFastMoney(new FastMoney());
 	}
 	
 }

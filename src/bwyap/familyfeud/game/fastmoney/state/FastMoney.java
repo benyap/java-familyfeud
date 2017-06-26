@@ -15,12 +15,36 @@ public class FastMoney {
 	public static final int QUESTIONS = 5;
 	
 	private Map<Integer, List<FastMoneyAnswer>> answers;
+	private final int players;
 	
 	/**
 	 * Create a new Fast Money game
 	 * @param players
 	 */
 	public FastMoney(int players) {
+		this.players = players;
+		reset();
+	}
+	
+	/**
+	 * Create a Fast Money game with a default of 2 players
+	 */
+	public FastMoney() {
+		this(2);
+	}
+	
+	/**
+	 * Get the number of players in fast money
+	 * @return
+	 */
+	public int getNumPlayers() {
+		return players;
+	}
+	
+	/**
+	 * Reset the fast money game
+	 */
+	public void reset() {
 		answers = new HashMap<Integer, List<FastMoneyAnswer>>();
 		
 		// Fill answers and scores with blank answers		
@@ -31,13 +55,6 @@ public class FastMoney {
 			}
 			answers.put(i, answerList);
 		}
-	}
-	
-	/**
-	 * Create a Fast Money game with a default of 2 players
-	 */
-	public FastMoney() {
-		this(2);
 	}
 	
 	/**

@@ -2,6 +2,7 @@ package bwyap.familyfeud.game.state;
 
 import bwyap.familyfeud.game.fastmoney.state.FFFastMoneyState;
 import bwyap.familyfeud.game.fastmoney.state.FFFastMoneyStateMachine;
+import bwyap.familyfeud.game.fastmoney.state.FastMoney;
 
 /**
  * A state used to render fast money game play
@@ -12,13 +13,16 @@ public class StateFastMoney extends FFState {
 	
 	private FFFastMoneyStateMachine stateMachine;
 	
-	protected StateFastMoney() {
+	private FastMoney fastmoney;
+	
+	protected StateFastMoney(FastMoney fastmoney) {
 		super(FFStateType.FAST_MONEY);
+		this.fastmoney = fastmoney;
 	}
 	
 	@Override
 	public void initState(Object data) {
-		stateMachine = new FFFastMoneyStateMachine();
+		stateMachine = new FFFastMoneyStateMachine(fastmoney);
 		stateMachine.init();
 	}
 	
