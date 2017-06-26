@@ -96,7 +96,7 @@ public class ControlWindow extends FamilyFeudWindow {
 			}
 		});
 		
-		fastmoneyWindow = new FastMoneyWindow(gameWindow, this, game.getFastMoney());
+		fastmoneyWindow = new FastMoneyWindow(this, game.getFastMoney());
 		fastmoneyWindow.initWindow();
 				
 		// init components

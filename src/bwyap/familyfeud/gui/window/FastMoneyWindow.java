@@ -24,16 +24,14 @@ public class FastMoneyWindow extends FamilyFeudWindow {
 	public static final int WIDTH = UIManager.getInstance().getProperty("fastmoneywindow.width");
 	public static final int HEIGHT = UIManager.getInstance().getProperty("fastmoneywindow.height");
 
-	private GameWindow gameWindow;
 	private ControlWindow controlWindow;
 	private FastMoney fastmoney;
 	
 	private FastMoneyAnswerPanel answerPanel1;
 	private FastMoneyAnswerPanel answerPanel2;
 
-	public FastMoneyWindow(GameWindow gameWindow, ControlWindow controlWindow, FastMoney fastmoney) {
+	public FastMoneyWindow(ControlWindow controlWindow, FastMoney fastmoney) {
 		super("Fast money!", WIDTH, HEIGHT);
-		this.gameWindow = gameWindow;
 		this.fastmoney = fastmoney;
 	}
 	
