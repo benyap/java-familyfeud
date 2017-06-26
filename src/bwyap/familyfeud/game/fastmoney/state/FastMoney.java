@@ -98,13 +98,26 @@ public class FastMoney {
 	}
 	
 	/**
+	 * Check if a player has answered all questions
+	 * @param player
+	 * @return
+	 */
+	public boolean allAnswered(int player) {
+		List<FastMoneyAnswer> answers = this.answers.get(player);
+		for(FastMoneyAnswer answer : answers) {
+			if (answer.getScore() < 0 || answer.getAnswer().equals("")) return false; 
+		}
+		return true;
+	}
+	
+	/**
 	 * This class represents an answer from the player in the fast money game
 	 * @author bwyap
 	 *
 	 */
 	class FastMoneyAnswer {
-		private String answer;
-		private int score;
+		private String answer = "";
+		private int score = -1;
 		private boolean revealed;
 		public String getAnswer() { return answer; }
 		public int getScore() { return score; }
@@ -113,4 +126,5 @@ public class FastMoney {
 		public void setScore(int score) { this.score = score; }
 		public void setRevealed(boolean revealed) { this.revealed = revealed; }
 	}
+
 }
