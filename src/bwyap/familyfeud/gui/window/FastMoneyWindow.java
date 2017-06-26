@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import bwyap.familyfeud.game.fastmoney.state.FastMoney;
+import bwyap.familyfeud.gui.GBC;
 import bwyap.familyfeud.gui.UIManager;
 import bwyap.familyfeud.gui.control.FastMoneyAnswerPanel;
 
@@ -26,6 +27,9 @@ public class FastMoneyWindow extends FamilyFeudWindow {
 	private GameWindow gameWindow;
 	private ControlWindow controlWindow;
 	private FastMoney fastmoney;
+	
+	private FastMoneyAnswerPanel answerPanel1;
+	private FastMoneyAnswerPanel answerPanel2;
 
 	public FastMoneyWindow(GameWindow gameWindow, ControlWindow controlWindow, FastMoney fastmoney) {
 		super("Fast money!", WIDTH, HEIGHT);
@@ -55,6 +59,12 @@ public class FastMoneyWindow extends FamilyFeudWindow {
 				}
 			}
 		});
+	
+		answerPanel1 = new FastMoneyAnswerPanel(fastmoney, 0);
+		answerPanel2 = new FastMoneyAnswerPanel(fastmoney, 1);
+		
+		add(answerPanel1, new GBC(0, 0));
+		add(answerPanel2, new GBC(0, 1));
 	}
 	
 	/**
