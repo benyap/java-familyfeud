@@ -12,9 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
-import javax.swing.InputVerifier;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -25,7 +23,6 @@ import bwyap.familyfeud.game.fastmoney.state.FastMoney;
 import bwyap.familyfeud.gui.GBC;
 import bwyap.familyfeud.gui.UIManager;
 import bwyap.gridgame.res.ResourceLoader;
-import bwyap.utility.logging.Logger;
 
 /**
  * This panel holds the input components for a player in Fast Money
@@ -69,7 +66,14 @@ public class FastMoneyAnswerPanel extends JPanel {
 		save.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Logger.info("Saved answers");
+				// Save the answers to the fastmoney object
+				for(int i = 0; i < FastMoney.QUESTIONS; i++) {
+					if (!scores.get(i).getText().equals("")) {
+						int score = Integer.parseInt(scores.get(i).getText());
+						fastmoney.setScore(PLAYER, i, score);
+						fastmoney.setAnswer(PLAYER, i, answers.get(i).getText());
+					}
+				}
 			}
 		});
 		
