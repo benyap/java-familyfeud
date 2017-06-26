@@ -43,10 +43,12 @@ public class FamilyFeudResources extends ResourceLoader {
 		SoundManager.getInstance().loadClip("blip", SoundRegion.AU, "/bwyap/familyfeud/res/sound/au_blip.wav");
 		SoundManager.getInstance().loadClip("strike", SoundRegion.AU, "/bwyap/familyfeud/res/sound/au_strike.wav");
 		SoundManager.getInstance().loadClip("theme", SoundRegion.AU, "/bwyap/familyfeud/res/sound/au_theme_short.wav");
+		SoundManager.getInstance().loadClip("tryagain", SoundRegion.AU, "/bwyap/familyfeud/res/sound/us_tryagain.wav");
 
 		SoundManager.getInstance().loadClip("blip", SoundRegion.US, "/bwyap/familyfeud/res/sound/us_blip.wav");
 		SoundManager.getInstance().loadClip("answer", SoundRegion.US, "/bwyap/familyfeud/res/sound/us_bell.wav");
 		SoundManager.getInstance().loadClip("strike", SoundRegion.US, "/bwyap/familyfeud/res/sound/us_strike.wav");
+		SoundManager.getInstance().loadClip("tryagain", SoundRegion.US, "/bwyap/familyfeud/res/sound/us_tryagain.wav");
 
 	}
 	
