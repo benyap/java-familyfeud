@@ -8,42 +8,19 @@ import bwyap.utility.statemachine.State;
  * @author bwyap
  *
  */
-public abstract class FFPlayState extends State {
-	
-	private FFPlayStateType type;
-		
+public abstract class FFPlayState extends State<FFPlayStateType> {
+			
 	/**
 	 * Create a new state with the specified name
 	 * @param name
 	 */
 	protected FFPlayState(FFPlayStateType type) {
-		super(type.toString());
-		this.type = type;
-	}
-	
-	/**
-	 * Get the state type.
-	 * @return
-	 */
-	public FFPlayStateType getType() {
-		return type;
-	}
-	
-	/**
-	 * Execute an action for that state.
-	 * Each state should specify a set of valid actions and appropriate action handlers.
-	 * If the specified action could not be executed, the method will return false.
-	 * @param action
-	 * @param data
-	 * @return true if the action was successfully executed.
-	 */
-	public boolean executeAction(int action, Object[] data) {
-		return false;
+		super(type);
 	}
 
 	@Override
 	public void updateState(float timeElapsed) {
 		// This method is not needed for this state machine
 	}
-
+	
 }

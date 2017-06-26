@@ -5,14 +5,16 @@ package bwyap.utility.statemachine;
  * @author bwyap
  *
  */
-public abstract class State {
+public abstract class State<T> {
 	
 	private String name;
 	private String nextState;
 	protected Object data;
-	
-	public State(String name) {
-		this.name = name;
+	private T type;
+
+	public State(T type) {
+		this.name = type.toString();
+		this.type = type;
 	}
 	
 	public String getName() {
@@ -22,6 +24,26 @@ public abstract class State {
 	@Override
 	public String toString() {
 		return getName();
+	}
+	
+	/**
+	 * Get the state type.
+	 * @return
+	 */
+	public T getType() {
+		return type;
+	}
+
+	/**
+	 * Execute an action for that state.
+	 * Each state should specify a set of valid actions and appropriate action handlers.
+	 * If the specified action could not be executed, the method will return false.
+	 * @param action
+	 * @param data
+	 * @return true if the action was successfully executed.
+	 */
+	public boolean executeAction(int action, Object[] data) {
+		return false;
 	}
 	
 	/**
