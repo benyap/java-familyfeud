@@ -150,6 +150,10 @@ public class UIManager {
 		
 		map.put("fastmoneyanswerpanel.width", 340);
 		map.put("fastmoneyanswerpanel.height", 200);
+
+		map.put("fastmoneytimerpanel.width", 150);
+		map.put("fastmoneytimerpanel.height", 150);
+		
 		
 		ConsoleLogger.getInstance().setFontSize(12);	
 	}

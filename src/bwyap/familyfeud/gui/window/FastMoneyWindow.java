@@ -11,6 +11,7 @@ import bwyap.familyfeud.game.fastmoney.state.FastMoney;
 import bwyap.familyfeud.gui.GBC;
 import bwyap.familyfeud.gui.UIManager;
 import bwyap.familyfeud.gui.control.FastMoneyAnswerPanel;
+import bwyap.familyfeud.gui.control.FastMoneyTimerPanel;
 
 /**
  * A control window to control a fast money game
@@ -29,7 +30,8 @@ public class FastMoneyWindow extends FamilyFeudWindow {
 	
 	private FastMoneyAnswerPanel answerPanel1;
 	private FastMoneyAnswerPanel answerPanel2;
-
+	private FastMoneyTimerPanel timerPanel;
+	
 	public FastMoneyWindow(ControlWindow controlWindow, FastMoney fastmoney) {
 		super("Fast money!", WIDTH, HEIGHT);
 		this.fastmoney = fastmoney;
@@ -60,9 +62,11 @@ public class FastMoneyWindow extends FamilyFeudWindow {
 	
 		answerPanel1 = new FastMoneyAnswerPanel(fastmoney, 0);
 		answerPanel2 = new FastMoneyAnswerPanel(fastmoney, 1);
+		timerPanel = new FastMoneyTimerPanel(fastmoney);
 		
-		add(answerPanel1, new GBC(0, 0));
-		add(answerPanel2, new GBC(0, 1));
+		add(answerPanel1, new GBC(0, 0).setSpan(2, 1));
+		add(answerPanel2, new GBC(0, 1).setSpan(2, 1));
+		add(timerPanel, new GBC(0, 2));
 	}
 	
 	/**

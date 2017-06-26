@@ -169,7 +169,8 @@ public class FastMoneyAnswerPanel extends JPanel {
 			String text = score.getText();
 			try {
 				if (!text.equals("")) {
-					Integer.parseInt(text);
+					if (Integer.parseInt(text) < 0)
+						throw new Exception();
 				}
 				score.setBackground(Color.WHITE);
 				save.setEnabled(true);
