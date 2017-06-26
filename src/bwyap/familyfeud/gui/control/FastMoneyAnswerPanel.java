@@ -92,8 +92,9 @@ public class FastMoneyAnswerPanel extends JPanel {
 		for(int i = 0; i < FastMoney.QUESTIONS; i++) {
 			JLabel label = new JLabel("Q" + (i+1) + ".");
 			JTextField answer = new JTextField();
+			answer.setPreferredSize(new Dimension(200, 30));
+			answer.setMinimumSize(new Dimension(200, 30));
 			answer.setToolTipText("Player " + (PLAYER + 1) + "\'s answer");
-			answer.setColumns(10);
 			answer.getDocument().addDocumentListener(new DocumentListener() {
 				@Override
 				public void insertUpdate(DocumentEvent e) { save.setEnabled(true); save.setText("Save"); }
@@ -105,7 +106,8 @@ public class FastMoneyAnswerPanel extends JPanel {
 			
 			JTextField score = new JTextField();
 			score.setToolTipText("Answer score (must be a non-negative integer)");
-			score.setColumns(3);
+			score.setPreferredSize(new Dimension(50, 30));
+			score.setMinimumSize(new Dimension(50, 30));
 			score.getDocument().addDocumentListener(new DocumentListener() {
 				@Override
 				public void insertUpdate(DocumentEvent e) { validateScores(); }
