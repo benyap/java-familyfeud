@@ -7,6 +7,15 @@ import bwyap.familyfeud.game.QuestionSet;
 import bwyap.familyfeud.testdriver.FamilyFeudTestDriver;
 import bwyap.utility.logging.Logger;
 
+import static bwyap.familyfeud.game.state.FFStateType.ADD_FAMILY;
+import static bwyap.familyfeud.game.state.FFStateType.END_GAME;
+import static bwyap.familyfeud.game.state.FFStateType.FAST_MONEY;
+import static bwyap.familyfeud.game.state.FFStateType.INITIALIZE_GAME;
+import static bwyap.familyfeud.game.state.FFStateType.LOAD_QUESTIONS;
+import static bwyap.familyfeud.game.state.FFStateType.NEW_GAME;
+import static bwyap.familyfeud.game.state.FFStateType.PLAY;
+import static bwyap.familyfeud.game.state.FFStateType.START;
+
 /**
  * A state machine that handles {@code FFState} for Family Feud
  * @author bwyap
@@ -28,17 +37,17 @@ public class FFStateMachine extends AbstractFFStateMachine<FFState> {
 	@Override
 	public void init() {
 		// Add all states to the machine
-		addState(FFStateType.START.toString(), FFStateFactory.getState(FFStateType.START, null));
-		addState(FFStateType.NEW_GAME.toString(), FFStateFactory.getState(FFStateType.NEW_GAME, game));
-		addState(FFStateType.ADD_FAMILY.toString(), FFStateFactory.getState(FFStateType.ADD_FAMILY, families));
-		addState(FFStateType.LOAD_QUESTIONS.toString(), FFStateFactory.getState(FFStateType.LOAD_QUESTIONS, questions));
-		addState(FFStateType.INITIALIZE_GAME.toString(), FFStateFactory.getState(FFStateType.INITIALIZE_GAME, null));
-		addState(FFStateType.PLAY.toString(), FFStateFactory.getState(FFStateType.PLAY, game));
-		addState(FFStateType.END_GAME.toString(), FFStateFactory.getState(FFStateType.END_GAME, game));
-		addState(FFStateType.FAST_MONEY.toString(), FFStateFactory.getState(FFStateType.FAST_MONEY, null));
+		addState(START.toString(), FFStateFactory.getState(START, null));
+		addState(NEW_GAME.toString(), FFStateFactory.getState(NEW_GAME, game));
+		addState(ADD_FAMILY.toString(), FFStateFactory.getState(ADD_FAMILY, families));
+		addState(LOAD_QUESTIONS.toString(), FFStateFactory.getState(LOAD_QUESTIONS, questions));
+		addState(INITIALIZE_GAME.toString(), FFStateFactory.getState(INITIALIZE_GAME, null));
+		addState(PLAY.toString(), FFStateFactory.getState(PLAY, game));
+		addState(END_GAME.toString(), FFStateFactory.getState(END_GAME, game));
+		addState(FAST_MONEY.toString(), FFStateFactory.getState(FAST_MONEY, null));
 		
 		// Set the initial state
-		changeState(FFStateType.START.toString());
+		changeState(START.toString());
 		
 		if (FamilyFeudTestDriver.DEBUG_LOG_CONSOLE) Logger.info("FFStateMachine initialized.");
 	}
@@ -52,9 +61,9 @@ public class FFStateMachine extends AbstractFFStateMachine<FFState> {
 		switch (currentState.getType()) {
 		case ADD_FAMILY:
 		case LOAD_QUESTIONS:
-			if (nextState == FFStateType.ADD_FAMILY.toString()) return true;
-			if (nextState == FFStateType.LOAD_QUESTIONS.toString()) return true;
-			if (nextState == FFStateType.INITIALIZE_GAME.toString()) {
+			if (nextState == ADD_FAMILY.toString()) return true;
+			if (nextState == LOAD_QUESTIONS.toString()) return true;
+			if (nextState == INITIALIZE_GAME.toString()) {
 				// Check that questions are loaded and there are enough families
 				if (families.getFamilies().size() > 1) {
 					if (questions.getQuestions().size() > 0) {
@@ -66,28 +75,28 @@ public class FFStateMachine extends AbstractFFStateMachine<FFState> {
 			}
 			break;
 		case NEW_GAME:
-			if (nextState == FFStateType.ADD_FAMILY.toString()) return true;
-			if (nextState == FFStateType.LOAD_QUESTIONS.toString()) return true;
+			if (nextState == ADD_FAMILY.toString()) return true;
+			if (nextState == LOAD_QUESTIONS.toString()) return true;
 			break;
 		case END_GAME:
-			if (nextState == FFStateType.NEW_GAME.toString()) return true;
-			if (nextState == FFStateType.FAST_MONEY.toString()) {
+			if (nextState == NEW_GAME.toString()) return true;
+			if (nextState == FAST_MONEY.toString()) {
 				fromFastMoney = currentState.getType();
 				return true;
 			}
 			break;
 		case INITIALIZE_GAME:
-			if (nextState == FFStateType.PLAY.toString()) return true;
+			if (nextState == PLAY.toString()) return true;
 			break;
 		case PLAY:
-			if (nextState == FFStateType.END_GAME.toString()) return true;
-			if (nextState == FFStateType.FAST_MONEY.toString()) {
+			if (nextState == END_GAME.toString()) return true;
+			if (nextState == FAST_MONEY.toString()) {
 				fromFastMoney = currentState.getType();
 				return true;
 			}
 			break;
 		case START:
-			if (nextState == FFStateType.NEW_GAME.toString()) return true;
+			if (nextState == NEW_GAME.toString()) return true;
 			break;
 		case FAST_MONEY:
 			// Fast money must transition back into previous state
