@@ -48,7 +48,7 @@ public class StateFastMoney extends FFState {
 	 * Get the current fast money state
 	 * @return
 	 */
-	public FFFastMoneyState getPlayState() {
+	public FFFastMoneyState getFastMoneyState() {
 		if (stateMachine!= null) return stateMachine.getCurrentState();
 		return null;
 	}

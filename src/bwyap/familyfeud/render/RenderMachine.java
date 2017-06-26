@@ -41,7 +41,7 @@ public class RenderMachine extends AbstractRenderMachine {
 		renderStates.put(NEWGAME, new RenderStateNewGame(game));
 		renderStates.put(PLAY, new RenderStatePlay(game));
 		renderStates.put(ENDGAME, new RenderEndGame(game));
-		renderStates.put(FASTMONEY, new RenderFastMoney());
+		renderStates.put(FASTMONEY, new RenderFastMoney(game));
 	}
 	
 	@Override

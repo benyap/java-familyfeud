@@ -34,7 +34,8 @@ public class FFFastMoneyStateMachine extends AbstractFFStateMachine<FFFastMoneyS
 
 		// Set the initial state
 		fastmoney.reset();
-		
+		changeState(P1_ANSWER.toString());
+
 		if (FamilyFeudTestDriver.DEBUG_LOG_CONSOLE) Logger.info("FFFastMoneyStateMachine initialized.");
 	}
 	
