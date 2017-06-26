@@ -10,6 +10,7 @@ import bwyap.familyfeud.game.state.FFStateType;
 import bwyap.familyfeud.game.state.StateFastMoney;
 import bwyap.familyfeud.render.component.RenderComponentContainer;
 import bwyap.familyfeud.render.state.fastmoney.RenderFastMoneyAnswers;
+import bwyap.familyfeud.render.state.fastmoney.RenderFastMoneyTimer;
 import bwyap.familyfeud.render.state.play.RenderQuestionSet;
 import bwyap.familyfeud.render.state.play.RenderStrikes;
 
@@ -52,9 +53,11 @@ public class RenderFastMoneyMachine extends AbstractRenderMachine {
 			// Create containers for each stage
 			container = new RenderComponentContainer();
 			container.addComponent(new RenderFastMoneyAnswers(fastmoney));
+			container.addComponent(new RenderFastMoneyTimer(fastmoney));
 			renderFastMoneyStates.put(STATE_P1_ANSWER, container);
 			renderFastMoneyStates.put(STATE_P2_ANSWER, container);
-
+			renderFastMoneyStates.put(STATE_P1_REVEAL, container);
+			renderFastMoneyStates.put(STATE_P2_REVEAL, container);
 		}
 	}
 	
@@ -72,10 +75,14 @@ public class RenderFastMoneyMachine extends AbstractRenderMachine {
 						renderState = renderFastMoneyStates.get(STATE_P1_ANSWER);
 						break;
 					case P1_REVEAL:
+						renderState = renderFastMoneyStates.get(STATE_P1_REVEAL);
+						break;
 					case P2_ANSWER:
 						renderState = renderFastMoneyStates.get(STATE_P2_ANSWER);
 						break;
 					case P2_REVEAL:
+						renderState = renderFastMoneyStates.get(STATE_P1_REVEAL);
+						break;
 					}
 				}
 				previousStateType = fastMoneyState.getType();

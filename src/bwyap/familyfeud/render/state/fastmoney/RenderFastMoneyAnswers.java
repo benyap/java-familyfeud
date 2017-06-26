@@ -46,14 +46,15 @@ public class RenderFastMoneyAnswers implements RenderableInterface {
 	@Override
 	public void render(RenderingPanel panel, Graphics g) {
 		// Render the score
-		int x, y;
+		int x, y, offset;
+		offset = score == 0 ? 0 : ((int) Math.log10(score));
 		if (bwyap.familyfeud.gui.UIManager.isWidescreen()) {
 			y = (int)(1055 / panel.getRatio());
-			x = (int)(1840 / panel.getRatio()) - (((int) Math.log10(score)) * 40); 
+			x = (int)(1820 / panel.getRatio()) - (int)(offset * 56/panel.getRatio()); 
 		}
 		else {
 			y = (int)(830 / panel.getRatio());
-			x = (int)(1215 / panel.getRatio()) - (((int) Math.log10(score)) * 32); 
+			x = (int)(1215 / panel.getRatio()) - (int)(offset * 40/panel.getRatio()); 
 		}
 		totalScore.setPosition(x, y);
 		totalScore.render(panel, g);

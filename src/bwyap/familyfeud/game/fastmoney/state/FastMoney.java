@@ -17,7 +17,8 @@ public class FastMoney {
 	private Map<Integer, List<FastMoneyAnswer>> answers;
 	private Map<Integer, Boolean> show;
 	private final int players;
-	private int timer;
+	private float timer;
+	private boolean timerRunning;
 	
 	/**
 	 * Create a new Fast Money game
@@ -47,6 +48,8 @@ public class FastMoney {
 	 * Reset the fast money game
 	 */
 	public void reset() {
+		timerRunning = false;
+		timer = 20;
 		answers = new HashMap<Integer, List<FastMoneyAnswer>>();
 		show = new HashMap<Integer, Boolean>();
 		
@@ -124,16 +127,46 @@ public class FastMoney {
 	 * Get the timer 
 	 * @return
 	 */
-	public int getTimer() {
-		return timer;
+	public float getTimer() {
+		return timer/1000;
 	}
 	
 	/**
 	 * Set the timer
 	 * @param timer
 	 */
-	public void setTimer(int timer) {
-		this.timer = timer;
+	public void setTimer(float timer) {
+		this.timer = timer * 1000;
+	}
+	
+	/**
+	 * Update the timer with the time elapsed
+	 * @param timeElapsed
+	 */
+	public void updateTimer(float timeElapsed) {
+		timer -= timeElapsed;
+		
+		// Automatically stop if timer has reached 0
+		if (timer <= 0) {
+			timer = 0;
+			timerRunning = false;
+		}
+	}
+	
+	/**
+	 * Check if the timer is running
+	 * @return
+	 */
+	public boolean isTimerRunning() {
+		return timerRunning;
+	}
+	
+	/**
+	 * Set whether the timer is running
+	 * @param running
+	 */
+	public void setTimerRunning(boolean running) {
+		this.timerRunning = running;
 	}
 	
 	/**
