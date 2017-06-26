@@ -145,15 +145,14 @@ public class UIManager {
 		map.put("questioncontrolpanel.col1.width", 60);
 		map.put("questioncontrolpanel.col0.width", map.get("questioncontrolpanel.width") - 30 - map.get("questioncontrolpanel.col1.width") - map.get("questioncontrolpanel.col2.width")  - 5);
 		
-		map.put("fastmoneywindow.width", 350);
+		map.put("fastmoneywindow.width", 400);
 		map.put("fastmoneywindow.height", 600);
 		
-		map.put("fastmoneyanswerpanel.width", 340);
+		map.put("fastmoneyanswerpanel.width", 390);
 		map.put("fastmoneyanswerpanel.height", 200);
 
 		map.put("fastmoneytimerpanel.width", 150);
 		map.put("fastmoneytimerpanel.height", 150);
-		
 		
 		ConsoleLogger.getInstance().setFontSize(12);	
 	}
