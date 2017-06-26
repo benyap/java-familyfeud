@@ -2,6 +2,7 @@ package bwyap.familyfeud.game;
 
 import java.util.List;
 
+import bwyap.familyfeud.game.fastmoney.state.FastMoney;
 import bwyap.familyfeud.game.state.FFState;
 import bwyap.familyfeud.game.state.FFStateMachine;
 import bwyap.familyfeud.game.state.FFStateType;
@@ -20,6 +21,7 @@ public class FamilyFeudGame {
 	private FFStateMachine stateMachine;
 	private FamilyCollection families;
 	private QuestionSet questions;
+	private FastMoney fastmoney;
 	
 	private Family winner;
 	
@@ -29,6 +31,7 @@ public class FamilyFeudGame {
 	public void init() {
 		families = new FamilyCollection();
 		questions = new QuestionSet();
+		fastmoney = new FastMoney();
 		winner = null;
 		
 		stateMachine = new FFStateMachine(this, families, questions);
@@ -63,6 +66,14 @@ public class FamilyFeudGame {
 	 */
 	public FFState getState() {
 		return stateMachine.getCurrentState();
+	}
+	
+	/**
+	 * Get the Fast Money instance 
+	 * @return
+	 */
+	public FastMoney getFastMoney() {
+		return fastmoney;
 	}
 	
 	/**

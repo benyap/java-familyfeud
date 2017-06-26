@@ -1,12 +1,5 @@
 package bwyap.familyfeud.game.state;
 
-import bwyap.familyfeud.game.AbstractFFStateMachine;
-import bwyap.familyfeud.game.FamilyCollection;
-import bwyap.familyfeud.game.FamilyFeudGame;
-import bwyap.familyfeud.game.QuestionSet;
-import bwyap.familyfeud.testdriver.FamilyFeudTestDriver;
-import bwyap.utility.logging.Logger;
-
 import static bwyap.familyfeud.game.state.FFStateType.ADD_FAMILY;
 import static bwyap.familyfeud.game.state.FFStateType.END_GAME;
 import static bwyap.familyfeud.game.state.FFStateType.FAST_MONEY;
@@ -15,6 +8,13 @@ import static bwyap.familyfeud.game.state.FFStateType.LOAD_QUESTIONS;
 import static bwyap.familyfeud.game.state.FFStateType.NEW_GAME;
 import static bwyap.familyfeud.game.state.FFStateType.PLAY;
 import static bwyap.familyfeud.game.state.FFStateType.START;
+
+import bwyap.familyfeud.game.AbstractFFStateMachine;
+import bwyap.familyfeud.game.FamilyCollection;
+import bwyap.familyfeud.game.FamilyFeudGame;
+import bwyap.familyfeud.game.QuestionSet;
+import bwyap.familyfeud.testdriver.FamilyFeudTestDriver;
+import bwyap.utility.logging.Logger;
 
 /**
  * A state machine that handles {@code FFState} for Family Feud
@@ -44,7 +44,7 @@ public class FFStateMachine extends AbstractFFStateMachine<FFState> {
 		addState(INITIALIZE_GAME.toString(), FFStateFactory.getState(INITIALIZE_GAME, null));
 		addState(PLAY.toString(), FFStateFactory.getState(PLAY, game));
 		addState(END_GAME.toString(), FFStateFactory.getState(END_GAME, game));
-		addState(FAST_MONEY.toString(), FFStateFactory.getState(FAST_MONEY, null));
+		addState(FAST_MONEY.toString(), FFStateFactory.getState(FAST_MONEY, game));
 		
 		// Set the initial state
 		changeState(START.toString());

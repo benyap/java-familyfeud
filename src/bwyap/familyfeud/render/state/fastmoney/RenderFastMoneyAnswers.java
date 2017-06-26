@@ -35,7 +35,7 @@ public class RenderFastMoneyAnswers implements RenderableInterface {
 	public void update(float timeElapsed) {
 		score = 0;
 		for(int i = 0; i < fastmoney.getNumPlayers(); i++) {
-			for(int j = 0; j < fastmoney.QUESTIONS; j++) {
+			for(int j = 0; j < FastMoney.QUESTIONS; j++) {
 				if (fastmoney.getAnswer(i, j).isRevealed())
 					score += fastmoney.getAnswer(i, j).getScore();
 			}

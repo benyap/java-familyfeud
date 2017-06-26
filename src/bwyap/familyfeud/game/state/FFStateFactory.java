@@ -73,7 +73,12 @@ public class FFStateFactory {
 			if (start == null) createStartState();
 			return start;
 		case FAST_MONEY:
-			if (fastMoney == null) createFastMoneyState();
+			if (fastMoney == null) {
+				if (data instanceof FamilyFeudGame) {
+					createFastMoneyState(((FamilyFeudGame) data).getFastMoney());
+				}
+				else throw new InvalidDataException("FFStateFactory: FamilyFeudGame required when create StateFastMoney");
+			}
 			return fastMoney;
 		}
 		return null;
@@ -112,8 +117,8 @@ public class FFStateFactory {
 		addFamily = new StateAddFamily(families);
 	}
 	
-	private static void createFastMoneyState() {
-		fastMoney = new StateFastMoney(new FastMoney());
+	private static void createFastMoneyState(FastMoney fastmoney) {
+		fastMoney = new StateFastMoney(fastmoney);
 	}
 	
 }

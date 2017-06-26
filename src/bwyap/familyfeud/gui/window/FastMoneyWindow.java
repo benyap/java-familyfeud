@@ -1,14 +1,15 @@
 package bwyap.familyfeud.gui.window;
 
-import java.awt.BorderLayout;
+import java.awt.GridBagLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import bwyap.familyfeud.game.FamilyFeudGame;
+import bwyap.familyfeud.game.fastmoney.state.FastMoney;
 import bwyap.familyfeud.gui.UIManager;
+import bwyap.familyfeud.gui.control.FastMoneyAnswerPanel;
 
 /**
  * A control window to control a fast money game
@@ -24,12 +25,12 @@ public class FastMoneyWindow extends FamilyFeudWindow {
 
 	private GameWindow gameWindow;
 	private ControlWindow controlWindow;
-	private FamilyFeudGame game;
+	private FastMoney fastmoney;
 
-	public FastMoneyWindow(GameWindow gameWindow, ControlWindow controlWindow, FamilyFeudGame game) {
+	public FastMoneyWindow(GameWindow gameWindow, ControlWindow controlWindow, FastMoney fastmoney) {
 		super("Fast money!", WIDTH, HEIGHT);
 		this.gameWindow = gameWindow;
-		this.game = game;
+		this.fastmoney = fastmoney;
 	}
 	
 	/**
@@ -39,7 +40,7 @@ public class FastMoneyWindow extends FamilyFeudWindow {
 		setLocationRelativeTo(controlWindow);
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setResizable(false);
-		setLayout(new BorderLayout());
+		setLayout(new GridBagLayout());
 		
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -61,6 +62,7 @@ public class FastMoneyWindow extends FamilyFeudWindow {
 	 */
 	public void reset() {
 		setLocationRelativeTo(null);
+		fastmoney.reset();
 	}
 	
 }

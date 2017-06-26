@@ -12,7 +12,7 @@ import java.util.Map;
  */
 public class FastMoney {
 	
-	public final int QUESTIONS = 5;
+	public static final int QUESTIONS = 5;
 	
 	private Map<Integer, List<FastMoneyAnswer>> answers;
 	private Map<Integer, Boolean> show;
