@@ -17,7 +17,7 @@ public class FastMoney {
 	private Map<Integer, List<FastMoneyAnswer>> answers;
 	private Map<Integer, Boolean> show;
 	private final int players;
-	private float timer;
+	private float timer = 20000;
 	private boolean timerRunning;
 	
 	/**
@@ -49,7 +49,7 @@ public class FastMoney {
 	 */
 	public void reset() {
 		timerRunning = false;
-		timer = 20;
+		timer = 20000;
 		answers = new HashMap<Integer, List<FastMoneyAnswer>>();
 		show = new HashMap<Integer, Boolean>();
 		

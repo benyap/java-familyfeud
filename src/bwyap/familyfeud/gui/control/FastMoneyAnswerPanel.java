@@ -178,7 +178,21 @@ public class FastMoneyAnswerPanel extends JPanel {
 		add(title, new GBC(0, 0).setSpan(5, 1));
 		add(save, new GBC(0, 6).setSpan(2, 1));
 		add(showAnswers, new GBC(2, 6).setSpan(2, 1));
-
+	}
+	
+	/**
+	 * Reset all controls
+	 */
+	public void reset() {
+		for(int i = 0; i < FastMoney.QUESTIONS; i++) {
+			answers.get(i).setText("");
+			scores.get(i).setText("");
+		}
+		validateScores();
+		enableReveal(false);
+		showAnswers.setEnabled(true);
+		showAnswers.setText("Hide answers");
+		showAnswers.setToolTipText("Hide the player's answers from the screen");
 	}
 	
 	/**

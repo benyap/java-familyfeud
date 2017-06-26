@@ -170,7 +170,6 @@ public class StatePanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				if (game.changeState(FFStateType.FAST_MONEY)) {
 					Logger.info("Playing fast money!");
-					Logger.err("Feature not implemented.");
 					fastmoney.setEnabled(false);
 					window.setQuestionSelectionEnabled(false);
 					window.setQuestionControlEnabled(false);

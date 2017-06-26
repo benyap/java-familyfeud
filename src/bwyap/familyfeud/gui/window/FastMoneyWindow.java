@@ -75,6 +75,9 @@ public class FastMoneyWindow extends FamilyFeudWindow {
 	public void reset() {
 		setLocationRelativeTo(null);
 		fastmoney.reset();
+		answerPanel1.reset();
+		answerPanel2.reset();
+		timerPanel.reset();
 	}
 	
 	/**

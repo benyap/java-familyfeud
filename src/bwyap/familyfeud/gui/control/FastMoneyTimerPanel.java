@@ -144,4 +144,13 @@ public class FastMoneyTimerPanel extends JPanel {
 		}		
 		reset.setEnabled(valid);
 	}
+
+	/**
+	 * Reset the controls
+	 */
+	public void reset() {
+		start.setEnabled(true);
+		stop.setEnabled(false);
+		time.setText("20");
+	}
 }
