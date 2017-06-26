@@ -1,6 +1,5 @@
 package bwyap.familyfeud.game.fastmoney.state;
 
-import static bwyap.familyfeud.game.fastmoney.state.FFFastMoneyStateType.P1_ANSWER;
 import static bwyap.familyfeud.game.fastmoney.state.FFFastMoneyStateType.P2_ANSWER;
 
 import bwyap.familyfeud.game.InvalidDataException;
@@ -15,11 +14,9 @@ public class StateReveal extends FFFastMoneyState {
 	public static final int ACTION_REVEALANSWER = 0x12;
 
 	private final int PLAYER;
-	private FastMoney fastmoney;
 	
 	public StateReveal(FastMoney fastmoney, int player) {
-		super(player == 0 ? P1_ANSWER : (player == 1 ? P2_ANSWER : null));
-		this.fastmoney = fastmoney;
+		super(fastmoney, player);
 		this.PLAYER = player;
 	}
 	
