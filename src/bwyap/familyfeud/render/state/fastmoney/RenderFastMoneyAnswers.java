@@ -45,8 +45,9 @@ public class RenderFastMoneyAnswers implements RenderableInterface {
 		score = 0;
 		for(int i = 0; i < COLUMNS; i++) {
 			for(int j = 0; j < FastMoney.QUESTIONS; j++) {
-				if (fastmoney.getAnswer(i, j).isRevealed() && fastmoney.getAnswer(i, j).getScore() >= 0)
+				if (fastmoney.getAnswer(i, j).isRevealed() && fastmoney.getAnswer(i, j).getScore() >= 0) {
 					score += fastmoney.getAnswer(i, j).getScore();
+				}
 			}
 		}
 		totalScore.setText(score + "");

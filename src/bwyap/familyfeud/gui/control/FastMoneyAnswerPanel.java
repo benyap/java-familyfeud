@@ -22,6 +22,7 @@ import javax.swing.event.DocumentListener;
 import bwyap.familyfeud.game.fastmoney.state.FastMoney;
 import bwyap.familyfeud.gui.GBC;
 import bwyap.familyfeud.gui.UIManager;
+import bwyap.familyfeud.sound.SoundManager;
 import bwyap.gridgame.res.ResourceLoader;
 
 /**
@@ -138,8 +139,17 @@ public class FastMoneyAnswerPanel extends JPanel {
 						button.setText("Reveal");
 					}
 					else {
-						fastmoney.setRevealed(PLAYER, question, true);
-						button.setText("Hide");
+						try {
+							SoundManager.getInstance().playClip("blip");
+							Thread.sleep(1000);
+							fastmoney.setRevealed(PLAYER, question, true);
+							button.setText("Hide");
+							if (fastmoney.getAnswer(PLAYER, question).getScore() > 0) {
+								SoundManager.getInstance().playClip("answer");
+							}
+							else SoundManager.getInstance().playClip("strike");
+						}
+						catch (Exception ex) { }
 					}
 				}
 			});
