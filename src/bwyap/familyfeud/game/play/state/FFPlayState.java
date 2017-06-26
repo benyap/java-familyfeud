@@ -3,7 +3,7 @@ package bwyap.familyfeud.game.play.state;
 import bwyap.utility.statemachine.State;
 
 /**
- * A template for a game state in Family Feud.
+ * Represents a state during the PLAY phase of a game of Family Feud.
  * Inherit this class to create a specific game sate.
  * @author bwyap
  *
