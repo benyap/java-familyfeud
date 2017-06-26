@@ -27,6 +27,8 @@ public class RenderQuestionSet implements RenderableInterface {
 	public static final int PANEL_WIDTH = 400;
 	public static final int PANEL_HEIGHT = 100;
 	
+	private static final int CLICK_TIME = 200;
+	
 	private FamilyFeudGame game;
 	private Fader board;
 	private RenderableString score;
@@ -124,7 +126,7 @@ public class RenderQuestionSet implements RenderableInterface {
 						num += (question.getAnswers().get(i).getValue() * question.getMultiplier());
 					}
 					if (i == numberRevealNext && !numbers.get(numberRevealNext).isVisible()) {
-						if (numberRevealCounter < 400.0) numberRevealCounter += timeElapsed;
+						if (numberRevealCounter < CLICK_TIME) numberRevealCounter += timeElapsed;
 						else {
 							numberRevealCounter = 0;
 							numbers.get(numberRevealNext).setVisible(true);
