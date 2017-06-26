@@ -66,6 +66,7 @@ public class FastMoneyAnswerPanel extends JPanel {
 		title.setFont(new Font(ResourceLoader.DEFAULT_FONT_NAME, Font.BOLD, 14));
 		
 		showAnswers = new JButton("Hide answers");
+		showAnswers.setToolTipText("Hide the player's answers from the screen");
 		showAnswers.setPreferredSize(new Dimension(150, 30));
 		showAnswers.addActionListener(new ActionListener() {
 			@Override
@@ -73,10 +74,12 @@ public class FastMoneyAnswerPanel extends JPanel {
 				if (fastmoney.showAnswers(PLAYER)) {
 					fastmoney.setShow(PLAYER, false);
 					showAnswers.setText("Show answers");
+					showAnswers.setToolTipText("Show the player's answers on the screen");
 				}
 				else {
 					fastmoney.setShow(PLAYER, true);
 					showAnswers.setText("Hide answers");
+					showAnswers.setToolTipText("Hide the player's answers from the screen");
 				}
 			}
 		});
@@ -89,6 +92,7 @@ public class FastMoneyAnswerPanel extends JPanel {
 		for(int i = 0; i < FastMoney.QUESTIONS; i++) {
 			JLabel label = new JLabel("Q" + (i+1) + ".");
 			JTextField answer = new JTextField();
+			answer.setToolTipText("Player " + (PLAYER + 1) + "\'s answer");
 			answer.setColumns(10);
 			answer.getDocument().addDocumentListener(new DocumentListener() {
 				@Override
@@ -100,6 +104,7 @@ public class FastMoneyAnswerPanel extends JPanel {
 			});
 			
 			JTextField score = new JTextField();
+			score.setToolTipText("Answer score (must be a non-negative integer)");
 			score.setColumns(3);
 			score.getDocument().addDocumentListener(new DocumentListener() {
 				@Override
@@ -111,6 +116,7 @@ public class FastMoneyAnswerPanel extends JPanel {
 			});
 			
 			JButton button = new JButton("Reveal");
+			button.setToolTipText("Reveal the answer");
 			button.setEnabled(false);
 			button.setPreferredSize(new Dimension(100, 30));
 			final int question = i;
@@ -121,6 +127,7 @@ public class FastMoneyAnswerPanel extends JPanel {
 						fastmoney.setRevealedAnswer(PLAYER, question, false);
 						fastmoney.setRevealedScore(PLAYER, question, false);
 						button.setText("Reveal");
+						button.setToolTipText("Reveal the answer and its score");
 					}
 					else {
 						SoundManager.getInstance().playClip("blip");
@@ -129,6 +136,7 @@ public class FastMoneyAnswerPanel extends JPanel {
 						catch (Exception ex) { }
 						fastmoney.setRevealedScore(PLAYER, question, true);
 						button.setText("Hide");
+						button.setToolTipText("Hide the answer and its score");
 						if (fastmoney.getAnswer(PLAYER, question).getScore() > 0) {
 							SoundManager.getInstance().playClip("fm_answer");
 						}
@@ -148,6 +156,7 @@ public class FastMoneyAnswerPanel extends JPanel {
 		}
 		
 		save = new JButton("Save");
+		save.setToolTipText("Save the scores and answers (all inputs must be valid)");
 		save.setPreferredSize(new Dimension(100, 30));
 		save.addActionListener(new ActionListener() {
 			@Override
