@@ -60,7 +60,7 @@ public class FastMoney {
 				answerList.add(new FastMoneyAnswer());
 			}
 			answers.put(i, answerList);
-			show.put(i, false);
+			show.put(i, true);
 		}
 	}
 	

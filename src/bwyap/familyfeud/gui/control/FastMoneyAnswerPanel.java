@@ -65,25 +65,7 @@ public class FastMoneyAnswerPanel extends JPanel {
 		title = new JLabel("PLAYER " + (PLAYER + 1) + " ANSWERS");
 		title.setFont(new Font(ResourceLoader.DEFAULT_FONT_NAME, Font.BOLD, 14));
 		
-		save = new JButton("Save");
-		save.setPreferredSize(new Dimension(100, 30));
-		save.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// Save the answers to the fastmoney object
-				for(int i = 0; i < FastMoney.QUESTIONS; i++) {
-					if (!scores.get(i).getText().equals("")) {
-						int score = Integer.parseInt(scores.get(i).getText());
-						fastmoney.setScore(PLAYER, i, score);
-						fastmoney.setAnswer(PLAYER, i, answers.get(i).getText());
-						save.setEnabled(false);
-						save.setText("Saved");
-					}
-				}
-			}
-		});
-		
-		showAnswers = new JButton("Show answers");
+		showAnswers = new JButton("Hide answers");
 		showAnswers.setPreferredSize(new Dimension(150, 30));
 		showAnswers.addActionListener(new ActionListener() {
 			@Override
@@ -129,6 +111,7 @@ public class FastMoneyAnswerPanel extends JPanel {
 			});
 			
 			JButton button = new JButton("Reveal");
+			button.setEnabled(false);
 			button.setPreferredSize(new Dimension(100, 30));
 			final int question = i;
 			button.addActionListener(new ActionListener() {
@@ -163,6 +146,25 @@ public class FastMoneyAnswerPanel extends JPanel {
 			add(score, new GBC(2, i + 1));
 			add(button, new GBC(3, i + 1));
 		}
+		
+		save = new JButton("Save");
+		save.setPreferredSize(new Dimension(100, 30));
+		save.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// Save the answers to the fastmoney object
+				for(int i = 0; i < FastMoney.QUESTIONS; i++) {
+					if (!scores.get(i).getText().equals("")) {
+						int score = Integer.parseInt(scores.get(i).getText());
+						fastmoney.setScore(PLAYER, i, score);
+						fastmoney.setAnswer(PLAYER, i, answers.get(i).getText());
+						save.setEnabled(false);
+						save.setText("Saved");
+						reveal.get(i).setEnabled(true);
+					}
+				}
+			}
+		});
 		
 		add(title, new GBC(0, 0).setSpan(5, 1));
 		add(save, new GBC(0, 6).setSpan(2, 1));
