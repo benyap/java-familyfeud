@@ -3,8 +3,8 @@ package bwyap.familyfeud.game.state;
 import bwyap.familyfeud.game.FFPlayStateMachine;
 import bwyap.familyfeud.game.FamilyFeudGame;
 import bwyap.familyfeud.game.InvalidDataException;
-import bwyap.familyfeud.game.play.FFPlayState;
-import bwyap.familyfeud.game.play.FFPlayStateType;
+import bwyap.familyfeud.game.play.state.FFPlayState;
+import bwyap.familyfeud.game.play.state.FFPlayStateType;
 
 /**
  * This state is used to control the game play

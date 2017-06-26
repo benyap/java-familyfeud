@@ -1,11 +1,11 @@
 package bwyap.familyfeud.gui.control;
 
-import static bwyap.familyfeud.game.play.FFPlayStateType.ALLOCATE_POINTS;
-import static bwyap.familyfeud.game.play.FFPlayStateType.FACE_OFF;
-import static bwyap.familyfeud.game.play.FFPlayStateType.FAMILY_PLAY;
-import static bwyap.familyfeud.game.play.FFPlayStateType.FAMILY_STEAL;
-import static bwyap.familyfeud.game.play.FFPlayStateType.REVEAL_ANSWERS;
-import static bwyap.familyfeud.game.play.FFPlayStateType.SELECT_QUESTION;
+import static bwyap.familyfeud.game.play.state.FFPlayStateType.ALLOCATE_POINTS;
+import static bwyap.familyfeud.game.play.state.FFPlayStateType.FACE_OFF;
+import static bwyap.familyfeud.game.play.state.FFPlayStateType.FAMILY_PLAY;
+import static bwyap.familyfeud.game.play.state.FFPlayStateType.FAMILY_STEAL;
+import static bwyap.familyfeud.game.play.state.FFPlayStateType.REVEAL_ANSWERS;
+import static bwyap.familyfeud.game.play.state.FFPlayStateType.SELECT_QUESTION;
 import static bwyap.familyfeud.gui.window.ControlWindow.DEFAULT_BORDER_WIDTH;
 import static bwyap.familyfeud.gui.window.ControlWindow.SELECTED_BORDER_WIDTH;
 
@@ -22,7 +22,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import bwyap.familyfeud.game.FamilyFeudGame;
-import bwyap.familyfeud.game.play.FFPlayState;
+import bwyap.familyfeud.game.play.state.FFPlayState;
 import bwyap.familyfeud.game.play.state.StateFaceOff;
 import bwyap.familyfeud.game.play.state.StateFamilyPlay;
 import bwyap.familyfeud.game.play.state.StateFamilySteal;

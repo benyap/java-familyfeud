@@ -3,8 +3,8 @@ package bwyap.familyfeud.render;
 import java.util.HashMap;
 
 import bwyap.familyfeud.game.FamilyFeudGame;
-import bwyap.familyfeud.game.play.FFPlayState;
-import bwyap.familyfeud.game.play.FFPlayStateType;
+import bwyap.familyfeud.game.play.state.FFPlayState;
+import bwyap.familyfeud.game.play.state.FFPlayStateType;
 import bwyap.familyfeud.game.state.FFStateType;
 import bwyap.familyfeud.game.state.StatePlay;
 import bwyap.familyfeud.render.component.RenderComponentContainer;

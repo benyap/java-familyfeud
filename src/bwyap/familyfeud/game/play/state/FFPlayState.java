@@ -1,4 +1,4 @@
-package bwyap.familyfeud.game.play;
+package bwyap.familyfeud.game.play.state;
 
 import bwyap.utility.statemachine.State;
 
