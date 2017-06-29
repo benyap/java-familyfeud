@@ -42,6 +42,7 @@ public class GameWindow extends FamilyFeudWindow {
 	 */
 	public void initWindow() {
 		//setLocationRelativeTo(null);
+		setAlwaysOnTop(false);
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setLayout(new BorderLayout());
 		add(renderSurface, BorderLayout.CENTER);
@@ -58,10 +59,12 @@ public class GameWindow extends FamilyFeudWindow {
 		if (fullscreen) {
 			setSize(width, height);
 			setUndecorated(false);
+			setFocusableWindowState(true);
 		}
 		else {
 			GraphicsDevice[] screens = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices();
 			setUndecorated(true);
+			setFocusableWindowState(false);
 			if (screens.length == 1) {
 				screens[0].setFullScreenWindow(this);
 			}
