@@ -42,7 +42,6 @@ public class GameWindow extends FamilyFeudWindow {
 	 */
 	public void initWindow() {
 		//setLocationRelativeTo(null);
-		setFocusableWindowState(false);
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setLayout(new BorderLayout());
 		add(renderSurface, BorderLayout.CENTER);

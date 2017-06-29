@@ -182,14 +182,16 @@ public class RenderQuestionSet implements RenderableInterface {
 						int y = 325 + 113 * (i % 4);
 						a.setPosition(x, y);
 						s.setPosition(x + 400 - (s.getTextWidth(g, s.getFont())), y);
-						if (a.getText().length() > 8) a.setSize((int)(100 * (9.0/a.getText().length())));
+						if (a.getText().length() > 11) a.setSize((int)(100 * (8.0/(a.getText().length()*0.9))));
+						else if (a.getText().length() > 7) a.setSize((int)(100 * (8.0/a.getText().length())));
 					}
 					else {
 						int x = i / 4 < 1 ? 80: 530;
 						int y = 345 + 120 * (i % 4);
 						a.setPosition(x, y);
 						s.setPosition(x + 420 - (s.getTextWidth(g, s.getFont())), y);
-						if (a.getText().length() > 7) a.setSize((int)(100 * (10.0/a.getText().length())));
+						if (a.getText().length() > 11) a.setSize((int)(100 * (9.0/(a.getText().length()*0.9))));
+						else if (a.getText().length() > 7) a.setSize((int)(100 * (9.0/a.getText().length())));
 					}
 					a.render(panel, g);
 					s.render(panel, g);
