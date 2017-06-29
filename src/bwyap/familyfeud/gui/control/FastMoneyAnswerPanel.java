@@ -212,6 +212,8 @@ public class FastMoneyAnswerPanel extends JPanel {
 		for(int i = 0; i < FastMoney.QUESTIONS; i++) {
 			answers.get(i).setText("");
 			scores.get(i).setText("");
+			revealAnswers.get(i).setText("Reveal A");
+			revealScores.get(i).setText("Reveal S");
 		}
 		validateScores();
 		enableReveal(false);
