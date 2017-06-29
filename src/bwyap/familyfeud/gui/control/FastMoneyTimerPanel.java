@@ -77,6 +77,7 @@ public class FastMoneyTimerPanel extends JPanel {
 		stop.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if (fastmoney.isTimerRunning()) SoundManager.getInstance().playClip("fm_ding2");
 				fastmoney.setTimerRunning(false);
 				stop.setEnabled(false);
 				start.setEnabled(true);

@@ -138,7 +138,7 @@ public class FastMoney {
 	 * @return
 	 */
 	public float getTimer() {
-		return timer/1000;
+		return (float) Math.ceil(timer/1000);
 	}
 	
 	/**

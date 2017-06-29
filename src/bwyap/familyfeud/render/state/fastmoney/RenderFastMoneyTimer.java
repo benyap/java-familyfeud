@@ -8,6 +8,7 @@ import bwyap.familyfeud.game.fastmoney.state.FastMoney;
 import bwyap.familyfeud.render.RenderableInterface;
 import bwyap.familyfeud.render.RenderingPanel;
 import bwyap.familyfeud.render.component.RenderableString;
+import bwyap.familyfeud.sound.SoundManager;
 
 /**
  * This class renders the count down timer for Fast Money
@@ -19,6 +20,8 @@ public class RenderFastMoneyTimer implements RenderableInterface {
 	private FastMoney fastmoney;
 	
 	private RenderableString timer;
+	private boolean timerRunning;
+	private boolean stopped;
 	
 	public RenderFastMoneyTimer(FastMoney fastmoney) {
 		this.fastmoney = fastmoney;
@@ -27,8 +30,19 @@ public class RenderFastMoneyTimer implements RenderableInterface {
 
 	@Override
 	public void update(float timeElapsed) {
-		if (fastmoney.isTimerRunning()) {
+		if (fastmoney.isTimerRunning() && fastmoney.getTimer() != 0) {
+			timerRunning = true;
+			stopped = false;
 			fastmoney.updateTimer(timeElapsed);			
+		}
+		else {
+			if (timerRunning) {
+				timerRunning = false;
+				if (fastmoney.getTimer() == 0 && !stopped) {
+					SoundManager.getInstance().playClip("fm_ding3");
+					stopped = true;
+				}
+			}
 		}
 		timer.setText((int)fastmoney.getTimer() + "");
 	}

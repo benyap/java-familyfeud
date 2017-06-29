@@ -47,6 +47,8 @@ public class FamilyFeudResources extends ResourceLoader {
 		SoundManager.getInstance().loadClip("fm_answer", SoundRegion.AU, "/bwyap/familyfeud/res/sound/au_answer.wav");
 		SoundManager.getInstance().loadClip("fm_strike", SoundRegion.AU, "/bwyap/familyfeud/res/sound/us_strike.wav");
 		SoundManager.getInstance().loadClip("fm_tryagain", SoundRegion.AU, "/bwyap/familyfeud/res/sound/us_tryagain.wav");
+		SoundManager.getInstance().loadClip("fm_ding3", SoundRegion.AU, "/bwyap/familyfeud/res/sound/us_ding3.wav");
+		SoundManager.getInstance().loadClip("fm_ding2", SoundRegion.AU, "/bwyap/familyfeud/res/sound/us_ding2.wav");
 
 		SoundManager.getInstance().loadClip("blip", SoundRegion.US, "/bwyap/familyfeud/res/sound/us_blip.wav");
 		SoundManager.getInstance().loadClip("answer", SoundRegion.US, "/bwyap/familyfeud/res/sound/us_bell.wav");
@@ -56,6 +58,8 @@ public class FamilyFeudResources extends ResourceLoader {
 		SoundManager.getInstance().loadClip("fm_answer", SoundRegion.US, "/bwyap/familyfeud/res/sound/us_bell.wav");
 		SoundManager.getInstance().loadClip("fm_strike", SoundRegion.US, "/bwyap/familyfeud/res/sound/us_strike.wav");
 		SoundManager.getInstance().loadClip("fm_tryagain", SoundRegion.US, "/bwyap/familyfeud/res/sound/us_tryagain.wav");
+		SoundManager.getInstance().loadClip("fm_ding3", SoundRegion.US, "/bwyap/familyfeud/res/sound/us_ding3.wav");
+		SoundManager.getInstance().loadClip("fm_ding2", SoundRegion.US, "/bwyap/familyfeud/res/sound/us_ding2.wav");
 
 	}
 	
