@@ -44,7 +44,8 @@ public class FastMoneyAnswerPanel extends JPanel {
 	private List<JLabel> labels;
 	private List<JTextField> answers;
 	private List<JTextField> scores;
-	private List<JButton> reveal;
+	private List<JButton> revealAnswers;
+	private List<JButton> revealScores;
 	private JButton save;
 	private JButton showAnswers;
 	
@@ -87,13 +88,14 @@ public class FastMoneyAnswerPanel extends JPanel {
 		labels = new ArrayList<JLabel>();
 		answers = new ArrayList<JTextField>();
 		scores = new ArrayList<JTextField>();
-		reveal = new ArrayList<JButton>();
+		revealAnswers = new ArrayList<JButton>();
+		revealScores = new ArrayList<JButton>();
 		
 		for(int i = 0; i < FastMoney.QUESTIONS; i++) {
 			JLabel label = new JLabel("Q" + (i+1) + ".");
 			JTextField answer = new JTextField();
-			answer.setPreferredSize(new Dimension(200, 30));
-			answer.setMinimumSize(new Dimension(200, 30));
+			answer.setPreferredSize(new Dimension(140, 30));
+			answer.setMinimumSize(new Dimension(150, 30));
 			answer.setToolTipText("Player " + (PLAYER + 1) + "\'s answer");
 			answer.getDocument().addDocumentListener(new DocumentListener() {
 				@Override
@@ -106,7 +108,7 @@ public class FastMoneyAnswerPanel extends JPanel {
 			
 			JTextField score = new JTextField();
 			score.setToolTipText("Answer score (must be a non-negative integer)");
-			score.setPreferredSize(new Dimension(50, 30));
+			score.setPreferredSize(new Dimension(30, 30));
 			score.setMinimumSize(new Dimension(50, 30));
 			score.getDocument().addDocumentListener(new DocumentListener() {
 				@Override
@@ -116,29 +118,25 @@ public class FastMoneyAnswerPanel extends JPanel {
 				@Override
 				public void changedUpdate(DocumentEvent e) {}
 			});
-			
-			JButton button = new JButton("Reveal");
-			button.setToolTipText("Reveal the answer");
-			button.setEnabled(false);
-			button.setPreferredSize(new Dimension(100, 30));
+
 			final int question = i;
-			button.addActionListener(new ActionListener() {
+
+			JButton revealScore = new JButton("Reveal S");
+			revealScore.setToolTipText("Reveal the score");
+			revealScore.setEnabled(false);
+			revealScore.setPreferredSize(new Dimension(85, 30));
+			revealScore.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					if (fastmoney.getAnswer(PLAYER, question).isRevealedAnswer()) {
-						fastmoney.setRevealedAnswer(PLAYER, question, false);
+					if (fastmoney.getAnswer(PLAYER, question).isRevealedScore()) {
 						fastmoney.setRevealedScore(PLAYER, question, false);
-						button.setText("Reveal");
-						button.setToolTipText("Reveal the answer and its score");
+						revealScore.setText("Reveal S");
+						revealScore.setToolTipText("Reveal the score");
 					}
 					else {
-						SoundManager.getInstance().playClip("blip");
-						fastmoney.setRevealedAnswer(PLAYER, question, true);
-						try { Thread.sleep(1000); }
-						catch (Exception ex) { }
 						fastmoney.setRevealedScore(PLAYER, question, true);
-						button.setText("Hide");
-						button.setToolTipText("Hide the answer and its score");
+						revealScore.setText("Hide S");
+						revealScore.setToolTipText("Hide the score");
 						if (fastmoney.getAnswer(PLAYER, question).getScore() > 0) {
 							SoundManager.getInstance().playClip("fm_answer");
 						}
@@ -147,14 +145,39 @@ public class FastMoneyAnswerPanel extends JPanel {
 				}
 			});
 			
+			JButton revealAnswer = new JButton("Reveal A");
+			revealAnswer.setToolTipText("Reveal the answer");
+			revealAnswer.setEnabled(false);
+			revealAnswer.setPreferredSize(new Dimension(85, 30));
+			revealAnswer.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					if (fastmoney.getAnswer(PLAYER, question).isRevealedAnswer()) {
+						fastmoney.setRevealedAnswer(PLAYER, question, false);
+						revealAnswer.setText("Reveal A");
+						revealAnswer.setToolTipText("Reveal the answer");
+						if (fastmoney.getAnswer(PLAYER, question).isRevealedScore()) revealScore.doClick();
+					}
+					else {
+						SoundManager.getInstance().playClip("blip");
+						fastmoney.setRevealedAnswer(PLAYER, question, true);
+						revealAnswer.setText("Hide A");
+						revealAnswer.setToolTipText("Hide the answer");
+					}
+				}
+			});
+			
+			
 			labels.add(label);
 			answers.add(answer);
 			scores.add(score);
-			reveal.add(button);
+			revealAnswers.add(revealAnswer);
+			revealScores.add(revealScore);
 			add(label, new GBC(0, i + 1));
 			add(answer, new GBC(1, i + 1));
 			add(score, new GBC(2, i + 1));
-			add(button, new GBC(3, i + 1));
+			add(revealAnswer, new GBC(3, i + 1));
+			add(revealScore, new GBC(4, i + 1));
 		}
 		
 		save = new JButton("Save");
@@ -171,15 +194,15 @@ public class FastMoneyAnswerPanel extends JPanel {
 						fastmoney.setAnswer(PLAYER, i, answers.get(i).getText());
 						save.setEnabled(false);
 						save.setText("Saved");
-						if (!fastmoney.isTimerRunning()) reveal.get(i).setEnabled(true);
+						enableReveal(!fastmoney.isTimerRunning());
 					}
 				}
 			}
 		});
 		
-		add(title, new GBC(0, 0).setSpan(5, 1));
-		add(save, new GBC(0, 6).setSpan(2, 1));
-		add(showAnswers, new GBC(2, 6).setSpan(2, 1));
+		add(title, new GBC(0, 0).setSpan(6, 1));
+		add(save, new GBC(0, 6).setSpan(3, 1));
+		add(showAnswers, new GBC(3, 6).setSpan(2, 1));
 	}
 	
 	/**
@@ -230,13 +253,15 @@ public class FastMoneyAnswerPanel extends JPanel {
 		if (reveal) {
 			for(int i = 0; i < FastMoney.QUESTIONS; i++) {
 				if (!scores.get(i).getText().equals("")) {
-					this.reveal.get(i).setEnabled(true);
+					this.revealAnswers.get(i).setEnabled(true);
+					this.revealScores.get(i).setEnabled(true);
 				}
 			}
 		}
 		else {
 			for(int i = 0; i < FastMoney.QUESTIONS; i++) {
-				this.reveal.get(i).setEnabled(false);
+				this.revealAnswers.get(i).setEnabled(false);
+				this.revealScores.get(i).setEnabled(false);
 			}
 		}
 	}
