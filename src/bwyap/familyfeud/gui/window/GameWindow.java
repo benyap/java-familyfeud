@@ -60,11 +60,13 @@ public class GameWindow extends FamilyFeudWindow {
 			setSize(width, height);
 			setUndecorated(false);
 			setFocusableWindowState(true);
+			setAlwaysOnTop(false);
 		}
 		else {
 			GraphicsDevice[] screens = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices();
 			setUndecorated(true);
 			setFocusableWindowState(false);
+			setAlwaysOnTop(true);
 			if (screens.length == 1) {
 				screens[0].setFullScreenWindow(this);
 			}

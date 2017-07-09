@@ -8,7 +8,7 @@ package bwyap.familyfeud;
 public class FamilyFeud {
 	
 	public static final String TITLE = "Family Feud";
-	public static final String VERSION = "v1.3.2";
+	public static final String VERSION = "v1.3.3";
 	
 	public static FamilyFeudController app;
 	
